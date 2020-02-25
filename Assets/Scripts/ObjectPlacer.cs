@@ -8,6 +8,7 @@ public class ObjectPlacer : MonoBehaviour
     public Vector2 minPoint;
     public Vector2 maxPoint;
     public float randomAngle;
+    public int scoreIncrease = 1;
     public GameObject measureObject;
 
     public Text xValue;
@@ -26,14 +27,10 @@ public class ObjectPlacer : MonoBehaviour
         building = Instantiate(measureObject, objectPos, Quaternion.Euler(0, 0, Random.Range(-randomAngle, randomAngle)));
 
         correctPos = GameObject.FindGameObjectWithTag("MeasurePoint").transform.position;
+        Debug.Log(correctPos);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void ChangeBuilding()
     {
         ChangeTransform(building);
@@ -43,6 +40,8 @@ public class ObjectPlacer : MonoBehaviour
     {
         objectPos = new Vector2(Random.Range(minPoint.x, maxPoint.x), Random.Range(minPoint.y, maxPoint.y));
         obj.transform.SetPositionAndRotation(objectPos, Quaternion.Euler(0, 0, Random.Range(-randomAngle, randomAngle)));
+        correctPos = GameObject.FindGameObjectWithTag("MeasurePoint").transform.position;
+        Debug.Log(correctPos);
     }
 
     public bool CorrectLocationX (string answer)
@@ -71,7 +70,9 @@ public class ObjectPlacer : MonoBehaviour
     {
         if(CorrectLocationX(xValue.text) && CorrectLocationY(yValue.text))
         {
+            gm.IncreaseScore(scoreIncrease);
             Debug.Log("true");
+            ChangeBuilding();
         }
         else Debug.Log("false");
 

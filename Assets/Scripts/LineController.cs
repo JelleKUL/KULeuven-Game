@@ -18,6 +18,7 @@ public class LineController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         line = GetComponent<LineRenderer>();
         distanceText = endPoint.GetChild(0).GetComponent<TextMesh>();
         angleText = startPoint.GetChild(0).GetComponent<TextMesh>();
@@ -45,7 +46,7 @@ public class LineController : MonoBehaviour
     void SetText(Vector2 pS, Vector2 pE)
     {
         distanceText.text = (Mathf.Round((pE - pS).magnitude * 100f) / 100f).ToString() + " m";
-        angleText.text = (Mathf.Atan2(pE.y - pS.y, pE.x - pS.x) / (Mathf.PI * 2) * 400).ToString() + " gon";
+        angleText.text = (Mathf.Round(Mathf.Atan2(pE.y - pS.y, pE.x - pS.x) / (Mathf.PI * 2) * 400 * 100)/100f).ToString() + " gon";
     }
 
     Vector3 SetObjectToMouse(Vector2 mousePos)
