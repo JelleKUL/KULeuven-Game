@@ -46,24 +46,11 @@ public class ObjectPlacer : MonoBehaviour
 
     public bool CorrectLocationX (string answer)
     {
-        float answerNr = float.Parse(answer);
-        Debug.Log(Mathf.Abs(correctPos.x - answerNr) < gm.errorMargin);
-        if (Mathf.Abs(correctPos.x - answerNr) < gm.errorMargin)
-        {
-            return true; 
-        }
-        return false; 
+        return gm.CheckCorrectAnswer(answer, correctPos.x);
     }
     public bool CorrectLocationY(string answer)
     {
-        float answerNr = float.Parse(answer);
-        Debug.Log(Mathf.Abs(correctPos.y - answerNr) < gm.errorMargin);
-        if (Mathf.Abs(correctPos.y - answerNr) < gm.errorMargin)
-        {
-
-            return true;
-        }
-        return false;
+        return gm.CheckCorrectAnswer(answer, correctPos.y);
     }
 
     public void CheckAnswer()

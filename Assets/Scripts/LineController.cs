@@ -6,9 +6,8 @@ public class LineController : MonoBehaviour
 {
     public Transform startPoint;
     public Transform endPoint;
-    public Vector2 startCanvas;
-    public Vector2 endCanvas;
-
+    
+    private GameManager gm;
     private LineRenderer line;
     private TextMesh distanceText;
     private TextMesh angleText;
@@ -18,7 +17,7 @@ public class LineController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         line = GetComponent<LineRenderer>();
         distanceText = endPoint.GetChild(0).GetComponent<TextMesh>();
         angleText = startPoint.GetChild(0).GetComponent<TextMesh>();
@@ -28,9 +27,9 @@ public class LineController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && IsBetweenValues(SetObjectToMouse(Input.mousePosition),startCanvas, endCanvas))
+        if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
-            endPoint.position = SetObjectToMouse(Input.mousePosition);
+            endPoint.position = gm.SetObjectToMouse(Input.mousePosition, 0);
             p1 = startPoint.position;
             p2 = endPoint.position;
             SetLinePos(p1, p2);
@@ -49,14 +48,6 @@ public class LineController : MonoBehaviour
         angleText.text = (Mathf.Round(Mathf.Atan2(pE.y - pS.y, pE.x - pS.x) / (Mathf.PI * 2) * 400 * 100)/100f).ToString() + " gon";
     }
 
-    Vector3 SetObjectToMouse(Vector2 mousePos)
-    {
-        return Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, -Camera.main.transform.position.z));
-    }
+    
 
-    bool IsBetweenValues(Vector2 check, Vector2 min, Vector2 max)
-    {
-        if (check.x < max.x && check.y < max.y && check.x > min.x && check.y > min.y) return true;
-        else return false;
-    }
 }

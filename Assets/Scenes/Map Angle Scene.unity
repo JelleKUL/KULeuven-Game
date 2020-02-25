@@ -1307,8 +1307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 2033032421}
   endPoint: {fileID: 918356470}
-  startCanvas: {x: 0, y: 0}
-  endCanvas: {x: 8, y: 8}
 --- !u!120 &1133802918
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1828,7 +1826,7 @@ GameObject:
   - component: {fileID: 1699699317}
   - component: {fileID: 1699699316}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1851,7 +1849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.0999756, y: -44.929993}
+  m_AnchoredPosition: {x: -7.0999756, y: -44.930054}
   m_SizeDelta: {x: 95.64, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1699699316

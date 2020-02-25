@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorMargin: 0.1
+  min: {x: 0, y: 0}
+  max: {x: 8, y: 8}
 --- !u!114 &537557740068619184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +62,7 @@ MonoBehaviour:
   minPoint: {x: 0, y: 0}
   maxPoint: {x: 9, y: 9}
   randomAngle: 30
+  scoreIncrease: 1
   measureObject: {fileID: 4023926246308375095, guid: 29a30f260d24b4ffea411af6c4a568ee,
     type: 3}
   xValue: {fileID: 0}
