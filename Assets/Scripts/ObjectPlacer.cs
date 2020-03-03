@@ -13,10 +13,11 @@ public class ObjectPlacer : MonoBehaviour
 
     public Text xValue;
     public Text yValue;
+    public Text answer;
 
     private Vector2 objectPos;
     private GameObject building;
-    private Vector2 correctPos;
+    public Vector2 correctPos;
     private GameManager gm;
 
     // Start is called before the first frame update
@@ -63,6 +64,11 @@ public class ObjectPlacer : MonoBehaviour
         }
         else Debug.Log("false");
 
+    }
+    public void ShowAnswer()
+    {
+        
+        answer.text = "X-position: " + correctPos.x.ToString() + " & Y-position: " + correctPos.y.ToString();
     }
 
 }

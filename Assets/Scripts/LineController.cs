@@ -8,6 +8,7 @@ public class LineController : MonoBehaviour
     public Transform endPoint;
     
     private GameManager gm;
+    private ObjectPlacer op;
     private LineRenderer line;
     private TextMesh distanceText;
     private TextMesh angleText;
@@ -18,6 +19,7 @@ public class LineController : MonoBehaviour
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        op = GameObject.FindGameObjectWithTag("GameController").GetComponent<ObjectPlacer>();
         line = GetComponent<LineRenderer>();
         distanceText = endPoint.GetChild(0).GetComponent<TextMesh>();
         angleText = startPoint.GetChild(0).GetComponent<TextMesh>();
@@ -47,7 +49,14 @@ public class LineController : MonoBehaviour
         distanceText.text = (Mathf.Round((pE - pS).magnitude * 100f) / 100f).ToString() + " m";
         angleText.text = (Mathf.Round(Mathf.Atan2(pE.y - pS.y, pE.x - pS.x) / (Mathf.PI * 2) * 400 * 100)/100f).ToString() + " gon";
     }
-
+    public void ShowAnswer()
+    {
+        endPoint.position = op.correctPos;
+        p1 = startPoint.position;
+        p2 = endPoint.position;
+        SetLinePos(p1, p2);
+        SetText(p1, p2);
+    }
     
 
 }
