@@ -15,6 +15,7 @@ public class WaterPassingController : MonoBehaviour
     public Text answerText;
     public Vector2 minPoint;
     public Vector2 maxPoint;
+    public float distanceMeasureAngle;
     public float maxAngleError;
     public float minDistance;
     public int scoreIncrease = 1;
@@ -37,6 +38,7 @@ public class WaterPassingController : MonoBehaviour
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         measure.transform.GetChild(1).gameObject.SetActive(false);
         
+
         meanX = (maxPoint.x - minPoint.x) / 2;
         errorAngle = Random.Range(-maxAngleError, maxAngleError);
         startPoint = Instantiate(startPoint, objectPos, Quaternion.identity);
@@ -94,6 +96,9 @@ public class WaterPassingController : MonoBehaviour
     {
         measure = Instantiate(measure, gm.SetObjectToMouse(Input.mousePosition, 0), Quaternion.identity);
         measure.transform.GetChild(0).transform.Rotate(0, 0, errorAngle);
+
+        measure.transform.GetChild(0).GetChild(0).Rotate(0, 0, distanceMeasureAngle);
+        measure.transform.GetChild(0).GetChild(1).Rotate(0, 0, -distanceMeasureAngle);
         measurePlaced = true;
     }
     public void FlipMeasure()
@@ -135,6 +140,9 @@ public class WaterPassingController : MonoBehaviour
     public void ShowAnswer()
     {
         measure.transform.GetChild(1).gameObject.SetActive(true);
+        measure.transform.GetChild(1).GetChild(0).Rotate(0, 0, distanceMeasureAngle);
+        measure.transform.GetChild(1).GetChild(1).Rotate(0, 0, -distanceMeasureAngle);
+
         answerText.text = "errorAngle: " + errorAngle.ToString() + " & Height Diff: " + correctHeight.ToString();
     }
 

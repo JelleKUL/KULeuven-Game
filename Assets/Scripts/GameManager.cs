@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     public float errorMargin = 0.1f;
     public static int playerScore;
 
-    public Vector2 min;
-    public Vector2 max;
+    public Vector2 screenMin;
+    public Vector2 screenMax;
 
     private Text scoreText;
 
@@ -21,18 +21,17 @@ public class GameManager : MonoBehaviour
         scoreText.text = playerScore.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
+//score Control
+    // increases th score by a set amount
     public void IncreaseScore(int amount)
     {
         playerScore += amount;
         scoreText.text = playerScore.ToString();
     }
 
+
+//scenemanagement
     public void LoadScene (int sceneNr)
     {
         SceneManager.LoadScene(sceneNr);
@@ -43,16 +42,23 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+
+//mouse Navigation
+    // checks if position is in the boundary
     public bool IsBetweenValues(Vector2 check)
     {
-        if (check.x < max.x && check.y < max.y && check.x > min.x && check.y > min.y) return true;
+        if (check.x < screenMax.x && check.y < screenMax.y && check.x > screenMin.x && check.y > screenMin.y) return true;
         else return false;
     }
-
+    // translates a mousposition into a worldposition with offset z
     public Vector3 SetObjectToMouse(Vector2 mousePos, float z)
     {
         return Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, z-Camera.main.transform.position.z));
     }
+
+
+//aswer Control
+    // checks if a given string equals the float value minus the error margin
     public bool CheckCorrectAnswer(string answer, float correct)
     {
         float answerNr = float.Parse(answer);
