@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorMargin: 0.1
-  min: {x: 0, y: 0}
-  max: {x: 8, y: 8}
+  screenMin: {x: 0, y: 0}
+  screenMax: {x: 11.5, y: 8.5}
 --- !u!114 &537557740068619184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,3 +67,5 @@ MonoBehaviour:
     type: 3}
   xValue: {fileID: 0}
   yValue: {fileID: 0}
+  answer: {fileID: 0}
+  correctPos: {x: 0, y: 0}

@@ -2296,16 +2296,6 @@ PrefabInstance:
       propertyPath: screenMin.y
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 537557740068619190, guid: 5f6e9d3c0cfc349edbda725c46b82b40,
-        type: 3}
-      propertyPath: screenMax.x
-      value: 8.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 537557740068619190, guid: 5f6e9d3c0cfc349edbda725c46b82b40,
-        type: 3}
-      propertyPath: screenMax.y
-      value: 11.5
-      objectReference: {fileID: 0}
     - target: {fileID: 537557740068619191, guid: 5f6e9d3c0cfc349edbda725c46b82b40,
         type: 3}
       propertyPath: m_LocalPosition.x

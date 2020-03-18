@@ -7,28 +7,48 @@ public class WaterPassingController : MonoBehaviour
 {
     public GameObject beacon;
     public GameObject measure;
-    public GameObject correctMeasure;
+    public GameObject groundPoint;
     public GameObject magnifyGlass;
-    public GameObject startPoint;
-    public GameObject endPoint;
-    public Text heightAnswer;
-    public Text answerText;
-    public Vector2 minPoint;
-    public Vector2 maxPoint;
+    [Range (2,5)]
+    public int nrOfPoints = 2;
+    public int maxBeacons;
+    public int maxMeasures;
     public float distanceMeasureAngle;
     public float maxAngleError;
     public float minDistance;
     public int scoreIncrease = 1;
 
+    public Text heightAnswer;
+    public Text answerText;
+    
+    public Vector2 minPoint;
+    public Vector2 maxPoint;
+    
+    
+    
+
     private Vector2 objectPos;
+
+
     private GameManager gm;
+    public List<GameObject> groundPoints = new List<GameObject>();
+    private List<GameObject> measures = new List<GameObject>();
+    private List<GameObject> beacons = new List<GameObject>();
+    
+    private bool magnifyPlaced;
+    private float laserDistance;
+    private bool measureMode;
+    private bool beaconMode;
+    private bool magnifyMode;
+
+    private bool holdingObject;
+    private GameObject hitObject;
 
     private float correctHeight;
     private float meanX;
     private float errorAngle;
-    private bool measurePlaced;
-    private bool magnifyPlaced;
-    private bool useMagnify;
+    
+    
     private int posErrorAngle = 1;
     private Vector2 mousePos;
 
@@ -36,96 +56,206 @@ public class WaterPassingController : MonoBehaviour
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        measure.transform.GetChild(1).gameObject.SetActive(false);
+        magnifyGlass.SetActive(false);
+        ChangePoints();
         
-
-        meanX = (maxPoint.x - minPoint.x) / 2;
-        errorAngle = Random.Range(-maxAngleError, maxAngleError);
-        startPoint = Instantiate(startPoint, objectPos, Quaternion.identity);
-        endPoint = Instantiate(endPoint, objectPos, Quaternion.identity);
-
-
-        ChangeTransform(startPoint, 0, 1);
-        ChangeTransform(endPoint, 1, 0);
-
-        correctHeight = endPoint.transform.position.y - startPoint.transform.position.y;
-        Debug.Log(correctHeight);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!measurePlaced && Input.GetMouseButtonDown(0))
+        if (magnifyMode)
         {
-            PlaceMeasure();
-        }
-        else if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)) && !useMagnify)
-        {
-            measure.transform.position = gm.SetObjectToMouse(Input.mousePosition, 0);
-        }
-        else if (useMagnify && !magnifyPlaced)
-        {
-            PlaceMagnify();
-        }
-        else if (useMagnify)
-        {
+
             magnifyGlass.transform.position = gm.SetObjectToMouse(Input.mousePosition, -5);
+
         }
+        else if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
+        {
+            if (!holdingObject)
+            {
+                hitObject = CastMouseRay();
+
+                if (!holdingObject && beaconMode && beacons.Count < maxBeacons)
+                {
+                    AddBeacon();
+                }
+                else if (!holdingObject && measureMode && measures.Count < maxMeasures)
+                {
+                    AddMeasure();
+                }
+            }
+            else
+            {
+                hitObject.transform.position = gm.SetObjectToMouse(Input.mousePosition, 0);
+            }
+            
+        }
+        else holdingObject = false;
+
+        
+        
+    }
+    //returns the gamobject the mouse has hit
+    public GameObject CastMouseRay()
+    {
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
+
+        if (rayHit.collider != null)
+        {
+            holdingObject = true;
+            Debug.Log(rayHit.transform.gameObject.name);
+            return rayHit.transform.gameObject;
+            
+        }
+        holdingObject = false;
+        return null;
+    }
+
+    public void ToggleMeasure()
+    {
+        measureMode = true;
+        beaconMode = false;
+        magnifyMode = false;
+        magnifyGlass.SetActive(false);
+    }
+
+    public void ToggleBeacon()
+    {
+        measureMode = false;
+        beaconMode = true;
+        magnifyMode = false;
+        magnifyGlass.SetActive(false);
+    }
+
+    //toggles the magnifyglass
+    public void ToggleMagnify()
+    {
+        measureMode = false;
+        beaconMode = false;
+        magnifyMode = true;
+        magnifyGlass.SetActive(true);
+    }
+
+    //places a measure object
+    public void AddMeasure()
+    {
+        GameObject newMeasure = Instantiate(measure, gm.SetObjectToMouse(Input.mousePosition, 0), Quaternion.identity);
+        newMeasure.transform.GetChild(0).transform.Rotate(0, 0, Random.Range(-maxAngleError, maxAngleError));
+
+        newMeasure.transform.GetChild(0).GetChild(0).SetPositionAndRotation(newMeasure.transform.GetChild(0).GetChild(0).position,Quaternion.Euler(0, 0, distanceMeasureAngle));
+        newMeasure.transform.GetChild(0).GetChild(1).SetPositionAndRotation(newMeasure.transform.GetChild(0).GetChild(1).position, Quaternion.Euler(0, 0, -distanceMeasureAngle));
+        newMeasure.transform.GetChild(1).GetChild(0).SetPositionAndRotation(newMeasure.transform.GetChild(1).GetChild(0).position, Quaternion.Euler(0, 0, distanceMeasureAngle));
+        newMeasure.transform.GetChild(1).GetChild(1).SetPositionAndRotation(newMeasure.transform.GetChild(1).GetChild(1).position, Quaternion.Euler(0, 0, -distanceMeasureAngle));
+
+        newMeasure.transform.GetChild(1).gameObject.SetActive(false);
+        measures.Add(newMeasure);
+     
+    }
+
+
+    //removes the last measure object
+    public void RemoveMeasure()
+    {
+        GameObject lastMeasure = measures[measures.Count - 1];
+        measures.RemoveAt(measures.Count - 1);
+
+        Destroy(lastMeasure);
+    }
+
+    //flips the measure
+    public void FlipMeasure()
+    {
+        for (int i = 0; i < measures.Count; i++)
+        {
+            measures[i].transform.GetChild(0).transform.Rotate(0,0, -2 * measures[i].transform.GetChild(0).transform.eulerAngles.z);
+            Debug.Log(measures[i].transform.GetChild(0).transform.eulerAngles);
+        }
+
         
     }
 
-    public void ChangePoints()
+
+    //places a measure object
+    public void AddBeacon()
     {
-        measure.transform.GetChild(1).gameObject.SetActive(false);
-        ChangeTransform(startPoint,0,1);
-        ChangeTransform(endPoint,1,0);
-        errorAngle = Random.Range(-maxAngleError, maxAngleError);
-        measure.transform.GetChild(0).transform.SetPositionAndRotation(measure.transform.GetChild(0).transform.position, Quaternion.Euler(0, 0, errorAngle));
+        GameObject newBeacon = Instantiate(beacon, gm.SetObjectToMouse(Input.mousePosition, 0), Quaternion.identity);
+        beacons.Add(newBeacon);
+        
     }
 
-    public void ChangeTransform(GameObject obj, int start, int end)
+
+    //removes the last measure object
+    public void RemoveBeacon()
     {
-        objectPos = new Vector2(Random.Range(minPoint.x + (meanX + minDistance) * start, maxPoint.x - (meanX + minDistance) * end), Random.Range(minPoint.y, maxPoint.y));
-        obj.transform.SetPositionAndRotation(objectPos, Quaternion.identity);
-        correctHeight = endPoint.transform.position.y - startPoint.transform.position.y;
+        GameObject lastBeacon = beacons[beacons.Count - 1];
+        beacons.RemoveAt(beacons.Count - 1);
+
+        Destroy(lastBeacon);
+    }
+
+
+
+    // randomizes the playfield
+    public void ChangePoints()
+    {
+        AddGroundPoints();
+
+        for (int i = 0; i < measures.Count; i++)
+        {
+            RemoveMeasure();
+
+        }
+        for (int i = 0; i < beacons.Count; i++)
+        {
+            RemoveBeacon();
+
+        }
+
+    }
+
+    //place new groundpoints
+    public void AddGroundPoints()
+    {
+        float Increment = (gm.screenMax.x - gm.screenMin.x) / (float)nrOfPoints;
+
+        if (groundPoints.Count < nrOfPoints)
+        {
+            for (int i = groundPoints.Count; i < nrOfPoints; i++)
+            {
+                GameObject newPoint = Instantiate(groundPoint, Vector2.zero, Quaternion.identity);
+                newPoint.GetComponent<PolygonPointController>().SetNameText(i + 1);
+                groundPoints.Add(newPoint);
+                Debug.Log("placed " + i);
+            }
+        }
+        if (groundPoints.Count > nrOfPoints)
+        {
+            for (int i = groundPoints.Count; i > nrOfPoints; i--)
+            {
+                GameObject lastPoint = groundPoints[i -1];
+                groundPoints.RemoveAt(i - 1);
+
+                Destroy(lastPoint);
+            }
+        }
+
+        for (int i = 0; i < nrOfPoints; i++)
+        {
+            Vector2 newPos = new Vector2(gm.screenMin.x + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(gm.screenMin.y + 0.5f, gm.screenMax.y - 3f));
+            groundPoints[i].transform.position = newPos;
+            Debug.Log("moved " + i);
+        }
+        
+
+        correctHeight = groundPoints[groundPoints.Count - 1].transform.position.y - groundPoints[0].transform.position.y;
         Debug.Log(correctHeight);
 
     }
 
-    public void PlaceMeasure()
-    {
-        measure = Instantiate(measure, gm.SetObjectToMouse(Input.mousePosition, 0), Quaternion.identity);
-        measure.transform.GetChild(0).transform.Rotate(0, 0, errorAngle);
 
-        measure.transform.GetChild(0).GetChild(0).Rotate(0, 0, distanceMeasureAngle);
-        measure.transform.GetChild(0).GetChild(1).Rotate(0, 0, -distanceMeasureAngle);
-        measurePlaced = true;
-    }
-    public void FlipMeasure()
-    {
-        posErrorAngle = -posErrorAngle;
-        measure.transform.GetChild(0).transform.Rotate(0,0, errorAngle * 2 * posErrorAngle);
-        Debug.Log(measure.transform.GetChild(0).transform.rotation.eulerAngles);
-    }
-    public void PlaceMagnify()
-    {
-        magnifyGlass = Instantiate(magnifyGlass, gm.SetObjectToMouse(Input.mousePosition, -5), Quaternion.identity);
-        magnifyPlaced = true;
-    }
-    public void ToggleMagnify()
-    {
-        if (useMagnify)
-        {
-            magnifyGlass.SetActive(false);
-            useMagnify = false;
-        }
-        else
-        {
-            magnifyGlass.SetActive(true);
-            useMagnify = true;
-        }
-    }
 
+    //checks if the given anwser is correct
     public void CheckAnswer()
     {
         if (gm.CheckCorrectAnswer(heightAnswer.text, correctHeight))
@@ -139,11 +269,18 @@ public class WaterPassingController : MonoBehaviour
     }
     public void ShowAnswer()
     {
-        measure.transform.GetChild(1).gameObject.SetActive(true);
-        measure.transform.GetChild(1).GetChild(0).Rotate(0, 0, distanceMeasureAngle);
-        measure.transform.GetChild(1).GetChild(1).Rotate(0, 0, -distanceMeasureAngle);
+        answerText.text =  "Height Diff: " + correctHeight.ToString();
 
-        answerText.text = "errorAngle: " + errorAngle.ToString() + " & Height Diff: " + correctHeight.ToString();
+        for (int i = 0; i < measures.Count; i++)
+        {
+            float errorAngleEach = measures[i].transform.GetChild(0).transform.eulerAngles.z;
+            answerText.text += " & errorAngle " + (i + 1) + ": " + errorAngleEach.ToString();
+            measures[i].transform.GetChild(1).gameObject.SetActive(true);
+            measures[i].transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        
+        
     }
 
 }

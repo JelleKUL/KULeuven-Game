@@ -156,5 +156,19 @@ public class LineController : MonoBehaviour
         linePoints.Add(newPoint);
     }
 
+    //removes the last point
+    public void RemovePoint()
+    {
+        if(linePoints.Count > 0)
+        {
+            line.positionCount--;
+            GameObject removed = linePoints[linePoints.Count - 1];
+            linePoints.RemoveAt(linePoints.Count - 1);
+
+            Destroy(removed);
+        }
+
+    }
+
 
 }
