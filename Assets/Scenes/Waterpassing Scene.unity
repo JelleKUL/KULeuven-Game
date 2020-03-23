@@ -702,6 +702,9 @@ MonoBehaviour:
   groundPoint: {fileID: 4010883207403545137, guid: 37375dc84afda45f4bbcfc37dc1596eb,
     type: 3}
   magnifyGlass: {fileID: 1556727201}
+  pointMask:
+    serializedVersion: 2
+    m_Bits: 256
   nrOfPoints: 3
   maxBeacons: 3
   maxMeasures: 2

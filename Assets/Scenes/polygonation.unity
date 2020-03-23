@@ -277,7 +277,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 140.7, y: -46.149963}
+  m_AnchoredPosition: {x: 140.7, y: -46.150024}
   m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &330297686
@@ -493,7 +493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 68.1, y: -46.149963}
+  m_AnchoredPosition: {x: 68.1, y: -46.150024}
   m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &474557156
@@ -1642,8 +1642,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798b05e67b78744beae4f7009f0acf24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {fileID: 2033032421}
-  endPoint: {fileID: 918356470}
+  distanceError: 0
+  angleError: 0
+  linePoint: {fileID: 0}
+  showEllipses: 0
+  showAngles: 0
+  showLengths: 0
+  showStartAngle: 0
+  showStartLength: 0
+  maxPoints: 0
 --- !u!120 &1133802918
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -3074,7 +3081,7 @@ MonoBehaviour:
   randomAngle: 0
   scoreIncrease: 1
   obj1: {fileID: 6925030597558219202, guid: 0b53bcca134834af5bd46cc96bd3be77, type: 3}
-  obj2: {fileID: 5273208186367336130, guid: d768fb044150244bab9ff1b9020585fb, type: 3}
+  obj2: {fileID: 6925030597558219202, guid: 0b53bcca134834af5bd46cc96bd3be77, type: 3}
   answerLine: {fileID: 515061721}
   Value: {fileID: 1655184862}
   xValue: {fileID: 1293163520}

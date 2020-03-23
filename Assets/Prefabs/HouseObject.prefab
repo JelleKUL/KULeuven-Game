@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8495499860848434953}
   - component: {fileID: 5350944772822520262}
   - component: {fileID: 1498770910267250396}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HouseObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,8 +107,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.07, y: 0.07}
+  m_EdgeRadius: 0.28
 --- !u!1 &6436330738415293568
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4633778957911837511}
   - component: {fileID: 3282739101476125854}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MeasurePoint
   m_TagString: MeasurePoint
   m_Icon: {fileID: 0}

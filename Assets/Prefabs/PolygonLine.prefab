@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4222805036568096262}
   - component: {fileID: 4222805036568096265}
   m_Layer: 0
-  m_Name: LaserLine
-  m_TagString: Untagged
+  m_Name: PolygonLine
+  m_TagString: PolygonLine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,10 +71,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 2.71, y: 0.2, z: 1}
-  - {x: 3.83, y: 1.07, z: 1}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -151,5 +148,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798b05e67b78744beae4f7009f0acf24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {fileID: 0}
-  endPoint: {fileID: 0}
+  distanceError: 0
+  angleError: 0
+  linePoint: {fileID: 6925030597558219202, guid: 0b53bcca134834af5bd46cc96bd3be77,
+    type: 3}
+  lockFirstPoint: 0
+  firstPointPosition: {x: 0, y: 0}
+  showEllipses: 0
+  showAngles: 0
+  showLengths: 0
+  showStartAngle: 0
+  showStartLength: 0
+  maxPoints: 2
+  pointMask:
+    serializedVersion: 2
+    m_Bits: 256
+  Obstacles:
+    serializedVersion: 2
+    m_Bits: 512

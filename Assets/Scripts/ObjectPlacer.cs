@@ -5,70 +5,128 @@ using UnityEngine.UI;
 
 public class ObjectPlacer : MonoBehaviour
 {
-    public Vector2 minPoint;
-    public Vector2 maxPoint;
-    public float randomAngle;
-    public int scoreIncrease = 1;
-    public GameObject measureObject;
+    
+    
+    //[Header ("Predefined Points")]
+    //public Vector3[] pointLocationAndRotation;
 
-    public Text xValue;
-    public Text yValue;
-    public Text answer;
+    [Header("Randomized Constrains")]
+    //public bool randomizePoint;
+    //public int nrRandomizedPoints;
+    public float minDistanceBtwPoints = 2;
+    public Vector2 minOffset;
+    public Vector2 maxOffset;
+    public float maxRandomAngle;
 
-    private Vector2 objectPos;
-    private GameObject building;
-    public Vector2 correctPos;
+    [Header ("Prefabs")]
+    public GameObject calculatePoint;
+    public GameObject obstacle;
+
+
     private GameManager gm;
+    private List <GameObject> calculatePoints = new List <GameObject>();
+    private List<GameObject> obstacles = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        objectPos = new Vector2(Random.Range(minPoint.x, maxPoint.x), Random.Range(minPoint.y, maxPoint.y));
-        building = Instantiate(measureObject, objectPos, Quaternion.Euler(0, 0, Random.Range(-randomAngle, randomAngle)));
 
-        correctPos = GameObject.FindGameObjectWithTag("MeasurePoint").transform.position;
-        Debug.Log(correctPos);
     }
 
-    
-    public void ChangeBuilding()
+    public float[] PlaceCalculatePoints(int amount)
     {
-        ChangeTransform(building);
-    }
-
-    public void ChangeTransform( GameObject obj)
-    {
-        objectPos = new Vector2(Random.Range(minPoint.x, maxPoint.x), Random.Range(minPoint.y, maxPoint.y));
-        obj.transform.SetPositionAndRotation(objectPos, Quaternion.Euler(0, 0, Random.Range(-randomAngle, randomAngle)));
-        correctPos = GameObject.FindGameObjectWithTag("MeasurePoint").transform.position;
-        Debug.Log(correctPos);
-    }
-
-    public bool CorrectLocationX (string answer)
-    {
-        return gm.CheckCorrectAnswer(answer, correctPos.x);
-    }
-    public bool CorrectLocationY(string answer)
-    {
-        return gm.CheckCorrectAnswer(answer, correctPos.y);
-    }
-
-    public void CheckAnswer()
-    {
-        if(CorrectLocationX(xValue.text) && CorrectLocationY(yValue.text))
+        float[] positions = new float[amount * 2];
+        for (int i = 0; i < amount; i++)
         {
-            gm.IncreaseScore(scoreIncrease);
-            Debug.Log("true");
-            ChangeBuilding();
-        }
-        else Debug.Log("false");
+            GameObject newPoint = Instantiate(calculatePoint, FarEnoughRandomPoint(), Quaternion.identity);
+            calculatePoints.Add(newPoint);
+            newPoint.GetComponent<PolygonPointController>().SetNameText(i);
 
+            positions[i * 2] = newPoint.transform.position.x;
+            positions[(i * 2) + 1] = newPoint.transform.position.y;
+        }
+
+        return positions;
     }
-    public void ShowAnswer()
+
+    public float[] ChangeCalculatePoints()
+    {
+        float[] positions = new float[calculatePoints.Count * 2];
+        for (int i = 0; i < calculatePoints.Count; i++)
+        {
+            calculatePoints[i].transform.position = Vector2.zero;
+        }
+
+        for (int i = 0; i < calculatePoints.Count; i++)
+        {
+            calculatePoints[i].transform.position = FarEnoughRandomPoint();
+            positions[i * 2] = calculatePoints[i].transform.position.x;
+            positions[(i * 2) + 1] = calculatePoints[i].transform.position.y;
+        }
+
+        return positions;
+    }
+
+    public void PlaceObstacles (int amount)
     {
         
-        answer.text = "X-position: " + correctPos.x.ToString() + " & Y-position: " + correctPos.y.ToString();
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject newObstacle = Instantiate(obstacle, FarEnoughRandomPoint(), RandomAngle());
+            obstacles.Add(newObstacle);
+        }
     }
+
+    public void ChangeObstacles()
+    {
+        for (int i = 0; i < obstacles.Count; i++)
+        {
+            obstacles[i].transform.position = Vector2.zero;
+        }
+
+        for (int i = 0; i < obstacles.Count; i++)
+        {
+            obstacles[i].transform.SetPositionAndRotation(FarEnoughRandomPoint(), RandomAngle());
+        }
+    }
+
+
+    //returns a random position that is far enugh from all the others
+    public Vector2 FarEnoughRandomPoint()
+    {
+        float minDist = Mathf.Infinity;
+        Vector2 randPos;
+        do
+        {
+            randPos = new Vector2(Random.Range(gm.screenMin.x + minOffset.x, gm.screenMax.x - maxOffset.x), Random.Range(gm.screenMin.y + minOffset.y, gm.screenMax.y - maxOffset.y));
+            minDist = Mathf.Infinity;
+
+            for (int i = 0; i < calculatePoints.Count; i++)
+            {
+                if (Vector2.Distance(randPos, calculatePoints[i].transform.position) < minDist)
+                {
+                    minDist = Vector2.Distance(randPos, calculatePoints[i].transform.position);
+                }
+            }
+            for (int i = 0; i < obstacles.Count; i++)
+            {
+                if (Vector2.Distance(randPos, calculatePoints[i].transform.position) < minDist)
+                {
+                    minDist = Vector2.Distance(randPos, calculatePoints[i].transform.position);
+                }
+            }
+        } while (minDist < minDistanceBtwPoints);
+        
+        return randPos;
+    }
+
+    //returns a random rotationvalue
+    public Quaternion RandomAngle()
+    {
+        return Quaternion.Euler(0, 0, Random.Range(-maxRandomAngle, maxRandomAngle));
+    } 
+
+    
 
 }

@@ -2,23 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LineController : MonoBehaviour
+public class PolygonLineController : MonoBehaviour
 {
     [Range(0, 100)]
     public float distanceError;
     [Range(0, 100)]
     public float angleError;
     public GameObject linePoint;
+
+    [Header("Show data options")]
+    public bool lockFirstPoint;
+    public Vector2 firstPointPosition;
     public bool showEllipses;
     public bool showAngles;
     public bool showLengths;
     public bool showStartAngle;
     public bool showStartLength;
     public int maxPoints;
-    
+    public LayerMask pointMask;
+    public LayerMask Obstacles;
+
+
 
     private List<GameObject> linePoints = new List<GameObject>();
-    private bool mouseOnPoint;
+    private bool holdingObject;
+    private GameObject hitObject;
     private Vector2 obstacleHitPoint;
 
     private GameManager gm;
@@ -32,7 +40,13 @@ public class LineController : MonoBehaviour
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         line = GetComponent<LineRenderer>();
-        
+
+        if (lockFirstPoint)
+        {
+            AddPoint(firstPointPosition);
+            linePoints[0].GetComponent<CircleCollider2D>().enabled = false;
+        }
+
     }
 
     // Update is called once per frame
@@ -55,32 +69,48 @@ public class LineController : MonoBehaviour
         // checks is mousebutton is clicked and sets the point to that position
         if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
-            for (int i = linePoints.Count-1; i >= 0; i--)
+            if (!holdingObject)
             {
-                // if the mouse position is close to a point, the point will move to that position
-                if ((linePoints[i].transform.position - gm.SetObjectToMouse(Input.mousePosition, 0)).magnitude < 1f)
-                {
-                    mouseOnPoint = true;
-                    linePoints[i].transform.position = gm.SetObjectToMouse(Input.mousePosition, 0);
-                    break;
+                hitObject = CastMouseRay();
 
+                if (!holdingObject && linePoints.Count < maxPoints)
+                {
+                    AddPoint(gm.SetObjectToMouse(Input.mousePosition, 0));
                 }
 
             }
-            // adds new point if mouse clicks away from existing point
-            if (mouseOnPoint == false && linePoints.Count < maxPoints)
+            else
             {
-                AddPoint(gm.SetObjectToMouse(Input.mousePosition, 0));
+                hitObject.transform.position = gm.SetObjectToMouse(Input.mousePosition, 0);
+
             }
-            mouseOnPoint = false;
+
         }
+        else holdingObject = false;
+
+
     }
 
+    //returns the gamobject the mouse has hit
+    public GameObject CastMouseRay()
+    {
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), 100, pointMask);
+
+        if (rayHit.collider != null)
+        {
+            holdingObject = true;
+            Debug.Log(rayHit.transform.gameObject.name);
+            return rayHit.transform.gameObject;
+
+        }
+        holdingObject = false;
+        return null;
+    }
 
     //draws the line and values
     void DrawLineAndValues()
     {
-        
+
 
         for (int i = 0; i < linePoints.Count; i++)
         {
@@ -136,7 +166,7 @@ public class LineController : MonoBehaviour
     // checks if next point is visible
     bool CheckVisible(GameObject point, GameObject nextPoint)
     {
-        RaycastHit2D hit = Physics2D.Raycast(point.transform.position, nextPoint.transform.position - point.transform.position, (nextPoint.transform.position - point.transform.position).magnitude);
+        RaycastHit2D hit = Physics2D.Raycast(point.transform.position, nextPoint.transform.position - point.transform.position, (nextPoint.transform.position - point.transform.position).magnitude, Obstacles);
 
         if (hit.collider != null)
         {
@@ -144,6 +174,16 @@ public class LineController : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public void SetVisibles(bool ellipses, bool angles, bool lengths, bool startAngle, bool startLength, int nrPoints)
+    {
+        showEllipses = ellipses;
+        showLengths = lengths;
+        showAngles = angles;
+        showStartAngle = startAngle;
+        showStartLength = startLength;
+        maxPoints = nrPoints;
     }
 
 
@@ -159,7 +199,7 @@ public class LineController : MonoBehaviour
     //removes the last point
     public void RemovePoint()
     {
-        if(linePoints.Count > 0)
+        if (linePoints.Count > 1)
         {
             line.positionCount--;
             GameObject removed = linePoints[linePoints.Count - 1];

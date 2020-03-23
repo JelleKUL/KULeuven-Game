@@ -9,6 +9,7 @@ public class WaterPassingController : MonoBehaviour
     public GameObject measure;
     public GameObject groundPoint;
     public GameObject magnifyGlass;
+    public LayerMask pointMask;
     [Range (2,5)]
     public int nrOfPoints = 2;
     public int maxBeacons;
@@ -23,11 +24,6 @@ public class WaterPassingController : MonoBehaviour
     
     public Vector2 minPoint;
     public Vector2 maxPoint;
-    
-    
-    
-
-    private Vector2 objectPos;
 
 
     private GameManager gm;
@@ -35,8 +31,6 @@ public class WaterPassingController : MonoBehaviour
     private List<GameObject> measures = new List<GameObject>();
     private List<GameObject> beacons = new List<GameObject>();
     
-    private bool magnifyPlaced;
-    private float laserDistance;
     private bool measureMode;
     private bool beaconMode;
     private bool magnifyMode;
@@ -45,12 +39,6 @@ public class WaterPassingController : MonoBehaviour
     private GameObject hitObject;
 
     private float correctHeight;
-    private float meanX;
-    private float errorAngle;
-    
-    
-    private int posErrorAngle = 1;
-    private Vector2 mousePos;
 
     // Start is called before the first frame update
     void Start()
@@ -99,7 +87,7 @@ public class WaterPassingController : MonoBehaviour
     //returns the gamobject the mouse has hit
     public GameObject CastMouseRay()
     {
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),20, pointMask);
 
         if (rayHit.collider != null)
         {
