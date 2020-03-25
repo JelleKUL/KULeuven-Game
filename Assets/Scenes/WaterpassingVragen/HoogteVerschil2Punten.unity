@@ -121,7 +121,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &7099133128912135998
+--- !u!1001 &1499985407
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -188,15 +188,10 @@ PrefabInstance:
       propertyPath: SoortVraag
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7093937433697466476, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
-        type: 3}
-      propertyPath: nrOfPoints
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 9048913617645147364, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_Name
-      value: WaterPassingStandardScene
+      value: WaterPassingStandardScene Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d233a20e80c34bc4bdc4f5e8e446f79, type: 3}

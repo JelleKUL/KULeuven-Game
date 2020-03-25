@@ -12,7 +12,13 @@ public class PolygonPointController : MonoBehaviour
 
     public void SetNameText (int nr)
     {
-        nameText.text = nr.ToString();
+        char c = (char)(65 + (nr));
+        
+        nameText.text = c.ToString();
+    }
+    public void SetNameNrText(int nr)
+    {
+       nameText.text = (nr).ToString();
     }
 
     public void SetDistanceText (Vector3 prevPoint)

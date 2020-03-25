@@ -21,18 +21,13 @@ public class ObjectPlacer : MonoBehaviour
     [Header ("Prefabs")]
     public GameObject calculatePoint;
     public GameObject obstacle;
+    public GameManager gm;
 
-
-    private GameManager gm;
-    private List <GameObject> calculatePoints = new List <GameObject>();
+    [HideInInspector]
+    public List <GameObject> calculatePoints = new List <GameObject>();
     private List<GameObject> obstacles = new List<GameObject>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-
-    }
+    
 
     public float[] PlaceCalculatePoints(int amount)
     {

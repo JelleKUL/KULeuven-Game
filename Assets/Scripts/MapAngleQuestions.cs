@@ -1,10 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapAngleQuestions : MonoBehaviour
 {
-    public enum QuestionType { Geen, BepaalMapAngle, BepaalCoordinaat, BepaalVorigPunt }
+    [Header("Predefined TextFields")]
+    public Text questionText;
+    public Text answerInputX;
+    public Text answerInputY;
+    public Text answerInputH;
+    public Text answerOutput;
+    public GameObject assenkruis;
+
+    public enum QuestionType { Geen, BepaalMapAngle, BepaalCoordinaat, BepaalVorigPunt, AnderAssenStelsel }
     [Tooltip("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -14,18 +23,21 @@ public class MapAngleQuestions : MonoBehaviour
     public Vector3 axisTransform; // X & Y value: position offset, Z value rotation offset
 
     public int numberOfPoints;
-   
+    public int scoreIncrease;
 
 
-    [HideInInspector]
-    public float[] correctAnswer;
+    
+    private float[] correctAnswerArray;
+    private float correctAnswerX;
+    private float correctAnswerY;
+    private float correctAnswerH;
 
     private PolygonLineController lineController;
     private GameManager gm;
     private ObjectPlacer placer;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
@@ -48,29 +60,85 @@ public class MapAngleQuestions : MonoBehaviour
                 break;
 
             case QuestionType.BepaalMapAngle:
-                //start oefening VanANaarB
-                lineController.SetVisibles(false, false, false, true, true, 2);
-                correctAnswer = placer.PlaceCalculatePoints(numberOfPoints);
-                placer.PlaceObstacles(1);
+                //start oefening BepaalMapAngle
+                lineController.SetVisibles(true, false, false, false, true, true, 2);
+                correctAnswerArray = placer.PlaceCalculatePoints(1);
+                
+                questionText.text = "Bepaal de Map Angle van punt B";
+                correctAnswerH = lineController.GetMapAngle(new Vector2(correctAnswerArray[0], correctAnswerArray[1]), Vector2.up);
 
-                foreach (var nr in correctAnswer)
-                {
-                    Debug.Log(nr + " , ");
-                }
+                Debug.Log(correctAnswerArray[0]+ "," + correctAnswerArray[1] + ",  " + correctAnswerH);
                 
 
                 break;
             case QuestionType.BepaalCoordinaat:
-                //start oefening TekenFoutenEllips
-                lineController.SetVisibles(false, false, false, true, true, 2);
+                //start oefening BepaalCoordinaat
+                lineController.SetVisibles(true, false, false, false, true, true, 2);
+                correctAnswerArray = placer.PlaceCalculatePoints(1);
+                correctAnswerX = correctAnswerArray[0];
+                correctAnswerY = correctAnswerArray[1];
+                questionText.text = "Bepaal het coördinaat van punt B";
                 break;
 
             case QuestionType.BepaalVorigPunt:
-                //start oefening DragEnDropEllips
-                lineController.SetVisibles(false, false, false, true, true, 2);
+                //start oefening BepaalVorigPunt
+                lineController.SetVisibles(false, false, false, false, false, false, 2);
+                correctAnswerArray = placer.PlaceCalculatePoints(2);
+                correctAnswerX = correctAnswerArray[0];
+                correctAnswerY = correctAnswerArray[1];
+                questionText.text = "Bepaal het coördinaat van punt A, via de verkregen meting van B: x:" + correctAnswerArray[2] + " / y:" + correctAnswerArray[3];
+                break;
+
+            case QuestionType.AnderAssenStelsel:
+                lineController.SetVisibles(true, false, false, false, true, true, 2);
+                correctAnswerArray = placer.PlaceCalculatePoints(1);
+                
+                placer.calculatePoints[0].transform.SetParent(assenkruis.transform);
+                assenkruis.transform.position += new Vector3(axisTransform.x, axisTransform.y, 0);
+                assenkruis.transform.Rotate(0, 0, axisTransform.z);
+                //global position
+                    //correctAnswerX = placer.calculatePoints[0].transform.position.x;
+                    //correctAnswerY = placer.calculatePoints[0].transform.position.y;
+                //localposition
+                correctAnswerX = correctAnswerArray[0];
+                correctAnswerY = correctAnswerArray[1];
+                Debug.Log(correctAnswerX + " , " + correctAnswerY);
+                questionText.text = "Bepaal het coördinaat van punt B, Het Assenstelsel is gedraaid";
                 break;
 
          
         }
     }
+
+    //checks if the given anwser is correct
+    public void CheckAnswerH()
+    {
+        if (gm.CheckCorrectAnswer(answerInputH.text, correctAnswerH))
+        {
+            gm.IncreaseScore(scoreIncrease);
+            Debug.Log("true");
+            
+        }
+        else Debug.Log("false");
+
+    }
+    public void CheckAnswerXY()
+    {
+        if (gm.CheckCorrectAnswer(answerInputX.text, correctAnswerX) && gm.CheckCorrectAnswer(answerInputY.text, correctAnswerY))
+        {
+            gm.IncreaseScore(scoreIncrease);
+            Debug.Log("true");
+
+        }
+        else Debug.Log("false");
+
+    }
+    Vector2 Rotate(Vector2 aPoint, float aDegree)
+    {
+        float rad = aDegree * Mathf.Deg2Rad;
+        float s = Mathf.Sin(rad);
+        float c = Mathf.Cos(rad);
+        return new Vector2( aPoint.x * c - aPoint.y * s, aPoint.y * c + aPoint.x * s);
+    }
+
 }

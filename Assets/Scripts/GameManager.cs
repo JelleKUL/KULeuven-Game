@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
 
 //score Control
-    // increases th score by a set amount
+    // increases the score by a set amount
     public void IncreaseScore(int amount)
     {
         playerScore += amount;
@@ -37,9 +37,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneNr);
     }
 
+    public void LoadSceneName(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
+
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 

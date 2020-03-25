@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PolygonLineController : MonoBehaviour
 {
+    [Header("Prefabs")]
+    public GameObject linePoint;
+    public LayerMask pointMask;
+    public LayerMask Obstacles;
+
+    [Header("Changeable Parameters")]
     [Range(0, 100)]
     public float distanceError;
     [Range(0, 100)]
     public float angleError;
-    public GameObject linePoint;
-
-    [Header("Show data options")]
     public bool lockFirstPoint;
     public Vector2 firstPointPosition;
     public bool showEllipses;
@@ -19,11 +22,8 @@ public class PolygonLineController : MonoBehaviour
     public bool showStartAngle;
     public bool showStartLength;
     public int maxPoints;
-    public LayerMask pointMask;
-    public LayerMask Obstacles;
 
-
-
+    
     private List<GameObject> linePoints = new List<GameObject>();
     private bool holdingObject;
     private GameObject hitObject;
@@ -31,8 +31,6 @@ public class PolygonLineController : MonoBehaviour
 
     private GameManager gm;
     private LineRenderer line;
-
-
 
 
     // Start is called before the first frame update
@@ -176,8 +174,9 @@ public class PolygonLineController : MonoBehaviour
         return true;
     }
 
-    public void SetVisibles(bool ellipses, bool angles, bool lengths, bool startAngle, bool startLength, int nrPoints)
+    public void SetVisibles(bool lock1stPoint, bool ellipses, bool angles, bool lengths, bool startAngle, bool startLength, int nrPoints)
     {
+        lockFirstPoint = lock1stPoint;
         showEllipses = ellipses;
         showLengths = lengths;
         showAngles = angles;
@@ -186,13 +185,20 @@ public class PolygonLineController : MonoBehaviour
         maxPoints = nrPoints;
     }
 
+    public float GetMapAngle(Vector2 endPoint, Vector2 startPoint)
+    {
+        float angle = Vector2.SignedAngle(endPoint, startPoint);
+
+        return (Mathf.Round(angle / 360 * 400 * 100) / 100f);
+    }
+
 
     //adds new point
     public void AddPoint(Vector2 pos)
     {
         line.positionCount++;
         GameObject newPoint = Instantiate(linePoint, pos, Quaternion.identity);
-        newPoint.GetComponent<PolygonPointController>().SetNameText(line.positionCount);
+        newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
         linePoints.Add(newPoint);
     }
 

@@ -9,15 +9,45 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen Scene.unity
     guid: 8406c6635ecdf486b88f184979edc1c9
   - enabled: 1
-    path: Assets/Scenes/Map Angle Scene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/WaterpassingVragen/Afstand2Punten.unity
+    guid: 01f5444c365b94ee7a4cc7ddfd5e3183
   - enabled: 1
-    path: Assets/Scenes/Waterpassing Scene.unity
-    guid: 123af82644b6f4d15bfb6e8eaa0f7b48
+    path: Assets/Scenes/WaterpassingVragen/Hoekfout.unity
+    guid: cef981af7ce4f4f59a1adc0e4947cb50
   - enabled: 1
-    path: Assets/Scenes/foutenpropagatie.unity
-    guid: dbed519177f7e4c618e541a1297e66dc
+    path: Assets/Scenes/WaterpassingVragen/HoogteVerschil2Punten.unity
+    guid: 5227a20c12b854b1e9f4c1b7385df44e
   - enabled: 1
-    path: Assets/Scenes/polygonation.unity
-    guid: 40b957b6c541e44a1bb1b1ee75f3d4fb
+    path: Assets/Scenes/WaterpassingVragen/HoogteVerschilMeerPunten.unity
+    guid: 794f4ba2d1e164df8a57c52d11144863
+  - enabled: 1
+    path: Assets/Scenes/FoutenpropagatieVragen/MinimaleGrootte.unity
+    guid: 9fedd04343adf45dd98e66e0d5051c60
+  - enabled: 1
+    path: Assets/Scenes/FoutenpropagatieVragen/Werking1Punt.unity
+    guid: 97fbb9c051e9540b9a667a37d6cf1057
+  - enabled: 1
+    path: Assets/Scenes/FoutenpropagatieVragen/WerkingMeerderePunten.unity
+    guid: 0b17e36b5f75e430f8f5a919838cb5cf
+  - enabled: 1
+    path: Assets/Scenes/MapAngleVragen/AnderAssenStelsel.unity
+    guid: 87ffbc9c3c60d443db7b1ffe49a68b8c
+  - enabled: 1
+    path: Assets/Scenes/MapAngleVragen/BepaalCoordinaat.unity
+    guid: 844f7934994cc4ff4a4a0c8b07e280ac
+  - enabled: 1
+    path: Assets/Scenes/MapAngleVragen/BepaalMapAngle.unity
+    guid: c6628bc6af4b14aa9bc828ad499c49e8
+  - enabled: 1
+    path: Assets/Scenes/MapAngleVragen/BepaalVorigPunt.unity
+    guid: a9d3669f1129247f38e6b3e321ef8d64
+  - enabled: 1
+    path: Assets/Scenes/PolygonatieVragen/Afstand2PuntenPolygoon.unity
+    guid: 4fc959cf1906a42549e983128712251c
+  - enabled: 1
+    path: Assets/Scenes/PolygonatieVragen/Coordinaat1Punt.unity
+    guid: c8443c9f2ce2f4a2185c15095f556661
+  - enabled: 1
+    path: Assets/Scenes/PolygonatieVragen/VoorwaardseInsnijding.unity
+    guid: 1cb165e04386f4618a8c1aa9245d4ff9
   m_configObjects: {}
