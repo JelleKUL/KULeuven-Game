@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//*********** The PolygonLineController manages the Top down lines and displays all the measuring information ******************//
+
 public class PolygonLineController : MonoBehaviour
 {
     [Header("Prefabs")]
@@ -10,10 +12,13 @@ public class PolygonLineController : MonoBehaviour
     public LayerMask Obstacles;
 
     [Header("Changeable Parameters")]
+    [Tooltip ("the measure error of distance")]
     [Range(0, 100)]
     public float distanceError;
+    [Tooltip("the measure error of the angle")]
     [Range(0, 100)]
     public float angleError;
+    [Tooltip ("Should the first point be locked in place an where?")]
     public bool lockFirstPoint;
     public Vector2 firstPointPosition;
     public bool showEllipses;
@@ -174,6 +179,7 @@ public class PolygonLineController : MonoBehaviour
         return true;
     }
 
+    //sets the parameters to a specific value so it matches the question
     public void SetVisibles(bool lock1stPoint, bool ellipses, bool angles, bool lengths, bool startAngle, bool startLength, int nrPoints)
     {
         lockFirstPoint = lock1stPoint;
@@ -185,6 +191,7 @@ public class PolygonLineController : MonoBehaviour
         maxPoints = nrPoints;
     }
 
+    //returs the mapangle between two points
     public float GetMapAngle(Vector2 endPoint, Vector2 startPoint)
     {
         float angle = Vector2.SignedAngle(endPoint, startPoint);
@@ -193,7 +200,7 @@ public class PolygonLineController : MonoBehaviour
     }
 
 
-    //adds new point
+    //adds a new point
     public void AddPoint(Vector2 pos)
     {
         line.positionCount++;

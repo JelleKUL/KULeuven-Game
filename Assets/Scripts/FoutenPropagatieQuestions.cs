@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//*********** The FoutenPropagatieQuestions sets the required parameters for a specific question ******************//
+
+
 public class FoutenPropagatieQuestions : MonoBehaviour
 {
     [Header("Predefined TextFields")]
@@ -19,7 +22,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     private PolygonLineController lineController;
     private ObjectPlacer placer;
 
-    // Start is called before the first frame update
+    // awake is called before start functions
     void Awake()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();

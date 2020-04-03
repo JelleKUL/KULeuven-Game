@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//*********** The WaterPassingController controls most aspects of the waterpassing type exercise ******************//
+
+
 public class WaterPassingController : MonoBehaviour
 {
     [Header ("Prefabs")]
@@ -103,9 +106,8 @@ public class WaterPassingController : MonoBehaviour
         }
         else holdingObject = false;
 
-        
-        
     }
+
     //returns the gamobject the mouse has hit
     public GameObject CastMouseRay()
     {
@@ -122,6 +124,7 @@ public class WaterPassingController : MonoBehaviour
         return null;
     }
 
+    //toggles the different modes
     public void ToggleMeasure()
     {
         measureMode = true;
@@ -138,7 +141,6 @@ public class WaterPassingController : MonoBehaviour
         magnifyGlass.SetActive(false);
     }
 
-    //toggles the magnifyglass
     public void ToggleMagnify()
     {
         measureMode = false;
@@ -146,6 +148,7 @@ public class WaterPassingController : MonoBehaviour
         magnifyMode = true;
         magnifyGlass.SetActive(true);
     }
+
 
     //places a measure object
     public void AddMeasure(Vector2 location)
@@ -171,8 +174,6 @@ public class WaterPassingController : MonoBehaviour
         }
 
         newMeasure.transform.GetChild(0).transform.Rotate(0, 0, correctErrorAngle);
-
-        
 
         newMeasure.transform.GetChild(0).GetChild(0).SetPositionAndRotation(newMeasure.transform.GetChild(0).GetChild(0).position,Quaternion.Euler(0, 0, distanceMeasureAngle));
         newMeasure.transform.GetChild(0).GetChild(1).SetPositionAndRotation(newMeasure.transform.GetChild(0).GetChild(1).position, Quaternion.Euler(0, 0, -distanceMeasureAngle));
@@ -298,7 +299,7 @@ public class WaterPassingController : MonoBehaviour
 
     }
   
-
+    //shows the correct answer (replaced in the questionscript)
     public string ShowAnswer()
     {
         string answer =  "Height Diff: " + correctHeight.ToString();
@@ -315,6 +316,7 @@ public class WaterPassingController : MonoBehaviour
 
     }
 
+    //sets the parameters so they match the given question
     public void SetParameters(int nrPoints, int nrBeacons, int nrMeasures, bool ShowDistance, bool lockmeasure, Vector2 measureLocation, bool lockbeacon, Vector2 beaconLocation)
     {
         nrOfPoints = nrPoints;
@@ -325,6 +327,6 @@ public class WaterPassingController : MonoBehaviour
         lockedMeasureLocation = measureLocation;
         lockBeacon = lockbeacon;
         lockedBeaconLocation = beaconLocation;
-}
+    }
 
 }

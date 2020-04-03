@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//*********** The WaterpassingQuestions sets the required parameters for a specific question ******************//
+
+
 public class WaterpassingQuestions : MonoBehaviour
 {
     [Header("Predefined TextFields")]
@@ -20,16 +23,17 @@ public class WaterpassingQuestions : MonoBehaviour
     private GameManager gm;
     private float correctAnswer;
 
-    // Start is called before the first frame update
+    // awake is called before start
     void Awake()
     {
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         waterpassing = GetComponent<WaterPassingController>();
 
         SetQuestionType(SoortVraag);
     }
 
 
-
+    //sets the parameters for the type of question
     public void SetQuestionType(QuestionType vraag)
     {
         switch (vraag)
@@ -78,6 +82,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
     }
 
+    //displays the correct answer
     public void ShowAnswer()
     {
         answerOutput.text = "Het antwoord is: " + correctAnswer.ToString();

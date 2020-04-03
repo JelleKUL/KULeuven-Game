@@ -3,32 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//*********** The ObjectPlacer manages the placement of random objects such as the to-be-calculated points and the obstacles ******************//
+
+
 public class ObjectPlacer : MonoBehaviour
 {
-    
-    
-    //[Header ("Predefined Points")]
-    //public Vector3[] pointLocationAndRotation;
+    [Header("Prefabs")]
+    public GameObject calculatePoint;
+    public GameObject obstacle;
+    public GameManager gm;
 
     [Header("Randomized Constrains")]
-    //public bool randomizePoint;
-    //public int nrRandomizedPoints;
     public float minDistanceBtwPoints = 2;
     public Vector2 minOffset;
     public Vector2 maxOffset;
     public float maxRandomAngle;
 
-    [Header ("Prefabs")]
-    public GameObject calculatePoint;
-    public GameObject obstacle;
-    public GameManager gm;
 
     [HideInInspector]
     public List <GameObject> calculatePoints = new List <GameObject>();
     private List<GameObject> obstacles = new List<GameObject>();
 
     
-
+    // generates a set amount of random points, making sure there is no overlap between any point or obstacle
+    // and returns all the coordinates in an array so it can be evaluated by the questions
     public float[] PlaceCalculatePoints(int amount)
     {
         float[] positions = new float[amount * 2];
@@ -45,6 +43,7 @@ public class ObjectPlacer : MonoBehaviour
         return positions;
     }
 
+    // changes the position of the points and returns the updated value
     public float[] ChangeCalculatePoints()
     {
         float[] positions = new float[calculatePoints.Count * 2];
@@ -63,6 +62,7 @@ public class ObjectPlacer : MonoBehaviour
         return positions;
     }
 
+    //places a set amount of obstacles keeping in mind the minimum distance
     public void PlaceObstacles (int amount)
     {
         
@@ -73,6 +73,7 @@ public class ObjectPlacer : MonoBehaviour
         }
     }
 
+    //changes the location of the random obstacles
     public void ChangeObstacles()
     {
         for (int i = 0; i < obstacles.Count; i++)
@@ -87,7 +88,7 @@ public class ObjectPlacer : MonoBehaviour
     }
 
 
-    //returns a random position that is far enugh from all the others
+    //returns a random position that is far enough from all the other obstacles and points
     public Vector2 FarEnoughRandomPoint()
     {
         float minDist = Mathf.Infinity;

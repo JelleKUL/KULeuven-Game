@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//*********** The MapAngleQuestions sets the required parameters for a specific question ******************//
+
+
 public class MapAngleQuestions : MonoBehaviour
 {
     [Header("Predefined TextFields")]
@@ -96,10 +99,7 @@ public class MapAngleQuestions : MonoBehaviour
                 placer.calculatePoints[0].transform.SetParent(assenkruis.transform);
                 assenkruis.transform.position += new Vector3(axisTransform.x, axisTransform.y, 0);
                 assenkruis.transform.Rotate(0, 0, axisTransform.z);
-                //global position
-                    //correctAnswerX = placer.calculatePoints[0].transform.position.x;
-                    //correctAnswerY = placer.calculatePoints[0].transform.position.y;
-                //localposition
+                
                 correctAnswerX = correctAnswerArray[0];
                 correctAnswerY = correctAnswerArray[1];
                 Debug.Log(correctAnswerX + " , " + correctAnswerY);
@@ -122,6 +122,8 @@ public class MapAngleQuestions : MonoBehaviour
         else Debug.Log("false");
 
     }
+
+    // checks if a given coordinate is correct
     public void CheckAnswerXY()
     {
         if (gm.CheckCorrectAnswer(answerInputX.text, correctAnswerX) && gm.CheckCorrectAnswer(answerInputY.text, correctAnswerY))
@@ -133,12 +135,6 @@ public class MapAngleQuestions : MonoBehaviour
         else Debug.Log("false");
 
     }
-    Vector2 Rotate(Vector2 aPoint, float aDegree)
-    {
-        float rad = aDegree * Mathf.Deg2Rad;
-        float s = Mathf.Sin(rad);
-        float c = Mathf.Cos(rad);
-        return new Vector2( aPoint.x * c - aPoint.y * s, aPoint.y * c + aPoint.x * s);
-    }
+   
 
 }

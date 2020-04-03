@@ -4,14 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+//*********** The GameManager manages all the global settings and methods ******************//
+
 public class GameManager : MonoBehaviour
 {
+    [Header ("Global Parameters")]
+    [Tooltip ("the errormargin for answers")]
     public float errorMargin = 0.1f;
-    public static int playerScore;
-
+    [Tooltip ("the size of the interactable screen in world dimentions")]
     public Vector2 screenMin;
     public Vector2 screenMax;
 
+    [HideInInspector]
+    public static int playerScore;
     private Text scoreText;
 
     // Start is called before the first frame update

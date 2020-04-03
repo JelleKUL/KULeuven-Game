@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//*********** The PolygonationQuestions sets the required parameters for a specific question ******************//
+
+
 public class PolygonationQuestions : MonoBehaviour
 {
     [Header("Predefined TextFields")]
@@ -37,16 +40,7 @@ public class PolygonationQuestions : MonoBehaviour
 
         SetQuestionType(SoortVraag);
 
-
-
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     //sets the type of question, can be altered by another script
     public void SetQuestionType(QuestionType vraag)
@@ -95,6 +89,8 @@ public class PolygonationQuestions : MonoBehaviour
         else Debug.Log("false");
 
     }
+
+    // checks if a given coordinate is correct
     public void CheckAnswerXY()
     {
         if (gm.CheckCorrectAnswer(answerInputX.text, correctAnswerX) && gm.CheckCorrectAnswer(answerInputY.text, correctAnswerY))
