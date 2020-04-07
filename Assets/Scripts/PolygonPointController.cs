@@ -15,9 +15,17 @@ public class PolygonPointController : MonoBehaviour
     //sets the name of the point as a number
     public void SetNameText (int nr)
     {
-        char c = (char)(65 + (nr));
+        if (nr < 0)
+        {
+            nameText.text = 0.ToString();
+        }
+        else
+        {
+            char c = (char)(65 + (nr));
+
+            nameText.text = c.ToString();
+        }
         
-        nameText.text = c.ToString();
     }
 
     //sets the name of the point as a letter
@@ -71,6 +79,14 @@ public class PolygonPointController : MonoBehaviour
     public Vector3 GetEllipseInfo()
     {
         return new Vector3(errorEllipse.transform.localScale.x, errorEllipse.transform.localScale.y, errorEllipse.transform.eulerAngles.z);
-    } 
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Beacon")
+        {
+            collision.transform.position = transform.position;
+        }
+    }
 
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1406690197702459682}
   - component: {fileID: 6696414436310916981}
   - component: {fileID: 5709015640929012113}
+  - component: {fileID: 8665197482629893217}
   m_Layer: 0
   m_Name: GroundPoint
   m_TagString: Untagged
@@ -99,6 +100,22 @@ MonoBehaviour:
   distanceText: {fileID: 0}
   angleText: {fileID: 0}
   errorEllipse: {fileID: 0}
+--- !u!58 &8665197482629893217
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4010883207403545137}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!1 &6822053826031557225
 GameObject:
   m_ObjectHideFlags: 0

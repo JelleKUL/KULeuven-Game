@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 537557740068619191}
   - component: {fileID: 537557740068619190}
-  - component: {fileID: 537557740068619184}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -45,27 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorMargin: 0.1
-  screenMin: {x: 0, y: 0}
-  screenMax: {x: 11.5, y: 8.5}
---- !u!114 &537557740068619184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 537557740068619189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 782e9c71fb27b4a87930416471fd47ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minPoint: {x: 0, y: 0}
-  maxPoint: {x: 9, y: 9}
-  randomAngle: 30
-  scoreIncrease: 1
-  measureObject: {fileID: 4023926246308375095, guid: 29a30f260d24b4ffea411af6c4a568ee,
-    type: 3}
-  xValue: {fileID: 0}
-  yValue: {fileID: 0}
-  answer: {fileID: 0}
-  correctPos: {x: 0, y: 0}
+  playField: {fileID: 0}

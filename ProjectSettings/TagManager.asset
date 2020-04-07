@@ -8,6 +8,7 @@ TagManager:
   - scoreText
   - PolygonLine
   - PolygonPoint
+  - Beacon
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1077476589
+    locked: 0
   - name: Laser
     uniqueID: 17773557
     locked: 0
