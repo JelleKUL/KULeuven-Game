@@ -11,6 +11,9 @@ public class PolygonPointController : MonoBehaviour
     public TextMesh distanceText;
     public TextMesh angleText;
     public GameObject errorEllipse;
+    public GameObject angleDisplay;
+    public GameObject spriteMask1;
+    public GameObject spriteMask2;
 
     //sets the name of the point as a number
     public void SetNameText (int nr)
@@ -43,12 +46,20 @@ public class PolygonPointController : MonoBehaviour
     //displays the angle between the previous and next point
     public void SetAngleText (Vector3 prevPoint, Vector3 nextPoint)
     {
-        Vector2 pos = transform.position;
-        float angle = Mathf.Atan2(nextPoint.y - pos.y, nextPoint.x - pos.x) - Mathf.Atan2(prevPoint.y - pos.y, prevPoint.x - pos.x);
-        //if (angle < 0) angle = Mathf.PI;
-        //if (angle > Mathf.PI) angle = Mathf.PI;
+        angleDisplay.SetActive(true);
+        Vector3 pos = transform.position;
+        float angle = Vector3.Angle(prevPoint - pos, nextPoint - pos);
+        spriteMask1.transform.right = prevPoint - spriteMask1.transform.position;
+        spriteMask2.transform.right = -nextPoint + spriteMask2.transform.position;
+        //Debug.Log((spriteMask1.transform.rotation * Quaternion.Inverse(spriteMask2.transform.rotation)).eulerAngles.z);
 
-        angleText.text = (Mathf.Round(angle / (Mathf.PI * 2) * 400 * 100) / 100f).ToString() + " gon";
+        if ((spriteMask1.transform.rotation * Quaternion.Inverse(spriteMask2.transform.rotation)).eulerAngles.z > 180)
+        {
+            spriteMask1.transform.right = nextPoint - spriteMask1.transform.position;
+            spriteMask2.transform.right = -prevPoint + spriteMask2.transform.position;
+        }
+        
+        angleText.text = (Mathf.Round(angle /360 * 400 * 100) / 100f).ToString() + " gon";
 
     }
 
@@ -58,6 +69,7 @@ public class PolygonPointController : MonoBehaviour
         distanceText.text = "";
         angleText.text = "";
         errorEllipse.SetActive(false);
+        angleDisplay.SetActive(false);
     }
 
     //scales the error ellips taking into account the previous one
@@ -83,10 +95,13 @@ public class PolygonPointController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Beacon")
+        if(collision.gameObject.tag == "Beacon" || collision.gameObject.tag == "PolygonPoint")
         {
             collision.transform.position = transform.position;
         }
+        
     }
+
+    
 
 }

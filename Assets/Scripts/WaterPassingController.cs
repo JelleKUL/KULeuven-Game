@@ -22,6 +22,7 @@ public class WaterPassingController : MonoBehaviour
     public Text angleErrorText;
     public SpriteShapeController spriteShapeController;
     public Transform groundPointTopDownCenter;
+    public WaterpassingTabel waterpassingTabel;
     [Header ("Changeable Parameters")]
     [Range (2,5)]
     public int nrOfPoints;
@@ -87,6 +88,7 @@ public class WaterPassingController : MonoBehaviour
         {
             AddStartAndEndGroundPoint();
             SetGroundPointsTopDown();
+            waterpassingTabel.CreateTable(nrOfPoints + 1);
         }
         SetGroundSprite();
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //*********** The PolygonLineController manages the Top down lines and displays all the measuring information ******************//
 
@@ -10,8 +11,12 @@ public class PolygonLineController : MonoBehaviour
     public GameObject linePoint;
     public LayerMask pointMask;
     public LayerMask Obstacles;
+    public Slider distanceErrorSlider;
+    public Slider angleErrorSlider;
 
     [Header("Changeable Parameters")]
+    public bool lockDistanceError;
+    public bool lockAngleError;
     [Tooltip ("the measure error of distance")]
     [Range(0, 100)]
     public float distanceError;
@@ -49,7 +54,17 @@ public class PolygonLineController : MonoBehaviour
             AddPoint(firstPointPosition);
             linePoints[0].GetComponent<CircleCollider2D>().enabled = false;
         }
+        if(distanceErrorSlider != null && angleErrorSlider != null)
+        {
+            distanceErrorSlider.value = distanceError;
+            angleErrorSlider.value = angleError;
 
+            if (lockAngleError) angleErrorSlider.interactable = false;
+            else angleErrorSlider.interactable = true;
+            if (lockDistanceError) distanceErrorSlider.interactable = false;
+            else distanceErrorSlider.interactable = true;
+        }
+        
     }
 
     // Update is called once per frame
@@ -223,5 +238,13 @@ public class PolygonLineController : MonoBehaviour
 
     }
 
+    public void SetAngleError(float value)
+    {
+        angleError = value;
+    }
+    public void SetDistanceError(float value)
+    {
+        distanceError = value;
+    }
 
 }
