@@ -165,6 +165,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterPassingTabelPart: {fileID: 0}
+  waterPassingTabelVereffening: {fileID: 0}
+  waterPassingTotaal: {fileID: 0}
+  waterPassingTotaalVereffening: {fileID: 0}
+  totalHoogte: 0
+  totalAfstand: 0
+  nieuwTotalHoogte: 0
 --- !u!1 &1092004018431433990
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,8 +321,10 @@ MonoBehaviour:
   beaconButton: {fileID: 0}
   measureButton: {fileID: 0}
   angleErrorText: {fileID: 0}
+  distanceAngleText: {fileID: 0}
   spriteShapeController: {fileID: 0}
   groundPointTopDownCenter: {fileID: 5468122333015959906}
+  waterpassingTabel: {fileID: 0}
   nrOfPoints: 2
   maxBeacons: 3
   maxMeasures: 2
@@ -608,13 +616,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac2a5404dfa64506b976b6ded717858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionText: {fileID: 0}
-  answerInputX: {fileID: 0}
-  answerInputY: {fileID: 0}
-  answerInputH: {fileID: 0}
-  answerOutput: {fileID: 0}
+  questionText: {fileID: 7128626481883086562}
+  answerInputX: {fileID: 6600748969144902869}
+  answerInputY: {fileID: 4340327729546393417}
+  answerInputH: {fileID: 5940607178984352508}
+  answerOutput: {fileID: 698391461229908680}
   SoortVraag: 0
-  scoreIncrease: 0
+  scoreIncrease: 1
 --- !u!114 &6249460733618340913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,8 +641,8 @@ MonoBehaviour:
     type: 3}
   gm: {fileID: 7320656095557494914}
   minDistanceBtwPoints: 2
-  minOffset: {x: 0, y: 0}
-  maxOffset: {x: 0, y: 0}
+  minOffset: {x: 1, y: 1}
+  maxOffset: {x: 1, y: 1}
   maxRandomAngle: 0
   calculatePoints: []
 --- !u!1 &2238602420597454985
@@ -2091,7 +2099,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
@@ -2527,8 +2535,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeBuildings
+      - m_Target: {fileID: 7320656095557494914}
+        m_MethodName: ReloadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3149,7 +3157,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Show Answer
+  m_Text: Toon correct antwoord
 --- !u!1 &7128626483265694999
 GameObject:
   m_ObjectHideFlags: 0
@@ -3217,7 +3225,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 12
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
@@ -3226,7 +3234,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Change Building Location
+  m_Text: "Randomiseer \nposities"
 --- !u!1 &7128626483271178119
 GameObject:
   m_ObjectHideFlags: 0

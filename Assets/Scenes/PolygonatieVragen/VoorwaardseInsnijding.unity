@@ -193,6 +193,11 @@ PrefabInstance:
       propertyPath: SoortVraag
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5146478976307846148, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6980487831481127707, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName

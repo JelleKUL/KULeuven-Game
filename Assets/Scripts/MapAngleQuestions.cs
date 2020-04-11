@@ -67,7 +67,7 @@ public class MapAngleQuestions : MonoBehaviour
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 
-                questionText.text = "Bepaal de Map Angle van punt B";
+                questionText.text = "Bepaal de Map Angle van punt A";
                 correctAnswerH = lineController.GetMapAngle(new Vector2(correctAnswerArray[0], correctAnswerArray[1]), Vector2.up);
 
                 Debug.Log(correctAnswerArray[0]+ "," + correctAnswerArray[1] + ",  " + correctAnswerH);
@@ -80,7 +80,7 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 correctAnswerX = correctAnswerArray[0];
                 correctAnswerY = correctAnswerArray[1];
-                questionText.text = "Bepaal het coördinaat van punt B";
+                questionText.text = "Bepaal het coördinaat van punt A";
                 break;
 
             case QuestionType.BepaalVorigPunt:
@@ -103,7 +103,7 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerX = correctAnswerArray[0];
                 correctAnswerY = correctAnswerArray[1];
                 Debug.Log(correctAnswerX + " , " + correctAnswerY);
-                questionText.text = "Bepaal het coördinaat van punt B, Het Assenstelsel is gedraaid";
+                questionText.text = "Bepaal het coördinaat van punt A, Het Assenstelsel is gedraaid";
                 break;
 
          
@@ -117,7 +117,9 @@ public class MapAngleQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease);
             Debug.Log("true");
-            
+            gm.ReloadScene();
+
+
         }
         else Debug.Log("false");
 
@@ -130,6 +132,7 @@ public class MapAngleQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease);
             Debug.Log("true");
+            gm.ReloadScene();
 
         }
         else Debug.Log("false");

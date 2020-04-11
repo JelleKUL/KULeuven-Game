@@ -7,6 +7,8 @@ public class WaterPassingTabelTotaal : MonoBehaviour
 {
     public Text hoogteVerschilText;
     public Text afstandText;
+    public Text nieuwHoogteText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,12 +19,16 @@ public class WaterPassingTabelTotaal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     public void SetValues(float hoogte, float afstand)
     {
         hoogteVerschilText.text = hoogte.ToString();
         afstandText.text = afstand.ToString();
+    }
+    public void SetNieuwHoogte(float nieuwhoogte)
+    {
+        nieuwHoogteText.text = nieuwhoogte.ToString();
     }
 }

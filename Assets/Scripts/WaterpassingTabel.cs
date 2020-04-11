@@ -5,14 +5,22 @@ using UnityEngine;
 public class WaterpassingTabel : MonoBehaviour
 {
     public GameObject waterPassingTabelPart;
+    public GameObject waterPassingTabelVereffening;
     public GameObject waterPassingTotaal;
+    public GameObject waterPassingTotaalVereffening;
 
     private GameObject totaal;
+    private GameObject totaalVereffening;
 
     private List<WaterpassigTabelDeel> tabelParts = new List<WaterpassigTabelDeel>();
+    private List<WaterPassingTabelVereffening> tabelVereffeningParts = new List<WaterPassingTabelVereffening>();
 
     public float totalHoogte;
     public float totalAfstand;
+    public float nieuwTotalHoogte;
+    private int amount; 
+
+    private bool VereffeningsMode;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,22 +30,42 @@ public class WaterpassingTabel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        totalHoogte = 0f;
-        totalAfstand = 0f;
-        for (int i = 0; i < tabelParts.Count; i++)
+        if (!VereffeningsMode)
         {
-            totalHoogte += tabelParts[i].hoogteVerschil;
-            totalAfstand += tabelParts[i].afstand;
-        }
+            totalHoogte = 0f;
+            totalAfstand = 0f;
+            for (int i = 0; i < tabelParts.Count; i++)
+            {
+                totalHoogte += tabelParts[i].hoogteVerschil;
+                totalAfstand += tabelParts[i].afstand;
+            }
 
-        if(totaal != null)
-        {
-            totaal.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
+            if (totaal != null)
+            {
+                totaal.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
+            }
         }
+        else
+        {
+            nieuwTotalHoogte = 0f;
+            for (int i = 0; i < tabelVereffeningParts.Count; i++)
+            {
+                nieuwTotalHoogte += tabelVereffeningParts[i].hoogteVerschil;
+                
+            }
+
+            if (totaal != null)
+            {
+                totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetNieuwHoogte(nieuwTotalHoogte);
+            }
+            
+        }
+        
     }
 
     public void CreateTable(int nrOfPoints)
     {
+        amount = nrOfPoints;
         float size = waterPassingTabelPart.GetComponent<RectTransform>().rect.height;
        
         for (int i = 0; i < nrOfPoints; i++)
@@ -71,5 +99,31 @@ public class WaterpassingTabel : MonoBehaviour
             return  c.ToString();
         }
 
+    }
+
+    public void CreateVereffeningTabel()
+    {
+        VereffeningsMode = true;
+        foreach (var tabelPart in tabelParts)
+        {
+            tabelPart.gameObject.SetActive(false);
+            totaal.SetActive(false);
+        }
+
+        float size = waterPassingTabelVereffening.GetComponent<RectTransform>().rect.height;
+
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject newPart = Instantiate(waterPassingTabelVereffening, transform, false);
+            WaterPassingTabelVereffening deel = newPart.GetComponent<WaterPassingTabelVereffening>();
+            newPart.GetComponent<RectTransform>().localPosition = new Vector2(0, -20 - i * size);
+            tabelVereffeningParts.Add(deel);
+
+                deel.SetNames(i + 1, tabelParts[i].hoogteVerschilText.text, tabelParts[i].afstand.ToString());
+            
+        }
+        totaalVereffening = Instantiate(waterPassingTotaalVereffening, transform, false);
+        totaalVereffening.GetComponent<RectTransform>().localPosition = new Vector2(0, -20 - (amount) * size);
+        totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
     }
 }

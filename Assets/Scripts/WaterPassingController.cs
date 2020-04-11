@@ -20,6 +20,7 @@ public class WaterPassingController : MonoBehaviour
     public Button beaconButton;
     public Button measureButton;
     public Text angleErrorText;
+    public Text distanceAngleText;
     public SpriteShapeController spriteShapeController;
     public Transform groundPointTopDownCenter;
     public WaterpassingTabel waterpassingTabel;
@@ -107,8 +108,13 @@ public class WaterPassingController : MonoBehaviour
     {
         if (magnifyMode)
         {
-
-            magnifyGlass.transform.position = gm.SetObjectToMouse(Input.mousePosition, -5);
+            if (MouseOverBeacon())
+            {
+                magnifyGlass.SetActive(true);
+                magnifyGlass.transform.position = gm.SetObjectToMouse(Input.mousePosition, -5);
+            }
+            else magnifyGlass.SetActive(false);
+            
 
         }
         else if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
@@ -170,8 +176,18 @@ public class WaterPassingController : MonoBehaviour
 
     }
 
-
-
+    public bool MouseOverBeacon()
+    {
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), 20);
+        if (rayHit.collider != null)
+        {
+            if (rayHit.collider.tag == "Beacon")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     //returns the gamobject the mouse has hit
     public GameObject CastMouseRay()
     {
@@ -233,6 +249,7 @@ public class WaterPassingController : MonoBehaviour
         GameObject newMeasure = Instantiate(measure, location, Quaternion.identity);
         correctErrorAngle = Random.Range(-maxAngleError, maxAngleError);
         SetAngleErrorText();
+        SetDistanceAngleText();
         float laserlength;
 
         if (nrOfPoints > 0)
@@ -420,7 +437,12 @@ public class WaterPassingController : MonoBehaviour
 
     public void SetAngleErrorText()
     {
-        angleErrorText.text = "De hoekfout is: \n " + correctErrorAngle.ToString();
+        angleErrorText.text = "De hoekfout is: \n " + (Mathf.Round(correctErrorAngle * 100) / 100).ToString() + "°";
+    }
+
+    public void SetDistanceAngleText()
+    {
+        distanceAngleText.text = "Afstandshoek: \n " + distanceMeasureAngle.ToString() + "°";
     }
   
     //shows the correct answer (replaced in the questionscript)
@@ -441,7 +463,7 @@ public class WaterPassingController : MonoBehaviour
     }
 
     //sets the parameters so they match the given question
-    public void SetParameters(int nrPoints, int nrBeacons, int nrMeasures, bool ShowDistance, bool lockmeasure, Vector2 measureLocation, bool lockbeacon, Vector2 beaconLocation)
+    public void SetParameters(int nrPoints, int nrBeacons, int nrMeasures, bool ShowDistance, bool lockmeasure, Vector2 measureLocation, bool lockbeacon, Vector2 beaconLocation, bool loop)
     {
         nrOfPoints = nrPoints;
         maxBeacons = nrBeacons;
@@ -451,6 +473,7 @@ public class WaterPassingController : MonoBehaviour
         lockedMeasureLocation = measureLocation;
         lockBeacon = lockbeacon;
         lockedBeaconLocation = beaconLocation;
+        loopAround = loop;
     }
 
 }

@@ -31,7 +31,38 @@ public class WaterpassingQuestions : MonoBehaviour
 
         SetQuestionType(SoortVraag);
     }
+    public void ResetCurrentQuestion()
+    {
+        switch (SoortVraag)
+        {
+            case QuestionType.Geen:
+                break;
 
+            case QuestionType.Hoogteverschil2Punten:
+                waterpassing.ChangePoints();
+                correctAnswer = waterpassing.correctHeight;
+
+                break;
+
+            case QuestionType.Afstand2Punten:
+                waterpassing.ChangePoints();
+                correctAnswer = waterpassing.correctDistance;
+
+                break;
+
+            case QuestionType.Hoekfout:
+                waterpassing.ChangePoints();
+                correctAnswer = waterpassing.correctErrorAngle;
+
+                break;
+
+            case QuestionType.HoogteVerschilMeerPunten:
+                waterpassing.ChangePoints();
+                correctAnswer = waterpassing.correctHeight;
+
+                break;
+        }
+    }
 
     //sets the parameters for the type of question
     public void SetQuestionType(QuestionType vraag)
@@ -42,29 +73,30 @@ public class WaterpassingQuestions : MonoBehaviour
                 break;
 
             case QuestionType.Hoogteverschil2Punten:
-                waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero);
+                waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = waterpassing.correctHeight;
 
                 break;
 
             case QuestionType.Afstand2Punten:
-                waterpassing.SetParameters(2, 2, 1, true, false, Vector2.zero, false, Vector2.zero);
+                waterpassing.SetParameters(2, 2, 1, true, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = waterpassing.correctDistance;
 
                 break;
 
             case QuestionType.Hoekfout:
-                waterpassing.SetParameters(0, 1, 1, true, true, new Vector2(3,1), true, new Vector2(6,1));
+                waterpassing.SetParameters(0, 1, 1, true, true, new Vector2(3,1), true, new Vector2(6,1), false);
                 correctAnswer = waterpassing.correctErrorAngle;
 
                 break;
 
             case QuestionType.HoogteVerschilMeerPunten:
-                waterpassing.SetParameters(3, 3, 2, false, false, Vector2.zero, false, Vector2.zero);
+                waterpassing.SetParameters(3, 5, 1, false, false, Vector2.zero, false, Vector2.zero, true);
                 correctAnswer = waterpassing.correctHeight;
 
                 break;
         }
+        Debug.Log("correctAnswer");
     }
 
 
@@ -72,11 +104,12 @@ public class WaterpassingQuestions : MonoBehaviour
     //checks if the given anwser is correct
     public void CheckAnswer()
     {
-        if (gm.CheckCorrectAnswer(answerInputH.text, correctAnswer))
+        
+        if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer()))
         {
             gm.IncreaseScore(scoreIncrease);
             Debug.Log("true");
-            waterpassing.ChangePoints();
+            gm.ReloadScene();
         }
         else Debug.Log("false");
 
@@ -85,11 +118,38 @@ public class WaterpassingQuestions : MonoBehaviour
     //displays the correct answer
     public void ShowAnswer()
     {
-        answerOutput.text = "Het antwoord is: " + correctAnswer.ToString();
+        answerOutput.text = "Het antwoord is: " + CorrectAnswer().ToString();
 
         waterpassing.ShowAnswer();
 
 
 
+    }
+
+    public float CorrectAnswer()
+    {
+        switch (SoortVraag)
+        {
+            case QuestionType.Hoogteverschil2Punten:
+
+                return waterpassing.correctHeight;
+
+
+            case QuestionType.Afstand2Punten:
+
+                return waterpassing.correctDistance;
+
+
+            case QuestionType.Hoekfout:
+
+                return waterpassing.correctErrorAngle;
+
+
+            case QuestionType.HoogteVerschilMeerPunten:
+
+                return waterpassing.correctHeight;
+
+        }
+        return 0;
     }
 }

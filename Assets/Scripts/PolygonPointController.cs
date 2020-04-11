@@ -58,7 +58,7 @@ public class PolygonPointController : MonoBehaviour
             spriteMask1.transform.right = nextPoint - spriteMask1.transform.position;
             spriteMask2.transform.right = -prevPoint + spriteMask2.transform.position;
         }
-        
+        angleText.transform.position = -Vector3.Normalize(Vector3.Normalize(nextPoint - transform.position) + Vector3.Normalize(prevPoint - transform.position)) * 0.7f + transform.position;
         angleText.text = (Mathf.Round(angle /360 * 400 * 100) / 100f).ToString() + " gon";
 
     }

@@ -141,7 +141,7 @@ public class PolygonLineController : MonoBehaviour
         }
         if (showStartAngle && linePoints.Count > 1)
         {
-            linePoints[0].GetComponent<PolygonPointController>().SetAngleText(linePoints[0].transform.position + Vector3.right, linePoints[1].transform.position);
+            linePoints[0].GetComponent<PolygonPointController>().SetAngleText(linePoints[0].transform.position + Vector3.up, linePoints[1].transform.position);
         }
 
         for (int i = 0; i < linePoints.Count; i++)

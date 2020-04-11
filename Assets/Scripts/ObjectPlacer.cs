@@ -29,6 +29,10 @@ public class ObjectPlacer : MonoBehaviour
     // and returns all the coordinates in an array so it can be evaluated by the questions
     public float[] PlaceCalculatePoints(int amount)
     {
+        if(calculatePoints.Count > 0)
+        {
+            return (ChangeCalculatePoints());
+        }
         float[] positions = new float[amount * 2];
         for (int i = 0; i < amount; i++)
         {
@@ -65,12 +69,20 @@ public class ObjectPlacer : MonoBehaviour
     //places a set amount of obstacles keeping in mind the minimum distance
     public void PlaceObstacles (int amount)
     {
-        
-        for (int i = 0; i < amount; i++)
+        if(obstacles.Count > 0)
         {
-            GameObject newObstacle = Instantiate(obstacle, FarEnoughRandomPoint(), RandomAngle());
-            obstacles.Add(newObstacle);
+            ChangeObstacles();
+            
         }
+        else
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                GameObject newObstacle = Instantiate(obstacle, FarEnoughRandomPoint(), RandomAngle());
+                obstacles.Add(newObstacle);
+            }
+        }
+        
     }
 
     //changes the location of the random obstacles

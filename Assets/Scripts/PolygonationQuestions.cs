@@ -41,7 +41,10 @@ public class PolygonationQuestions : MonoBehaviour
         SetQuestionType(SoortVraag);
 
     }
-
+    public void ResetCurrentQuestion()
+    {
+        SetQuestionType(SoortVraag);
+    }
     //sets the type of question, can be altered by another script
     public void SetQuestionType(QuestionType vraag)
     {

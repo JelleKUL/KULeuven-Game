@@ -138,6 +138,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapAngleStandardScene Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2580940359688496536, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034826972943384797, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 973655044}
+    - target: {fileID: 7034826972943384797, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckAnswerXY
+      objectReference: {fileID: 0}
     - target: {fileID: 7882142649180327795, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -195,3 +210,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a63067732c6884dd59186a198fc1d824, type: 3}
+--- !u!114 &973655044 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 271289531687891773, guid: a63067732c6884dd59186a198fc1d824,
+    type: 3}
+  m_PrefabInstance: {fileID: 490187743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b6cb5b4810b4ae1a9ef38947a1dba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
