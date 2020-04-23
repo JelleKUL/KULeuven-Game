@@ -22,11 +22,15 @@ public class WaterPassingController : MonoBehaviour
     public Text angleErrorText;
     public Text distanceAngleText;
     public SpriteShapeController spriteShapeController;
+    public SpriteShapeController topSpriteShapeController;
     public Transform groundPointTopDownCenter;
     public WaterpassingTabel waterpassingTabel;
     [Header ("Changeable Parameters")]
     [Range (2,5)]
     public int nrOfPoints;
+    public bool placeTopPoints;
+    [Range(0, 3)]
+    public int nrOfTopPoints;
     public int maxBeacons;
     public int maxMeasures;
     public bool showDistanceLaser;
@@ -44,14 +48,16 @@ public class WaterPassingController : MonoBehaviour
     [Tooltip("the minimum distance the points should be apart")]
     public float minDistance;
     [Tooltip("the max height of the points in % of the screen height")]
-    [Range(0, 1)]
+    [Range(0, 0.5f)]
     public float maxHeightGroundPoint;
+    
     public Color buttonBaseColor;
     public Color buttonActiveColor;
 
     
     private GameManager gm;
     private List<GameObject> groundPoints = new List<GameObject>();
+    private List<GameObject> topPoints = new List<GameObject>();
     private List<GameObject> measures = new List<GameObject>();
     private List<GameObject> beacons = new List<GameObject>();
     private List<GameObject> groundPointsTopDown = new List<GameObject>();
@@ -85,6 +91,7 @@ public class WaterPassingController : MonoBehaviour
         {
             ChangePoints();
         }
+       
         if (loopAround)
         {
             AddStartAndEndGroundPoint();
@@ -92,6 +99,7 @@ public class WaterPassingController : MonoBehaviour
             waterpassingTabel.CreateTable(nrOfPoints + 1);
         }
         SetGroundSprite();
+        SetTopSprite();
 
         if (lockMeasure)
         {
@@ -172,6 +180,27 @@ public class WaterPassingController : MonoBehaviour
             spriteShapeController.spline.SetHeight(i, 0.1f);
             spriteShapeController.spline.SetLeftTangent(i, Vector3.left);
             spriteShapeController.spline.SetRightTangent(i, Vector3.right);
+        }
+
+    }
+    public void SetTopSprite()
+    {
+        topSpriteShapeController.spline.Clear();
+        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x,gm.screenMax.y -0.5f));
+
+        for (int i = 0; i < nrOfTopPoints; i++)
+        {
+            topSpriteShapeController.spline.InsertPointAt(0, topPoints[i].transform.position + 0.5f * Vector3.up);
+            
+        }
+        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, gm.screenMax.y - 0.5f));
+
+        for (int i = 0; i < topSpriteShapeController.spline.GetPointCount(); i++)
+        {
+            topSpriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
+            topSpriteShapeController.spline.SetHeight(i, 0.1f);
+            topSpriteShapeController.spline.SetLeftTangent(i, Vector3.right);
+            topSpriteShapeController.spline.SetRightTangent(i, Vector3.left);
         }
 
     }
@@ -311,6 +340,7 @@ public class WaterPassingController : MonoBehaviour
     public void AddBeacon(Vector2 location)
     {
         GameObject newBeacon = Instantiate(beacon, location, Quaternion.identity);
+        newBeacon.GetComponent<Physics2DObject>().allowUpsideDown = placeTopPoints;
         beacons.Add(newBeacon);
         
     }
@@ -331,6 +361,11 @@ public class WaterPassingController : MonoBehaviour
     public void ChangePoints()
     {
         AddGroundPoints();
+        if (placeTopPoints)
+        {
+            addTopPoints();
+
+        }
 
         for (int i = 0; i < measures.Count; i++)
         {
@@ -394,7 +429,7 @@ public class WaterPassingController : MonoBehaviour
 
         for (int i = 0; i < nrOfPoints; i++)
         {
-            Vector2 newPos = new Vector2(gm.screenMin.x + 1  + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(0 , gm.screenMax.y * maxHeightGroundPoint));
+            Vector2 newPos = new Vector2(gm.screenMin.x + 1  + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(0 , (gm.screenMax.y) * maxHeightGroundPoint));
             groundPoints[i].transform.position = newPos;
             Debug.Log("moved " + i);
         }
@@ -405,6 +440,48 @@ public class WaterPassingController : MonoBehaviour
         Debug.Log(correctHeight);
 
     }
+    //adds the top points
+    public void addTopPoints()
+    {
+        float Increment = (gm.screenMax.x - gm.screenMin.x - 2) / (float)nrOfTopPoints;
+
+        if (topPoints.Count < nrOfTopPoints)
+        {
+            Debug.Log(topPoints.Count + " " + nrOfTopPoints);
+
+            for (int i = topPoints.Count; i < nrOfTopPoints; i++)
+            {
+                GameObject newPoint = Instantiate(groundPoint, Vector2.zero, Quaternion.identity);
+                newPoint.GetComponent<PolygonPointController>().SetNameText(i);
+                topPoints.Add(newPoint);
+                Debug.Log("placed " + i);
+            }
+        }
+        if (topPoints.Count > nrOfTopPoints)
+        {
+            for (int i = topPoints.Count; i > nrOfTopPoints; i--)
+            {
+                GameObject lastPoint = topPoints[i - 1];
+                topPoints.RemoveAt(i - 1);
+
+                Destroy(lastPoint);
+                Debug.Log("destroyed" + i);
+            }
+        }
+
+        for (int i = 0; i < nrOfTopPoints; i++)
+        {
+            Vector2 newPos = new Vector2(gm.screenMin.x + 1 + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(gm.screenMax.y,  (gm.screenMax.y) * (1 - maxHeightGroundPoint)));
+            topPoints[i].transform.position = newPos;
+            Debug.Log("moved top" + i);
+        }
+
+
+        //correctHeight = groundPoints[groundPoints.Count - 1].transform.position.y - groundPoints[0].transform.position.y;
+        //correctDistance = groundPoints[groundPoints.Count - 1].transform.position.x - groundPoints[0].transform.position.x;
+        //Debug.Log(correctHeight);
+    }
+
     public void SetGroundPointsTopDown()
     {
         float radius = (gm.screenMax.x - gm.screenMin.x) / ( 2 * Mathf.PI);
@@ -437,12 +514,12 @@ public class WaterPassingController : MonoBehaviour
 
     public void SetAngleErrorText()
     {
-        angleErrorText.text = "De hoekfout is: \n " + (Mathf.Round(correctErrorAngle * 100) / 100).ToString() + "°";
+        angleErrorText.text = "De Collimatiefout is: \n " + (Mathf.Round(correctErrorAngle * 100 * (4/3.6f)) / 100).ToString() + "gon";
     }
 
     public void SetDistanceAngleText()
     {
-        distanceAngleText.text = "Afstandshoek: \n " + distanceMeasureAngle.ToString() + "°";
+        distanceAngleText.text = "Divergentiecoefficient: \n " + (distanceMeasureAngle * 400/360f).ToString() + "gon";
     }
   
     //shows the correct answer (replaced in the questionscript)

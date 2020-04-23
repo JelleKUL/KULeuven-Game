@@ -93,6 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af33d93886d644a8a351062598da815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowUpsideDown: 1
+  gravityForce: 10
 --- !u!1 &5288884246696016087
 GameObject:
   m_ObjectHideFlags: 0
