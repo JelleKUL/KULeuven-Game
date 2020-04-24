@@ -14,6 +14,7 @@ public class ObjectPlacer : MonoBehaviour
     public GameManager gm;
 
     [Header("Randomized Constrains")]
+    public bool placeBtwnPoints;
     public float minDistanceBtwPoints = 2;
     public Vector2 minOffset;
     public Vector2 maxOffset;
@@ -133,7 +134,20 @@ public class ObjectPlacer : MonoBehaviour
     public Quaternion RandomAngle()
     {
         return Quaternion.Euler(0, 0, Random.Range(-maxRandomAngle, maxRandomAngle));
-    } 
+    }
+
+    public void PlaceObstacleBtwn(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            Vector3 obsPosition;
+            if (i == 0) obsPosition = calculatePoints[0].transform.position / 2f;
+            else obsPosition = (calculatePoints[i-1].transform.position + calculatePoints[i].transform.position) / 2f;
+            GameObject newObstacle = Instantiate(obstacle, obsPosition, RandomAngle());
+            obstacles.Add(newObstacle);
+        }
+        
+    }
 
     
 

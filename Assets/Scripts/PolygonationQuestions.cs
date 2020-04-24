@@ -15,7 +15,7 @@ public class PolygonationQuestions : MonoBehaviour
     public Text answerInputH;
     public Text answerOutput;
 
-    public enum QuestionType { Geen, Coordinaat1Punt, Afstand2PuntenPolygoon, VoorwaardseInsnijding }
+    public enum QuestionType { Geen, Coordinaat1Punt, Afstand2PuntenPolygoon, VoorwaardseInsnijding, AchterwaardseInsnijding }
     [Tooltip("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -71,11 +71,23 @@ public class PolygonationQuestions : MonoBehaviour
                 break;
 
             case QuestionType.VoorwaardseInsnijding:
-                //start oefening MinimaleGrote
+                //start oefening voorwaardse insnijding
                 lineController.SetVisibles(false, true, true, false, false, false, 3);
                 correctAnswerArray = placer.PlaceCalculatePoints(3);
                 placer.PlaceObstacles(2);
+                correctAnswerX = correctAnswerArray[4];
+                correctAnswerY = correctAnswerArray[5];
                 questionText.text = "Voorwaardse Insnijding bepaal C, A = x:" + correctAnswerArray[0]+", y:" + correctAnswerArray[1] + " B = x:" + correctAnswerArray[2] + ", y:" + correctAnswerArray[3];
+                break;
+
+            case QuestionType.AchterwaardseInsnijding:
+                //start oefening achterwaardse insnijding
+                lineController.SetVisibles(false, true, true, false, false, false, 3);
+                correctAnswerArray = placer.PlaceCalculatePoints(4);
+                correctAnswerX = correctAnswerArray[0];
+                correctAnswerY = correctAnswerArray[1];
+                //placer.PlaceObstacles(2);
+                questionText.text = "Achterwaardse Insnijding bepaal A, B = x:" + correctAnswerArray[2] + ", y:" + correctAnswerArray[3] + " C = x:" + correctAnswerArray[4] + ", y:" + correctAnswerArray[5] + " D = x:" + correctAnswerArray[6] + ", y:" + correctAnswerArray[7];
                 break;
         }
     }

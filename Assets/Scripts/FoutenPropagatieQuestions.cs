@@ -63,7 +63,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 //start oefening MinimaleGrote
                 lineController.SetVisibles(true, true, true, true, false, false, 10);
                 placer.PlaceCalculatePoints(1);
-                placer.PlaceObstacles(1);
+                placer.PlaceObstacleBtwn(1);
                 questionText.text = "Hoe kan je de foutenellips zo klein mogelijk maken?";
                 break;
         }
