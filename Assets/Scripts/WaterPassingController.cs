@@ -280,7 +280,7 @@ public class WaterPassingController : MonoBehaviour
         SetAngleErrorText();
         SetDistanceAngleText();
         float laserlength;
-
+        /*
         if (nrOfPoints > 0)
         {
             laserlength = (gm.screenMax.x - gm.screenMin.x) / nrOfPoints;
@@ -296,7 +296,7 @@ public class WaterPassingController : MonoBehaviour
             laserline.SetPosition(0, -laserlength * Vector3.right);
             laserline.SetPosition(1, laserlength * Vector3.right);
         }
-
+        
         newMeasure.transform.GetChild(0).transform.Rotate(0, 0, correctErrorAngle);
 
         newMeasure.transform.GetChild(0).GetChild(0).localEulerAngles = new Vector3(0, 0, distanceMeasureAngle);
@@ -308,6 +308,7 @@ public class WaterPassingController : MonoBehaviour
         newMeasure.transform.GetChild(0).GetChild(1).gameObject.SetActive(showDistanceLaser);
         newMeasure.transform.GetChild(1).GetChild(0).gameObject.SetActive(showDistanceLaser);
         newMeasure.transform.GetChild(1).GetChild(1).gameObject.SetActive(showDistanceLaser);
+        */
         newMeasure.transform.GetChild(1).gameObject.SetActive(false);
         measures.Add(newMeasure);
      

@@ -316,16 +316,19 @@ MonoBehaviour:
   magnifyGlass: {fileID: 5944935336328589914}
   pointMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   magnifyButton: {fileID: 0}
   beaconButton: {fileID: 0}
   measureButton: {fileID: 0}
   angleErrorText: {fileID: 0}
   distanceAngleText: {fileID: 0}
   spriteShapeController: {fileID: 0}
+  topSpriteShapeController: {fileID: 0}
   groundPointTopDownCenter: {fileID: 5468122333015959906}
   waterpassingTabel: {fileID: 0}
   nrOfPoints: 2
+  placeTopPoints: 0
+  nrOfTopPoints: 0
   maxBeacons: 3
   maxMeasures: 2
   showDistanceLaser: 0
@@ -640,6 +643,7 @@ MonoBehaviour:
   obstacle: {fileID: 4023926246308375095, guid: 29a30f260d24b4ffea411af6c4a568ee,
     type: 3}
   gm: {fileID: 7320656095557494914}
+  placeBtwnPoints: 0
   minDistanceBtwPoints: 2
   minOffset: {x: 1, y: 1}
   maxOffset: {x: 1, y: 1}
@@ -3362,6 +3366,7 @@ MonoBehaviour:
   calculatePoint: {fileID: 0}
   obstacle: {fileID: 0}
   gm: {fileID: 7320656095557494914}
+  placeBtwnPoints: 0
   minDistanceBtwPoints: 2
   minOffset: {x: 0, y: 0}
   maxOffset: {x: 0, y: 0}
@@ -4134,6 +4139,11 @@ PrefabInstance:
         type: 3}
       propertyPath: angleError
       value: 6.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222805036568096265, guid: e5504b34600944f4ba5765c6209affd6,
+        type: 3}
+      propertyPath: pointMask.m_Bits
+      value: 1280
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5504b34600944f4ba5765c6209affd6, type: 3}
