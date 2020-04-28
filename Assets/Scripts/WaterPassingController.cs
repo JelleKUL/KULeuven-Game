@@ -125,7 +125,7 @@ public class WaterPassingController : MonoBehaviour
             
 
         }
-        else if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
+        if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
             if (!holdingObject)
             {
@@ -277,9 +277,10 @@ public class WaterPassingController : MonoBehaviour
     {
         GameObject newMeasure = Instantiate(measure, location, Quaternion.identity);
         correctErrorAngle = Random.Range(-maxAngleError, maxAngleError);
+        newMeasure.GetComponent<MeasureController>().errorAngle = correctErrorAngle;
         SetAngleErrorText();
         SetDistanceAngleText();
-        float laserlength;
+        
         /*
         if (nrOfPoints > 0)
         {
@@ -329,11 +330,25 @@ public class WaterPassingController : MonoBehaviour
     {
         for (int i = 0; i < measures.Count; i++)
         {
-            measures[i].transform.GetChild(0).transform.Rotate(0,0, -2 * measures[i].transform.GetChild(0).transform.eulerAngles.z);
-            Debug.Log(measures[i].transform.GetChild(0).transform.eulerAngles);
+            measures[i].GetComponent<MeasureController>().errorAngle *= -1;
+            Debug.Log(measures[i].GetComponent<MeasureController>().errorAngle);
         }
 
         
+    }
+
+    //sets the scheefstandangle of all the measures
+
+    public void RotateMeasure(string input)
+    {
+        float angleinput = float.Parse(input);
+        for (int i = 0; i < measures.Count; i++)
+        {
+            measures[i].GetComponent<MeasureController>().scheefstandsHoek = angleinput * 4 / 3.6f;
+            Debug.Log(angleinput * 4 / 3.6f);
+        }
+
+
     }
 
 
@@ -553,5 +568,7 @@ public class WaterPassingController : MonoBehaviour
         lockedBeaconLocation = beaconLocation;
         loopAround = loop;
     }
+
+
 
 }

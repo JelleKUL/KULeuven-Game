@@ -341,7 +341,7 @@ MonoBehaviour:
   showAngleError: 0
   maxAngleError: 2
   minDistance: 1
-  maxHeightGroundPoint: 0.373
+  maxHeightGroundPoint: 0.1
   buttonBaseColor: {r: 1, g: 1, b: 1, a: 1}
   buttonActiveColor: {r: 0.6273585, g: 1, b: 0.9898838, a: 1}
   correctHeight: 0
@@ -2842,7 +2842,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 5943
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

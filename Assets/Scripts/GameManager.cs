@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [Header ("Global Parameters")]
     [Tooltip ("the errormargin for answers")]
     public float errorMargin = 0.1f;
+    public static float worldScale = 10f;
     [Tooltip ("the size of the interactable screen in world dimentions")]
     public Vector2 screenMin;
     public Vector2 screenMax;

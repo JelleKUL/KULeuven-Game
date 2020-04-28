@@ -5,12 +5,17 @@ using UnityEngine;
 public class MeasureController : MonoBehaviour
 {
     public LayerMask beacons;
+    public float scheefstandsHoek = 0f;
     public float errorAngle;
     public float maxDistance = 10;
+    public float DistanceMultiplier = 0.01f;
     public LineRenderer laserline;
     public GameObject kruisDraden;
+    public Transform measureHead;
 
-    private Vector3 beaconHitPoint;
+    private Vector4 beaconHitPointL;
+    private Vector4 beaconHitPointR;
+
     private GameObject kruisDraadL;
     private GameObject kruisDraadR;
     
@@ -31,9 +36,13 @@ public class MeasureController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        laserLinePositions[1] = transform.position;
-        kruisDraadL.transform.position = CastLaser(transform.position, new Vector2(-Mathf.Cos(errorAngle * Mathf.Deg2Rad), Mathf.Sin(errorAngle * Mathf.Deg2Rad)));
-        kruisDraadR.transform.position = CastLaser(transform.position, new Vector2(Mathf.Cos(errorAngle * Mathf.Deg2Rad), Mathf.Sin(errorAngle * Mathf.Deg2Rad)));
+        laserLinePositions[1] = measureHead.position;
+        beaconHitPointL = CastLaser(measureHead.position, new Vector2(-Mathf.Cos((errorAngle - scheefstandsHoek)* Mathf.Deg2Rad), Mathf.Sin((errorAngle - scheefstandsHoek) * Mathf.Deg2Rad)));
+        beaconHitPointR = CastLaser(measureHead.position, new Vector2(Mathf.Cos((errorAngle + scheefstandsHoek) * Mathf.Deg2Rad), Mathf.Sin((errorAngle + scheefstandsHoek) * Mathf.Deg2Rad)));
+        kruisDraadL.transform.position = beaconHitPointL;
+        kruisDraadL.transform.localScale = new Vector3(1,beaconHitPointL.w * DistanceMultiplier, 1);
+        kruisDraadR.transform.position = beaconHitPointR;
+        kruisDraadR.transform.localScale = new Vector3(1, beaconHitPointR.w * DistanceMultiplier, 1);
         laserLinePositions[0] = kruisDraadL.transform.position;
         laserLinePositions[2] = kruisDraadR.transform.position;
 
@@ -47,15 +56,15 @@ public class MeasureController : MonoBehaviour
     }
 
     // casts a ray in the direction of the laser
-    Vector3 CastLaser(Vector2 origin, Vector2 direction)
+    Vector4 CastLaser(Vector2 origin, Vector2 direction)
     {
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, maxDistance, beacons);
 
         if (hit.collider != null)
         {
-            return new Vector3( hit.point.x, hit.point.y, -1);
+            return new Vector4( hit.point.x, hit.point.y, -1, hit.distance);
             
         }
-        return transform.position;
+        return measureHead.position;
     }
 }

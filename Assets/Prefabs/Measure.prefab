@@ -130,7 +130,7 @@ LineRenderer:
   - {x: 10, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.005
+    widthMultiplier: 0.02
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638548363782295850}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8544603d242b046f8a4e123367b5466e, type: 3}
   m_Name: 
@@ -200,9 +200,11 @@ MonoBehaviour:
     m_Bits: 256
   errorAngle: 1.41
   maxDistance: 10
+  DistanceMultiplier: 0.1
   laserline: {fileID: 4323721489155251476}
   kruisDraden: {fileID: 939078881808828710, guid: 58eab502b124c44f38fa2da86f98e965,
     type: 3}
+  measureHead: {fileID: 0}
 --- !u!1 &1354509410431150012
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +217,7 @@ GameObject:
   - component: {fileID: 7890361848550782006}
   - component: {fileID: 6122742460880355783}
   - component: {fileID: 6509450951023837422}
+  - component: {fileID: 6999979535368058921}
   m_Layer: 10
   m_Name: Measure
   m_TagString: Measure
@@ -299,6 +302,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowUpsideDown: 0
+--- !u!114 &6999979535368058921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354509410431150012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8544603d242b046f8a4e123367b5466e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beacons:
+    serializedVersion: 2
+    m_Bits: 256
+  errorAngle: 1.41
+  maxDistance: 10
+  DistanceMultiplier: 0.1
+  laserline: {fileID: 4323721489155251476}
+  kruisDraden: {fileID: 939078881808828710, guid: 58eab502b124c44f38fa2da86f98e965,
+    type: 3}
+  measureHead: {fileID: 2066107927335179320}
 --- !u!1 &2699590325922045698
 GameObject:
   m_ObjectHideFlags: 0

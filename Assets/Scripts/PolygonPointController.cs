@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PolygonPointController : MonoBehaviour
 {
+    
     [Header("Prefab Childeren")]
     public TextMesh nameText;
     public TextMesh distanceText;
@@ -40,7 +41,7 @@ public class PolygonPointController : MonoBehaviour
     //displays the distance to the previous point
     public void SetDistanceText (Vector3 prevPoint)
     {
-        distanceText.text = (Mathf.Round((transform.position - prevPoint).magnitude * 100f) / 100f).ToString() + " m";
+        distanceText.text = (Mathf.Round((transform.position - prevPoint).magnitude * 100f * GameManager.worldScale) / 100f).ToString() + " m";
     }
 
     //displays the angle between the previous and next point
