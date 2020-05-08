@@ -30,9 +30,12 @@ public class WaterPassingTabelVereffening : MonoBehaviour
 
     }
 
-    public void SetNames(int nr, string hoogteVerschilVoor, string afstandVoor)
+    public void SetName(int nr)
     {
         station.text = nr.ToString();
+    }
+    public void SetValues(string hoogteVerschilVoor, string afstandVoor)
+    {
         hoogteVerschilText.text = hoogteVerschilVoor;
         afstandText.text = afstandVoor;
     }

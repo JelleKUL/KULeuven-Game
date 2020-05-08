@@ -426,7 +426,7 @@ public class WaterPassingController : MonoBehaviour
             for (int i = groundPoints.Count; i < nrOfPoints; i++)
             {
                 GameObject newPoint = Instantiate(groundPoint, Vector2.zero, Quaternion.identity);
-                newPoint.GetComponent<PolygonPointController>().SetNameText(i);
+                newPoint.GetComponent<PolygonPointController>().SetNameText(i+1);
                 groundPoints.Add(newPoint);
                 Debug.Log("placed " + i);
             }
@@ -468,7 +468,7 @@ public class WaterPassingController : MonoBehaviour
             for (int i = topPoints.Count; i < nrOfTopPoints; i++)
             {
                 GameObject newPoint = Instantiate(groundPoint, Vector2.zero, Quaternion.identity);
-                newPoint.GetComponent<PolygonPointController>().SetNameText(i);
+                newPoint.GetComponent<PolygonPointController>().SetNameText(i+1);
                 topPoints.Add(newPoint);
                 Debug.Log("placed " + i);
             }
@@ -521,6 +521,13 @@ public class WaterPassingController : MonoBehaviour
             cummAngle += (groundPoints[i-1].transform.position.x - groundPoints[i-2].transform.position.x) / radius;
             groundPointsTopDown[i].transform.RotateAround(groundPointTopDownCenter.position, Vector3.back, cummAngle * Mathf.Rad2Deg);
               
+        }
+        LineRenderer line = groundPointTopDownCenter.gameObject.GetComponent<LineRenderer>();
+        line.positionCount = groundPointsTopDown.Count;
+
+        for (int i = 0; i < line.positionCount; i++)
+        {
+            line.SetPosition(i, groundPointsTopDown[i].transform.position - Vector3.forward * 10);
         }
         
 

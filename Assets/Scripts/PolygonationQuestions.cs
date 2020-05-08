@@ -26,6 +26,7 @@ public class PolygonationQuestions : MonoBehaviour
     private GameManager gm;
 
     private float[] correctAnswerArray;
+    private float[] obsructedPointsArray;
     private float correctAnswerX;
     private float correctAnswerY;
     private float correctAnswerH;
@@ -73,21 +74,24 @@ public class PolygonationQuestions : MonoBehaviour
             case QuestionType.VoorwaardseInsnijding:
                 //start oefening voorwaardse insnijding
                 lineController.SetVisibles(false, true, true, false, false, false, 3);
-                correctAnswerArray = placer.PlaceCalculatePoints(3);
+                obsructedPointsArray = placer.PlaceObstructedCalculatePoints(1);
+                correctAnswerArray = placer.PlaceCalculatePoints(2);
+                
                 placer.PlaceObstacles(2);
-                correctAnswerX = correctAnswerArray[4];
-                correctAnswerY = correctAnswerArray[5];
-                questionText.text = "Voorwaardse Insnijding bepaal C, A = x:" + correctAnswerArray[0]+", y:" + correctAnswerArray[1] + " B = x:" + correctAnswerArray[2] + ", y:" + correctAnswerArray[3];
+                correctAnswerX = obsructedPointsArray[0];
+                correctAnswerY = obsructedPointsArray[1];
+                questionText.text = "Voorwaardse Insnijding bepaal P, A = x:" + correctAnswerArray[0]+", y:" + correctAnswerArray[1] + " B = x:" + correctAnswerArray[2] + ", y:" + correctAnswerArray[3];
                 break;
 
             case QuestionType.AchterwaardseInsnijding:
                 //start oefening achterwaardse insnijding
                 lineController.SetVisibles(false, true, true, false, false, false, 3);
-                correctAnswerArray = placer.PlaceCalculatePoints(4);
+                correctAnswerArray = placer.PlaceCalculatePoints(1);
+                obsructedPointsArray = placer.PlaceObstructedCalculatePoints(3);
                 correctAnswerX = correctAnswerArray[0];
                 correctAnswerY = correctAnswerArray[1];
                 //placer.PlaceObstacles(2);
-                questionText.text = "Achterwaardse Insnijding bepaal A, B = x:" + correctAnswerArray[2] + ", y:" + correctAnswerArray[3] + " C = x:" + correctAnswerArray[4] + ", y:" + correctAnswerArray[5] + " D = x:" + correctAnswerArray[6] + ", y:" + correctAnswerArray[7];
+                questionText.text = "Achterwaardse Insnijding bepaal P, A = x:" + obsructedPointsArray[0] + ", y:" + obsructedPointsArray[1] + " B = x:" + obsructedPointsArray[2] + ", y:" + obsructedPointsArray[3] + " C = x:" + obsructedPointsArray[4] + ", y:" + obsructedPointsArray[5];
                 break;
         }
     }

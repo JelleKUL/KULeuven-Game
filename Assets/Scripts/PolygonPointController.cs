@@ -19,13 +19,13 @@ public class PolygonPointController : MonoBehaviour
     //sets the name of the point as a number
     public void SetNameText (int nr)
     {
-        if (nr < 0)
+        if (nr <= 0)
         {
-            nameText.text = 0.ToString();
+            nameText.text = "P";
         }
         else
         {
-            char c = (char)(65 + (nr));
+            char c = (char)(64 + (nr));
 
             nameText.text = c.ToString();
         }

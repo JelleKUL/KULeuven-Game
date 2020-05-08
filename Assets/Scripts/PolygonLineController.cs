@@ -32,7 +32,8 @@ public class PolygonLineController : MonoBehaviour
     public bool showStartAngle;
     public bool showStartLength;
     public int maxPoints;
-
+    public bool showObstructedValues;
+    public bool startCenterPoint;
     
     private List<GameObject> linePoints = new List<GameObject>();
     private bool holdingObject;
@@ -160,19 +161,25 @@ public class PolygonLineController : MonoBehaviour
                 //Debug.Log(prevEllipse.z);
                 linePoints[i].GetComponent<PolygonPointController>().SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError, angleError);
             }
-
+            
             //checks if the line intersects with an obstacle
-            if (i != linePoints.Count - 1 && !CheckVisible(linePoints[i], linePoints[i + 1]))
+            if (i != linePoints.Count - 1 && !CheckVisible(linePoints[i], linePoints[i + 1]) && !showObstructedValues)
             {
+                
                 line.positionCount = i + 2;
-                line.SetPosition(line.positionCount - 1, obstacleHitPoint);
+                line.SetPosition(i + 1, obstacleHitPoint);
 
                 break;
+                
             }
             //sets the anglevalues of the points
             if (showAngles && i != 0 && i != linePoints.Count - 1)
             {
-                linePoints[i].GetComponent<PolygonPointController>().SetAngleText(linePoints[i - 1].transform.position, linePoints[i + 1].transform.position);
+                if (!CheckVisible(linePoints[1], linePoints[1]))
+                {
+                    
+                }
+                else linePoints[i].GetComponent<PolygonPointController>().SetAngleText(linePoints[i - 1].transform.position, linePoints[i + 1].transform.position);
             }
 
             line.positionCount = linePoints.Count;
@@ -219,9 +226,19 @@ public class PolygonLineController : MonoBehaviour
     public void AddPoint(Vector2 pos)
     {
         line.positionCount++;
-        GameObject newPoint = Instantiate(linePoint, pos, Quaternion.identity);
-        newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
-        linePoints.Add(newPoint);
+        if (startCenterPoint && line.positionCount == 2)
+        {
+            GameObject newPoint = Instantiate(linePoint, pos, Quaternion.identity);
+            newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
+            linePoints.Insert(0,newPoint);
+        }
+        else
+        {
+            GameObject newPoint = Instantiate(linePoint, pos, Quaternion.identity);
+            newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
+            linePoints.Add(newPoint);
+        }
+        
     }
 
     //removes the last point

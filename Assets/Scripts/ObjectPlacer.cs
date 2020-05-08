@@ -10,6 +10,7 @@ public class ObjectPlacer : MonoBehaviour
 {
     [Header("Prefabs")]
     public GameObject calculatePoint;
+    public GameObject obstructedCalculatePoint;
     public GameObject obstacle;
     public GameManager gm;
 
@@ -23,7 +24,9 @@ public class ObjectPlacer : MonoBehaviour
 
     [HideInInspector]
     public List <GameObject> calculatePoints = new List <GameObject>();
+    public List<GameObject> obstructedCalculatePoints = new List<GameObject>();
     private List<GameObject> obstacles = new List<GameObject>();
+    private int nrofPointsPlaced = 0;
 
     
     // generates a set amount of random points, making sure there is no overlap between any point or obstacle
@@ -39,7 +42,8 @@ public class ObjectPlacer : MonoBehaviour
         {
             GameObject newPoint = Instantiate(calculatePoint, FarEnoughRandomPoint(), Quaternion.identity);
             calculatePoints.Add(newPoint);
-            newPoint.GetComponent<PolygonPointController>().SetNameText(i);
+            newPoint.GetComponent<PolygonPointController>().SetNameText(nrofPointsPlaced);
+            nrofPointsPlaced++;
 
             positions[i * 2] = newPoint.transform.position.x;
             positions[(i * 2) + 1] = newPoint.transform.position.y;
@@ -66,6 +70,48 @@ public class ObjectPlacer : MonoBehaviour
 
         return positions;
     }
+    // places obstructed points
+    public float[] PlaceObstructedCalculatePoints(int amount)
+    {
+        if (obstructedCalculatePoints.Count > 0)
+        {
+            return (ChangeCalculatePoints());
+        }
+        float[] positions = new float[amount * 2];
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject newPoint = Instantiate(obstructedCalculatePoint, FarEnoughRandomPoint(), Quaternion.identity);
+            obstructedCalculatePoints.Add(newPoint);
+            newPoint.GetComponent<PolygonPointController>().SetNameText(nrofPointsPlaced);
+            nrofPointsPlaced++;
+
+            positions[i * 2] = newPoint.transform.position.x;
+            positions[(i * 2) + 1] = newPoint.transform.position.y;
+        }
+
+        return positions;
+    }
+
+    // changes the position of the points and returns the updated value
+    public float[] ChangeObstructedCalculatePoints()
+    {
+        float[] positions = new float[obstructedCalculatePoints.Count * 2];
+        for (int i = 0; i < obstructedCalculatePoints.Count; i++)
+        {
+            obstructedCalculatePoints[i].transform.position = Vector2.zero;
+        }
+
+        for (int i = 0; i < obstructedCalculatePoints.Count; i++)
+        {
+            obstructedCalculatePoints[i].transform.position = FarEnoughRandomPoint();
+            positions[i * 2] = obstructedCalculatePoints[i].transform.position.x;
+            positions[(i * 2) + 1] = obstructedCalculatePoints[i].transform.position.y;
+        }
+
+        return positions;
+    }
+
+
 
     //places a set amount of obstacles keeping in mind the minimum distance
     public void PlaceObstacles (int amount)
@@ -116,6 +162,13 @@ public class ObjectPlacer : MonoBehaviour
                 if (Vector2.Distance(randPos, calculatePoints[i].transform.position) < minDist)
                 {
                     minDist = Vector2.Distance(randPos, calculatePoints[i].transform.position);
+                }
+            }
+            for (int i = 0; i < obstructedCalculatePoints.Count; i++)
+            {
+                if (Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position) < minDist)
+                {
+                    minDist = Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position);
                 }
             }
             for (int i = 0; i < obstacles.Count; i++)
