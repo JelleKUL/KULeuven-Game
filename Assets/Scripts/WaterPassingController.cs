@@ -108,6 +108,7 @@ public class WaterPassingController : MonoBehaviour
         if (lockBeacon)
         {
             AddBeacon(lockedBeaconLocation);
+            AddBeacon(new Vector2(lockedMeasureLocation.x * 2 - lockedBeaconLocation.x, lockedBeaconLocation.y));
         }
     }
 

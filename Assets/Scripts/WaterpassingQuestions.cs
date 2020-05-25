@@ -91,7 +91,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 break;
 
             case QuestionType.Hoekfout:
-                waterpassing.SetParameters(0, 1, 1, true, true, new Vector2(3,1), true, new Vector2(6,1), false);
+                waterpassing.SetParameters(0, 1, 1, true, true, new Vector2(4,1), true, new Vector2(7,1), false);
                 correctAnswer = waterpassing.correctErrorAngle;
 
                 break;
