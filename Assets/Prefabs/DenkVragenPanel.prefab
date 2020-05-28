@@ -635,24 +635,31 @@ MonoBehaviour:
   vraagText: {fileID: 7743290664149552016}
   uitlegText: {fileID: 7743290664828450141}
   vragen:
-  - vraagText: De hoekfout zal vergroten als de agstand vergroot
+  - vraagText: De sluitfout kan groter worden als de standaardafwijking van het toestel
+      Kleiner wordt
+    Thema: 0
     isWaar: 0
-    uitleg: de hoekfout is een constante afwijking
-    a: hoekfout
-    b: afstand
-    juisteVergelijking: 0
-  - vraagText: de foutenellips zal langer worden als de hoekfout vergroot
-    isWaar: 0
-    uitleg: hij zal breder worden
-    a: 
-    b: 
-    juisteVergelijking: 0
-  - vraagText: hoeken worden gemeten in Gon
+    uitleg: de sluitfout zal net kleiner worden
+  - vraagText: de Vertrouwensgrenzen op een gewaterpast punt liggen dichter bij elkaar
+      naargelang de Afstand naar een vast punt kleiner is
+    Thema: 0
     isWaar: 1
-    uitleg: de hoeken worden in Gon gemeten
-    a: 
-    b: 
-    juisteVergelijking: 0
+    uitleg: de vertrouwensgrenzen zijn evenredig met de afstand
+  - vraagText: het hoogteverscil heeft geen invloed op de toegelaten waarde van de
+      sluitfout
+    Thema: 0
+    isWaar: 1
+    uitleg: de sluitfout is evenredig met de afstand
+  - vraagText: De standaardafwijking van het toestel heeft geen invloed op dei toegelaten
+      sluitfout
+    Thema: 0
+    isWaar: 0
+    uitleg: wel dus
+  - vraagText: hoe kleiner de vetrouwensgrenzen op een waterpassing, hoe dighter
+      de sluitfouten bij elkaar liggen voor alle punten
+    Thema: 0
+    isWaar: 0
+    uitleg: Dit is anders voor elk punt
 --- !u!1 &7743290664444090318
 GameObject:
   m_ObjectHideFlags: 0

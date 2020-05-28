@@ -15,11 +15,12 @@ public class PolygonationQuestions : MonoBehaviour
     public Text answerInputH;
     public Text answerOutput;
 
-    public enum QuestionType { Geen, Coordinaat1Punt, Afstand2PuntenPolygoon, VoorwaardseInsnijding, AchterwaardseInsnijding }
+    public enum QuestionType { Geen, Coordinaat1Punt, Afstand2PuntenPolygoon, VoorwaardseInsnijding, AchterwaardseInsnijding, Tabel }
     [Tooltip("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
     public int scoreIncrease;
+  
 
     private PolygonLineController lineController;
     private ObjectPlacer placer;
@@ -92,6 +93,18 @@ public class PolygonationQuestions : MonoBehaviour
                 correctAnswerY = correctAnswerArray[1];
                 //placer.PlaceObstacles(2);
                 questionText.text = "Achterwaardse Insnijding bepaal P, A = x:" + obsructedPointsArray[0] + ", y:" + obsructedPointsArray[1] + " B = x:" + obsructedPointsArray[2] + ", y:" + obsructedPointsArray[3] + " C = x:" + obsructedPointsArray[4] + ", y:" + obsructedPointsArray[5];
+                break;
+
+            case QuestionType.Tabel:
+                //start oefening tabel
+                lineController.SetVisibles(false, true, true, true, false, false, 3);
+                correctAnswerArray = placer.placeLoopedPoints(2);
+                
+                correctAnswerX = correctAnswerArray[12];
+                correctAnswerY = correctAnswerArray[13];
+                lineController.SetPoints(correctAnswerArray);
+                //placer.PlaceObstacles(2);
+                questionText.text = "Bepaal de afstand tussen A en B";
                 break;
         }
     }

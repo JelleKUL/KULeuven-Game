@@ -22,6 +22,7 @@ public class WaterpassingQuestions : MonoBehaviour
     private WaterPassingController waterpassing;
     private GameManager gm;
     private float correctAnswer;
+    private float[] correctPoints;
 
     // awake is called before start
     void Awake()
@@ -98,7 +99,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.HoogteVerschilMeerPunten:
                 waterpassing.SetParameters(3, 5, 3, false, false, Vector2.zero, false, Vector2.zero, true);
-                correctAnswer = waterpassing.correctHeight;
+                correctPoints = waterpassing.correctHeightDifferences;
 
                 break;
 
@@ -127,14 +128,28 @@ public class WaterpassingQuestions : MonoBehaviour
 
     }
 
+    public void CheckAnswerArray()
+    {
+        if (waterpassing.CheckTabelAnswer())
+        {
+            gm.IncreaseScore(scoreIncrease);
+            Debug.Log("true");
+            //gm.ReloadScene();
+            answerOutput.text = "De Waarden die zijn ingevoerd zijn correct";
+        }
+        else
+        {
+            answerOutput.text = "De Waarden die zijn ingevoerd zijn niet correct";
+            Debug.Log("false");
+        }
+    }
+
     //displays the correct answer
     public void ShowAnswer()
     {
         answerOutput.text = "Het antwoord is: " + CorrectAnswer().ToString();
 
         waterpassing.ShowAnswer();
-
-
 
     }
 

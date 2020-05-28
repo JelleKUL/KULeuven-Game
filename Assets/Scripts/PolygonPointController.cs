@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class PolygonPointController : MonoBehaviour
 {
-    
+    public bool showName;
+    public float maxLengthError;
+    public float maxAngleError;
+
     [Header("Prefab Childeren")]
     public TextMesh nameText;
     public TextMesh distanceText;
@@ -16,32 +19,55 @@ public class PolygonPointController : MonoBehaviour
     public GameObject spriteMask1;
     public GameObject spriteMask2;
 
+    private float lengthError;
+    private float angleError;
+
     //sets the name of the point as a number
+    private void Start()
+    {
+        transform.rotation = Quaternion.identity;
+        lengthError = Random.Range(-3 * maxLengthError, 3 * maxLengthError);
+        angleError = Random.Range(-3 * maxAngleError, 3 * maxAngleError);
+    }
+
     public void SetNameText (int nr)
     {
-        if (nr <= 0)
+        if (showName)
         {
-            nameText.text = "P";
-        }
-        else
-        {
-            char c = (char)(64 + (nr));
+            if (nr < 0)
+            {
+                nameText.text = "0";
+            }
+            else if (nr == 0)
+            {
+                nameText.text = "P";
+            }
+            else
+            {
+                char c = (char)(64 + (nr));
 
-            nameText.text = c.ToString();
+                nameText.text = c.ToString();
+            }
         }
-        
+        else nameText.text = "";
+
+
     }
 
     //sets the name of the point as a letter
     public void SetNameNrText(int nr)
     {
-       nameText.text = (nr).ToString();
+        if (showName)
+        {
+            nameText.text = (nr).ToString();
+        }
+        else nameText.text = "";
     }
 
     //displays the distance to the previous point
     public void SetDistanceText (Vector3 prevPoint)
     {
-        distanceText.text = (Mathf.Round((transform.position - prevPoint).magnitude * 100f * GameManager.worldScale) / 100f).ToString() + " m";
+        distanceText.text = (Mathf.Round(((transform.position - prevPoint).magnitude * GameManager.worldScale + lengthError) * 1000f ) / 1000f).ToString() + " m";
     }
 
     //displays the angle between the previous and next point
@@ -60,7 +86,8 @@ public class PolygonPointController : MonoBehaviour
             spriteMask2.transform.right = -prevPoint + spriteMask2.transform.position;
         }
         angleText.transform.position = -Vector3.Normalize(Vector3.Normalize(nextPoint - transform.position) + Vector3.Normalize(prevPoint - transform.position)) * 0.7f + transform.position;
-        angleText.text = (Mathf.Round(angle /360 * 400 * 100) / 100f).ToString() + " gon";
+        distanceText.transform.position = -Vector3.Normalize(Vector3.Normalize(nextPoint - transform.position) + Vector3.Normalize(prevPoint - transform.position)) * 0.7f + transform.position;// + Vector3.down * 0.1f;
+        angleText.text = (Mathf.Round((angle + angleError) /360 * 400 * 100) / 100f).ToString() + " gon";
 
     }
 

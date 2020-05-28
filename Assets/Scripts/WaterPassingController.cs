@@ -39,6 +39,7 @@ public class WaterPassingController : MonoBehaviour
     public bool lockBeacon;
     public Vector2 lockedBeaconLocation;
     public bool loopAround;
+    public bool addPointOutLoop;
     [Header ("Standard Parameters")]
     [Tooltip ("the angle of the upper and lower laserline to determine the distance")]
     public float distanceMeasureAngle;
@@ -74,6 +75,8 @@ public class WaterPassingController : MonoBehaviour
 
     [HideInInspector]
     public float correctHeight;
+    [HideInInspector]
+    public float[] correctHeightDifferences;
     [HideInInspector]
     public float correctDistance;
     [HideInInspector]
@@ -418,16 +421,16 @@ public class WaterPassingController : MonoBehaviour
     //place new groundpoints
     public void AddGroundPoints()
     {
-        float Increment = (gm.screenMax.x - gm.screenMin.x -2) / (float)nrOfPoints;
+        float Increment = (gm.screenMax.x - gm.screenMin.x - 2) / (float)nrOfPoints;
 
         if (groundPoints.Count < nrOfPoints)
         {
             Debug.Log(groundPoints.Count + " " + nrOfPoints);
-            
+
             for (int i = groundPoints.Count; i < nrOfPoints; i++)
             {
                 GameObject newPoint = Instantiate(groundPoint, Vector2.zero, Quaternion.identity);
-                newPoint.GetComponent<PolygonPointController>().SetNameText(i+1);
+                newPoint.GetComponent<PolygonPointController>().SetNameText(i + 1);
                 groundPoints.Add(newPoint);
                 Debug.Log("placed " + i);
             }
@@ -436,7 +439,7 @@ public class WaterPassingController : MonoBehaviour
         {
             for (int i = groundPoints.Count; i > nrOfPoints; i--)
             {
-                GameObject lastPoint = groundPoints[i -1];
+                GameObject lastPoint = groundPoints[i - 1];
                 groundPoints.RemoveAt(i - 1);
 
                 Destroy(lastPoint);
@@ -446,15 +449,35 @@ public class WaterPassingController : MonoBehaviour
 
         for (int i = 0; i < nrOfPoints; i++)
         {
-            Vector2 newPos = new Vector2(gm.screenMin.x + 1  + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(0 , (gm.screenMax.y) * maxHeightGroundPoint));
+            Vector2 newPos = new Vector2(gm.screenMin.x + 1 + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(0, (gm.screenMax.y) * maxHeightGroundPoint));
             groundPoints[i].transform.position = newPos;
             Debug.Log("moved " + i);
         }
 
-        
+
         correctHeight = groundPoints[groundPoints.Count - 1].transform.position.y - groundPoints[0].transform.position.y;
         correctDistance = groundPoints[groundPoints.Count - 1].transform.position.x - groundPoints[0].transform.position.x;
         Debug.Log(correctHeight);
+
+        if (loopAround)
+        {
+            correctHeightDifferences = new float[nrOfPoints + 1];
+            correctHeightDifferences[0] = groundPoints[0].transform.position.y;
+
+            for (int i = 1; i < nrOfPoints; i++)
+            {
+                correctHeightDifferences[i] = groundPoints[i].transform.position.y - groundPoints[i - 1].transform.position.y;
+            }
+            correctHeightDifferences[nrOfPoints] = -groundPoints[nrOfPoints-1].transform.position.y;
+
+            for (int i = 0; i < nrOfPoints+1; i++)
+            {
+                Debug.Log(correctHeightDifferences[i]);
+            }
+        }
+        
+
+        
 
     }
     //adds the top points
@@ -504,12 +527,19 @@ public class WaterPassingController : MonoBehaviour
         float radius = (gm.screenMax.x - gm.screenMin.x) / ( 2 * Mathf.PI);
         //groundPointTopDownCenter.localScale = Vector3.one * radius;
         float cummAngle = 0f;
+        int pointOutLoopNr = 0;
+        //chooses one point to leave out of the loop
+        if (addPointOutLoop)
+        {
+            pointOutLoopNr = Random.Range(1, nrOfPoints);
+        }
         
 
         for (int i = 0; i < nrOfPoints + 1; i++)
         {
-            GameObject newpoint = Instantiate(groundPointTopDown, groundPointTopDownCenter.position + Vector3.right, Quaternion.identity);
-            newpoint.GetComponent<PolygonPointController>().SetNameText(i-1);
+            // instantiates a point and moves a point out of the loop further away
+            GameObject newpoint = Instantiate(groundPointTopDown, groundPointTopDownCenter.position + Vector3.right * ((addPointOutLoop && i == pointOutLoopNr) ? 1.5f : 1), Quaternion.identity);
+            newpoint.GetComponent<PolygonPointController>().SetNameText(i==0? -1:i);
             groundPointsTopDown.Add(newpoint);
         }
 
@@ -524,11 +554,14 @@ public class WaterPassingController : MonoBehaviour
               
         }
         LineRenderer line = groundPointTopDownCenter.gameObject.GetComponent<LineRenderer>();
-        line.positionCount = groundPointsTopDown.Count;
+        line.positionCount = ((addPointOutLoop) ? -1 : 0) + groundPointsTopDown.Count;
 
         for (int i = 0; i < line.positionCount; i++)
         {
-            line.SetPosition(i, groundPointsTopDown[i].transform.position - Vector3.forward * 10);
+            int j = (i < pointOutLoopNr || ! addPointOutLoop) ? i : i + 1;
+            
+
+            line.SetPosition(i, groundPointsTopDown[j].transform.position - Vector3.forward * 10);
         }
         
 
@@ -576,7 +609,10 @@ public class WaterPassingController : MonoBehaviour
         lockedBeaconLocation = beaconLocation;
         loopAround = loop;
     }
-
+    public bool CheckTabelAnswer()
+    {
+        return waterpassingTabel.CheckAnswers(correctHeightDifferences);
+    }
 
 
 }

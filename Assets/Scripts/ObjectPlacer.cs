@@ -20,6 +20,7 @@ public class ObjectPlacer : MonoBehaviour
     public Vector2 minOffset;
     public Vector2 maxOffset;
     public float maxRandomAngle;
+    
 
 
     [HideInInspector]
@@ -111,6 +112,60 @@ public class ObjectPlacer : MonoBehaviour
         return positions;
     }
 
+    //places the calculate points in a looped position
+    public float[] placeLoopedPoints(float edgeLength)
+    {
+        int[,] angleArray = new int[,] {    { 90, 90, 180, 90, 90,180 }, { 90, 90, 225, 45, 135, 135 }, { 45, 135, 180, 45, 135, 180 }, { 90, 90, 135, 135,45, 225 },
+                                            { 135,45, 180, 135,45, 180 }, { 135, 135, 90, 135, 135, 90 }, { 90, 135, 135, 90, 135, 135 }, { 135, 90, 135, 135, 90, 135 } };
+        /*
+        int totalAngle = 180 * (amount - 3); // substract one extra point for the first external point to compare
+        int amountOfQuarters = 4 * (amount - 3);
+        int[] angles = new int[amount - 1]; // also substract the first point
+        */
+        int shape = Random.Range(0, 8);
+        Debug.Log(shape);
+        Vector2 centerPoint = (gm.screenMax + gm.screenMin)/2 + Vector2.down;
+
+        float[] positions = new float[7 * 2];
+        for (int i = 0; i < 7; i++)
+        {
+            Vector2 position = Vector2.zero;
+            if (i == 0)
+            {
+                position = centerPoint;
+            }
+            else if(i == 1)
+            {
+                position = centerPoint + Vector2.right * edgeLength;
+            }
+            else if(i > 1 && i < 6)
+            {
+                position = calculatePoints[i - 2].transform.position;
+            }
+            else
+            {
+                position = calculatePoints[i-1].transform.position;
+            }
+
+            GameObject newPoint = Instantiate(calculatePoint, position, Quaternion.identity);
+            if(i> 1 && i< 6)
+            {
+                newPoint.transform.RotateAround(calculatePoints[i - 1].transform.position, Vector3.back, angleArray[shape, i-1]);
+            }
+            else if (i == 6)
+            {
+                newPoint.transform.RotateAround(calculatePoints[0].transform.position, Vector3.forward, Random.Range(1,5) * 45);
+            }
+            calculatePoints.Add(newPoint);
+            newPoint.GetComponent<PolygonPointController>().SetNameText( i==6? 0 : nrofPointsPlaced+1);
+            nrofPointsPlaced++;
+
+            positions[i * 2] = newPoint.transform.position.x;
+            positions[(i * 2) + 1] = newPoint.transform.position.y;
+        }
+
+        return positions;
+    }
 
 
     //places a set amount of obstacles keeping in mind the minimum distance

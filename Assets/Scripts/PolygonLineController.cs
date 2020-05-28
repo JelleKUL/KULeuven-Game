@@ -88,12 +88,13 @@ public class PolygonLineController : MonoBehaviour
         // checks is mousebutton is clicked and sets the point to that position
         if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
-            if (!holdingObject)
+            if (!holdingObject )
             {
                 hitObject = CastMouseRay();
 
-                if (!holdingObject && linePoints.Count < maxPoints)
+                if (!holdingObject && linePoints.Count < maxPoints && Input.GetMouseButtonDown(0))
                 {
+                    Debug.Log("adding point");
                     AddPoint(gm.SetObjectToMouse(Input.mousePosition, 0));
                 }
 
@@ -252,6 +253,18 @@ public class PolygonLineController : MonoBehaviour
 
             Destroy(removed);
         }
+
+    }
+    public void SetPoints(float[] positions)
+    {
+        line = GetComponent<LineRenderer>();
+        maxPoints = positions.Length / 2;
+        for (int i = 0; i < maxPoints-1; i++)
+        {
+            AddPoint(new Vector2(positions[i * 2],positions[i * 2 + 1] ) );
+        }
+        AddPoint(new Vector2(positions[0], positions[1]));
+        AddPoint(new Vector2(positions[(maxPoints-1)*2], positions[(maxPoints - 1) * 2 +1]));
 
     }
 

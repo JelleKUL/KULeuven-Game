@@ -15,6 +15,9 @@ public class WaterpassingTabel : MonoBehaviour
     private List<WaterpassigTabelDeel> tabelParts = new List<WaterpassigTabelDeel>();
     private List<WaterPassingTabelVereffening> tabelVereffeningParts = new List<WaterPassingTabelVereffening>();
 
+    public float[] inputHoogteverschillen;
+    public float[] inputHoogteverschillenVereffening;
+
     public float totalHoogte;
     public float totalAfstand;
     public float nieuwTotalHoogte;
@@ -34,10 +37,13 @@ public class WaterpassingTabel : MonoBehaviour
         totalHoogte = 0f;
         totalAfstand = 0f;
         nieuwTotalHoogte = 0f;
+        inputHoogteverschillen = new float[tabelParts.Count];
+        inputHoogteverschillenVereffening = new float[tabelParts.Count];
 
         for (int i = 0; i < tabelParts.Count; i++)
         {
             totalHoogte += tabelParts[i].hoogteVerschil;
+            inputHoogteverschillen[i] = tabelParts[i].hoogteVerschil;
             totalAfstand += tabelParts[i].afstand;
         }
 
@@ -49,7 +55,8 @@ public class WaterpassingTabel : MonoBehaviour
         
         for (int i = 0; i < tabelVereffeningParts.Count; i++)
         {
-            nieuwTotalHoogte += tabelVereffeningParts[i].hoogteVerschil;
+            nieuwTotalHoogte += tabelVereffeningParts[i].vereffenigsHoogte;
+            inputHoogteverschillenVereffening[i] = tabelVereffeningParts[i].vereffenigsHoogte;
             tabelVereffeningParts[i].GetComponent<WaterPassingTabelVereffening>().SetValues(tabelParts[i].hoogteVerschilText.text, tabelParts[i].afstand.ToString());
 
         }
@@ -57,6 +64,7 @@ public class WaterpassingTabel : MonoBehaviour
         if (totaalVereffening != null)
         {
             totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetNieuwHoogte(nieuwTotalHoogte);
+            totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
         }
             
         
@@ -141,8 +149,38 @@ public class WaterpassingTabel : MonoBehaviour
         totaalVereffening.SetActive(!input);
     }
 
-    public void CheckAnswers()
+    public bool CheckAnswers(float[] inputs)
     {
+        bool correct = true;
+        if (VereffeningsMode)
+        {
+            if (Mathf.Abs(nieuwTotalHoogte) <  0.02)
+            {
+                Debug.Log("correct");
+                for (int i = 0; i < tabelVereffeningParts.Count; i++)
+                {
+                    if(Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - inputs[i]) > 0.02)
+                    {
+                        correct = false;
+                    }
+                    
+                 }
+            }
+            else correct = false;
+        }
+        else
+        { 
+                
+            for (int i = 0; i < tabelParts.Count; i++)
+            {
+                if (Mathf.Abs(tabelParts[i].hoogteVerschil - inputs[i]) > 0.02)
+                {
+                    correct = false;
+                }
 
+            }
+           
+        }
+        return correct;
     }
 }
