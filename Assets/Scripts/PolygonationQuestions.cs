@@ -24,6 +24,7 @@ public class PolygonationQuestions : MonoBehaviour
 
     private PolygonLineController lineController;
     private ObjectPlacer placer;
+    public PolygonatieLoopTabel tabel;
     private GameManager gm;
 
     private float[] correctAnswerArray;
@@ -126,6 +127,17 @@ public class PolygonationQuestions : MonoBehaviour
     public void CheckAnswerXY()
     {
         if (gm.CheckCorrectAnswer(answerInputX.text, correctAnswerX) && gm.CheckCorrectAnswer(answerInputY.text, correctAnswerY))
+        {
+            gm.IncreaseScore(scoreIncrease);
+            Debug.Log("true");
+
+        }
+        else Debug.Log("false");
+
+    }
+    public void CheckAnswerArray()
+    {
+        if (tabel.checkAnswers())
         {
             gm.IncreaseScore(scoreIncrease);
             Debug.Log("true");

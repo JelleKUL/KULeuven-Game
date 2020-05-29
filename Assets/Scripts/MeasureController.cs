@@ -67,4 +67,9 @@ public class MeasureController : MonoBehaviour
         }
         return measureHead.position;
     }
+
+    public void ToggleMagnify()
+    {
+
+    }
 }

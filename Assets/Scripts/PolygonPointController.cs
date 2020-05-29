@@ -16,8 +16,7 @@ public class PolygonPointController : MonoBehaviour
     public TextMesh angleText;
     public GameObject errorEllipse;
     public GameObject angleDisplay;
-    public GameObject spriteMask1;
-    public GameObject spriteMask2;
+    
 
     private float lengthError;
     private float angleError;
@@ -28,6 +27,10 @@ public class PolygonPointController : MonoBehaviour
         transform.rotation = Quaternion.identity;
         lengthError = Random.Range(-3 * maxLengthError, 3 * maxLengthError);
         angleError = Random.Range(-3 * maxAngleError, 3 * maxAngleError);
+
+
+
+
     }
 
     public void SetNameText (int nr)
@@ -75,18 +78,27 @@ public class PolygonPointController : MonoBehaviour
     {
         angleDisplay.SetActive(true);
         Vector3 pos = transform.position;
-        float angle = Vector3.Angle(prevPoint - pos, nextPoint - pos);
+        float angle = Vector2.SignedAngle(nextPoint - pos, prevPoint - pos);
+        if (angle < 0) angle = 360 + angle;
+        //angleDisplay.transform.up = prevPoint - pos;
+        Vector2 dir = prevPoint - pos;
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        angleDisplay.transform.rotation = Quaternion.AngleAxis(targetAngle, Vector3.forward);
+        angleDisplay.GetComponent<MeshRenderer>().material.SetFloat("_Arc2",360- angle);
+        
+        /*
         spriteMask1.transform.right = prevPoint - spriteMask1.transform.position;
         spriteMask2.transform.right = -nextPoint + spriteMask2.transform.position;
         //Debug.Log((spriteMask1.transform.rotation * Quaternion.Inverse(spriteMask2.transform.rotation)).eulerAngles.z);
-
+        
         if ((spriteMask1.transform.rotation * Quaternion.Inverse(spriteMask2.transform.rotation)).eulerAngles.z > 180)
         {
             spriteMask1.transform.right = nextPoint - spriteMask1.transform.position;
             spriteMask2.transform.right = -prevPoint + spriteMask2.transform.position;
         }
+        */
         angleText.transform.position = -Vector3.Normalize(Vector3.Normalize(nextPoint - transform.position) + Vector3.Normalize(prevPoint - transform.position)) * 0.7f + transform.position;
-        distanceText.transform.position = -Vector3.Normalize(Vector3.Normalize(nextPoint - transform.position) + Vector3.Normalize(prevPoint - transform.position)) * 0.7f + transform.position;// + Vector3.down * 0.1f;
+        distanceText.transform.position = angleText.transform.position;
         angleText.text = (Mathf.Round((angle + angleError) /360 * 400 * 100) / 100f).ToString() + " gon";
 
     }

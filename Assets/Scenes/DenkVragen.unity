@@ -382,11 +382,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7743290664407530193, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
-        type: 3}
-      propertyPath: vragen.Array.data[0].vraagText
-      value: De hoekfout zal vergroten als de afstand vergroot
-      objectReference: {fileID: 0}
     - target: {fileID: 7743290664407530199, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
       propertyPath: m_Name

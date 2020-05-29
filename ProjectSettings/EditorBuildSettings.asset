@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/WaterpassingVragen/Scheefstand.unity
     guid: 7ea084eed504a4365a9bead8ef5fd42e
   - enabled: 1
+    path: Assets/Scenes/WaterpassingVragen/Zijslag.unity
+    guid: 0e20e2c0ac3cd4ff582c90248e2c0a0f
+  - enabled: 1
     path: Assets/Scenes/FoutenpropagatieVragen/MinimaleGrootte.unity
     guid: 9fedd04343adf45dd98e66e0d5051c60
   - enabled: 1
@@ -56,6 +59,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PolygonatieVragen/AchterwaardseInsnijding.unity
     guid: 6de65cbec5ff84ee2a7752a295068d03
+  - enabled: 1
+    path: Assets/Scenes/PolygonatieVragen/PolygonatieTabel.unity
+    guid: 645b211b589714613a03a7a0e0539389
   - enabled: 1
     path: Assets/Scenes/DenkVragen.unity
     guid: 1373173e49a8842d096fd8fad0d09a82

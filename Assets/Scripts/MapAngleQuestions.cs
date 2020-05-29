@@ -85,7 +85,7 @@ public class MapAngleQuestions : MonoBehaviour
 
             case QuestionType.BepaalVorigPunt:
                 //start oefening BepaalVorigPunt
-                lineController.SetVisibles(false, false, false, false, false, false, 2);
+                lineController.SetVisibles(false, false, false, false, true, true, 2);
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
                 correctAnswerX = correctAnswerArray[0];
                 correctAnswerY = correctAnswerArray[1];

@@ -167,6 +167,18 @@ public class ObjectPlacer : MonoBehaviour
         return positions;
     }
 
+    public Vector2[] GetCoordinates()
+    {
+        Vector2[] coordinates = new Vector2[calculatePoints.Count];
+
+        for (int i = 0; i < calculatePoints.Count; i++)
+        {
+            coordinates[i] = calculatePoints[i].transform.position;
+        }
+
+        return coordinates;
+    }
+
 
     //places a set amount of obstacles keeping in mind the minimum distance
     public void PlaceObstacles (int amount)
