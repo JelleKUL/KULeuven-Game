@@ -14,7 +14,7 @@ public class WaterPassingController : MonoBehaviour
     public GameObject measure;
     public GameObject groundPoint;
     public GameObject groundPointTopDown;
-    public GameObject magnifyGlass;
+    //public GameObject magnifyGlass;
     public LayerMask pointMask;
     public Button magnifyButton;
     public Button beaconButton;
@@ -66,7 +66,7 @@ public class WaterPassingController : MonoBehaviour
     // determine what mode the player is in
     private bool measureMode;
     private bool beaconMode;
-    private bool magnifyMode;
+    //private bool magnifyMode;
     private ColorBlock buttonColorBase;
     private ColorBlock buttonColorActive;
 
@@ -86,7 +86,7 @@ public class WaterPassingController : MonoBehaviour
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        magnifyGlass.SetActive(false);
+        //magnifyGlass.SetActive(false);
 
         SetButtonColors();
 
@@ -118,6 +118,7 @@ public class WaterPassingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (magnifyMode)
         {
             if (MouseOverBeacon())
@@ -127,13 +128,26 @@ public class WaterPassingController : MonoBehaviour
             }
             else magnifyGlass.SetActive(false);
             
-
         }
-        if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
+        */
+
+        if (Input.GetMouseButtonDown(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
+        {
+            hitObject = CastMouseRay();
+
+            if (hitObject != null && hitObject.tag == "MagnifyGlass")
+            {
+
+                hitObject.GetComponent<MagnifyGlass>().ToggleZoom();
+            }
+        }
+
+            if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
             if (!holdingObject)
             {
                 hitObject = CastMouseRay();
+
 
                 if (!holdingObject && beaconMode && beacons.Count < maxBeacons)
                 {
@@ -144,7 +158,7 @@ public class WaterPassingController : MonoBehaviour
                     AddMeasure(gm.SetObjectToMouse(Input.mousePosition, 0));
                 }
             }
-            else
+            else if(hitObject.tag != "MagnifyGlass")
             {
                 hitObject.transform.position = gm.SetObjectToMouse(Input.mousePosition, 0);
             }
@@ -242,8 +256,8 @@ public class WaterPassingController : MonoBehaviour
     {
         measureMode = true;
         beaconMode = false;
-        magnifyMode = false;
-        magnifyGlass.SetActive(false);
+        //magnifyMode = false;
+        //magnifyGlass.SetActive(false);
 
         magnifyButton.colors = buttonColorBase;
         beaconButton.colors = buttonColorBase;
@@ -254,8 +268,8 @@ public class WaterPassingController : MonoBehaviour
     {
         measureMode = false;
         beaconMode = true;
-        magnifyMode = false;
-        magnifyGlass.SetActive(false);
+        //magnifyMode = false;
+        //magnifyGlass.SetActive(false);
 
         magnifyButton.colors = buttonColorBase;
         beaconButton.colors = buttonColorActive;
@@ -266,8 +280,12 @@ public class WaterPassingController : MonoBehaviour
     {
         measureMode = false;
         beaconMode = false;
-        magnifyMode = true;
-        magnifyGlass.SetActive(true);
+        foreach (var measureObject in measures)
+        {
+            measureObject.GetComponent<MeasureController>().ToggleMagnify();
+        }
+        //magnifyMode = true;
+        //magnifyGlass.SetActive(true);
 
         magnifyButton.colors = buttonColorActive;
         beaconButton.colors = buttonColorBase;

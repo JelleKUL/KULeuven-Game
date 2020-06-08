@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2066107927335179320}
   - component: {fileID: 8718050424662056287}
   - component: {fileID: 4323721489155251476}
-  - component: {fileID: 4625475187188672349}
   m_Layer: 10
   m_Name: MeasureHead
   m_TagString: Untagged
@@ -183,28 +182,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &4625475187188672349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638548363782295850}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8544603d242b046f8a4e123367b5466e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beacons:
-    serializedVersion: 2
-    m_Bits: 256
-  errorAngle: 1.41
-  maxDistance: 10
-  DistanceMultiplier: 0.1
-  laserline: {fileID: 4323721489155251476}
-  kruisDraden: {fileID: 939078881808828710, guid: 58eab502b124c44f38fa2da86f98e965,
-    type: 3}
-  measureHead: {fileID: 0}
 --- !u!1 &1354509410431150012
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,16 +291,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8544603d242b046f8a4e123367b5466e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  measureHead: {fileID: 2066107927335179320}
+  magnifyGlassR: {fileID: 270250608793077094, guid: e34937ee0eafa47d79196c0322409e29,
+    type: 3}
+  magnifyGlassL: {fileID: 6813965971426954006, guid: 6d3ff51689680420b87b4fa0d3288dfe,
+    type: 3}
+  laserline: {fileID: 4323721489155251476}
   beacons:
     serializedVersion: 2
     m_Bits: 256
+  scheefstandsHoek: 0
   errorAngle: 1.41
   maxDistance: 10
   DistanceMultiplier: 0.1
-  laserline: {fileID: 4323721489155251476}
-  kruisDraden: {fileID: 939078881808828710, guid: 58eab502b124c44f38fa2da86f98e965,
-    type: 3}
-  measureHead: {fileID: 2066107927335179320}
+  beaconOffset: 0.1
+  showMagnify: 0
 --- !u!1 &2699590325922045698
 GameObject:
   m_ObjectHideFlags: 0

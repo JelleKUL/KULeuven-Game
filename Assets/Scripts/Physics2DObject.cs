@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Physics2DObject : MonoBehaviour
 {
+    
+    [Tooltip ("Check-off if you want to allow the object to be placed upside down")]
     public bool allowUpsideDown;
     private Rigidbody2D rb;
     private GameManager gm;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,8 +54,8 @@ public class Physics2DObject : MonoBehaviour
         }
        
     }
-
-    public void setGravityDownWards(bool direction)
+    // swaps the direction of the gravity
+    private void setGravityDownWards(bool direction)
     {
         if (direction)
         {
