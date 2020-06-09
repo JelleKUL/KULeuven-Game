@@ -10,6 +10,8 @@ public class Physics2DObject : MonoBehaviour
     private Rigidbody2D rb;
     private GameManager gm;
 
+    public bool isHeld;
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,34 +23,37 @@ public class Physics2DObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!allowUpsideDown)
+        if (!isHeld)
         {
-            if (transform.position.y < gm.screenMin.y)
+            if (!allowUpsideDown)
             {
-                transform.position = new Vector2(transform.position.x, (gm.screenMax.y + gm.screenMin.y) / 2f);
-            }
-        }
-        else
-        {
-            if (transform.position.y < ((gm.screenMax.y + gm.screenMin.y) / 2f))
-            {
-                setGravityDownWards(true);
-            }
-            else setGravityDownWards(false);
-
-            if (rb.gravityScale == -1)
-            {
-
-                if (transform.position.y > gm.screenMax.y)
+                if (transform.position.y < gm.screenMin.y)
                 {
                     transform.position = new Vector2(transform.position.x, (gm.screenMax.y + gm.screenMin.y) / 2f);
                 }
             }
             else
             {
-                if (transform.position.y < gm.screenMin.y)
+                if (transform.position.y < ((gm.screenMax.y + gm.screenMin.y) / 2f))
                 {
-                    transform.position = new Vector2(transform.position.x, (gm.screenMax.y + gm.screenMin.y) / 2f);
+                    setGravityDownWards(true);
+                }
+                else setGravityDownWards(false);
+
+                if (rb.gravityScale == -1)
+                {
+
+                    if (transform.position.y > gm.screenMax.y)
+                    {
+                        transform.position = new Vector2(transform.position.x, (gm.screenMax.y + gm.screenMin.y) / 2f);
+                    }
+                }
+                else
+                {
+                    if (transform.position.y < gm.screenMin.y)
+                    {
+                        transform.position = new Vector2(transform.position.x, (gm.screenMax.y + gm.screenMin.y) / 2f);
+                    }
                 }
             }
         }
@@ -68,4 +73,6 @@ public class Physics2DObject : MonoBehaviour
             transform.up = Vector3.down;
         }
     }
+    
+    
 }

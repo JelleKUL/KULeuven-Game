@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 217ead1fdc23e4523b86f55f77276f95, type: 2}
+    - target: {fileID: 6701067203024935760, guid: 6d3ff51689680420b87b4fa0d3288dfe,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 217ead1fdc23e4523b86f55f77276f95, type: 2}
     - target: {fileID: 6813965969849489615, guid: 6d3ff51689680420b87b4fa0d3288dfe,
         type: 3}
       propertyPath: m_TargetTexture
@@ -75,7 +80,7 @@ PrefabInstance:
     - target: {fileID: 6813965971426954006, guid: 6d3ff51689680420b87b4fa0d3288dfe,
         type: 3}
       propertyPath: m_Name
-      value: MagnifyingGlassR
+      value: MagnifyingGlassR Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d3ff51689680420b87b4fa0d3288dfe, type: 3}

@@ -16,6 +16,8 @@ public class WaterPassingController : MonoBehaviour
     public GameObject groundPointTopDown;
     //public GameObject magnifyGlass;
     public LayerMask pointMask;
+    public Transform BeaconPlacer;
+    public Transform MeasurePlacer;
     public Button magnifyButton;
     public Button beaconButton;
     public Button measureButton;
@@ -108,10 +110,18 @@ public class WaterPassingController : MonoBehaviour
         {
             AddMeasure(lockedMeasureLocation);
         }
+        else
+        {
+            AddMeasure(MeasurePlacer.position);
+        }
         if (lockBeacon)
         {
             AddBeacon(lockedBeaconLocation);
             AddBeacon(new Vector2(lockedMeasureLocation.x * 2 - lockedBeaconLocation.x, lockedBeaconLocation.y));
+        }
+        else
+        {
+            AddBeacon(BeaconPlacer.position);
         }
     }
 
@@ -130,6 +140,7 @@ public class WaterPassingController : MonoBehaviour
             
         }
         */
+        
 
         if (Input.GetMouseButtonDown(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
@@ -142,7 +153,54 @@ public class WaterPassingController : MonoBehaviour
             }
         }
 
-            if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
+        if (Input.GetMouseButton(0))
+        {
+            if (!holdingObject)
+            {
+                hitObject = CastMouseRay();
+            }
+            if (hitObject!= null && hitObject.tag != "MagnifyGlass")
+            {
+                hitObject.transform.position = gm.SetObjectToMouse(Input.mousePosition, 0);
+                hitObject.GetComponent<Physics2DObject>().isHeld = true;
+            }
+
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (holdingObject && hitObject.tag != "MagnifyGlass")
+            {
+                if (gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
+                {
+                    if (hitObject.tag == "Measure" && measures.Count < maxMeasures)
+                    {
+                        AddMeasure(MeasurePlacer.position);
+                    }
+                    else if (hitObject.tag == "Beacon" && beacons.Count < maxBeacons)
+                    {
+                        AddBeacon(BeaconPlacer.position);
+                    }
+                }
+                else
+                {
+                    if (hitObject.tag == "Measure")
+                    {
+                        hitObject.transform.position = MeasurePlacer.position;
+                    }
+                    else if (hitObject.tag == "Beacon")
+                    {
+                        hitObject.transform.position = BeaconPlacer.position;
+                    }
+                }
+                hitObject.GetComponent<Physics2DObject>().isHeld = false;
+            }
+
+            holdingObject = false;
+
+        }
+        /*
+        if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
             if (!holdingObject)
             {
@@ -165,7 +223,7 @@ public class WaterPassingController : MonoBehaviour
             
         }
         else holdingObject = false;
-
+        */
     }
     public void SetButtonColors()
     {
