@@ -35,7 +35,7 @@ public class WaterPassingController : MonoBehaviour
     public int nrOfTopPoints;
     public int maxBeacons;
     public int maxMeasures;
-    public bool showDistanceLaser;
+    //public bool showDistanceLaser;
     public bool lockMeasure;
     public Vector2 lockedMeasureLocation;
     public bool lockBeacon;
@@ -678,7 +678,7 @@ public class WaterPassingController : MonoBehaviour
         nrOfPoints = nrPoints;
         maxBeacons = nrBeacons;
         maxMeasures = nrMeasures;
-        showDistanceLaser = ShowDistance;
+        //showDistanceLaser = ShowDistance;
         lockMeasure = lockmeasure;
         lockedMeasureLocation = measureLocation;
         lockBeacon = lockbeacon;
