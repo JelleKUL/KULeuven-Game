@@ -2,15 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent (typeof(CircleCollider2D), typeof(BoxCollider2D))]
 public class MagnifyGlass : MonoBehaviour
 {
     public GameObject ZoomedMagnify;
+    public Transform zoomedBackground;
+    public GameObject viewer;
+    public Camera viewerCamera;
+    public GameObject assenkruis;
+    public GameObject assenkruisZoom;
+    private BoxCollider2D zoomedCollider;
+
+    private CircleCollider2D circleCollider;
+
     private GameManager gm;
+    private bool ShowAssenkruis;
+
 
     // Start is called before the first frame update
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        circleCollider = GetComponent<CircleCollider2D>();
+        zoomedCollider = GetComponent<BoxCollider2D>();
 
     }
 
@@ -20,11 +35,20 @@ public class MagnifyGlass : MonoBehaviour
         if (ZoomedMagnify.activeSelf)
         {
             ZoomedMagnify.transform.position = (gm.screenMax + gm.screenMin) / 2f;
-            if(transform.localScale.x * transform.localScale.y * transform.localScale.z != 0)
-            {
-                ZoomedMagnify.transform.localScale = new Vector3(1 / transform.localScale.x, 1 / transform.localScale.y, 1 / transform.localScale.z);
+            ZoomedMagnify.transform.position += Vector3.back * 5;
+            zoomedBackground.position = ZoomedMagnify.transform.position + Vector3.forward;
+            zoomedCollider.offset = zoomedBackground.position - transform.position;
 
-            }
+            ZoomedMagnify.transform.localScale = Vector3.one * Mathf.Min(gm.screenMax.x - gm.screenMin.x,gm.screenMax.y - gm.screenMin.y)/2f;
+            zoomedBackground.localScale = new Vector3(gm.screenMax.x - gm.screenMin.x, gm.screenMax.y - gm.screenMin.y, 1);
+            zoomedCollider.size = zoomedBackground.localScale;
+            
+        }
+        else
+        {
+            zoomedCollider.offset = Vector2.zero;
+
+            zoomedCollider.size = Vector2.one;
         }
     }
 
@@ -32,6 +56,28 @@ public class MagnifyGlass : MonoBehaviour
     {
         Debug.Log("Toogle");
         ZoomedMagnify.SetActive(!ZoomedMagnify.activeSelf);
+        zoomedBackground.gameObject.SetActive(!zoomedBackground.gameObject.activeSelf);
+    }
+
+    public void SetPositionAndScale(Vector2 position, float scale, bool assenkruisActive)
+    {
+        if (assenkruis.activeSelf != assenkruisActive)
+        {
+            assenkruis.SetActive(assenkruisActive);
+            assenkruisZoom.SetActive(assenkruisActive);
+        }
+
+        if (circleCollider == null)
+        {
+            circleCollider = GetComponent<CircleCollider2D>();
+        }
+
+        viewerCamera.orthographicSize = scale;
+        viewer.transform.localScale = Vector3.one * scale;
+        circleCollider.radius = scale * 1.1f;
+
+        transform.position = position;
+        transform.position += Vector3.back;
     }
 
    

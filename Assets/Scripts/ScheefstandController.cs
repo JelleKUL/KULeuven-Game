@@ -14,6 +14,7 @@ public class ScheefstandController : MonoBehaviour
 
     [Header("Variables")]
     public float maxSkewAngle;
+    public float maxSkewError;
     public Vector2 skewBuildingLocation;
 
     [HideInInspector]
@@ -25,12 +26,14 @@ public class ScheefstandController : MonoBehaviour
     private GameObject hitObject;
     private GameObject theodolietObject;
     private bool holdingObject;
+    private float skewError;
+    private bool isFlipped;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-
+        skewError = Random.Range(-maxSkewError, maxSkewError);
 
         PlaceBulding();
         theodolietObject = Instantiate(theodoliet, MeasurePlacer.position, Quaternion.identity);
@@ -90,6 +93,8 @@ public class ScheefstandController : MonoBehaviour
             building = Instantiate(skewBuilding, skewBuildingLocation, Quaternion.Euler(0, 0, Random.Range(-maxSkewAngle, maxSkewAngle)));
             correctDistance = building.GetComponent<SkewBuildingController>().getDistance();
             points = building.GetComponent<SkewBuildingController>().beaconPoints;
+
+        building.GetComponent<SkewBuildingController>().SetLine(skewError);
         }
 
         //returns the gamobject the mouse has hit
@@ -110,6 +115,13 @@ public class ScheefstandController : MonoBehaviour
     public void ToggleMagnify()
     {
         theodolietObject.GetComponent<Theodoliet>().ToggleMagnify() ;
+    }
+
+    public void FlipTheodoliet()
+    {
+        isFlipped = !isFlipped;
+
+        building.GetComponent<SkewBuildingController>().SetLine(skewError * (isFlipped? -1: 1));
     }
 
 

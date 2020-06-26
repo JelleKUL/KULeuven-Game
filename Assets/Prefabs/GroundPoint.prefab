@@ -128,13 +128,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showName: 1
+  maxLengthError: 0
+  maxAngleError: 0
   nameText: {fileID: 3921552776200299759}
   distanceText: {fileID: 0}
   angleText: {fileID: 0}
   errorEllipse: {fileID: 0}
   angleDisplay: {fileID: 0}
-  spriteMask1: {fileID: 0}
-  spriteMask2: {fileID: 0}
 --- !u!58 &8665197482629893217
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -243,4 +243,4 @@ TextMesh:
   m_Font: {fileID: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080

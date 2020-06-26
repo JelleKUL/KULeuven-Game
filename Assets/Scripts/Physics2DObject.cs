@@ -25,6 +25,7 @@ public class Physics2DObject : MonoBehaviour
     {
         if (!isHeld)
         {
+            rb.simulated = true;
             if (!allowUpsideDown)
             {
                 if (transform.position.y < gm.screenMin.y)
@@ -57,7 +58,12 @@ public class Physics2DObject : MonoBehaviour
                 }
             }
         }
-       
+        else
+        {
+            rb.simulated = false;
+        }
+        
+
     }
     // swaps the direction of the gravity
     private void setGravityDownWards(bool direction)

@@ -1070,7 +1070,7 @@ GameObject:
   - component: {fileID: 8568660867024383014}
   - component: {fileID: 7861372935325291194}
   - component: {fileID: 3585613728847250674}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TopTerrainHeightGenerationController (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1135,10 +1135,10 @@ SpriteShapeRenderer:
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 0}
   m_Sprites:
-  - {fileID: 21300000, guid: f00233b5abc5e439da53ac7ba809477b, type: 3}
+  - {fileID: 21300000, guid: 7ea348253ba994a8f9bde0a6dd7efbb3, type: 3}
   m_LocalAABB:
-    m_Center: {x: 4.498184, y: 0.0066909194, z: -0.00005}
-    m_Extent: {x: 5.5024385, y: 0.5186906, z: 0.00005}
+    m_Center: {x: 4.4981837, y: 0.0066908896, z: -0.00005}
+    m_Extent: {x: 5.502127, y: 0.26269072, z: 0.00005}
 --- !u!114 &7861372935325291194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1202,9 +1202,9 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.0030093, y: 0.5253814}
-  - {x: 9.860428, y: 0.51217014}
-  - {x: 10.000622, y: 0.51199967}
+  - {x: -1.0033207, y: 0.26938155}
+  - {x: 9.860116, y: 0.25617033}
+  - {x: 10.000311, y: 0.25599983}
 --- !u!1 &6033793343329214955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,10 +1435,10 @@ SpriteShapeRenderer:
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 0}
   m_Sprites:
-  - {fileID: 21300000, guid: f00233b5abc5e439da53ac7ba809477b, type: 3}
+  - {fileID: 21300000, guid: 7ea348253ba994a8f9bde0a6dd7efbb3, type: 3}
   m_LocalAABB:
-    m_Center: {x: 4.498184, y: 0.0066909194, z: -0.00005}
-    m_Extent: {x: 5.5024385, y: 0.5186906, z: 0.00005}
+    m_Center: {x: 4.498215, y: 0, z: -0.00005}
+    m_Extent: {x: 5.502968, y: 0.97279924, z: 0.00005}
 --- !u!114 &1062846598689017130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,7 +1458,7 @@ MonoBehaviour:
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.1
+      height: 0.36
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
@@ -1467,7 +1467,7 @@ MonoBehaviour:
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.1
+      height: 0.38
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
@@ -1478,10 +1478,10 @@ MonoBehaviour:
   m_SplineDetail: 16
   m_AdaptiveUV: 1
   m_StretchUV: 0
-  m_WorldSpaceUV: 0
+  m_WorldSpaceUV: 1
   m_CornerAngleThreshold: 30
   m_ColliderDetail: 16
-  m_ColliderOffset: 0.5
+  m_ColliderOffset: 0.452
   m_UpdateCollider: 1
   m_OptimizeCollider: 1
   m_OptimizeGeometry: 1
@@ -1502,9 +1502,9 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.0030093, y: 0.5253814}
-  - {x: 9.860428, y: 0.51217014}
-  - {x: 10.000622, y: 0.51199967}
+  - {x: -1.0026188, y: 0.84650755}
+  - {x: 9.860874, y: 0.8789913}
+  - {x: 10.00107, y: 0.8794105}
 --- !u!1001 &7099133127937059949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1614,7 +1614,7 @@ PrefabInstance:
     - target: {fileID: 813449793210613434, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 871048951824392393, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -1624,7 +1624,12 @@ PrefabInstance:
     - target: {fileID: 1673039630763612347, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942206750719068064, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1942755776151484894, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -1668,12 +1673,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5631332701032391200, guid: 3a82ac8decc1249689407b81d4dc2874,
         type: 3}
+    - target: {fileID: 5349324435398295970, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 5468122333015959906, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_LocalScale.x
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5944935336328589914, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6233286182123213650, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1788,6 +1803,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8057092605342330426, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 8195923324617090103, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: answerOutput
@@ -1801,7 +1821,17 @@ PrefabInstance:
     - target: {fileID: 8221969930764121830, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8389455402677037967, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8389455402677037967, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8891788708089017914, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -1811,7 +1841,7 @@ PrefabInstance:
     - target: {fileID: 8898349699412978217, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9076298048400637828, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}

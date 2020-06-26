@@ -253,7 +253,7 @@ public class WaterPassingController : MonoBehaviour
         for (int i = 0; i < spriteShapeController.spline.GetPointCount(); i++)
         {
             spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
-            spriteShapeController.spline.SetHeight(i, 0.1f);
+            spriteShapeController.spline.SetHeight(i, 0.2f);
             spriteShapeController.spline.SetLeftTangent(i, Vector3.left);
             spriteShapeController.spline.SetRightTangent(i, Vector3.right);
         }

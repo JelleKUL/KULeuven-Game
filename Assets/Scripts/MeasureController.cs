@@ -28,10 +28,14 @@ public class MeasureController : MonoBehaviour
     private Vector4 beaconHitPointL;
     private Vector4 beaconHitPointR;
     private GameObject MagnifyL;
+    private MagnifyGlass magnifyLScript;
     private GameObject MagnifyR;
+    private MagnifyGlass magnifyRScript;
     private Vector3[] laserLinePositions = new Vector3[3];
     private bool hasHitL;
     private bool hasHitR;
+
+    private GameManager gm;
 
 
     // Start is called before the first frame update
@@ -39,6 +43,10 @@ public class MeasureController : MonoBehaviour
     {
         MagnifyL =  Instantiate(magnifyGlassL, transform.position, Quaternion.identity);
         MagnifyR = Instantiate(magnifyGlassR, transform.position, Quaternion.identity);
+        magnifyLScript = MagnifyL.GetComponent<MagnifyGlass>();
+        magnifyRScript = MagnifyR.GetComponent<MagnifyGlass>();
+
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
     }
 
@@ -46,8 +54,8 @@ public class MeasureController : MonoBehaviour
     void Update()
     {
         laserLinePositions[1] = measureHead.position;
-        scaleMagnify(-1, MagnifyL);
-        scaleMagnify(1, MagnifyR);
+        scaleMagnify(-1, magnifyLScript);
+        scaleMagnify(1, magnifyRScript);
         laserline.SetPositions(laserLinePositions);
 
         MagnifyR.SetActive(hasHitR && showMagnify);
@@ -59,8 +67,8 @@ public class MeasureController : MonoBehaviour
     Vector4 CastLaser(Vector2 origin, Vector2 directionVector, int direction)
     {
         RaycastHit2D hit = Physics2D.Raycast(origin, directionVector, maxDistance, beacons);
-
-        if (hit.collider != null)
+            
+        if (hit.collider != null && gm.IsBetweenValues(hit.transform.position) && gm.IsBetweenValues(transform.position))
         {
             if(direction == 1)
             {
@@ -90,11 +98,13 @@ public class MeasureController : MonoBehaviour
 
     
 
-    void scaleMagnify(int direction, GameObject magnify)
+    void scaleMagnify(int direction, MagnifyGlass magnify)
     {
         Vector4 beaconHitPoint = CastLaser(measureHead.position, new Vector2(direction * Mathf.Cos((errorAngle + direction * scheefstandsHoek) * Mathf.Deg2Rad), Mathf.Sin((errorAngle + direction * scheefstandsHoek) * Mathf.Deg2Rad)),direction);
-        magnify.transform.position = beaconHitPoint + new Vector4(1, 0,0,0) * direction * beaconOffset;
-        magnify.transform.localScale = new Vector3(beaconHitPoint.w * DistanceMultiplier, beaconHitPoint.w * DistanceMultiplier, 1);
+        magnify.SetPositionAndScale(beaconHitPoint + new Vector4(1, 0, 0, 0) * direction * beaconOffset, beaconHitPoint.w * DistanceMultiplier, true);
+
+        //magnify.transform.position = beaconHitPoint + new Vector4(1, 0,0,0) * direction * beaconOffset;
+        //magnify.transform.localScale = new Vector3(beaconHitPoint.w * DistanceMultiplier, beaconHitPoint.w * DistanceMultiplier, 1);
         laserLinePositions[1 + direction] = magnify.transform.position;
     }
 
