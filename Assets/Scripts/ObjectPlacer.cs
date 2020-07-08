@@ -11,7 +11,7 @@ public class ObjectPlacer : MonoBehaviour
     [Header("Prefabs")]
     public GameObject calculatePoint;
     public GameObject obstructedCalculatePoint;
-    public GameObject obstacle;
+    public GameObject[] obstaclePrefabs;
     public GameManager gm;
 
     [Header("Randomized Constrains")]
@@ -192,7 +192,7 @@ public class ObjectPlacer : MonoBehaviour
         {
             for (int i = 0; i < amount; i++)
             {
-                GameObject newObstacle = Instantiate(obstacle, FarEnoughRandomPoint(), RandomAngle());
+                GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0,obstaclePrefabs.Length)], FarEnoughRandomPoint(), RandomAngle());
                 obstacles.Add(newObstacle);
             }
         }
@@ -263,7 +263,7 @@ public class ObjectPlacer : MonoBehaviour
             Vector3 obsPosition;
             if (i == 0) obsPosition = calculatePoints[0].transform.position / 2f;
             else obsPosition = (calculatePoints[i-1].transform.position + calculatePoints[i].transform.position) / 2f;
-            GameObject newObstacle = Instantiate(obstacle, obsPosition, RandomAngle());
+            GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], obsPosition, RandomAngle());
             obstacles.Add(newObstacle);
         }
         

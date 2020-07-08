@@ -1070,9 +1070,9 @@ GameObject:
   - component: {fileID: 8568660867024383014}
   - component: {fileID: 7861372935325291194}
   - component: {fileID: 3585613728847250674}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: TopTerrainHeightGenerationController (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1370,9 +1370,9 @@ GameObject:
   - component: {fileID: 2939056588926342708}
   - component: {fileID: 1062846598689017130}
   - component: {fileID: 5203938460643851568}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TerrainHeightGenerationController
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1712,6 +1712,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: Waterpassing
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128626482578238558, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 55095
       objectReference: {fileID: 0}
     - target: {fileID: 7128626482935169015, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}

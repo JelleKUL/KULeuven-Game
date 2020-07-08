@@ -200,8 +200,8 @@ QualitySettings:
     shadowmaskMode: 1
     skinWeights: 4
     textureQuality: 0
-    anisotropicTextures: 0
-    antiAliasing: 8
+    anisotropicTextures: 1
+    antiAliasing: 2
     softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 0
@@ -225,5 +225,5 @@ QualitySettings:
   m_PerPlatformDefaultQuality:
     Android: 0
     Standalone: 0
-    WebGL: 0
+    WebGL: 5
     iPhone: 0

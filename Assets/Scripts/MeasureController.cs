@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//***** Controls the measure object ******//
+[RequireComponent (typeof(BoxCollider2D))]
 public class MeasureController : MonoBehaviour
 {
     [Header ("Prefabs")]
@@ -14,13 +17,23 @@ public class MeasureController : MonoBehaviour
     [SerializeField]
     private LineRenderer laserline;
     [SerializeField]
+    private Transform behindLegL;
+    [SerializeField]
+    private Transform behindLegR;
+    [SerializeField]
     private LayerMask beacons;
+    [SerializeField]
+    private LayerMask groundMask;
+    [SerializeField]
+    private string groundTag = "Ground";
 
     [Header("Measure Variables")]
     public float scheefstandsHoek = 0f;
     public float errorAngle;
     public float maxDistance = 10;
     public float DistanceMultiplier = 0.01f;
+    [SerializeField]
+    private bool showBehindLegs;
     [SerializeField]
     private float beaconOffset = 0.1f;
     public bool showMagnify;
@@ -108,5 +121,25 @@ public class MeasureController : MonoBehaviour
         laserLinePositions[1 + direction] = magnify.transform.position;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+      if(collision.gameObject.tag == groundTag && showBehindLegs)
+        {
+            SetBehindLegs(behindLegL);
+            SetBehindLegs(behindLegR);
+        }
+    }
 
+
+    private void SetBehindLegs(Transform leg)
+    {
+        // Cast a ray straight down.
+        RaycastHit2D hit = Physics2D.Raycast(leg.position, -leg.up, 1f, groundMask);
+
+        // If it hits something...
+        if (hit.collider != null)
+        {
+            leg.localScale = hit.distance * Vector2.one;
+        }
+    }
 }
