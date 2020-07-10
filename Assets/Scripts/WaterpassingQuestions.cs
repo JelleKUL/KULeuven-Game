@@ -98,7 +98,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 break;
 
             case QuestionType.HoogteVerschilMeerPunten:
-                waterpassing.SetParameters(3, 5, 3, false, false, Vector2.zero, false, Vector2.zero, true);
+                waterpassing.SetParameters(3, 5, 1, false, false, Vector2.zero, false, Vector2.zero, true);
                 correctPoints = waterpassing.correctHeightDifferences;
 
                 break;

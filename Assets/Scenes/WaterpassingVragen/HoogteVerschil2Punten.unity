@@ -128,23 +128,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1380859681, guid: 4d233a20e80c34bc4bdc4f5e8e446f79, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 43.23047
-      objectReference: {fileID: 0}
-    - target: {fileID: 1380859681, guid: 4d233a20e80c34bc4bdc4f5e8e446f79, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 38.51953
-      objectReference: {fileID: 0}
     - target: {fileID: 29510839122793100, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -55.09961
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 29510839122793103, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_Text
       value: Bepaal het hoogteverschil tussen de 2 punten
+      objectReference: {fileID: 0}
+    - target: {fileID: 29510840217473947, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 29510840217473947, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 179706975883617650, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
@@ -669,6 +671,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778500829650642821, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.950012
       objectReference: {fileID: 0}
     - target: {fileID: 9048913617645147364, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
