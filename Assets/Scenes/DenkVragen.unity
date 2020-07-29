@@ -197,6 +197,11 @@ PrefabInstance:
       propertyPath: m_Text
       value: DenkVragen
       objectReference: {fileID: 0}
+    - target: {fileID: 7128626482935169013, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7128626483119555747, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_IsActive
@@ -211,6 +216,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783179508598164045, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7971704073162203606, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -279,18 +289,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fedf2ec0e39744ebf85ff34b14446f74, type: 3}
---- !u!224 &358172077 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7128626482535786160, guid: fedf2ec0e39744ebf85ff34b14446f74,
-    type: 3}
-  m_PrefabInstance: {fileID: 358172076}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1584205995
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 358172077}
+    m_TransformParent: {fileID: 1691988977}
     m_Modifications:
     - target: {fileID: 7743290664407530192, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
@@ -330,7 +334,7 @@ PrefabInstance:
     - target: {fileID: 7743290664407530192, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7743290664407530192, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
@@ -350,7 +354,7 @@ PrefabInstance:
     - target: {fileID: 7743290664407530192, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 7743290664407530192, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
@@ -370,22 +374,22 @@ PrefabInstance:
     - target: {fileID: 7743290664407530192, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.04
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7743290664407530192, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.17
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: 7743290664407530192, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.73
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7743290664407530192, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.81
+      value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: 7743290664407530192, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
@@ -412,6 +416,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7743290664407530193, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
+        type: 3}
+      propertyPath: vragen.Array.data[2].vraagText
+      value: het hoogteverschil heeft geen invloed op de toegelaten waarde van de
+        sluitfout
+      objectReference: {fileID: 0}
     - target: {fileID: 7743290664407530199, guid: 8bd2a9084565b42aeaf5eb859e1d849a,
         type: 3}
       propertyPath: m_Name
@@ -424,3 +434,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bd2a9084565b42aeaf5eb859e1d849a, type: 3}
+--- !u!224 &1691988977 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7128626481618353795, guid: fedf2ec0e39744ebf85ff34b14446f74,
+    type: 3}
+  m_PrefabInstance: {fileID: 358172076}
+  m_PrefabAsset: {fileID: 0}

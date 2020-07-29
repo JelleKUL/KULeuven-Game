@@ -148,10 +148,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798b05e67b78744beae4f7009f0acf24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceError: 0
-  angleError: 0
   linePoint: {fileID: 6925030597558219202, guid: 0b53bcca134834af5bd46cc96bd3be77,
     type: 3}
+  pointMask:
+    serializedVersion: 2
+    m_Bits: 256
+  Obstacles:
+    serializedVersion: 2
+    m_Bits: 512
+  distanceErrorSlider: {fileID: 0}
+  angleErrorSlider: {fileID: 0}
+  fullLine: {fileID: 0}
+  dottedLine: {fileID: 0}
+  lockDistanceError: 0
+  lockAngleError: 0
+  distanceError: 0
+  angleError: 0
   lockFirstPoint: 0
   firstPointPosition: {x: 0, y: 0}
   showEllipses: 0
@@ -160,9 +172,5 @@ MonoBehaviour:
   showStartAngle: 0
   showStartLength: 0
   maxPoints: 2
-  pointMask:
-    serializedVersion: 2
-    m_Bits: 256
-  Obstacles:
-    serializedVersion: 2
-    m_Bits: 512
+  showObstructedValues: 0
+  startCenterPoint: 0

@@ -9,10 +9,14 @@ public class PolygonLineController : MonoBehaviour
 {
     [Header("Prefabs")]
     public GameObject linePoint;
+    public GameObject firstPoint;
     public LayerMask pointMask;
     public LayerMask Obstacles;
+    public LayerMask ObstructionPoints;
     public Slider distanceErrorSlider;
     public Slider angleErrorSlider;
+    public Material fullLine;
+    public Material dottedLine;
 
     [Header("Changeable Parameters")]
     public bool lockDistanceError;
@@ -32,7 +36,6 @@ public class PolygonLineController : MonoBehaviour
     public bool showStartAngle;
     public bool showStartLength;
     public int maxPoints;
-    public bool showObstructedValues;
     public bool startCenterPoint;
     
     private List<GameObject> linePoints = new List<GameObject>();
@@ -50,11 +53,21 @@ public class PolygonLineController : MonoBehaviour
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         line = GetComponent<LineRenderer>();
 
+        // sets the type of line renderer
+        if (showLengths)
+        {
+            line.material = fullLine;
+        }
+        else line.material = dottedLine;
+
+        // places the first point 
         if (lockFirstPoint)
         {
             AddPoint(firstPointPosition);
             linePoints[0].GetComponent<CircleCollider2D>().enabled = false;
         }
+
+        // finds the sliders and then sets the foutenellips to those values at the starts
         if(distanceErrorSlider != null && angleErrorSlider != null)
         {
             distanceErrorSlider.value = distanceError;
@@ -164,7 +177,7 @@ public class PolygonLineController : MonoBehaviour
             }
             
             //checks if the line intersects with an obstacle
-            if (i != linePoints.Count - 1 && !CheckVisible(linePoints[i], linePoints[i + 1]) && !showObstructedValues)
+            if (i != linePoints.Count - 1 && !CheckVisible(linePoints[i], linePoints[i + 1], Obstacles))
             {
                 
                 line.positionCount = i + 2;
@@ -176,7 +189,7 @@ public class PolygonLineController : MonoBehaviour
             //sets the anglevalues of the points
             if (showAngles && i != 0 && i != linePoints.Count - 1)
             {
-                if (!CheckVisible(linePoints[1], linePoints[1]))
+                if (!CheckVisible(linePoints[1], linePoints[1], ObstructionPoints))
                 {
                     
                 }
@@ -190,9 +203,9 @@ public class PolygonLineController : MonoBehaviour
 
 
     // checks if next point is visible
-    bool CheckVisible(GameObject point, GameObject nextPoint)
+    bool CheckVisible(GameObject point, GameObject nextPoint, LayerMask layerMask)
     {
-        RaycastHit2D hit = Physics2D.Raycast(point.transform.position, nextPoint.transform.position - point.transform.position, (nextPoint.transform.position - point.transform.position).magnitude, Obstacles);
+        RaycastHit2D hit = Physics2D.Raycast(point.transform.position, nextPoint.transform.position - point.transform.position, (nextPoint.transform.position - point.transform.position).magnitude, layerMask);
 
         if (hit.collider != null)
         {
@@ -227,7 +240,14 @@ public class PolygonLineController : MonoBehaviour
     public void AddPoint(Vector2 pos)
     {
         line.positionCount++;
-        if (startCenterPoint && line.positionCount == 2)
+        if(linePoints.Count == 0)
+        {
+            GameObject newPoint = Instantiate(firstPoint, pos, Quaternion.identity);
+            newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
+            linePoints.Add(newPoint);
+        }
+
+        else if (startCenterPoint && line.positionCount == 2)
         {
             GameObject newPoint = Instantiate(linePoint, pos, Quaternion.identity);
             newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);

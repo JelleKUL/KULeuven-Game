@@ -4304,7 +4304,7 @@ PrefabInstance:
     - target: {fileID: 1169042849516795187, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849577834200, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4434,13 +4434,18 @@ PrefabInstance:
     - target: {fileID: 1169042849640620418, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849640620420, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 912187554}
+    - target: {fileID: 1169042849640620420, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Bilateratie
+      objectReference: {fileID: 0}
     - target: {fileID: 1169042849640620421, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4459,7 +4464,7 @@ PrefabInstance:
     - target: {fileID: 1169042849666190284, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -10
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849941321376, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4490,7 +4495,7 @@ PrefabInstance:
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.14563721
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4510,7 +4515,7 @@ PrefabInstance:
     - target: {fileID: 1169042850670976434, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850944884499, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4531,6 +4536,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: PolygonatieTabel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042850993633905, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_Text
+      value: Bilateratie
       objectReference: {fileID: 0}
     - target: {fileID: 1169042851081461713, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4555,7 +4565,7 @@ PrefabInstance:
     - target: {fileID: 1169042851166332672, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 316.3
+      value: 379.23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0ec51f37b19546e1bc3d28cc09af294, type: 3}
@@ -5902,6 +5912,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 912187554}
+    - target: {fileID: 1169042849640620420, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: OmgekeerdeBaak
+      objectReference: {fileID: 0}
     - target: {fileID: 1169042849666190284, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -5931,7 +5946,7 @@ PrefabInstance:
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.28000003
+      value: 0.27999997
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
