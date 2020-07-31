@@ -88,6 +88,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2433934575586514883, guid: 0b53bcca134834af5bd46cc96bd3be77,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3327031842360615429, guid: 0b53bcca134834af5bd46cc96bd3be77,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3668429104693911391, guid: 0b53bcca134834af5bd46cc96bd3be77,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -151,7 +161,7 @@ PrefabInstance:
     - target: {fileID: 6925030597558219202, guid: 0b53bcca134834af5bd46cc96bd3be77,
         type: 3}
       propertyPath: m_Name
-      value: StartPolygonPoint
+      value: StartPolygonPoint Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b53bcca134834af5bd46cc96bd3be77, type: 3}

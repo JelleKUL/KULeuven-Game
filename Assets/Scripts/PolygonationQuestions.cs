@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class PolygonationQuestions : MonoBehaviour
 {
     [Header("Predefined TextFields")]
+    public Text titleQuestionText;
     public Text questionText;
     public Text answerInputX;
     public Text answerInputY;
@@ -62,7 +63,7 @@ public class PolygonationQuestions : MonoBehaviour
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 correctAnswerX = correctAnswerArray[0];
                 correctAnswerY = correctAnswerArray[1];
-                questionText.text = "Bepaal het coördinaat van punt B";
+                titleQuestionText.text = "Bepaal het coördinaat van punt B";
                 break;
 
             case QuestionType.Afstand2PuntenPolygoon:
@@ -70,7 +71,7 @@ public class PolygonationQuestions : MonoBehaviour
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
                 correctAnswerH = Mathf.Sqrt(Mathf.Pow(correctAnswerArray[2] - correctAnswerArray[0], 2) + Mathf.Pow(correctAnswerArray[3] - correctAnswerArray[1], 2));
-                questionText.text = "Bepaal de afstand tussen A en B";
+                titleQuestionText.text = "Bepaal de afstand tussen A en B";
                 break;
 
             case QuestionType.VoorwaardseInsnijding:
@@ -82,7 +83,8 @@ public class PolygonationQuestions : MonoBehaviour
                 placer.PlaceObstacles(2);
                 correctAnswerX = obsructedPointsArray[0];
                 correctAnswerY = obsructedPointsArray[1];
-                questionText.text = "Voorwaardse Insnijding bepaal P, A = x:" + correctAnswerArray[0]+", y:" + correctAnswerArray[1] + " B = x:" + correctAnswerArray[2] + ", y:" + correctAnswerArray[3];
+                titleQuestionText.text = "Voorwaardse Insnijding bepaal P";
+                questionText.text = "A = x:" + correctAnswerArray[0]+", y:" + correctAnswerArray[1] + "\n B = x:" + correctAnswerArray[2] + ", y:" + correctAnswerArray[3];
                 break;
 
             case QuestionType.AchterwaardseInsnijding:
@@ -92,8 +94,9 @@ public class PolygonationQuestions : MonoBehaviour
                 obsructedPointsArray = placer.PlaceObstructedCalculatePoints(3);
                 correctAnswerX = correctAnswerArray[0];
                 correctAnswerY = correctAnswerArray[1];
-                //placer.PlaceObstacles(2);
-                questionText.text = "Achterwaardse Insnijding bepaal P, A = x:" + obsructedPointsArray[0] + ", y:" + obsructedPointsArray[1] + " B = x:" + obsructedPointsArray[2] + ", y:" + obsructedPointsArray[3] + " C = x:" + obsructedPointsArray[4] + ", y:" + obsructedPointsArray[5];
+                placer.PlaceObstacles(1);
+                titleQuestionText.text = "Achterwaardse Insnijding bepaal P";
+                questionText.text = "\n\u2022 A = x: " + obsructedPointsArray[0] + ", y: " + obsructedPointsArray[1] + "\n\u2022 B = x: " + obsructedPointsArray[2] + ", y: " + obsructedPointsArray[3] + "\n\u2022 C = x: " + obsructedPointsArray[4] + ", y: " + obsructedPointsArray[5];
                 break;
 
             case QuestionType.Tabel:

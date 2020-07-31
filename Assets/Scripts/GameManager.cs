@@ -15,16 +15,27 @@ public class GameManager : MonoBehaviour
     [Tooltip ("the size of the interactable screen in world dimentions")]
     public Vector2 screenMin;
     public Vector2 screenMax;
+    [Header("CampaignOrder")]
+    public int[] campaignLevel;
 
     [HideInInspector]
     public static int playerScore;
     private Text scoreText;
 
+    public static int highestLevel;
+    public static int currentLevel;
+
+
     // Start is called before the first frame update
     void Start()
     {
         scoreText = GameObject.FindGameObjectWithTag("scoreText").GetComponent<Text>();
-        scoreText.text = playerScore.ToString();
+        if (scoreText)
+        {
+            scoreText.text = playerScore.ToString();
+        }
+        
+        
     }
 
 
@@ -57,8 +68,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+//CampaignManagement
+    
 
-    //mouse Navigation
+
+//mouse Navigation
     // checks if position is in the boundary
     public bool IsBetweenValues(Vector2 check)
     {
@@ -72,7 +86,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-//aswer Control
+//answer Control
     // checks if a given string equals the float value minus the error margin
     public bool CheckCorrectAnswer(string answer, float correct)
     {
