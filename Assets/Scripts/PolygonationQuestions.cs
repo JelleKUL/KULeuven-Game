@@ -94,7 +94,7 @@ public class PolygonationQuestions : MonoBehaviour
                 obsructedPointsArray = placer.PlaceObstructedCalculatePoints(3);
                 correctAnswerX = correctAnswerArray[0];
                 correctAnswerY = correctAnswerArray[1];
-                placer.PlaceObstacles(1);
+                //placer.PlaceObstacles(1);
                 titleQuestionText.text = "Achterwaardse Insnijding bepaal P";
                 questionText.text = "\n\u2022 A = x: " + obsructedPointsArray[0] + ", y: " + obsructedPointsArray[1] + "\n\u2022 B = x: " + obsructedPointsArray[2] + ", y: " + obsructedPointsArray[3] + "\n\u2022 C = x: " + obsructedPointsArray[4] + ", y: " + obsructedPointsArray[5];
                 break;

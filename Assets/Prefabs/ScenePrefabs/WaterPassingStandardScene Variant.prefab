@@ -1437,8 +1437,8 @@ SpriteShapeRenderer:
   m_Sprites:
   - {fileID: 21300000, guid: 7ea348253ba994a8f9bde0a6dd7efbb3, type: 3}
   m_LocalAABB:
-    m_Center: {x: 4.498215, y: 0, z: -0.00005}
-    m_Extent: {x: 5.502968, y: 0.97279924, z: 0.00005}
+    m_Center: {x: 5.939631, y: 0.006690979, z: -0.00005}
+    m_Extent: {x: 7.2111692, y: 2.56669, z: 0.00005}
 --- !u!114 &1062846598689017130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,20 +1454,20 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
-    - position: {x: -1.0036321, y: 0.01338172, z: 0}
+    - position: {x: -1.2691622, y: 0.01338172, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.36
+      height: 1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 10, y: 0, z: 0}
+    - position: {x: 13.148426, y: 0, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.38
+      height: 1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_WorldSpaceUV: 1
   m_CornerAngleThreshold: 30
   m_ColliderDetail: 16
-  m_ColliderOffset: 0.452
+  m_ColliderOffset: 0.476
   m_UpdateCollider: 1
   m_OptimizeCollider: 1
   m_OptimizeGeometry: 1
@@ -1502,9 +1502,9 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.0026188, y: 0.84650755}
-  - {x: 9.860874, y: 0.8789913}
-  - {x: 10.00107, y: 0.8794105}
+  - {x: -1.2669001, y: 2.450501}
+  - {x: 12.966997, y: 2.4372897}
+  - {x: 13.150686, y: 2.437119}
 --- !u!1001 &7099133127937059949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1641,21 +1641,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1969849890702429160, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -123.17993
-      objectReference: {fileID: 0}
-    - target: {fileID: 1969849890702429160, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 6.949951
-      objectReference: {fileID: 0}
-    - target: {fileID: 1969849890702429160, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -13.899957
-      objectReference: {fileID: 0}
     - target: {fileID: 2238602420597454985, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_Name
@@ -1733,11 +1718,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5631332701032391200, guid: 3a82ac8decc1249689407b81d4dc2874,
         type: 3}
-    - target: {fileID: 4446215733289814962, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 18
-      objectReference: {fileID: 0}
     - target: {fileID: 4829420828650428293, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -1783,11 +1763,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6225006562212499319, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6233269731080539105, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1827,21 +1802,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 55095
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128626482578238558, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.5136169
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128626482578238558, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.5471698
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128626482578238558, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.5471698
       objectReference: {fileID: 0}
     - target: {fileID: 7128626482935169015, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}

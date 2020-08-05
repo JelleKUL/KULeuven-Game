@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class WaterpassingTabel : MonoBehaviour
 {
+    public GameObject waterPassingHeader;
+    public GameObject waterPassingHeaderVereffening;
+
     public GameObject waterPassingTabelPart;
     public GameObject waterPassingTabelVereffening;
     public GameObject waterPassingTotaal;
@@ -139,6 +142,7 @@ public class WaterpassingTabel : MonoBehaviour
         {
             tabelPart.gameObject.SetActive(input);    
         }
+        waterPassingHeader.SetActive(input);
         totaal.SetActive(input);
 
         foreach (var tabelPart in tabelVereffeningParts)
@@ -146,6 +150,7 @@ public class WaterpassingTabel : MonoBehaviour
 
             tabelPart.gameObject.SetActive(!input);
         }
+        waterPassingHeaderVereffening.SetActive(!input);
         totaalVereffening.SetActive(!input);
     }
 

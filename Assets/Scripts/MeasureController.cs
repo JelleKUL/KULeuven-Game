@@ -75,6 +75,12 @@ public class MeasureController : MonoBehaviour
         MagnifyL.SetActive(hasHitL && showMagnify);
     }
 
+    public void UpdateMeasureHeadRotation(float angle)
+    {
+        scheefstandsHoek = angle;
+        measureHead.eulerAngles = Vector3.forward * angle;
+    }
+
 
     // casts a ray in the direction of the laser
     Vector4 CastLaser(Vector2 origin, Vector2 directionVector, int direction)

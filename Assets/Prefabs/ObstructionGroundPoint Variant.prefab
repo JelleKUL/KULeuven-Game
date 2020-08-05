@@ -93,6 +93,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObstructionGroundPoint Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4604099556424873805, guid: 37375dc84afda45f4bbcfc37dc1596eb,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.183722
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604099556424873805, guid: 37375dc84afda45f4bbcfc37dc1596eb,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.482
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604099556424873805, guid: 37375dc84afda45f4bbcfc37dc1596eb,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.23343495
+      objectReference: {fileID: 0}
     - target: {fileID: 6696414436310916981, guid: 37375dc84afda45f4bbcfc37dc1596eb,
         type: 3}
       propertyPath: m_Color.r

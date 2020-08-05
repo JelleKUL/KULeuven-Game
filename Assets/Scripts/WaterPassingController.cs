@@ -23,6 +23,7 @@ public class WaterPassingController : MonoBehaviour
     public Button measureButton;
     public Text angleErrorText;
     public Text distanceAngleText;
+    public Text rotationAngleText;
     public SpriteShapeController spriteShapeController;
     public SpriteShapeController topSpriteShapeController;
     public Transform groundPointTopDownCenter;
@@ -42,6 +43,7 @@ public class WaterPassingController : MonoBehaviour
     public Vector2 lockedBeaconLocation;
     public bool loopAround;
     public bool addPointOutLoop;
+    public float topDownPointRaduis = 0.5f;
     [Header ("Standard Parameters")]
     [Tooltip ("the angle of the upper and lower laserline to determine the distance")]
     public float distanceMeasureAngle;
@@ -242,6 +244,9 @@ public class WaterPassingController : MonoBehaviour
     public void SetGroundSprite()
     {
         spriteShapeController.spline.Clear();
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(-2,-3));
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(18, -3));
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(18, -0.5f));
         spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, -0.5f));
         
         for (int i = nrOfPoints; i > 0 ; i--)
@@ -249,11 +254,11 @@ public class WaterPassingController : MonoBehaviour
             spriteShapeController.spline.InsertPointAt(0, groundPoints[i-1].transform.position + 0.5f * Vector3.down);
         }
         spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, -0.5f));
-
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(-2, -0.5f));
         for (int i = 0; i < spriteShapeController.spline.GetPointCount(); i++)
         {
             spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
-            spriteShapeController.spline.SetHeight(i, 0.2f);
+            //spriteShapeController.spline.SetHeight(i, 1);
             spriteShapeController.spline.SetLeftTangent(i, Vector3.left);
             spriteShapeController.spline.SetRightTangent(i, Vector3.right);
         }
@@ -419,13 +424,16 @@ public class WaterPassingController : MonoBehaviour
 
     //sets the scheefstandangle of all the measures
 
-    public void RotateMeasure(string input)
+    public void RotateMeasure(float angleInput)
     {
-        float angleinput = float.Parse(input);
+        if (rotationAngleText)
+        {
+            rotationAngleText.text = (Mathf.Round(angleInput * 100) / 100f).ToString() + " gon";
+        }
         for (int i = 0; i < measures.Count; i++)
         {
-            measures[i].GetComponent<MeasureController>().scheefstandsHoek = angleinput * 4 / 3.6f;
-            Debug.Log(angleinput * 4 / 3.6f);
+            measures[i].GetComponent<MeasureController>().UpdateMeasureHeadRotation(angleInput * 3.6f / 4f);
+            Debug.Log(angleInput);
         }
 
 
@@ -614,7 +622,7 @@ public class WaterPassingController : MonoBehaviour
         for (int i = 0; i < nrOfPoints + 1; i++)
         {
             // instantiates a point and moves a point out of the loop further away
-            GameObject newpoint = Instantiate(groundPointTopDown, groundPointTopDownCenter.position + Vector3.right * ((addPointOutLoop && i == pointOutLoopNr) ? 1.5f : 1), Quaternion.identity);
+            GameObject newpoint = Instantiate(groundPointTopDown, groundPointTopDownCenter.position + Vector3.right * topDownPointRaduis * ((addPointOutLoop && i == pointOutLoopNr) ? 1.5f : 1), Quaternion.identity);
             newpoint.GetComponent<PolygonPointController>().SetNameText(i==0? -1:i);
             groundPointsTopDown.Add(newpoint);
         }

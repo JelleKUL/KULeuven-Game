@@ -13,7 +13,7 @@ public class WaterpassingQuestions : MonoBehaviour
     public Text answerInputH;   
     public Text answerOutput;
 
-    public enum QuestionType { Geen, Hoogteverschil2Punten, Afstand2Punten, Hoekfout, HoogteVerschilMeerPunten, Scheefstand, OmgekeerdeBaak }
+    public enum QuestionType { Geen, Hoogteverschil2Punten, Afstand2Punten, Hoekfout, HoogteVerschilMeerPunten, Scheefstand, OmgekeerdeBaak, ScheveWaterpassing }
     [Tooltip("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -68,6 +68,11 @@ public class WaterpassingQuestions : MonoBehaviour
                 correctAnswer = waterpassing.correctHeight;
 
                 break;
+            case QuestionType.ScheveWaterpassing:
+                waterpassing.ChangePoints();
+                correctAnswer = waterpassing.correctHeight;
+
+                break;
         }
     }
 
@@ -111,6 +116,11 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.OmgekeerdeBaak:
                 waterpassing.SetParameters(1, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
+                correctAnswer = waterpassing.correctHeight;
+
+                break;
+            case QuestionType.ScheveWaterpassing:
+                waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = waterpassing.correctHeight;
 
                 break;

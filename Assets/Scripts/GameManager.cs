@@ -8,13 +8,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("PlayField")]
     [Header ("Global Parameters")]
     [Tooltip ("the errormargin for answers")]
     public float errorMargin = 0.1f;
     public static float worldScale = 10f;
-    [Tooltip ("the size of the interactable screen in world dimentions")]
-    public Vector2 screenMin;
-    public Vector2 screenMax;
+    
+    
     [Header("CampaignOrder")]
     public int[] campaignLevel;
 
@@ -22,9 +22,15 @@ public class GameManager : MonoBehaviour
     public static int playerScore;
     private Text scoreText;
 
+    [HideInInspector]
+    public Vector2 screenMin, screenMax;
+
     public static int highestLevel;
     public static int currentLevel;
-
+    private void Awake()
+    {
+        SetPlayArea();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +40,7 @@ public class GameManager : MonoBehaviour
         {
             scoreText.text = playerScore.ToString();
         }
+
         
         
     }
@@ -97,5 +104,15 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+// playAreaSetting
+    void SetPlayArea()
+    {
+        screenMin.x = transform.position.x - transform.localScale.x / 2f;
+        screenMax.x = transform.position.x + transform.localScale.x / 2f;
+
+        screenMin.y = transform.position.y - transform.localScale.y / 2f;
+        screenMax.y = transform.position.y + transform.localScale.y / 2f;
     }
 }
