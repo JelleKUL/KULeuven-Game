@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 1388886009021958529}
   - component: {fileID: 8513563837376933240}
   - component: {fileID: 3031627927930280651}
+  - component: {fileID: 5764153161217147394}
   m_Layer: 5
   m_Name: Score UI
   m_TagString: Untagged
@@ -190,7 +191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.100006, y: -5.769989}
+  m_AnchoredPosition: {x: 2.0999756, y: -5.769989}
   m_SizeDelta: {x: 131.5, y: 74.3}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8513563837376933240
@@ -229,3 +230,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2
+--- !u!114 &5764153161217147394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018576053325788999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a24e6ad37d23466ab381e80edd1634f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1582539565538720873}

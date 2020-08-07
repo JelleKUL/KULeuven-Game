@@ -138,6 +138,7 @@ public class PolygonPointController : MonoBehaviour
         if(collision.gameObject.tag == "Beacon" || collision.gameObject.tag == "PolygonPoint")
         {
             collision.transform.position = transform.position;
+            //collision.attachedRigidbody.simulated = false;
         }
         
     }

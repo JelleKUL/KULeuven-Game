@@ -9,9 +9,12 @@ using UnityEngine.UI;
 public class WaterpassingQuestions : MonoBehaviour
 {
     [Header("Predefined TextFields")]
+    public Text questionHeaderText;
     public Text questionText;
     public Text answerInputH;   
     public Text answerOutput;
+
+    public GameObject winMenu;
 
     public enum QuestionType { Geen, Hoogteverschil2Punten, Afstand2Punten, Hoekfout, HoogteVerschilMeerPunten, Scheefstand, OmgekeerdeBaak, ScheveWaterpassing }
     [Tooltip("Kies het soort vraag voor de oefening")]
@@ -87,7 +90,8 @@ public class WaterpassingQuestions : MonoBehaviour
             case QuestionType.Hoogteverschil2Punten:
                 waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = waterpassing.correctHeight;
-
+                questionHeaderText.text = "Bepaal het hoogteveschil tussen A & B";
+                questionText.text = "Plaats de meetbaken op de meetpunten en meet met het meettoestel het verschil tussen beide punten";
                 break;
 
             case QuestionType.Afstand2Punten:
@@ -138,7 +142,8 @@ public class WaterpassingQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease);
             Debug.Log("true");
-            gm.ReloadScene();
+            winMenu.SetActive(true);
+            //gm.ReloadScene();
         }
         else Debug.Log("false");
 

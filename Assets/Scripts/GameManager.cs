@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public static int playerScore;
-    private Text scoreText;
+    private Text[] scoreText;
 
     [HideInInspector]
     public Vector2 screenMin, screenMax;
@@ -35,11 +35,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreText = GameObject.FindGameObjectWithTag("scoreText").GetComponent<Text>();
-        if (scoreText)
-        {
-            scoreText.text = playerScore.ToString();
-        }
+        
 
         
         
@@ -47,11 +43,38 @@ public class GameManager : MonoBehaviour
 
 
 //score Control
+    // searches all the active score displays at the start of the scene
+    private void SearchScoreTexts()
+    {
+        GameObject[] scoreObjects = GameObject.FindGameObjectsWithTag("scoreText");
+        scoreText = new Text[scoreObjects.Length];
+
+        for (int i = 0; i < scoreText.Length; i++)
+        {
+            scoreText[i] = scoreObjects[i].GetComponent<Text>();
+        }
+
+        if (scoreText.Length > 0)
+        {
+            foreach (var score in scoreText)
+            {
+                score.text = playerScore.ToString();
+            }
+
+
+        }
+    }
     // increases the score by a set amount
     public void IncreaseScore(int amount)
     {
         playerScore += amount;
-        scoreText.text = playerScore.ToString();
+
+        /*
+        foreach (var score in scoreText)
+        {
+            score.text = playerScore.ToString();
+        }
+        */
     }
 
 
