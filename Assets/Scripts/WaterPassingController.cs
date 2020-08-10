@@ -55,10 +55,7 @@ public class WaterPassingController : MonoBehaviour
     [Tooltip("the max height of the points in % of the screen height")]
     [Range(0, 0.5f)]
     public float maxHeightGroundPoint;
-    
-    public Color buttonBaseColor;
-    public Color buttonActiveColor;
-
+  
     
     private GameManager gm;
     private List<GameObject> groundPoints = new List<GameObject>();
@@ -67,12 +64,7 @@ public class WaterPassingController : MonoBehaviour
     private List<GameObject> beacons = new List<GameObject>();
     private List<GameObject> groundPointsTopDown = new List<GameObject>();
 
-    // determine what mode the player is in
-    private bool measureMode;
-    private bool beaconMode;
-    //private bool magnifyMode;
-    private ColorBlock buttonColorBase;
-    private ColorBlock buttonColorActive;
+
 
     private bool holdingObject;
     private GameObject hitObject;
@@ -92,7 +84,6 @@ public class WaterPassingController : MonoBehaviour
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         //magnifyGlass.SetActive(false);
 
-        SetButtonColors();
 
         if (nrOfPoints > 0)
         {
@@ -227,19 +218,7 @@ public class WaterPassingController : MonoBehaviour
         else holdingObject = false;
         */
     }
-    public void SetButtonColors()
-    {
-        buttonColorBase = magnifyButton.colors;
-        buttonColorBase.normalColor = buttonBaseColor;
-        buttonColorBase.selectedColor = buttonBaseColor;
-        buttonColorActive = magnifyButton.colors;
-        buttonColorActive.normalColor = buttonActiveColor;
-        buttonColorActive.selectedColor = buttonActiveColor;
-
-        magnifyButton.colors = buttonColorBase;
-        beaconButton.colors = buttonColorBase;
-        measureButton.colors = buttonColorBase;
-    }
+    
 
     public void SetGroundSprite()
     {
@@ -314,45 +293,16 @@ public class WaterPassingController : MonoBehaviour
         return null;
     }
 
-    //toggles the different modes
-    public void ToggleMeasure()
-    {
-        measureMode = true;
-        beaconMode = false;
-        //magnifyMode = false;
-        //magnifyGlass.SetActive(false);
-
-        magnifyButton.colors = buttonColorBase;
-        beaconButton.colors = buttonColorBase;
-        measureButton.colors = buttonColorActive;
-    }
-
-    public void ToggleBeacon()
-    {
-        measureMode = false;
-        beaconMode = true;
-        //magnifyMode = false;
-        //magnifyGlass.SetActive(false);
-
-        magnifyButton.colors = buttonColorBase;
-        beaconButton.colors = buttonColorActive;
-        measureButton.colors = buttonColorBase;
-    }
 
     public void ToggleMagnify()
     {
-        measureMode = false;
-        beaconMode = false;
+        
         foreach (var measureObject in measures)
         {
             measureObject.GetComponent<MeasureController>().ToggleMagnify();
         }
-        //magnifyMode = true;
-        //magnifyGlass.SetActive(true);
+        
 
-        magnifyButton.colors = buttonColorActive;
-        beaconButton.colors = buttonColorBase;
-        measureButton.colors = buttonColorBase;
     }
     
 
@@ -655,12 +605,12 @@ public class WaterPassingController : MonoBehaviour
 
     public void SetAngleErrorText()
     {
-        angleErrorText.text = "De Collimatiefout is: \n " + (Mathf.Round(correctErrorAngle * 100 * (4/3.6f)) / 100).ToString() + "gon";
+        angleErrorText.text = "De Collimatiefout is: \n " + (Mathf.Round(correctErrorAngle * 100 * (4/3.6f)) / 100).ToString() + " gon";
     }
 
     public void SetDistanceAngleText()
     {
-        distanceAngleText.text = "Divergentiecoefficient: \n " + (distanceMeasureAngle * 400/360f).ToString() + "gon";
+        distanceAngleText.text = "Divergentiecoefficient: \n " + (Mathf.Round(distanceMeasureAngle * 1000 * 400/360f)/1000f).ToString() + " gon";
     }
   
     //shows the correct answer (replaced in the questionscript)
