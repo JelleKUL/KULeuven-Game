@@ -54,7 +54,7 @@ public class PolygonLineController : MonoBehaviour
         line = GetComponent<LineRenderer>();
 
         // sets the type of line renderer
-        if (showLengths)
+        if (showLengths || showStartLength)
         {
             line.material = fullLine;
         }

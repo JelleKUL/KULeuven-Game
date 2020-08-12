@@ -14,6 +14,7 @@ public class PolygonPointController : MonoBehaviour
     public TextMesh nameText;
     public TextMesh distanceText;
     public TextMesh angleText;
+    public GameObject anglePointer;
     public GameObject errorEllipse;
     public GameObject angleDisplay;
     
@@ -70,7 +71,40 @@ public class PolygonPointController : MonoBehaviour
     //displays the distance to the previous point
     public void SetDistanceText (Vector3 prevPoint)
     {
-        distanceText.text = (Mathf.Round(((transform.position - prevPoint).magnitude * GameManager.worldScale + lengthError) * 1000f ) / 1000f).ToString() + " m";
+        float distance = (transform.position - prevPoint).magnitude ;
+
+        distanceText.text = (Mathf.Round((distance * GameManager.worldScale + lengthError) * 1000f ) / 1000f).ToString() + " m";
+
+        distanceText.transform.position = (transform.position + prevPoint) / 2f;
+        
+
+        if(distance < 1.5)
+        {
+            distanceText.anchor = TextAnchor.MiddleLeft;
+            Vector2 upVector = transform.position - prevPoint;
+            float direction = Vector2.Dot(upVector, Vector2.up);
+            distanceText.transform.up = upVector * direction;
+            distanceText.transform.position += distanceText.transform.right * 0.2f;
+
+        }
+        else
+        {
+            distanceText.anchor = TextAnchor.UpperCenter;
+            Vector2 upVector = new Vector2((transform.position.y - prevPoint.y), -(transform.position.x - prevPoint.x));
+            float direction = Vector2.Dot(upVector, Vector2.up);
+            distanceText.transform.up = upVector * direction;
+            distanceText.transform.position -= distanceText.transform.up * 0.1f;
+
+            if (direction == 0)
+            {
+                distanceText.anchor = TextAnchor.MiddleLeft;
+                distanceText.transform.position += distanceText.transform.right * 0.1f;
+            }
+        }
+
+        
+
+
     }
 
     //displays the angle between the previous and next point
@@ -97,9 +131,30 @@ public class PolygonPointController : MonoBehaviour
             spriteMask2.transform.right = -prevPoint + spriteMask2.transform.position;
         }
         */
-        angleText.transform.position = -Vector3.Normalize(Vector3.Normalize(nextPoint - transform.position) + Vector3.Normalize(prevPoint - transform.position)) * 0.7f + transform.position;
-        distanceText.transform.position = angleText.transform.position;
+        //angleText.transform.position = -Vector3.Normalize(Vector3.Normalize(nextPoint - transform.position) + Vector3.Normalize(prevPoint - transform.position)) * 0.7f + transform.position;
+        angleText.transform.position = transform.position;
         angleText.text = (Mathf.Round((angle + angleError) /360 * 400 * 100) / 100f).ToString() + " gon";
+
+        Vector2 upVector = Vector3.Normalize(transform.position - prevPoint) + Vector3.Normalize(transform.position - nextPoint);
+        float direction = Vector2.Dot(upVector, Vector2.right);
+
+        angleText.transform.right = upVector * direction;
+
+        if(direction > 0)
+        {
+            angleText.anchor = TextAnchor.MiddleLeft;
+            angleText.transform.position += angleText.transform.right * 0.5f;
+            anglePointer.transform.position = angleText.transform.position;
+            anglePointer.transform.up = angleText.transform.right;
+        }
+        else
+        {
+            angleText.anchor = TextAnchor.MiddleRight;
+            angleText.transform.position -= angleText.transform.right * 0.5f;
+            anglePointer.transform.position = angleText.transform.position;
+            anglePointer.transform.up = - angleText.transform.right;
+        }
+
 
     }
 

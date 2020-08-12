@@ -74,27 +74,36 @@ LineRenderer:
   m_Positions: []
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.21222305
-        inSlope: 0.26864508
-        outSlope: 0.26864508
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.24999997
+        outWeight: 0.11520737
+      - serializedVersion: 3
+        time: 0.5
+        value: 0.8832525
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0.8358207
-        outSlope: 0.8358207
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.28571433
+        inWeight: 0.14055306
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -128,8 +137,8 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
+    numCornerVertices: 4
+    numCapVertices: 4
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
@@ -150,12 +159,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linePoint: {fileID: 6925030597558219202, guid: 0b53bcca134834af5bd46cc96bd3be77,
     type: 3}
+  firstPoint: {fileID: 0}
   pointMask:
     serializedVersion: 2
     m_Bits: 256
   Obstacles:
     serializedVersion: 2
     m_Bits: 512
+  ObstructionPoints:
+    serializedVersion: 2
+    m_Bits: 0
   distanceErrorSlider: {fileID: 0}
   angleErrorSlider: {fileID: 0}
   fullLine: {fileID: 0}
@@ -172,5 +185,4 @@ MonoBehaviour:
   showStartAngle: 0
   showStartLength: 0
   maxPoints: 2
-  showObstructedValues: 0
   startCenterPoint: 0

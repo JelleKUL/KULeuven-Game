@@ -55,6 +55,8 @@ public class Theodoliet : MonoBehaviour
         scaleMagnify(1, magnifyRScript);
         laserline.SetPositions(laserLinePositions);
 
+        measureHead.right = (laserline.GetPosition(0) - measureHead.position);
+
         MagnifyR.SetActive( showMagnify);
         MagnifyL.SetActive( showMagnify);
     }

@@ -44,7 +44,8 @@ public class WaterPassingController : MonoBehaviour
     public bool loopAround;
     public bool addPointOutLoop;
     public float topDownPointRaduis = 0.5f;
-    [Header ("Standard Parameters")]
+    [Header("Standard Parameters")]
+    public bool showDistanceMeasureAngle;
     [Tooltip ("the angle of the upper and lower laserline to determine the distance")]
     public float distanceMeasureAngle;
     public bool showAngleError;
@@ -55,6 +56,7 @@ public class WaterPassingController : MonoBehaviour
     [Tooltip("the max height of the points in % of the screen height")]
     [Range(0, 0.5f)]
     public float maxHeightGroundPoint;
+    public bool extremeHeightDiff;
   
     
     private GameManager gm;
@@ -83,7 +85,7 @@ public class WaterPassingController : MonoBehaviour
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         //magnifyGlass.SetActive(false);
-
+        
 
         if (nrOfPoints > 0)
         {
@@ -311,7 +313,7 @@ public class WaterPassingController : MonoBehaviour
     public void AddMeasure(Vector2 location)
     {
         GameObject newMeasure = Instantiate(measure, location, Quaternion.identity);
-        correctErrorAngle = Random.Range(-maxAngleError, maxAngleError);
+        
         newMeasure.GetComponent<MeasureController>().errorAngle = correctErrorAngle;
         SetAngleErrorText();
         SetDistanceAngleText();
@@ -483,7 +485,12 @@ public class WaterPassingController : MonoBehaviour
 
         for (int i = 0; i < nrOfPoints; i++)
         {
-            Vector2 newPos = new Vector2(gm.screenMin.x + 1 + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(0, (gm.screenMax.y) * maxHeightGroundPoint));
+            Vector2 newPos;
+            if (extremeHeightDiff)
+            {
+                 newPos = new Vector2(gm.screenMin.x + 1 + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), (gm.screenMax.y) * maxHeightGroundPoint * i * 2 / (float)nrOfPoints + Random.Range(0, 0.5f));
+            }
+            else newPos = new Vector2(gm.screenMin.x + 1 + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(0, (gm.screenMax.y) * maxHeightGroundPoint));
             groundPoints[i].transform.position = newPos;
             Debug.Log("moved " + i);
         }
@@ -595,7 +602,7 @@ public class WaterPassingController : MonoBehaviour
             int j = (i < pointOutLoopNr || ! addPointOutLoop) ? i : i + 1;
             
 
-            line.SetPosition(i, groundPointsTopDown[j].transform.position - Vector3.forward * 10);
+            line.SetPosition(i, groundPointsTopDown[j].transform.position - Vector3.forward * 2);
         }
         
 
@@ -605,12 +612,23 @@ public class WaterPassingController : MonoBehaviour
 
     public void SetAngleErrorText()
     {
-        angleErrorText.text = "De Collimatiefout is: \n " + (Mathf.Round(correctErrorAngle * 100 * (4/3.6f)) / 100).ToString() + " gon";
+        if (showAngleError)
+        {
+            angleErrorText.text = "De Collimatiefout is: \n " + (Mathf.Round(correctErrorAngle * 100 * (4 / 3.6f)) / 100).ToString() + " gon";
+        }
+        else angleErrorText.text = "De Collimatiefout is: \n " + "? gon";
+
+
     }
 
     public void SetDistanceAngleText()
     {
-        distanceAngleText.text = "Divergentiecoefficient: \n " + (Mathf.Round(distanceMeasureAngle * 1000 * 400/360f)/1000f).ToString() + " gon";
+        if (showDistanceMeasureAngle)
+        {
+            distanceAngleText.text = "Divergentiecoefficient: \n " + (Mathf.Round(distanceMeasureAngle * 1000 * 400 / 360f) / 1000f).ToString() + " gon";
+
+        }
+        else distanceAngleText.text = "Divergentiecoefficient: \n " + "? gon";
     }
   
     //shows the correct answer (replaced in the questionscript)
@@ -633,6 +651,8 @@ public class WaterPassingController : MonoBehaviour
     //sets the parameters so they match the given question
     public void SetParameters(int nrPoints, int nrBeacons, int nrMeasures, bool ShowDistance, bool lockmeasure, Vector2 measureLocation, bool lockbeacon, Vector2 beaconLocation, bool loop)
     {
+        correctErrorAngle = Random.Range(-maxAngleError, maxAngleError);
+
         nrOfPoints = nrPoints;
         maxBeacons = nrBeacons;
         maxMeasures = nrMeasures;

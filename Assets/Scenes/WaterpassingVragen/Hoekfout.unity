@@ -193,9 +193,24 @@ PrefabInstance:
       propertyPath: SoortVraag
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4344728549182195325, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4433829007614233326, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7093937433697466476, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: showAngleError
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568660867024383014, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9048913617645147364, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
