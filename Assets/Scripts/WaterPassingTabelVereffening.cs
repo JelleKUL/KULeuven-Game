@@ -46,6 +46,6 @@ public class WaterPassingTabelVereffening : MonoBehaviour
         }
         else hoogteVerschil = 0f;
 
-        afstandText.text = afstandVoor;
+        afstandText.text = afstandVoor + " m";
     }
 }

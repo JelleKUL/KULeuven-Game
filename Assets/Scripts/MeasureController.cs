@@ -35,6 +35,8 @@ public class MeasureController : MonoBehaviour
     [SerializeField]
     private bool showBehindLegs;
     [SerializeField]
+    private float maxLegDistance = 1f;
+    [SerializeField]
     private float beaconOffset = 0.1f;
     public bool showMagnify;
 
@@ -140,7 +142,7 @@ public class MeasureController : MonoBehaviour
     private void SetBehindLegs(Transform leg)
     {
         // Cast a ray straight down.
-        RaycastHit2D hit = Physics2D.Raycast(leg.position, -leg.up, 1f, groundMask);
+        RaycastHit2D hit = Physics2D.Raycast(leg.position, -leg.up, maxLegDistance, groundMask);
 
         // If it hits something...
         if (hit.collider != null)

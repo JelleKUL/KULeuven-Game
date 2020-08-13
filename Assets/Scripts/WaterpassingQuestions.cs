@@ -107,9 +107,9 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.Hoekfout:
                 waterpassing.SetParameters(0, 1, 1, true, true, new Vector2(4,1), true, new Vector2(7,1), false);
-                correctAnswer = waterpassing.correctErrorAngle;
-                questionHeaderText.text = "Bepaal het hoogteveschil tussen A & B";
-                questionText.text = "Plaats de meetbaken op de meetpunten en meet met het meettoestel het verschil tussen beide punten";
+                correctAnswer = waterpassing.correctErrorAngle * 4/3.6f;
+                questionHeaderText.text = "Bepaal de collimatiefout van het toestel";
+                questionText.text = "aan de hand van een exentrieke plaatsing.";
 
                 break;
 
@@ -144,7 +144,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
                 break;
         }
-        Debug.Log("correctAnswer");
+        Debug.Log(correctAnswer);
     }
 
 
@@ -205,7 +205,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.Hoekfout:
 
-                return waterpassing.correctErrorAngle;
+                return waterpassing.correctErrorAngle * 4/3.6f;
 
 
             case QuestionType.HoogteVerschilMeerPunten:

@@ -12,6 +12,8 @@ public class WaterpassingTabel : MonoBehaviour
     public GameObject waterPassingTotaal;
     public GameObject waterPassingTotaalVereffening;
 
+    public float titleHeight = 25f;
+
     private GameObject totaal;
     private GameObject totaalVereffening;
 
@@ -83,7 +85,7 @@ public class WaterpassingTabel : MonoBehaviour
         {
             GameObject newPart = Instantiate(waterPassingTabelPart, transform, false);
             WaterpassigTabelDeel deel = newPart.GetComponent<WaterpassigTabelDeel>();
-            newPart.GetComponent<RectTransform>().localPosition = new Vector2(0,-20 -i * size);
+            newPart.GetComponent<RectTransform>().localPosition = new Vector2(0,-titleHeight - i * size);
             tabelParts.Add(deel);
 
             if(i+1 == nrOfPoints)
@@ -94,7 +96,7 @@ public class WaterpassingTabel : MonoBehaviour
                 deel.SetNames(i + 1, SetNameText(i-1), SetNameText(i));
         }
         totaal = Instantiate(waterPassingTotaal, transform, false);
-        totaal.GetComponent<RectTransform>().localPosition = new Vector2(0, -20 - (nrOfPoints) * size);
+        totaal.GetComponent<RectTransform>().localPosition = new Vector2(0, -titleHeight - (nrOfPoints) * size);
 
         //creating the VereffeningsTable and setting it False
         
@@ -104,7 +106,7 @@ public class WaterpassingTabel : MonoBehaviour
         {
             GameObject newPart = Instantiate(waterPassingTabelVereffening, transform, false);
             WaterPassingTabelVereffening deel = newPart.GetComponent<WaterPassingTabelVereffening>();
-            newPart.GetComponent<RectTransform>().localPosition = new Vector2(0, -20 - i * size);
+            newPart.GetComponent<RectTransform>().localPosition = new Vector2(0, -titleHeight - i * size);
             tabelVereffeningParts.Add(deel);
 
             deel.SetName(i + 1);
@@ -112,7 +114,7 @@ public class WaterpassingTabel : MonoBehaviour
 
         }
         totaalVereffening = Instantiate(waterPassingTotaalVereffening, transform, false);
-        totaalVereffening.GetComponent<RectTransform>().localPosition = new Vector2(0, -20 - (amount) * size);
+        totaalVereffening.GetComponent<RectTransform>().localPosition = new Vector2(0, -titleHeight - (amount) * size);
         totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
         totaalVereffening.SetActive(false);
     }

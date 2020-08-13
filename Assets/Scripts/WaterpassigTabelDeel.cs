@@ -45,7 +45,7 @@ public class WaterpassigTabelDeel : MonoBehaviour
         }
         else hoogteVerschil = 0f;
 
-        hoogteVerschilText.text = hoogteVerschil.ToString();
+        hoogteVerschilText.text = hoogteVerschil.ToString() + " m";
 
     }
 

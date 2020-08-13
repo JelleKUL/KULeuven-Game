@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1, y: -3}
+  m_SizeDelta: {x: -2, y: -6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1413805186312379200
 CanvasRenderer:
@@ -59,12 +59,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.25858846, g: 0.3314792, b: 0.3679245, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: a827a0e56d22a4724ad054ddb908b316, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 20
 --- !u!1 &6803857853329716029
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,13 +132,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.93333334, g: 0.8980392, b: 0.9137255, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 122dd9102983e4b66bbcb49261b88713, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -183,6 +183,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 1348081750577415529, guid: 3a82ac8decc1249689407b81d4dc2874,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348081750577415529, guid: 3a82ac8decc1249689407b81d4dc2874,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -4
+      objectReference: {fileID: 0}
     - target: {fileID: 5375996236341042039, guid: 3a82ac8decc1249689407b81d4dc2874,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -196,7 +206,7 @@ PrefabInstance:
     - target: {fileID: 5631332701032391200, guid: 3a82ac8decc1249689407b81d4dc2874,
         type: 3}
       propertyPath: m_Name
-      value: WaterpassingTotaal
+      value: WaterpassingTotaalVereffening Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8997894536596875105, guid: 3a82ac8decc1249689407b81d4dc2874,
         type: 3}
@@ -271,7 +281,7 @@ PrefabInstance:
     - target: {fileID: 8997894536596875105, guid: 3a82ac8decc1249689407b81d4dc2874,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 20
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 8997894536596875105, guid: 3a82ac8decc1249689407b81d4dc2874,
         type: 3}

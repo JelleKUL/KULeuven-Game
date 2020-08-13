@@ -13,6 +13,7 @@ public class WaterPassingController : MonoBehaviour
     public GameObject beacon;
     public GameObject measure;
     public GameObject groundPoint;
+    public GameObject topPoint;
     public GameObject groundPointTopDown;
     //public GameObject magnifyGlass;
     public LayerMask pointMask;
@@ -236,6 +237,7 @@ public class WaterPassingController : MonoBehaviour
         }
         spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, -0.5f));
         spriteShapeController.spline.InsertPointAt(0, new Vector3(-2, -0.5f));
+
         for (int i = 0; i < spriteShapeController.spline.GetPointCount(); i++)
         {
             spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
@@ -248,19 +250,25 @@ public class WaterPassingController : MonoBehaviour
     public void SetTopSprite()
     {
         topSpriteShapeController.spline.Clear();
-        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x,gm.screenMax.y -0.5f));
+
+        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(-2, gm.screenMax.y - 0.5f));
+        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, gm.screenMax.y - 0.5f));
 
         for (int i = 0; i < nrOfTopPoints; i++)
         {
             topSpriteShapeController.spline.InsertPointAt(0, topPoints[i].transform.position + 0.5f * Vector3.up);
             
         }
+
         topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, gm.screenMax.y - 0.5f));
+        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(18, gm.screenMax.y - 0.5f));
+        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(18, 10));
+        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(-2, 10));
 
         for (int i = 0; i < topSpriteShapeController.spline.GetPointCount(); i++)
         {
             topSpriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
-            topSpriteShapeController.spline.SetHeight(i, 0.1f);
+            //topSpriteShapeController.spline.SetHeight(i, 0.1f);
             topSpriteShapeController.spline.SetLeftTangent(i, Vector3.right);
             topSpriteShapeController.spline.SetRightTangent(i, Vector3.left);
         }
@@ -447,10 +455,10 @@ public class WaterPassingController : MonoBehaviour
 
     public void AddStartAndEndGroundPoint()
     {
-        GameObject newPoint = Instantiate(groundPoint, new Vector2(gm.screenMin.x,0), Quaternion.identity);
+        GameObject newPoint = Instantiate(groundPoint, new Vector2(gm.screenMin.x+0.1f,0), Quaternion.identity);
         newPoint.GetComponent<PolygonPointController>().SetNameNrText(0);
 
-        newPoint = Instantiate(groundPoint, new Vector2(gm.screenMax.x, 0), Quaternion.identity);
+        newPoint = Instantiate(groundPoint, new Vector2(gm.screenMax.x - 0.1f, 0), Quaternion.identity);
         newPoint.GetComponent<PolygonPointController>().SetNameNrText(0);
     }
 
@@ -532,8 +540,8 @@ public class WaterPassingController : MonoBehaviour
 
             for (int i = topPoints.Count; i < nrOfTopPoints; i++)
             {
-                GameObject newPoint = Instantiate(groundPoint, Vector2.zero, Quaternion.identity);
-                newPoint.GetComponent<PolygonPointController>().SetNameText(i+1);
+                GameObject newPoint = Instantiate(topPoint, Vector2.zero, Quaternion.identity);
+                newPoint.GetComponent<PolygonPointController>().SetNameText(i+1+nrOfPoints);
                 topPoints.Add(newPoint);
                 Debug.Log("placed " + i);
             }

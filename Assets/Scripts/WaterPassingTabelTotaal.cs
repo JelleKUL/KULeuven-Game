@@ -24,11 +24,11 @@ public class WaterPassingTabelTotaal : MonoBehaviour
 
     public void SetValues(float hoogte, float afstand)
     {
-        hoogteVerschilText.text = hoogte.ToString();
-        afstandText.text = afstand.ToString();
+        hoogteVerschilText.text = hoogte.ToString() + " m";
+        afstandText.text = afstand.ToString() + " m";
     }
     public void SetNieuwHoogte(float nieuwhoogte)
     {
-        nieuwHoogteText.text = nieuwhoogte.ToString();
+        nieuwHoogteText.text = nieuwhoogte.ToString() + " m";
     }
 }
