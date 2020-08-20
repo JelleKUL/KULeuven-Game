@@ -85,7 +85,7 @@ public class PolygonationQuestions : MonoBehaviour
                 obsructedPointsArray = placer.PlaceObstructedCalculatePoints(1);
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
                 
-                placer.PlaceObstacles(2);
+                //placer.PlaceObstacles(2);
                 correctAnswerX = obsructedPointsArray[0] * GameManager.worldScale;
                 correctAnswerY = obsructedPointsArray[1] * GameManager.worldScale;
                 titleQuestionText.text = "Voorwaardse Insnijding bepaal P";

@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMove: {x: 0.1, y: 0.5, z: 0}
   movementSpeed: 0.2
+  moveLocal: 0
 --- !u!212 &1960039117
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -293,6 +294,55 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 837752781, guid: f3f16918dd96e42e0baf32203e1602c6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5.0000305
+      objectReference: {fileID: 0}
+    - target: {fileID: 441028148740438555, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 619562792141047562, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 877046013376416577, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 889256755396214157, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027527510047763990, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140231448478249447, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293076796377346298, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_Name
+      value: Kaarthoek
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843963941754628136, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3210985553833222505, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3510848682365021501, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -348,10 +398,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3674942230722331218, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4686340462885712994, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: m_Name
       value: WaterPassingStandardScene closedLoop
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942301167798139580, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723304667681023593, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_Name
+      value: Hoek
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764799488898419108, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883144053190586815, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152591335793693221, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482660664670102572, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_Name
+      value: ver Kaarthoek
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547161857511231256, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147354164431503540, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_Name
+      value: Afstand
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3f16918dd96e42e0baf32203e1602c6, type: 3}

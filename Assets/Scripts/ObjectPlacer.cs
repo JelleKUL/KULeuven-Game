@@ -125,7 +125,7 @@ public class ObjectPlacer : MonoBehaviour
         */
         int shape = Random.Range(0, 8);
         Debug.Log(shape);
-        Vector2 centerPoint = (gm.screenMax + gm.screenMin)/2 + Vector2.down;
+        Vector2 centerPoint = (gm.screenMax + gm.screenMin)/2 + Vector2.down + Vector2.left;
 
         float[] positions = new float[7 * 2];
         for (int i = 0; i < 7; i++)
