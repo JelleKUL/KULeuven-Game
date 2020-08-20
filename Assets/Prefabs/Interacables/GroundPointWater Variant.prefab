@@ -88,6 +88,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 873977131823386563, guid: 37375dc84afda45f4bbcfc37dc1596eb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1406690197702459682, guid: 37375dc84afda45f4bbcfc37dc1596eb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -143,10 +148,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3877325003800721187, guid: 37375dc84afda45f4bbcfc37dc1596eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4010883207403545137, guid: 37375dc84afda45f4bbcfc37dc1596eb,
         type: 3}
       propertyPath: m_Name
-      value: GroundPointWater
+      value: GroundPointWater Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604099556424873805, guid: 37375dc84afda45f4bbcfc37dc1596eb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7343251398281683494, guid: 37375dc84afda45f4bbcfc37dc1596eb,
         type: 3}

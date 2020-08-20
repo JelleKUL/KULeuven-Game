@@ -7,7 +7,7 @@ public class SliderToText : MonoBehaviour
 {
     private Text targetText;
 
-    private void Start()
+    private void Awake()
     {
         targetText = GetComponent<Text>();
     }

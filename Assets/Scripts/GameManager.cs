@@ -120,13 +120,20 @@ public class GameManager : MonoBehaviour
     // checks if a given string equals the float value minus the error margin
     public bool CheckCorrectAnswer(string answer, float correct)
     {
-        float answerNr = float.Parse(answer);
-        Debug.Log(Mathf.Abs(correct - answerNr) < errorMargin);
-        if (Mathf.Abs(correct - answerNr) < errorMargin)
+        answer = answer.Replace(",",".");
+
+        float answerNr;
+        if(float.TryParse(answer,out answerNr))
         {
-            return true;
+            Debug.Log(correct + " = " + answerNr + " ? -> " + (Mathf.Abs(correct - answerNr) < errorMargin));
+            if (Mathf.Abs(correct - answerNr) < errorMargin)
+            {
+                return true;
+            }
+            return false;
         }
         return false;
+       
     }
 
 // playAreaSetting

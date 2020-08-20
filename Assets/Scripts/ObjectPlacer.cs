@@ -12,6 +12,7 @@ public class ObjectPlacer : MonoBehaviour
     public GameObject calculatePoint;
     public GameObject obstructedCalculatePoint;
     public GameObject[] obstaclePrefabs;
+    public GameObject[] mobileObstaclePrefabs;
     public GameManager gm;
 
     [Header("Randomized Constrains")]

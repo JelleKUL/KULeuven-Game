@@ -152,7 +152,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 54608d35735b44ca6b8b22bc9defb9ad, type: 3}
-  m_Color: {r: 0.51054645, g: 0.7139997, b: 0.7264151, a: 1}
+  m_Color: {r: 0.51054645, g: 0.7139997, b: 0.7264151, a: 0.5058824}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -614,6 +614,7 @@ MonoBehaviour:
   anglePointer: {fileID: 7105320799820103858}
   errorEllipse: {fileID: 2983213894593883259}
   angleDisplay: {fileID: 6011247650400368846}
+  errorEllipsSize: 0
 --- !u!58 &6925941611851908032
 CircleCollider2D:
   m_ObjectHideFlags: 0

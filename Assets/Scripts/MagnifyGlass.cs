@@ -32,17 +32,31 @@ public class MagnifyGlass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    public void ToggleZoom()
+    {
+        Debug.Log("Toggle");
+        ZoomedMagnify.SetActive(!ZoomedMagnify.activeSelf);
+        zoomedBackground.gameObject.SetActive(!zoomedBackground.gameObject.activeSelf);
+
+        setZoomLocation();
+    }
+
+    void setZoomLocation()
+    {
         if (ZoomedMagnify.activeSelf)
         {
             ZoomedMagnify.transform.position = (gm.screenMax + gm.screenMin) / 2f;
             ZoomedMagnify.transform.position += Vector3.back * 5;
-            zoomedBackground.position = ZoomedMagnify.transform.position + Vector3.forward;
+            zoomedBackground.position = Camera.main.transform.position + Vector3.back * Camera.main.transform.position.z + Vector3.forward;  //ZoomedMagnify.transform.position + Vector3.forward;
             zoomedCollider.offset = zoomedBackground.position - transform.position;
 
-            ZoomedMagnify.transform.localScale = Vector3.one * Mathf.Min(gm.screenMax.x - gm.screenMin.x,gm.screenMax.y - gm.screenMin.y)/2f;
-            zoomedBackground.localScale = new Vector3(gm.screenMax.x - gm.screenMin.x, gm.screenMax.y - gm.screenMin.y, 1);
+            ZoomedMagnify.transform.localScale = Vector3.one * Mathf.Min(gm.screenMax.x - gm.screenMin.x, gm.screenMax.y - gm.screenMin.y) / 2f;
+            zoomedBackground.localScale = new Vector3(Camera.main.aspect, 1, 1) * Camera.main.orthographicSize * 2.2f;  //new Vector3(gm.screenMax.x - gm.screenMin.x, gm.screenMax.y - gm.screenMin.y, 1);
             zoomedCollider.size = zoomedBackground.localScale;
-            
+
         }
         else
         {
@@ -50,13 +64,6 @@ public class MagnifyGlass : MonoBehaviour
 
             zoomedCollider.size = Vector2.one;
         }
-    }
-
-    public void ToggleZoom()
-    {
-        Debug.Log("Toogle");
-        ZoomedMagnify.SetActive(!ZoomedMagnify.activeSelf);
-        zoomedBackground.gameObject.SetActive(!zoomedBackground.gameObject.activeSelf);
     }
 
     public void SetPositionAndScale(Vector2 position, float scale, bool assenkruisActive)

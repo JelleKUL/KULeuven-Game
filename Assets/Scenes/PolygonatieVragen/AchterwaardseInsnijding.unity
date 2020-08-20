@@ -403,6 +403,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bulldozer
       objectReference: {fileID: 0}
+    - target: {fileID: 8418990332130332993, guid: 08ed0c0e05f534e7f988b63869e660b4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8418990332130332996, guid: 08ed0c0e05f534e7f988b63869e660b4,
         type: 3}
       propertyPath: m_LocalPosition.x

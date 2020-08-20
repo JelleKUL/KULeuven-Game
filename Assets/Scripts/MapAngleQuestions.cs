@@ -9,12 +9,17 @@ using UnityEngine.UI;
 public class MapAngleQuestions : MonoBehaviour
 {
     [Header("Predefined TextFields")]
+    public Text titleQuestionText;
     public Text questionText;
+
     public Text answerInputX;
     public Text answerInputY;
     public Text answerInputH;
     public Text answerOutput;
     public GameObject assenkruis;
+
+    public GameObject winMenu;
+
 
     public enum QuestionType { Geen, BepaalMapAngle, BepaalCoordinaat, BepaalVorigPunt, AnderAssenStelsel }
     [Tooltip("Kies het soort vraag voor de oefening")]
@@ -50,6 +55,8 @@ public class MapAngleQuestions : MonoBehaviour
 
         SetQuestionType(SoortVraag);
 
+        answerOutput.text = "";
+
     }
 
 
@@ -67,7 +74,8 @@ public class MapAngleQuestions : MonoBehaviour
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 
-                questionText.text = "Bepaal de Map Angle van punt A";
+                titleQuestionText.text = "Bepaal de Map Angle";
+                questionText.text = "Van het punt P naar het opstelpunt.";
                 correctAnswerH = lineController.GetMapAngle(new Vector2(correctAnswerArray[0], correctAnswerArray[1]), Vector2.up);
 
                 Debug.Log(correctAnswerArray[0]+ "," + correctAnswerArray[1] + ",  " + correctAnswerH);
@@ -78,18 +86,21 @@ public class MapAngleQuestions : MonoBehaviour
                 //start oefening BepaalCoordinaat
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
-                correctAnswerX = correctAnswerArray[0];
-                correctAnswerY = correctAnswerArray[1];
-                questionText.text = "Bepaal het coördinaat van punt A";
+                correctAnswerX = correctAnswerArray[0] * GameManager.worldScale;
+                correctAnswerY = correctAnswerArray[1] * GameManager.worldScale;
+                questionText.text = "Bepaal het coördinaat van punt P";
                 break;
 
             case QuestionType.BepaalVorigPunt:
                 //start oefening BepaalVorigPunt
                 lineController.SetVisibles(false, false, false, false, true, true, 2);
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
-                correctAnswerX = correctAnswerArray[0];
-                correctAnswerY = correctAnswerArray[1];
-                questionText.text = "Bepaal het coördinaat van punt A, via de verkregen meting van B: x:" + correctAnswerArray[2] + " / y:" + correctAnswerArray[3];
+                correctAnswerX = correctAnswerArray[0] * GameManager.worldScale;
+                correctAnswerY = correctAnswerArray[1] * GameManager.worldScale;
+                titleQuestionText.text = "Bepaal het coördinaat van punt P";
+                questionText.text = " Via de verkregen meting van A: \n\u2022 x: " + (Mathf.Round(correctAnswerArray[2] * 1000)/1000f) * GameManager.worldScale + "m \n\u2022 y: " + (Mathf.Round(correctAnswerArray[3] * 1000) / 1000f) * GameManager.worldScale + "m";
+                Debug.Log(correctAnswerArray[0] * GameManager.worldScale + "," + correctAnswerArray[1] * GameManager.worldScale);
+
                 break;
 
             case QuestionType.AnderAssenStelsel:
@@ -100,10 +111,11 @@ public class MapAngleQuestions : MonoBehaviour
                 assenkruis.transform.position += new Vector3(axisTransform.x, axisTransform.y, 0);
                 assenkruis.transform.Rotate(0, 0, axisTransform.z);
                 
-                correctAnswerX = correctAnswerArray[0];
-                correctAnswerY = correctAnswerArray[1];
+                correctAnswerX = correctAnswerArray[0] * GameManager.worldScale;
+                correctAnswerY = correctAnswerArray[1] * GameManager.worldScale;
                 Debug.Log(correctAnswerX + " , " + correctAnswerY);
-                questionText.text = "Bepaal het coördinaat van punt A, Het Assenstelsel is gedraaid";
+                titleQuestionText.text = "Bepaal het coördinaat van punt P";
+                questionText.text = "Het Assenstelsel is gedraaid met een bepaalde hoek, bepaal het coordinaat aan de hand van het rode assenkruis.";
                 break;
 
          
@@ -117,12 +129,15 @@ public class MapAngleQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease);
             Debug.Log("true");
-            gm.ReloadScene();
+            winMenu.SetActive(true);
 
 
         }
-        else Debug.Log("false");
-
+        else
+        {
+            Debug.Log("false");
+            answerOutput.text = "Incorrect";
+        }
     }
 
     // checks if a given coordinate is correct
@@ -132,10 +147,11 @@ public class MapAngleQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease);
             Debug.Log("true");
-            gm.ReloadScene();
+            winMenu.SetActive(true);
 
         }
         else Debug.Log("false");
+        answerOutput.text = "Incorrect";
 
     }
    

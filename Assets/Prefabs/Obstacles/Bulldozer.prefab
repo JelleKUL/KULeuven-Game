@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMove: {x: 0, y: 1, z: 0}
   movementSpeed: 1
+  moveLocal: 1
 --- !u!61 &8418990332130332997
 BoxCollider2D:
   m_ObjectHideFlags: 0

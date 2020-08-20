@@ -9,7 +9,12 @@ using UnityEngine.UI;
 public class FoutenPropagatieQuestions : MonoBehaviour
 {
     [Header("Predefined TextFields")]
+    public Text titleQuestionText;
     public Text questionText;
+
+    public GameObject winMenu;
+
+
     //public Text answerInputX;
     //public Text answerInputY;
     //public Text answerOutput;
@@ -45,13 +50,17 @@ public class FoutenPropagatieQuestions : MonoBehaviour
             case QuestionType.Werking1Punt:
                 //demo van de foutenellips 1 punt
                 lineController.SetVisibles(true, true, false, true, false, false, 2);
-                questionText.text = "Kijk hoe de foutenellips eruit ziet";
+                lineController.lockAngleError = false;
+                lineController.lockDistanceError = false;
+                titleQuestionText.text = "Kijk hoe de foutenellips eruit ziet";
+                questionText.text = "Klik in het veld om een meetpunt te paatsen.";
                 break;
             case QuestionType.WerkingMeerderePunten:
                 //start oefening TekenFoutenEllips
                 lineController.SetVisibles(true, true, false, true, false, false, 10);
                 placer.PlaceObstacles(1);
-                questionText.text = "Kijk hoe de foutenellips eruit ziet met meerdere punten";
+                titleQuestionText.text = "Kijk hoe de foutenellips eruit ziet met meerdere punten";
+                questionText.text = "Klik in het veld om meetpunten te paatsen met een maximum van 10 punten.";
                 break;
 
             case QuestionType.DragEnDropEllips:
@@ -62,9 +71,39 @@ public class FoutenPropagatieQuestions : MonoBehaviour
             case QuestionType.MinimaleGrootte:
                 //start oefening MinimaleGrote
                 lineController.SetVisibles(true, true, true, true, false, false, 10);
+                lineController.lockAngleError = true;
+                lineController.lockDistanceError = true;
+                lineController.randomizeErrors = true;
                 placer.PlaceCalculatePoints(1);
                 placer.PlaceObstacleBtwn(1);
-                questionText.text = "Hoe kan je de foutenellips zo klein mogelijk maken?";
+                titleQuestionText.text = "Hoe kan je de foutenellips zo klein mogelijk maken?";
+                questionText.text = "Probeer via een zo kort mogelijke weg het punt te bereiken.";
+                break;
+        }
+    }
+
+    public void CheckAnswer()
+    {
+        switch (SoortVraag)
+        {
+            case QuestionType.geen:
+
+                break;
+
+            case QuestionType.Werking1Punt:
+                
+                break;
+            case QuestionType.WerkingMeerderePunten:
+                
+                break;
+
+            case QuestionType.DragEnDropEllips:
+                
+
+                break;
+
+            case QuestionType.MinimaleGrootte:
+                
                 break;
         }
     }

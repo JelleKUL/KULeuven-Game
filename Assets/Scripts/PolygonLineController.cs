@@ -15,10 +15,12 @@ public class PolygonLineController : MonoBehaviour
     public LayerMask ObstructionPoints;
     public Slider distanceErrorSlider;
     public Slider angleErrorSlider;
+    public Text errorEllipsDisplay;
     public Material fullLine;
     public Material dottedLine;
 
     [Header("Changeable Parameters")]
+    public bool randomizeErrors;
     public bool lockDistanceError;
     public bool lockAngleError;
     [Tooltip ("the measure error of distance")]
@@ -37,6 +39,9 @@ public class PolygonLineController : MonoBehaviour
     public bool showStartLength;
     public int maxPoints;
     public bool startCenterPoint;
+
+    [HideInInspector]
+    public float biggestEllips;
     
     private List<GameObject> linePoints = new List<GameObject>();
     private bool holdingObject;
@@ -66,12 +71,21 @@ public class PolygonLineController : MonoBehaviour
             AddPoint(firstPointPosition);
             linePoints[0].GetComponent<CircleCollider2D>().enabled = false;
         }
+        // initializes a random value
+        if (randomizeErrors)
+        {
+            distanceError = Random.Range(1f, 99f);
+            angleError = Random.Range(1f, 99f);
+        }
 
         // finds the sliders and then sets the foutenellips to those values at the starts
-        if(distanceErrorSlider != null && angleErrorSlider != null)
+        if (distanceErrorSlider != null && angleErrorSlider != null)
         {
+            
+
             distanceErrorSlider.value = distanceError;
             angleErrorSlider.value = angleError;
+
 
             if (lockAngleError) angleErrorSlider.interactable = false;
             else angleErrorSlider.interactable = true;
@@ -173,7 +187,19 @@ public class PolygonLineController : MonoBehaviour
             {
                 Vector3 prevEllipse = linePoints[i - 1].GetComponent<PolygonPointController>().GetEllipseInfo();
                 //Debug.Log(prevEllipse.z);
-                linePoints[i].GetComponent<PolygonPointController>().SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError, angleError);
+                PolygonPointController thisPoint = linePoints[i].GetComponent<PolygonPointController>();
+                thisPoint.SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError, angleError);
+
+                if(i == linePoints.Count - 1)
+                {
+                    Vector3 ellips = thisPoint.GetEllipseInfo();
+                    biggestEllips = ellips.x * ellips.y * Mathf.PI / 4f;
+                    if (errorEllipsDisplay)
+                    {
+                        errorEllipsDisplay.text = (Mathf.Round(biggestEllips * 100) / 100f).ToString();
+                    }
+                }
+               
             }
             
             //checks if the line intersects with an obstacle
@@ -295,6 +321,11 @@ public class PolygonLineController : MonoBehaviour
     public void SetDistanceError(float value)
     {
         distanceError = value;
+    }
+
+    public void CreateShortestPath()
+    {
+
     }
 
 }

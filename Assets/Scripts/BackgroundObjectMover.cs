@@ -8,6 +8,8 @@ public class BackgroundObjectMover : MonoBehaviour
     Vector3 maxMove = Vector3.zero;
     [SerializeField]
     float movementSpeed = 0f;
+    [SerializeField]
+    bool moveLocal;
 
     Vector3 startPosition;
 
@@ -25,6 +27,6 @@ public class BackgroundObjectMover : MonoBehaviour
 
     void MoveObject()
     {
-        transform.position =startPosition + Mathf.Sin(Time.time * movementSpeed) * maxMove;
+        transform.position = startPosition + Mathf.Sin(Time.time * movementSpeed) * (moveLocal ? transform.TransformDirection(maxMove) : maxMove); //*  maxMove * moveLocal? transform.forward;
     }
 }

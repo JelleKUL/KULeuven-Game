@@ -17,7 +17,9 @@ public class PolygonPointController : MonoBehaviour
     public GameObject anglePointer;
     public GameObject errorEllipse;
     public GameObject angleDisplay;
-    
+
+    [HideInInspector]
+    public float errorEllipsSize;
 
     private float lengthError;
     private float angleError;
