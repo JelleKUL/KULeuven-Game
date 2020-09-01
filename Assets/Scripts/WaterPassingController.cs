@@ -560,9 +560,9 @@ public class WaterPassingController : MonoBehaviour
 
         for (int i = 0; i < nrOfTopPoints; i++)
         {
-            Vector2 newPos = new Vector2(gm.screenMin.x + 1 + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(gm.screenMax.y,  (gm.screenMax.y) * (1 - maxHeightGroundPoint)));
+            Vector2 newPos = new Vector2(gm.screenMin.x + 1 + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(gm.screenMax.y - 0.5f,  (gm.screenMax.y - 0.5f) * (1 - maxHeightGroundPoint)));
             topPoints[i].transform.position = newPos;
-            Debug.Log("moved top" + i);
+            Debug.Log("moved top " + i);
         }
 
 

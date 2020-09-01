@@ -280,7 +280,7 @@ public class AS_Credentials
             PlayerPrefs.SetString("AS_EmailAccount", value);
         }
     }
-	const string _phpScriptsLocation = "http://";
+	const string _phpScriptsLocation = "https://game.jens.app/AccountSystem";
     public static string phpScriptsLocation
     {
         get
