@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System; 
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AS_CanvasUI : MonoBehaviour
 {
@@ -16,15 +17,44 @@ public class AS_CanvasUI : MonoBehaviour
     public void OnSuccessfulLogin(int id)
 	{
 		this.Log(LogType.Log, "Successfully Logged In User with id: " + id + " - Add any custom Logic Here!");
-		loginState = AS_LoginState.LoginSuccessful;  
+		loginState = AS_LoginState.LoginSuccessful;
+
+		accountInfo.TryToDownload(id, AccountInfoDownloaded);
+
 		
+		/*
 		if (accountManagementGUI)
 		{
 			accountManagementGUI.enabled = true;
 			accountManagementGUI.Init(id);
 		}
-	} 
-	
+		*/
+		
+	}
+	void AccountInfoDownloaded(string message)
+	{
+		if (message.ToLower().Contains("error"))
+		{
+			this.Log(LogType.Error, "Account System: " + message);
+			guiMessage = "An error occured while Uploading your info. Try again later!";
+		}
+		else
+		{
+			this.Log(LogType.Log, "Account System: " + message + " - Add any custom Logic here!");
+			guiMessage = "Your info was successfully downloaded!";
+
+			Debug.Log("canvasUI: id= " + accountInfo.GetFieldValue("id") + " name= " + accountInfo.GetFieldValue("username") + " score: " + accountInfo.customInfo.totalScore);
+
+			int.TryParse(accountInfo.GetFieldValue("id"),out GameManager.loginID);
+
+			GameManager.playerScore = accountInfo.customInfo.totalScore;
+			GameManager.userName = accountInfo.GetFieldValue("username");
+
+			SceneManager.LoadScene("MainMenu");
+		}
+
+	}
+
 	// Messages to the user
 	/// <summary>
 	/// Make sure there's a child with that name in every canvas group

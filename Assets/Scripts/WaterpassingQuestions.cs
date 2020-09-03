@@ -156,7 +156,7 @@ public class WaterpassingQuestions : MonoBehaviour
         if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer()))
         {
             gm.IncreaseScore(scoreIncrease);
-            Debug.Log("true");
+            Debug.Log(answerInputH.text + " is correct!");
             winMenu.SetActive(true);
             //gm.ReloadScene();
         }

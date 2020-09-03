@@ -4092,7 +4092,7 @@ GameObject:
   - component: {fileID: 6292691808343884095}
   - component: {fileID: 6617669060821196163}
   m_Layer: 5
-  m_Name: Settings Button
+  m_Name: main menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4199,8 +4199,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7320656095557494914}
-        m_MethodName: LoadScene
-        m_Mode: 3
+        m_MethodName: LoadMainMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13696,11 +13696,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PauseMenuBG
-      objectReference: {fileID: 0}
-    - target: {fileID: 2712583190997252903, guid: 7cddb4a08f9674b689895d445696d024,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994011717202112987, guid: 7cddb4a08f9674b689895d445696d024,
         type: 3}

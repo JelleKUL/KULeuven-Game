@@ -34,8 +34,11 @@ public class AS_CustomInfo
 
     // -------- ADD YOUR CUSTOM VARIABLES HERE --------
     // !! MAKE SURE THEY ARE [Serializable] !!
-	// !! IF THEY ARE NOT, Add the [XmlIgnore] property on them
-	// !! NOTE THAT ANY VARIABLE WHICH HAS A TRANSFORM PROPERTY CAN NOT BE SERIALIZED!
+    // !! IF THEY ARE NOT, Add the [XmlIgnore] property on them
+    // !! NOTE THAT ANY VARIABLE WHICH HAS A TRANSFORM PROPERTY CAN NOT BE SERIALIZED!
+    public int totalScore = 0;
+    public int levelCamp1 = 0;
+    public int levelCamp2 = 0;
 
 	[XmlIgnore]
 	public GameObject someObject;
@@ -45,6 +48,7 @@ public class AS_CustomInfo
     // (although you can probably edit it to suit your needs,
     // if you ever need an ingame editor for the CustomInfo class)
 
+    /*
     public AS_PlayerClass playerClass = AS_PlayerClass.Mage;
     
     public AS_LevelInfo[] levels = new AS_LevelInfo[]
@@ -55,6 +59,8 @@ public class AS_CustomInfo
 	{ new AS_StatInfo ("Stamina", 40),
 		new AS_StatInfo ("Intelligence", 75),
 		new AS_StatInfo ("Agility", 20)};
+
+    */
 
 }
 
@@ -69,6 +75,7 @@ public class AS_CustomInfo
  */
 
 public enum AS_PlayerClass { Warrior, Rogue, Mage, Priest }
+
 
 [Serializable]
 public class AS_LevelInfo
@@ -113,6 +120,7 @@ public static class AS_CustomInfoMethods
 
         if (customInfo == null)
             return customInfo;
+        /*
 
         GUILayout.BeginVertical();
 
@@ -201,9 +209,13 @@ public static class AS_CustomInfoMethods
 
 
         }
+        
         customInfo.stats = stats.ToArray();
         GUILayout.EndVertical();
+        */
         return customInfo;
+        
     }
+
 
 }

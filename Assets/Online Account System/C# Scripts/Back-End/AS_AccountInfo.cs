@@ -40,7 +40,8 @@ public class AS_AccountInfo
 
         }
     }
-	*/
+    */
+	
 }
 
 public static class AS_MySQLFieldMethods
