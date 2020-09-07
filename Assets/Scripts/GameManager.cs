@@ -17,15 +17,25 @@ public class GameManager : MonoBehaviour
     [Tooltip ("the errormargin for answers")]
     public float errorMargin = 0.1f;
     public static float worldScale = 10f;
-    
-    
+
+
     [Header("CampaignOrder")]
-    public int[] campaignLevel;
+    public int firstCamp1Level;
+    public int nrOfCamp1Levels;
+    public int firstCamp2Level;
+    public int nrOfCamp2Levels;
 
     [HideInInspector]
     public static int loginID;
     public static string userName;
     public static int playerScore;
+
+    public static int levelCamp1;
+    public static int[] scoreCamp1 = new int[11];
+    public static int levelCamp2;
+    public static int[] scoreCamp2 = new int[13];
+    public static int scoreFreeTotal = 0;
+    //public static int[] scoreFree = new int[13];
     private Text[] scoreText;
 
     [HideInInspector]
@@ -33,6 +43,8 @@ public class GameManager : MonoBehaviour
 
     public static int highestLevel;
     public static int currentLevel;
+    public static bool isLoggedIn;
+    public static bool campaignMode;
 
     private AS_AccountInfo accountInfo = new AS_AccountInfo();
 
@@ -76,15 +88,47 @@ public class GameManager : MonoBehaviour
         }
     }
     // increases the score by a set amount
-    public void IncreaseScore(int amount)
+    public void IncreaseScore(int amount, int campaignNr)
     {
+        int sceneNr = SceneManager.GetActiveScene().buildIndex;
+
         playerScore += amount;
 
-        accountInfo.customInfo.totalScore = playerScore;
-
-        accountInfo.TryToDownload(loginID, UploadScore);
-
         
+        if (campaignNr == 1 && campaignMode)
+        {
+            if (sceneNr - firstCamp1Level >= levelCamp1)
+            {
+                levelCamp1 = sceneNr - firstCamp1Level + 1;
+            }
+
+            if (scoreCamp1[sceneNr - firstCamp1Level] < amount)
+            {
+                scoreCamp1[sceneNr - firstCamp1Level] = amount;
+            }
+            
+        }
+        else if(campaignNr == 2 && campaignMode)
+        {
+            if (sceneNr - firstCamp2Level >= levelCamp2)
+            {
+                levelCamp2 = sceneNr - firstCamp2Level + 1;
+            }
+
+            if (scoreCamp2[sceneNr - firstCamp2Level] < amount)
+            {
+                scoreCamp2[sceneNr - firstCamp2Level] = amount;
+            }
+        }
+        else
+        {
+            scoreFreeTotal += amount;
+        }
+
+        if (isLoggedIn)
+        {
+            accountInfo.TryToDownload(loginID, UploadScore); //downloads the player information
+        }
 
         /*
         foreach (var score in scoreText)
@@ -92,6 +136,28 @@ public class GameManager : MonoBehaviour
             score.text = playerScore.ToString();
         }
         */
+    }
+
+    public void SetMaxLevel(int campaignNr)
+    {
+        if( campaignNr == 1)
+        {
+            int sceneNr = SceneManager.GetActiveScene().buildIndex;
+
+            if(sceneNr - firstCamp1Level >= levelCamp1)
+            {
+                levelCamp1 = sceneNr - firstCamp1Level + 1;
+            }
+        }
+        if (campaignNr == 2)
+        {
+            int sceneNr = SceneManager.GetActiveScene().buildIndex;
+
+            if (sceneNr - firstCamp2Level >= levelCamp2)
+            {
+                levelCamp2 = sceneNr - firstCamp2Level + 1;
+            }
+        }
     }
 
 
@@ -110,6 +176,23 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
+    public void LoadCampaign1()
+    {
+        campaignMode = true;
+        Debug.Log(firstCamp1Level + " & " + levelCamp1);
+        SceneManager.LoadScene(firstCamp1Level + levelCamp1);
+    }
+    public void LoadCampaign2()
+    {
+        campaignMode = true;
+        Debug.Log(firstCamp2Level + " & " + levelCamp2);
+        SceneManager.LoadScene(firstCamp2Level + levelCamp2);
+    }
+    public void LoadFreeMode()
+    {
+        campaignMode = false;
+    }
+
     public void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -121,6 +204,7 @@ public class GameManager : MonoBehaviour
 
     public void LogOut()
     {
+        isLoggedIn = false;
         SceneManager.LoadScene("LoginMenu");
     }
 
@@ -192,6 +276,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("gamemanager: id= " + accountInfo.GetFieldValue("id") + " name= " + accountInfo.GetFieldValue("username") + " score: " + accountInfo.customInfo.totalScore);
 
         accountInfo.customInfo.totalScore = playerScore;
+        accountInfo.customInfo.levelCamp1 = levelCamp1;
+        accountInfo.customInfo.scoreCamp1 = scoreCamp1;
+        accountInfo.customInfo.levelCamp2 = levelCamp2;
+        accountInfo.customInfo.scoreCamp2 = scoreCamp2;
+        accountInfo.customInfo.scoreFreeTotal = scoreFreeTotal;
 
         accountInfo.TryToUpload(loginID, OnUpload);
     }

@@ -321,8 +321,16 @@ public class WaterPassingController : MonoBehaviour
     public void AddMeasure(Vector2 location)
     {
         GameObject newMeasure = Instantiate(measure, location, Quaternion.identity);
-        
-        newMeasure.GetComponent<MeasureController>().errorAngle = correctErrorAngle;
+        MeasureController measureController = newMeasure.GetComponent<MeasureController>();
+        measureController.errorAngle = correctErrorAngle;
+        if (nrOfPoints > 0)
+        {
+            measureController.maxDistance = (gm.screenMax.x - gm.screenMin.x) / nrOfPoints - minDistance;
+        }
+        else
+        {
+            measureController.maxDistance = (gm.screenMax.x - gm.screenMin.x);
+        }
         SetAngleErrorText();
         SetDistanceAngleText();
         
@@ -465,11 +473,13 @@ public class WaterPassingController : MonoBehaviour
     //place new groundpoints
     public void AddGroundPoints()
     {
+        
         float Increment = (gm.screenMax.x - gm.screenMin.x - 2) / (float)nrOfPoints;
+        
 
         if (groundPoints.Count < nrOfPoints)
         {
-            Debug.Log(groundPoints.Count + " " + nrOfPoints);
+            Debug.Log(groundPoints.Count + " placed -> " + nrOfPoints + " to Place");
 
             for (int i = groundPoints.Count; i < nrOfPoints; i++)
             {

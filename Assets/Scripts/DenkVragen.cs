@@ -47,7 +47,7 @@ public class DenkVragen : MonoBehaviour
         {
             uitlegText.text = "Correct!";
             Debug.Log("juist");
-            gm.IncreaseScore(1);
+            gm.IncreaseScore(1, 0);
             Invoke("SetCurrentQuestion", 1f);
         }
         else

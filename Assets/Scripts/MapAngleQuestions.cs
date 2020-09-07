@@ -127,7 +127,7 @@ public class MapAngleQuestions : MonoBehaviour
     {
         if (gm.CheckCorrectAnswer(answerInputH.text, correctAnswerH))
         {
-            gm.IncreaseScore(scoreIncrease);
+            gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
             winMenu.SetActive(true);
 
@@ -145,7 +145,7 @@ public class MapAngleQuestions : MonoBehaviour
     {
         if (gm.CheckCorrectAnswer(answerInputX.text, correctAnswerX) && gm.CheckCorrectAnswer(answerInputY.text, correctAnswerY))
         {
-            gm.IncreaseScore(scoreIncrease);
+            gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
             winMenu.SetActive(true);
 

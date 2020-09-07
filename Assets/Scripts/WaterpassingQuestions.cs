@@ -16,7 +16,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
     public GameObject winMenu;
 
-    public enum QuestionType { Geen, Hoogteverschil2Punten, Afstand2Punten, Hoekfout, HoogteVerschilMeerPunten, Scheefstand, OmgekeerdeBaak, ScheveWaterpassing }
+    public enum QuestionType { Geen, Hoogteverschil2Punten, HoogteVerschilMeerPunten, Afstand2Punten, Hoekfout, KringWaterpassing, Scheefstand, OmgekeerdeBaak, ScheveWaterpassing }
     [Tooltip("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -48,6 +48,12 @@ public class WaterpassingQuestions : MonoBehaviour
 
                 break;
 
+            case QuestionType.HoogteVerschilMeerPunten:
+                waterpassing.ChangePoints();
+                correctAnswer = waterpassing.correctHeight;
+
+                break;
+
             case QuestionType.Afstand2Punten:
                 waterpassing.ChangePoints();
                 correctAnswer = waterpassing.correctDistance;
@@ -60,7 +66,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
                 break;
 
-            case QuestionType.HoogteVerschilMeerPunten:
+            case QuestionType.KringWaterpassing:
                 waterpassing.ChangePoints();
                 correctAnswer = waterpassing.correctHeight;
 
@@ -96,6 +102,14 @@ public class WaterpassingQuestions : MonoBehaviour
 
                 break;
 
+            case QuestionType.HoogteVerschilMeerPunten:
+                waterpassing.SetParameters(4, 4, 1, false, false, Vector2.zero, false, Vector2.zero, false);
+                correctAnswer = waterpassing.correctHeight;
+                questionHeaderText.text = "Bepaal het hoogteveschil tussen A & D";
+                questionText.text = "Plaats de meetbaken op de meetpunten en meet met het meettoestel het verschil tussen beide punten";
+
+                break;
+
             case QuestionType.Afstand2Punten:
                 waterpassing.SetParameters(2, 2, 1, true, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = waterpassing.correctDistance;
@@ -113,7 +127,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
                 break;
 
-            case QuestionType.HoogteVerschilMeerPunten:
+            case QuestionType.KringWaterpassing:
                 waterpassing.SetParameters(3, 5, 1, false, false, Vector2.zero, false, Vector2.zero, true);
                 correctPoints = waterpassing.correctHeightDifferences;
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & B";
@@ -155,7 +169,7 @@ public class WaterpassingQuestions : MonoBehaviour
         
         if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer()))
         {
-            gm.IncreaseScore(scoreIncrease);
+            gm.IncreaseScore(scoreIncrease, 1);
             Debug.Log(answerInputH.text + " is correct!");
             winMenu.SetActive(true);
             //gm.ReloadScene();
@@ -168,7 +182,7 @@ public class WaterpassingQuestions : MonoBehaviour
     {
         if (waterpassing.CheckTabelAnswer())
         {
-            gm.IncreaseScore(scoreIncrease);
+            gm.IncreaseScore(scoreIncrease, 1);
             Debug.Log("true");
             //gm.ReloadScene();
             answerOutput.text = "De Waarden die zijn ingevoerd zijn correct";
@@ -197,6 +211,10 @@ public class WaterpassingQuestions : MonoBehaviour
 
                 return waterpassing.correctHeight;
 
+            case QuestionType.HoogteVerschilMeerPunten:
+
+                return waterpassing.correctHeight;
+
 
             case QuestionType.Afstand2Punten:
 
@@ -208,7 +226,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 return waterpassing.correctErrorAngle * 4/3.6f;
 
 
-            case QuestionType.HoogteVerschilMeerPunten:
+            case QuestionType.KringWaterpassing:
 
                 return waterpassing.correctHeight;
 

@@ -81,7 +81,7 @@ public class Polygonation : MonoBehaviour
     {
         if (CorrectLocation(Value.text))
         {
-            gm.IncreaseScore(scoreIncrease);
+            gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
             ChangeBuildings();
         }
@@ -111,7 +111,7 @@ public class Polygonation : MonoBehaviour
     {
         if (CorrectLocationX(xValue.text) && CorrectLocationY(yValue.text))
         {
-            gm.IncreaseScore(scoreIncrease);
+            gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
             ChangeBuildings();
         }

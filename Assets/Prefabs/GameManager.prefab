@@ -45,8 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6359cbdf2ebc6408db1428bc1c514509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usernameText: {fileID: 0}
   errorMargin: 0.1
-  campaignLevel: 
+  firstCamp1Level: 2
+  nrOfCamp1Levels: 9
+  firstCamp2Level: 11
+  nrOfCamp2Levels: 13
   screenMin: {x: 0, y: 0}
   screenMax: {x: 0, y: 0}
 --- !u!23 &2003768799235770477

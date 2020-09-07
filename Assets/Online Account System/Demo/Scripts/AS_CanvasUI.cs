@@ -49,6 +49,13 @@ public class AS_CanvasUI : MonoBehaviour
 
 			GameManager.playerScore = accountInfo.customInfo.totalScore;
 			GameManager.userName = accountInfo.GetFieldValue("username");
+			GameManager.isLoggedIn = true;
+
+			GameManager.levelCamp1 = accountInfo.customInfo.levelCamp1;
+			GameManager.scoreCamp1 = accountInfo.customInfo.scoreCamp1;
+			GameManager.levelCamp2 = accountInfo.customInfo.levelCamp2;
+			GameManager.scoreCamp2 = accountInfo.customInfo.scoreCamp2;
+			GameManager.scoreFreeTotal = accountInfo.customInfo.scoreFreeTotal;
 
 			SceneManager.LoadScene("MainMenu");
 		}

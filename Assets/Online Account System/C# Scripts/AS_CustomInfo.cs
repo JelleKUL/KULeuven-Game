@@ -38,9 +38,13 @@ public class AS_CustomInfo
     // !! NOTE THAT ANY VARIABLE WHICH HAS A TRANSFORM PROPERTY CAN NOT BE SERIALIZED!
     public int totalScore = 0;
     public int levelCamp1 = 0;
+    public int [] scoreCamp1 = new int[11];
     public int levelCamp2 = 0;
+    public int[] scoreCamp2 = new int[13];
+    public int scoreFreeTotal = 0;
+    public int[] scoreFree = new int[13];
 
-	[XmlIgnore]
+    [XmlIgnore]
 	public GameObject someObject;
 
     // Altering these variables will cause the Demo script
