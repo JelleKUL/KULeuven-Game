@@ -20,6 +20,7 @@ public class PolygonPointController : MonoBehaviour
 
     [HideInInspector]
     public float errorEllipsSize;
+    public bool IsSnapped;
 
     private float lengthError;
     private float angleError;
@@ -195,11 +196,29 @@ public class PolygonPointController : MonoBehaviour
         if(collision.gameObject.tag == "Beacon" || collision.gameObject.tag == "PolygonPoint")
         {
             collision.transform.position = transform.position;
+ 
             //collision.attachedRigidbody.simulated = false;
         }
         
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "GroundPoint")
+        {
+            IsSnapped = true;
+        }
 
+    }
     
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "GroundPoint")
+        {
+            IsSnapped = false;
+        }
+    }
+    
+
+
 
 }

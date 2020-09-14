@@ -23,7 +23,7 @@ public class WaterPassingController : MonoBehaviour
     public Button beaconButton;
     public Button measureButton;
     public Text angleErrorText;
-    public Text distanceAngleText;
+    //public Text distanceAngleText;
     public Text rotationAngleText;
     public SpriteShapeController spriteShapeController;
     public SpriteShapeController topSpriteShapeController;
@@ -332,7 +332,7 @@ public class WaterPassingController : MonoBehaviour
             measureController.maxDistance = (gm.screenMax.x - gm.screenMin.x);
         }
         SetAngleErrorText();
-        SetDistanceAngleText();
+        //SetDistanceAngleText();
         
         /*
         if (nrOfPoints > 0)
@@ -574,9 +574,9 @@ public class WaterPassingController : MonoBehaviour
             topPoints[i].transform.position = newPos;
             Debug.Log("moved top " + i);
         }
+    
 
-
-        //correctHeight = groundPoints[groundPoints.Count - 1].transform.position.y - groundPoints[0].transform.position.y;
+        correctHeight = topPoints[topPoints.Count - 1].transform.position.y - groundPoints[0].transform.position.y;
         //correctDistance = groundPoints[groundPoints.Count - 1].transform.position.x - groundPoints[0].transform.position.x;
         //Debug.Log(correctHeight);
     }
@@ -638,7 +638,7 @@ public class WaterPassingController : MonoBehaviour
 
 
     }
-
+    /*
     public void SetDistanceAngleText()
     {
         if (showDistanceMeasureAngle)
@@ -648,7 +648,7 @@ public class WaterPassingController : MonoBehaviour
         }
         else distanceAngleText.text = "Divergentiecoefficient: \n " + "? gon";
     }
-  
+  */
     //shows the correct answer (replaced in the questionscript)
     public string ShowAnswer()
     {

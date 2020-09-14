@@ -138,6 +138,11 @@ PrefabInstance:
       propertyPath: screenMax.x
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 367633900484917569, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckAnswerArray
+      objectReference: {fileID: 0}
     - target: {fileID: 402096528793119162, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -161,7 +166,7 @@ PrefabInstance:
     - target: {fileID: 402096529353279383, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 10.001129
+      value: 10.001007
       objectReference: {fileID: 0}
     - target: {fileID: 402096530060006302, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
@@ -267,6 +272,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363936046080140250, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: m_Name
+      value: Debug Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 2083008955150535954, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
@@ -376,7 +386,7 @@ PrefabInstance:
     - target: {fileID: 7932477422160264948, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.500023
+      value: 2.5000305
       objectReference: {fileID: 0}
     - target: {fileID: 8314618659170050361, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
@@ -395,3 +405,88 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f05c672adc144438fb40021d23ed2520, type: 3}
+--- !u!224 &817722096 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7401751883727414388, guid: f05c672adc144438fb40021d23ed2520,
+    type: 3}
+  m_PrefabInstance: {fileID: 73308441}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1899050399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1899050400}
+  - component: {fileID: 1899050402}
+  - component: {fileID: 1899050401}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1899050400
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899050399}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 817722096}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -48.1, y: 170.2}
+  m_SizeDelta: {x: 232.6, y: 110.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1899050401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899050399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 122dd9102983e4b66bbcb49261b88713, type: 3}
+    m_FontSize: 25
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: '(Jelle)
+
+    Fout in tabel -> Bezig met fixen'
+--- !u!222 &1899050402
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899050399}
+  m_CullTransparentMesh: 0

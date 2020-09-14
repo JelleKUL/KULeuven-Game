@@ -21,7 +21,7 @@ public class SkewBuildingController : MonoBehaviour
 
     public float getDistance()
     {
-        return beaconPoints[1].position.x - beaconPoints[0].position.x;
+        return beaconPoints[0].position.x - beaconPoints[1].position.x;
     }
 
 

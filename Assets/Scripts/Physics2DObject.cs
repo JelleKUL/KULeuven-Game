@@ -71,12 +71,16 @@ public class Physics2DObject : MonoBehaviour
         if (direction)
         {
             rb.gravityScale = 1;
-            transform.up = Vector3.up;
+            //transform.up = Vector3.up;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
             rb.gravityScale = -1;
-            transform.up = Vector3.down;
+            //transform.up = Vector3.down;
+            transform.rotation = Quaternion.Euler(0, 0, 180);
+
+
         }
     }
     

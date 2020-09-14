@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 8665197482629893217}
   m_Layer: 0
   m_Name: GroundPoint
-  m_TagString: Untagged
+  m_TagString: GroundPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -382,6 +382,8 @@ MonoBehaviour:
   anglePointer: {fileID: 0}
   errorEllipse: {fileID: 0}
   angleDisplay: {fileID: 0}
+  errorEllipsSize: 0
+  IsSnapped: 0
 --- !u!58 &8665197482629893217
 CircleCollider2D:
   m_ObjectHideFlags: 0

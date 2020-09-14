@@ -14,6 +14,8 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
     public GameObject winMenu;
 
+    public int maxPoints;
+
 
     //public Text answerInputX;
     //public Text answerInputY;
@@ -70,10 +72,11 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
             case QuestionType.MinimaleGrootte:
                 //start oefening MinimaleGrote
+                lineController.randomizeErrors = false;
                 lineController.SetVisibles(true, true, true, true, false, false, 10);
                 lineController.lockAngleError = true;
                 lineController.lockDistanceError = true;
-                lineController.randomizeErrors = true;
+                
                 placer.PlaceCalculatePoints(1);
                 placer.PlaceObstacleBtwn(1);
                 titleQuestionText.text = "Hoe kan je de foutenellips zo klein mogelijk maken?";
@@ -91,10 +94,12 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 break;
 
             case QuestionType.Werking1Punt:
-                
+                gm.IncreaseScore(0, 2);
+                winMenu.SetActive(true);
                 break;
             case QuestionType.WerkingMeerderePunten:
-                
+                gm.IncreaseScore(0, 2);
+                winMenu.SetActive(true);
                 break;
 
             case QuestionType.DragEnDropEllips:
@@ -103,7 +108,16 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 break;
 
             case QuestionType.MinimaleGrootte:
-                
+
+                Debug.Log(lineController.LastPointSnapped());
+                if (lineController.LastPointSnapped())
+                {
+                    int points = Mathf.Max(0, maxPoints - Mathf.FloorToInt(lineController.biggestEllips / 10f));
+
+                    gm.IncreaseScore(points, 2);
+                    winMenu.SetActive(true);
+                }
+               
                 break;
         }
     }

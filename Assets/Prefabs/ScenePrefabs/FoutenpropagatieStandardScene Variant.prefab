@@ -1643,6 +1643,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoutenpropagatieStandardScene Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2266292510227832000, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603560719369488480, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2664136748962988520, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_RootOrder
@@ -1652,6 +1662,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036988599956082936, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_Text
+      value: Next Example
       objectReference: {fileID: 0}
     - target: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -1699,6 +1714,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6239610400638983503, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -399
+      objectReference: {fileID: 0}
     - target: {fileID: 6679475374029918907, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_IsActive
@@ -1718,6 +1738,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -13.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089626478021127800, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8705791247899038999}
+    - target: {fileID: 7089626478021127800, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckAnswer
       objectReference: {fileID: 0}
     - target: {fileID: 7128626482070279231, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -1895,6 +1925,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 798b05e67b78744beae4f7009f0acf24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8705791247899038999 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2509636878817431344, guid: fedf2ec0e39744ebf85ff34b14446f74,
+    type: 3}
+  m_PrefabInstance: {fileID: 6486637507790772775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4bb45b2299544073ae4bff92aed2366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &4100758865033159844 stripped

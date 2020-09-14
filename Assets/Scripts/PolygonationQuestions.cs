@@ -17,6 +17,7 @@ public class PolygonationQuestions : MonoBehaviour
     public Text answerOutput;
 
     public GameObject winMenu;
+    public Color falseColor, CorrectColor;
 
 
     public enum QuestionType { Geen, Coordinaat1Punt, Afstand2PuntenPolygoon, VoorwaardseInsnijding, AchterwaardseInsnijding, Tabel, Bilateratie }
@@ -36,6 +37,7 @@ public class PolygonationQuestions : MonoBehaviour
     private float correctAnswerX;
     private float correctAnswerY;
     private float correctAnswerH;
+    private string correctAnswer;
 
     // Start is called before the first frame update
     void Awake()
@@ -66,6 +68,8 @@ public class PolygonationQuestions : MonoBehaviour
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 correctAnswerX = correctAnswerArray[0] * GameManager.worldScale;
                 correctAnswerY = correctAnswerArray[1] * GameManager.worldScale;
+                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+
                 titleQuestionText.text = "Bepaal het coördinaat van punt P";
                 questionText.text = "Met behulp van de afstand en map angle vanaf het meetpunt.";
                 break;
@@ -75,6 +79,8 @@ public class PolygonationQuestions : MonoBehaviour
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
                 correctAnswerH = GameManager.worldScale * Mathf.Sqrt(Mathf.Pow(correctAnswerArray[2] - correctAnswerArray[0], 2) + Mathf.Pow(correctAnswerArray[3] - correctAnswerArray[1], 2));
+                correctAnswer = correctAnswerH.ToString();
+
                 titleQuestionText.text = "Bepaal de afstand tussen A en B";
                 questionText.text = "Met behulp van de afstand en map angle vanaf het meetpunt.";
                 break;
@@ -88,6 +94,8 @@ public class PolygonationQuestions : MonoBehaviour
                 //placer.PlaceObstacles(2);
                 correctAnswerX = obsructedPointsArray[0] * GameManager.worldScale;
                 correctAnswerY = obsructedPointsArray[1] * GameManager.worldScale;
+                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+
                 titleQuestionText.text = "Voorwaardse Insnijding bepaal P";
                 questionText.text = "A = x:" + correctAnswerArray[0] * GameManager.worldScale + ", y:" + correctAnswerArray[1] * GameManager.worldScale + "\n\u2022 B = x:" + correctAnswerArray[2] * GameManager.worldScale + ", y:" + correctAnswerArray[3] * GameManager.worldScale;
                 break;
@@ -99,6 +107,8 @@ public class PolygonationQuestions : MonoBehaviour
                 obsructedPointsArray = placer.PlaceObstructedCalculatePoints(3);
                 correctAnswerX = correctAnswerArray[0] * GameManager.worldScale;
                 correctAnswerY = correctAnswerArray[1] * GameManager.worldScale;
+                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+
                 //placer.PlaceObstacles(1);
                 titleQuestionText.text = "Achterwaardse Insnijding bepaal P";
                 questionText.text = "\n\u2022 A = x: " + obsructedPointsArray[0] * GameManager.worldScale + ", y: " + obsructedPointsArray[1] * GameManager.worldScale + "\n\u2022 B = x: " + obsructedPointsArray[2] * GameManager.worldScale + ", y: " + obsructedPointsArray[3] * GameManager.worldScale + "\n\u2022 C = x: " + obsructedPointsArray[4] * GameManager.worldScale + ", y: " + obsructedPointsArray[5] * GameManager.worldScale;
@@ -111,9 +121,11 @@ public class PolygonationQuestions : MonoBehaviour
                 
                 correctAnswerX = correctAnswerArray[12] * GameManager.worldScale;
                 correctAnswerY = correctAnswerArray[13] * GameManager.worldScale;
+                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+
                 lineController.SetPoints(correctAnswerArray);
                 //placer.PlaceObstacles(2);
-                questionText.text = "Bepaal de afstand tussen A en B";
+                titleQuestionText.text = "Vervolledig onderstaande tabel";
                 break;
 
             case QuestionType.Bilateratie:
@@ -123,8 +135,11 @@ public class PolygonationQuestions : MonoBehaviour
                 obsructedPointsArray = placer.PlaceObstructedCalculatePoints(2);
                 correctAnswerX = correctAnswerArray[0] * GameManager.worldScale;
                 correctAnswerY = correctAnswerArray[1] * GameManager.worldScale;
+                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+
                 //placer.PlaceObstacles(2);
-                questionText.text = "Bilateratie bepaal P, A = x:" + obsructedPointsArray[0] * GameManager.worldScale + ", y:" + obsructedPointsArray[1] * GameManager.worldScale + " B = x:" + obsructedPointsArray[2] * GameManager.worldScale + ", y:" + obsructedPointsArray[3] * GameManager.worldScale;
+                titleQuestionText.text = "Bilateratie bepaal P";
+                questionText.text = "A = x:" + obsructedPointsArray[0] * GameManager.worldScale + ", y:" + obsructedPointsArray[1] * GameManager.worldScale + " B = x:" + obsructedPointsArray[2] * GameManager.worldScale + ", y:" + obsructedPointsArray[3] * GameManager.worldScale;
                 break;
         }
     }
@@ -139,8 +154,12 @@ public class PolygonationQuestions : MonoBehaviour
             winMenu.SetActive(true);
 
         }
-        else Debug.Log("false");
+        else
+        {
+            answerInputH.color = falseColor;
 
+            Debug.Log("false");
+        }
     }
 
     // checks if a given coordinate is correct
@@ -153,8 +172,12 @@ public class PolygonationQuestions : MonoBehaviour
             winMenu.SetActive(true);
 
         }
-        else Debug.Log("false");
-
+        else
+        {
+            answerInputX.color = falseColor;
+            answerInputY.color = falseColor;
+            Debug.Log("false");
+        }
     }
     public void CheckAnswerArray()
     {
@@ -166,6 +189,19 @@ public class PolygonationQuestions : MonoBehaviour
 
         }
         else Debug.Log("false");
+
+    }
+
+    //displays the correct answer
+    public void ShowAnswer()
+    {
+        answerOutput.text = "Het antwoord is: " + correctAnswer;
+        answerInputH.color = falseColor;
+        answerInputX.color = falseColor;
+        answerInputY.color = falseColor;
+        //answerInputH.text = "Het antwoord is: " + CorrectAnswer().ToString();
+        //waterpassing.ShowAnswer();
+        Debug.Log("showing answer");
 
     }
 }

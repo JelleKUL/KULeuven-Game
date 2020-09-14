@@ -328,4 +328,9 @@ public class PolygonLineController : MonoBehaviour
 
     }
 
+    public bool LastPointSnapped()
+    {
+        return linePoints[linePoints.Count-1].GetComponent<PolygonPointController>().IsSnapped;
+    }
+
 }

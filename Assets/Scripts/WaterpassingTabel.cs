@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WaterpassingTabel : MonoBehaviour
 {
+    public Color correctColor, falseColor;
+
     public GameObject waterPassingHeader;
     public GameObject waterPassingHeaderVereffening;
 
@@ -161,29 +163,39 @@ public class WaterpassingTabel : MonoBehaviour
         bool correct = true;
         if (VereffeningsMode)
         {
-            if (Mathf.Abs(nieuwTotalHoogte) <  0.02)
-            {
-                Debug.Log("correct");
+            
                 for (int i = 0; i < tabelVereffeningParts.Count; i++)
                 {
-                    if(Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - inputs[i]) > 0.02)
+                    if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - inputs[i]) > 0.02)
                     {
+                        tabelVereffeningParts[i].vereffeningsHoogteText.color = falseColor;
                         correct = false;
                     }
-                    
-                 }
-            }
-            else correct = false;
+                    else
+                    {
+                        tabelVereffeningParts[i].vereffeningsHoogteText.color = correctColor;
+
+                    }
+
+                }
+            
+            
         }
         else
         { 
                 
             for (int i = 0; i < tabelParts.Count; i++)
             {
-                if (Mathf.Abs(tabelParts[i].hoogteVerschil - inputs[i]) > 0.02)
+                if (Mathf.Abs(tabelParts[i].hoogteVerschil - inputs[i]) > 0.01)
                 {
+                    tabelParts[i].hoogteVerschilText.color = falseColor;
                     correct = false;
                 }
+                else
+                {
+                    tabelParts[i].hoogteVerschilText.color = correctColor;
+                }
+                
 
             }
            

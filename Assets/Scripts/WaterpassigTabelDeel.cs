@@ -40,7 +40,7 @@ public class WaterpassigTabelDeel : MonoBehaviour
 
         if (float.TryParse(metingAchter.text, out result) && float.TryParse(metingVoor.text, out result2))
         {
-            hoogteVerschil = result - result2;
+            hoogteVerschil = result2 - result;
             
         }
         else hoogteVerschil = 0f;
@@ -54,5 +54,10 @@ public class WaterpassigTabelDeel : MonoBehaviour
         station.text = nr.ToString();
         meetpuntVoor.text = voorMeetpunt;
         meetpuntAchter.text = achterMeetpunt;
+    }
+
+    public void SetColors()
+    {
+
     }
 }

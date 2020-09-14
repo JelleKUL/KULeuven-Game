@@ -19,9 +19,10 @@ public class MapAngleQuestions : MonoBehaviour
     public GameObject assenkruis;
 
     public GameObject winMenu;
+    public Color falseColor, CorrectColor;
 
 
-    public enum QuestionType { Geen, BepaalMapAngle, BepaalCoordinaat, BepaalVorigPunt, AnderAssenStelsel }
+    public enum QuestionType { Geen, BepaalMapAngle, BepaalCoordinaat, BepaalVorigPunt, AnderAssenStelsel, Afstand2Punten }
     [Tooltip("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -39,6 +40,8 @@ public class MapAngleQuestions : MonoBehaviour
     private float correctAnswerX;
     private float correctAnswerY;
     private float correctAnswerH;
+
+    private string correctAnswer;
 
     private PolygonLineController lineController;
     private GameManager gm;
@@ -74,10 +77,10 @@ public class MapAngleQuestions : MonoBehaviour
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 
-                titleQuestionText.text = "Bepaal de Map Angle";
+                titleQuestionText.text = "Bepaal de Kaarthoek";
                 questionText.text = "Van het punt P naar het opstelpunt.";
-                correctAnswerH = lineController.GetMapAngle(new Vector2(correctAnswerArray[0], correctAnswerArray[1]), Vector2.up);
-
+                correctAnswerH = lineController.GetMapAngle(Vector2.up, new Vector2(correctAnswerArray[0], correctAnswerArray[1]));
+                correctAnswer = correctAnswerH.ToString();
                 Debug.Log(correctAnswerArray[0]+ "," + correctAnswerArray[1] + ",  " + correctAnswerH);
                 
 
@@ -88,7 +91,9 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 correctAnswerX = correctAnswerArray[0] * GameManager.worldScale;
                 correctAnswerY = correctAnswerArray[1] * GameManager.worldScale;
-                questionText.text = "Bepaal het coördinaat van punt P";
+                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                titleQuestionText.text = "Bepaal het coördinaat van punt P";
+                questionText.text = "Het meettoestel staat op het nulpunt.";
                 break;
 
             case QuestionType.BepaalVorigPunt:
@@ -97,6 +102,7 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
                 correctAnswerX = correctAnswerArray[0] * GameManager.worldScale;
                 correctAnswerY = correctAnswerArray[1] * GameManager.worldScale;
+                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
                 titleQuestionText.text = "Bepaal het coördinaat van punt P";
                 questionText.text = " Via de verkregen meting van A: \n\u2022 x: " + (Mathf.Round(correctAnswerArray[2] * 1000)/1000f) * GameManager.worldScale + "m \n\u2022 y: " + (Mathf.Round(correctAnswerArray[3] * 1000) / 1000f) * GameManager.worldScale + "m";
                 Debug.Log(correctAnswerArray[0] * GameManager.worldScale + "," + correctAnswerArray[1] * GameManager.worldScale);
@@ -113,12 +119,24 @@ public class MapAngleQuestions : MonoBehaviour
                 
                 correctAnswerX = correctAnswerArray[0] * GameManager.worldScale;
                 correctAnswerY = correctAnswerArray[1] * GameManager.worldScale;
+                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
                 Debug.Log(correctAnswerX + " , " + correctAnswerY);
                 titleQuestionText.text = "Bepaal het coördinaat van punt P";
-                questionText.text = "Het Assenstelsel is gedraaid met een bepaalde hoek, bepaal het coordinaat aan de hand van het rode assenkruis.";
+                questionText.text = "Het Assenstelsel is gedraaid met een bepaalde hoek, bepaal het coordinaat aan de hand van het rode assenkruis ten opzichte van het meettoestel.";
                 break;
 
-         
+            case QuestionType.Afstand2Punten:
+                //start oefening afstand
+                lineController.SetVisibles(true, false, false, false, true, true, 2);
+                correctAnswerArray = placer.PlaceCalculatePoints(2);
+                correctAnswerH = Mathf.Sqrt(Mathf.Pow(correctAnswerArray[0] + correctAnswerArray[2], 2) + Mathf.Pow(correctAnswerArray[1] + correctAnswerArray[3], 2)) * GameManager.worldScale;
+                correctAnswer = correctAnswerH.ToString();
+
+                Debug.Log(correctAnswerH);
+                titleQuestionText.text = "Bepaal de afstand tussen de punten P & A";
+                questionText.text = "aan de hand van de kaarthoek, bepaal de afstand in vogelvlucht.";
+                break;
+
         }
     }
 
@@ -135,6 +153,7 @@ public class MapAngleQuestions : MonoBehaviour
         }
         else
         {
+            answerInputH.color = falseColor;
             Debug.Log("false");
             answerOutput.text = "Incorrect";
         }
@@ -150,10 +169,27 @@ public class MapAngleQuestions : MonoBehaviour
             winMenu.SetActive(true);
 
         }
-        else Debug.Log("false");
-        answerOutput.text = "Incorrect";
+        else
+        {
+            answerInputX.color = falseColor;
+            answerInputY.color = falseColor;
+            Debug.Log("false");
+            answerOutput.text = "Incorrect";
+        }
 
     }
-   
+
+    //displays the correct answer
+    public void ShowAnswer()
+    {
+        answerOutput.text = "Het antwoord is: " + correctAnswer;
+        answerInputH.color = falseColor;
+        //answerInputH.text = "Het antwoord is: " + CorrectAnswer().ToString();
+        //waterpassing.ShowAnswer();
+        Debug.Log("showing answer");
+
+    }
+
+
 
 }

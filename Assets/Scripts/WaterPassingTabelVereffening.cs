@@ -48,4 +48,9 @@ public class WaterPassingTabelVereffening : MonoBehaviour
 
         afstandText.text = afstandVoor + " m";
     }
+
+    public void SetColor(Color col)
+    {
+
+    }
 }

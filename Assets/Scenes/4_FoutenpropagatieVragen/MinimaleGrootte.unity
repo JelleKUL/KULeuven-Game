@@ -308,6 +308,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8079641867116022495, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_Text
+      value: Submit
+      objectReference: {fileID: 0}
     - target: {fileID: 8705791247899038999, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: SoortVraag

@@ -729,6 +729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff9b5755963c42a68e2a2afa7f4b56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  correctColor: {r: 0, g: 0, b: 0, a: 0}
+  falseColor: {r: 0, g: 0, b: 0, a: 0}
   waterPassingHeader: {fileID: 0}
   waterPassingHeaderVereffening: {fileID: 0}
   waterPassingTabelPart: {fileID: 0}
@@ -956,6 +958,8 @@ MonoBehaviour:
   answerInputH: {fileID: 5940607178984352508}
   answerOutput: {fileID: 698391461229908680}
   winMenu: {fileID: 7292503052413447360}
+  falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
+  CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
   SoortVraag: 0
   scoreIncrease: 1
 --- !u!114 &69688649889305601
@@ -987,7 +991,6 @@ MonoBehaviour:
   beaconButton: {fileID: 0}
   measureButton: {fileID: 0}
   angleErrorText: {fileID: 0}
-  distanceAngleText: {fileID: 0}
   rotationAngleText: {fileID: 0}
   spriteShapeController: {fileID: 0}
   topSpriteShapeController: {fileID: 0}
@@ -1557,6 +1560,8 @@ MonoBehaviour:
   answerInputH: {fileID: 5940607178984352508}
   answerOutput: {fileID: 698391461229908680}
   winMenu: {fileID: 7292503052413447360}
+  falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
+  CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
   SoortVraag: 0
   scoreIncrease: 1
   tabel: {fileID: 0}
@@ -2375,7 +2380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 693, y: -208}
+  m_AnchoredPosition: {x: 698, y: -387}
   m_SizeDelta: {x: 368.3, y: 115.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5202111252161377073
@@ -2581,7 +2586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.3}
   m_AnchorMax: {x: 1, y: 0.4}
-  m_AnchoredPosition: {x: 7.5, y: 0}
+  m_AnchoredPosition: {x: 7.5, y: 78.3}
   m_SizeDelta: {x: -45, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6033477681518525482
@@ -3578,14 +3583,19 @@ MonoBehaviour:
     type: 3}
   skewBuilding: {fileID: 3331951028963185800, guid: fb8b10bbf74c44475800ed4259aeefd8,
     type: 3}
+  winMenu: {fileID: 0}
   MeasurePlacer: {fileID: 7700334633352105136}
   magnifyButton: {fileID: 0}
   pointMask:
     serializedVersion: 2
     m_Bits: 9472
+  answerText: {fileID: 0}
+  falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
+  CorrectColor: {r: 0.574, g: 1, b: 0.59529996, a: 1}
   maxSkewAngle: 3
   maxSkewError: 0
   skewBuildingLocation: {x: 5, y: 0}
+  scoreIncrease: 0
   correctDistance: 0
   points:
   - {fileID: 0}
@@ -4732,7 +4742,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 693, y: -73.500015}
+  m_AnchoredPosition: {x: 697.99994, y: -252.50006}
   m_SizeDelta: {x: 368.3, y: 115.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4151565923704887237
@@ -9955,6 +9965,7 @@ MonoBehaviour:
   titleQuestionText: {fileID: 7128626481883086562}
   questionText: {fileID: 4446215733289814962}
   winMenu: {fileID: 7292503052413447360}
+  maxPoints: 10
   SoortVraag: 0
 --- !u!114 &8624441735927071720
 MonoBehaviour:
@@ -14013,6 +14024,46 @@ PrefabInstance:
       propertyPath: winMenu
       value: 
       objectReference: {fileID: 7292503052413447360}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: falseColor.r
+      value: 0.8745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: falseColor.g
+      value: 0.33493727
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: falseColor.b
+      value: 0.37051356
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: falseColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: CorrectColor.r
+      value: 0.5118588
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: CorrectColor.g
+      value: 0.894
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: CorrectColor.b
+      value: 0.53289413
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: CorrectColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2338229750975421abe8cad584921f17, type: 3}
 --- !u!4 &2039373209 stripped
@@ -14293,6 +14344,11 @@ PrefabInstance:
         type: 3}
       propertyPath: screenMax.y
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 537557740068619190, guid: 5f6e9d3c0cfc349edbda725c46b82b40,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 537557740068619191, guid: 5f6e9d3c0cfc349edbda725c46b82b40,
         type: 3}

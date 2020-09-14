@@ -620,7 +620,7 @@ PrefabInstance:
     - target: {fileID: 7089626478021127800, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CheckAnswerArray
+      value: CheckAnswerXY
       objectReference: {fileID: 0}
     - target: {fileID: 7128626481618353795, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -811,6 +811,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
       value: 19.222872
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545740672990681476, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 3883128868348204849}
+    - target: {fileID: 8545740672990681476, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ShowAnswer
       objectReference: {fileID: 0}
     - target: {fileID: 8728865717773427545, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}

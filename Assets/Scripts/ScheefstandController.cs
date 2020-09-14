@@ -6,16 +6,21 @@ using UnityEngine.UI;
 public class ScheefstandController : MonoBehaviour
 {
     [Header("Prefabs")]
+    
     public GameObject theodoliet;
     public GameObject skewBuilding;
+    public GameObject winMenu;
     public Transform MeasurePlacer;
     public Button magnifyButton;
     public LayerMask pointMask;
+    public Text answerText;
+    public Color falseColor, CorrectColor;
 
     [Header("Variables")]
     public float maxSkewAngle;
     public float maxSkewError;
     public Vector2 skewBuildingLocation;
+    public int scoreIncrease;
 
     [HideInInspector]
     public float correctDistance;
@@ -38,6 +43,8 @@ public class ScheefstandController : MonoBehaviour
         PlaceBulding();
         theodolietObject = Instantiate(theodoliet, MeasurePlacer.position, Quaternion.identity);
         theodolietObject.GetComponent<Theodoliet>().scheefstandController = this;
+
+        Debug.Log(correctDistance);
     }
 
     // Update is called once per frame
@@ -122,6 +129,24 @@ public class ScheefstandController : MonoBehaviour
         isFlipped = !isFlipped;
 
         building.GetComponent<SkewBuildingController>().SetLine(skewError * (isFlipped? -1: 1));
+    }
+
+    //checks if the given anwser is correct
+    public void CheckAnswer()
+    {
+
+        if (gm.CheckCorrectAnswer(answerText.text, correctDistance))
+        {
+            gm.IncreaseScore(scoreIncrease, 1);
+            Debug.Log(answerText.text + " is correct!");
+            winMenu.SetActive(true);
+            //gm.ReloadScene();
+        }
+        else
+        {
+            answerText.color = falseColor;
+            Debug.Log("false");
+        }
     }
 
 

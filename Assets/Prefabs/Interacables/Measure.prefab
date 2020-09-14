@@ -315,8 +315,9 @@ MonoBehaviour:
   maxDistance: 10
   DistanceMultiplier: 0.1
   showBehindLegs: 1
+  maxLegDistance: 1
   beaconOffset: 0.1
-  showMagnify: 0
+  showMagnify: 1
 --- !u!1 &2699590325922045698
 GameObject:
   m_ObjectHideFlags: 0

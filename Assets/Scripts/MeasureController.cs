@@ -38,7 +38,7 @@ public class MeasureController : MonoBehaviour
     private float maxLegDistance = 1f;
     [SerializeField]
     private float beaconOffset = 0.1f;
-    public bool showMagnify;
+    public bool showMagnify = true;
 
     private Vector4 beaconHitPointL;
     private Vector4 beaconHitPointR;
