@@ -14,7 +14,7 @@ public class DenkVraag
     //public string a;
     //public string b;
     //public Operator juisteVergelijking;
-
+	//jens was here
 
 
 
