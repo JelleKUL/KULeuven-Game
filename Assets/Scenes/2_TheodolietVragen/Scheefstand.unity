@@ -156,6 +156,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleMagnify
       objectReference: {fileID: 0}
+    - target: {fileID: 29510839473584210, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_Text
+      value: Scheefstand
+      objectReference: {fileID: 0}
     - target: {fileID: 874825781601848763, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -294,7 +299,7 @@ PrefabInstance:
     - target: {fileID: 1385115410466506842, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: SoortVraag
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1426936716534498215, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
