@@ -19,7 +19,7 @@ public class PolygonPointController : MonoBehaviour
     public GameObject angleDisplay;
 
     [HideInInspector]
-    public float errorEllipsSize;
+    public float errorEllipsSize; public float errorEllips;
     public bool IsSnapped;
     [HideInInspector]
     public bool displayError;
@@ -41,11 +41,11 @@ public class PolygonPointController : MonoBehaviour
     {
         if (showName)
         {
-            if (nr < 0)
+            if (nr < 0f)
             {
                 nameText.text = "0";
             }
-            else if (nr == 0)
+            else if (nr == 0f)
             {
                 nameText.text = "P";
             }
@@ -81,7 +81,7 @@ public class PolygonPointController : MonoBehaviour
         distanceText.transform.position = (transform.position + prevPoint) / 2f;
         
 
-        if(distance < 1.5)
+        if(distance < 1.5f)
         {
             distanceText.anchor = TextAnchor.MiddleLeft;
             Vector2 upVector = transform.position - prevPoint;
@@ -98,7 +98,7 @@ public class PolygonPointController : MonoBehaviour
             distanceText.transform.up = upVector * direction;
             distanceText.transform.position -= distanceText.transform.up * 0.1f;
 
-            if (direction == 0)
+            if (direction == 0f)
             {
                 distanceText.anchor = TextAnchor.MiddleLeft;
                 distanceText.transform.position += distanceText.transform.right * 0.1f;
@@ -116,7 +116,7 @@ public class PolygonPointController : MonoBehaviour
         angleDisplay.SetActive(true);
         Vector3 pos = transform.position;
         float angle = Vector2.SignedAngle(nextPoint - pos, prevPoint - pos);
-        if (angle < 0) angle = 360 + angle;
+        if (angle < 0) angle = 360f + angle;
         //angleDisplay.transform.up = prevPoint - pos;
         Vector2 dir = prevPoint - pos;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -136,14 +136,14 @@ public class PolygonPointController : MonoBehaviour
         */
         //angleText.transform.position = -Vector3.Normalize(Vector3.Normalize(nextPoint - transform.position) + Vector3.Normalize(prevPoint - transform.position)) * 0.7f + transform.position;
         angleText.transform.position = transform.position;
-        angleText.text = (Mathf.Round((angle + angleError) /360 * 400 * 100) / 100f).ToString() + " gon";
+        angleText.text = (Mathf.Round((angle + angleError) /360 * 400 * 1000) / 1000f).ToString() + " gon";
 
         Vector2 upVector = Vector3.Normalize(transform.position - prevPoint) + Vector3.Normalize(transform.position - nextPoint);
         float direction = Vector2.Dot(upVector, Vector2.right);
 
         angleText.transform.right = upVector * direction;
 
-        if(direction > 0)
+        if(direction > 0f)
         {
             angleText.anchor = TextAnchor.MiddleLeft;
             angleText.transform.position += angleText.transform.right * 0.5f;

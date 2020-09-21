@@ -257,8 +257,12 @@ public class PolygonLineController : MonoBehaviour
     public float GetMapAngle(Vector2 endPoint, Vector2 startPoint)
     {
         float angle = Vector2.SignedAngle(endPoint, startPoint);
-
-        return (Mathf.Round(angle / 360 * 400 * 100) / 100f);
+        angle = Mathf.Round(angle / 360 * 400 * 1000) / 1000f +200f;
+        //if (angle < -0F)
+        //{
+        //    angle = Mathf.Abs(angle) + 200f;
+        //}
+        return angle;
     }
 
 
