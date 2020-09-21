@@ -2,25 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//**************** Moves background objects in a rythmic fashion ******************//
+
 public class BackgroundObjectMover : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("the maximum offset in one direction")]
     Vector3 maxMove = Vector3.zero;
     [SerializeField]
+    [Tooltip("the maximum scale offset in one direction")]
     float maxScale = 0;
     [SerializeField]
+    [Tooltip("the speed at which the object moves")]
     float movementSpeed = 0f;
     [SerializeField]
+    [Tooltip("toggle to use this property")]
     bool moveLocal, move, scale;
 
-    Vector3 startPosition;
-    Vector3 startScale;
+    //Private Variables
 
-    float offset;
+    private Vector3 startPosition;
+    private Vector3 startScale;
+
+    private float offset;
 
     // Start is called before the first frame update
     void Start()
     {
+        // set the start values
         startPosition = transform.position;
         startScale = transform.localScale;
     }
@@ -31,6 +40,7 @@ public class BackgroundObjectMover : MonoBehaviour
         MoveObject();
     }
 
+    // moves the object with a sin offset in time
     void MoveObject()
     {
         offset = Mathf.Sin(Time.time * movementSpeed);

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//*************** Manages the scheefstand oefening ****************//
+
 public class ScheefstandController : MonoBehaviour
 {
     [Header("Prefabs")]
@@ -44,7 +46,10 @@ public class ScheefstandController : MonoBehaviour
         theodolietObject = Instantiate(theodoliet, MeasurePlacer.position, Quaternion.identity);
         theodolietObject.GetComponent<Theodoliet>().scheefstandController = this;
 
-        Debug.Log(correctDistance);
+        if (GameManager.showDebugAnswer)
+        {
+            Debug.Log("Correct distance = " + correctDistance);
+        }
     }
 
     // Update is called once per frame
@@ -95,30 +100,33 @@ public class ScheefstandController : MonoBehaviour
 
         }
     }
-        void PlaceBulding()
+
+    void PlaceBulding()
+    {
+        building = Instantiate(skewBuilding, skewBuildingLocation, Quaternion.Euler(0, 0, Random.Range(-maxSkewAngle, maxSkewAngle)));
+        SkewBuildingController skewBuildingController = building.GetComponent<SkewBuildingController>();
+        
+        correctDistance = skewBuildingController.getDistance();
+        points = skewBuildingController.beaconPoints;
+        skewBuildingController.SetLine(skewError);
+    }
+
+    //returns the gamobject the mouse has hit
+    public GameObject CastMouseRay()
+    {
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), 20, pointMask);
+
+        if (rayHit.collider != null)
         {
-            building = Instantiate(skewBuilding, skewBuildingLocation, Quaternion.Euler(0, 0, Random.Range(-maxSkewAngle, maxSkewAngle)));
-            correctDistance = building.GetComponent<SkewBuildingController>().getDistance();
-            points = building.GetComponent<SkewBuildingController>().beaconPoints;
+            holdingObject = true;
+            //Debug.Log(rayHit.transform.gameObject.name);
+            return rayHit.transform.gameObject;
 
-        building.GetComponent<SkewBuildingController>().SetLine(skewError);
         }
+        holdingObject = false;
+        return null;
+    }
 
-        //returns the gamobject the mouse has hit
-        public GameObject CastMouseRay()
-        {
-            RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), 20, pointMask);
-
-            if (rayHit.collider != null)
-            {
-                holdingObject = true;
-                Debug.Log(rayHit.transform.gameObject.name);
-                return rayHit.transform.gameObject;
-
-            }
-            holdingObject = false;
-            return null;
-        }
     public void ToggleMagnify()
     {
         theodolietObject.GetComponent<Theodoliet>().ToggleMagnify() ;
@@ -145,7 +153,7 @@ public class ScheefstandController : MonoBehaviour
         else
         {
             answerText.color = falseColor;
-            Debug.Log("false");
+            Debug.Log(answerText.text + " is False...");
         }
     }
 

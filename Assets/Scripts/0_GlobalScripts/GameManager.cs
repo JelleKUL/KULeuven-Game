@@ -25,68 +25,48 @@ public class GameManager : MonoBehaviour
     public int firstCamp2Level;
     public int nrOfCamp2Levels;
 
+    [Header("ShowAnswersInDebug")]
+    [SerializeField]
+    private bool showDebug;
+    public static bool showDebugAnswer; 
+
+    // the static variables that are used all over the place
+        public static int loginID;
+        public static string userName;
+        public static int playerScore;
+
+        public static int levelCamp1;
+        public static int[] scoreCamp1 = new int[11];
+        public static int levelCamp2;
+        public static int[] scoreCamp2 = new int[13];
+        public static int scoreFreeTotal = 0;
+        //public static int[] scoreFree = new int[13];
+
+        public static int highestLevel;
+        public static int currentLevel;
+        public static bool isLoggedIn;
+        public static bool campaignMode;
+
+
     [HideInInspector]
-    public static int loginID;
-    public static string userName;
-    public static int playerScore;
+    public Vector2 screenMin, screenMax; // calculated based on the x&y scale of the gamamanager
 
-    public static int levelCamp1;
-    public static int[] scoreCamp1 = new int[11];
-    public static int levelCamp2;
-    public static int[] scoreCamp2 = new int[13];
-    public static int scoreFreeTotal = 0;
-    //public static int[] scoreFree = new int[13];
-    private Text[] scoreText;
-
-    [HideInInspector]
-    public Vector2 screenMin, screenMax;
-
-    public static int highestLevel;
-    public static int currentLevel;
-    public static bool isLoggedIn;
-    public static bool campaignMode;
-
+    // a new instance for the account system
     private AS_AccountInfo accountInfo = new AS_AccountInfo();
 
+    // activates before the start functions
     private void Awake()
     {
         SetPlayArea();
 
         if (usernameText) ShowUsername();
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-
-        
-        
+        SetDebugPreference(showDebug);
     }
 
 
 //score Control
-    // searches all the active score displays at the start of the scene
-    private void SearchScoreTexts()
-    {
-        GameObject[] scoreObjects = GameObject.FindGameObjectsWithTag("scoreText");
-        scoreText = new Text[scoreObjects.Length];
-
-        for (int i = 0; i < scoreText.Length; i++)
-        {
-            scoreText[i] = scoreObjects[i].GetComponent<Text>();
-        }
-
-        if (scoreText.Length > 0)
-        {
-            foreach (var score in scoreText)
-            {
-                score.text = playerScore.ToString();
-            }
-
-
-        }
-    }
+    
     // increases the score by a set amount
     public void IncreaseScore(int amount, int campaignNr)
     {
@@ -138,6 +118,7 @@ public class GameManager : MonoBehaviour
         */
     }
 
+    // sets the latest level the player has reached in the account system
     public void SetMaxLevel(int campaignNr)
     {
         if( campaignNr == 1)
@@ -158,6 +139,11 @@ public class GameManager : MonoBehaviour
                 levelCamp2 = sceneNr - firstCamp2Level + 1;
             }
         }
+    }
+
+    void SetDebugPreference(bool check)
+    {
+        showDebugAnswer = check;
     }
 
 

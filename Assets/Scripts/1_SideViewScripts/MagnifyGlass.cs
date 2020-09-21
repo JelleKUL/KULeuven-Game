@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//*************** Manages the magnify glass ****************//
 
 [RequireComponent (typeof(CircleCollider2D), typeof(BoxCollider2D))]
 public class MagnifyGlass : MonoBehaviour
 {
+    [Header("Objects")]
     public GameObject ZoomedMagnify;
     public Transform zoomedBackground;
     public GameObject viewer;
     public Camera viewerCamera;
     public GameObject assenkruis;
     public GameObject assenkruisZoom;
-    private BoxCollider2D zoomedCollider;
 
+    private BoxCollider2D zoomedCollider;
     private CircleCollider2D circleCollider;
 
     private GameManager gm;
@@ -29,11 +31,7 @@ public class MagnifyGlass : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public void ToggleZoom()
     {

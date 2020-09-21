@@ -99,6 +99,7 @@ public class WaterPassingController : MonoBehaviour
             SetGroundPointsTopDown();
             waterpassingTabel.CreateTable(nrOfPoints + 1);
         }
+
         SetGroundSprite();
         SetTopSprite();
 
@@ -110,6 +111,7 @@ public class WaterPassingController : MonoBehaviour
         {
             AddMeasure(MeasurePlacer.position);
         }
+
         if (lockBeacon)
         {
             AddBeacon(lockedBeaconLocation);
@@ -124,20 +126,7 @@ public class WaterPassingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (magnifyMode)
-        {
-            if (MouseOverBeacon())
-            {
-                magnifyGlass.SetActive(true);
-                magnifyGlass.transform.position = gm.SetObjectToMouse(Input.mousePosition, -5);
-            }
-            else magnifyGlass.SetActive(false);
-            
-        }
-        */
         
-
         if (Input.GetMouseButtonDown(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
             hitObject = CastMouseRay();
@@ -195,31 +184,7 @@ public class WaterPassingController : MonoBehaviour
             holdingObject = false;
 
         }
-        /*
-        if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
-        {
-            if (!holdingObject)
-            {
-                hitObject = CastMouseRay();
-
-
-                if (!holdingObject && beaconMode && beacons.Count < maxBeacons)
-                {
-                    AddBeacon(gm.SetObjectToMouse(Input.mousePosition, 0));
-                }
-                else if (!holdingObject && measureMode && measures.Count < maxMeasures)
-                {
-                    AddMeasure(gm.SetObjectToMouse(Input.mousePosition, 0));
-                }
-            }
-            else if(hitObject.tag != "MagnifyGlass")
-            {
-                hitObject.transform.position = gm.SetObjectToMouse(Input.mousePosition, 0);
-            }
-            
-        }
-        else holdingObject = false;
-        */
+       
     }
     
 
@@ -315,8 +280,6 @@ public class WaterPassingController : MonoBehaviour
 
     }
     
-
-
     //places a measure object
     public void AddMeasure(Vector2 location)
     {
@@ -334,35 +297,6 @@ public class WaterPassingController : MonoBehaviour
         SetAngleErrorText();
         //SetDistanceAngleText();
         
-        /*
-        if (nrOfPoints > 0)
-        {
-            laserlength = (gm.screenMax.x - gm.screenMin.x) / nrOfPoints;
-        }
-        else
-        {
-            laserlength = (gm.screenMax.x - gm.screenMin.x);
-        }
-
-        LineRenderer[] laserlines = newMeasure.transform.GetComponentsInChildren<LineRenderer>();
-        foreach (var laserline in laserlines)
-        {
-            laserline.SetPosition(0, -laserlength * Vector3.right);
-            laserline.SetPosition(1, laserlength * Vector3.right);
-        }
-        
-        newMeasure.transform.GetChild(0).transform.Rotate(0, 0, correctErrorAngle);
-
-        newMeasure.transform.GetChild(0).GetChild(0).localEulerAngles = new Vector3(0, 0, distanceMeasureAngle);
-        newMeasure.transform.GetChild(0).GetChild(1).localEulerAngles = new Vector3(0, 0, -distanceMeasureAngle);
-        newMeasure.transform.GetChild(1).GetChild(0).localEulerAngles = new Vector3(0, 0, distanceMeasureAngle);
-        newMeasure.transform.GetChild(1).GetChild(1).localEulerAngles = new Vector3(0, 0, -distanceMeasureAngle);
-
-        newMeasure.transform.GetChild(0).GetChild(0).gameObject.SetActive(showDistanceLaser);
-        newMeasure.transform.GetChild(0).GetChild(1).gameObject.SetActive(showDistanceLaser);
-        newMeasure.transform.GetChild(1).GetChild(0).gameObject.SetActive(showDistanceLaser);
-        newMeasure.transform.GetChild(1).GetChild(1).gameObject.SetActive(showDistanceLaser);
-        */
         newMeasure.transform.GetChild(1).gameObject.SetActive(false);
         measures.Add(newMeasure);
      
@@ -638,17 +572,7 @@ public class WaterPassingController : MonoBehaviour
 
 
     }
-    /*
-    public void SetDistanceAngleText()
-    {
-        if (showDistanceMeasureAngle)
-        {
-            distanceAngleText.text = "Divergentiecoefficient: \n " + (Mathf.Round(distanceMeasureAngle * 1000 * 400 / 360f) / 1000f).ToString() + " gon";
-
-        }
-        else distanceAngleText.text = "Divergentiecoefficient: \n " + "? gon";
-    }
-  */
+ 
     //shows the correct answer (replaced in the questionscript)
     public string ShowAnswer()
     {

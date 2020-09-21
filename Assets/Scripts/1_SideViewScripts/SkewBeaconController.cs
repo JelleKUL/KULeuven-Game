@@ -10,12 +10,7 @@ public class SkewBeaconController : MonoBehaviour
         RotateStraight();
     }
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        
-    }
-
+    // rotates the beacon straight even when the building is rotated
     void RotateStraight()
     {
         transform.rotation = Quaternion.identity;

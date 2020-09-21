@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//***** Controls the measure object ******//
+//**************** Controls the measure object ******************//
+
 [RequireComponent (typeof(BoxCollider2D))]
 public class MeasureController : MonoBehaviour
 {
@@ -40,8 +41,8 @@ public class MeasureController : MonoBehaviour
     private float beaconOffset = 0.1f;
     public bool showMagnify = true;
 
-    private Vector4 beaconHitPointL;
-    private Vector4 beaconHitPointR;
+    private Vector4 beaconHitPointL; // also includes the distance
+    private Vector4 beaconHitPointR; // also includes the distance
     private GameObject MagnifyL;
     private MagnifyGlass magnifyLScript;
     private GameObject MagnifyR;
@@ -77,6 +78,7 @@ public class MeasureController : MonoBehaviour
         MagnifyL.SetActive(hasHitL && showMagnify);
     }
 
+    //rotates the measurehead to the desired location
     public void UpdateMeasureHeadRotation(float angle)
     {
         scheefstandsHoek = angle;
@@ -112,13 +114,14 @@ public class MeasureController : MonoBehaviour
         return measureHead.position;
     }
 
+    // toggles the visibility of the magnifyglass //obsolete
     public void ToggleMagnify()
     {
         showMagnify = !showMagnify;
     }
 
     
-
+    // scale the small magnify the the correct scale according to the distance
     void scaleMagnify(int direction, MagnifyGlass magnify)
     {
         Vector4 beaconHitPoint = CastLaser(measureHead.position, new Vector2(direction * Mathf.Cos((errorAngle + direction * scheefstandsHoek) * Mathf.Deg2Rad), Mathf.Sin((errorAngle + direction * scheefstandsHoek) * Mathf.Deg2Rad)),direction);
@@ -129,6 +132,7 @@ public class MeasureController : MonoBehaviour
         laserLinePositions[1 + direction] = magnify.transform.position;
     }
 
+    //triggerd on a collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
       if(collision.gameObject.tag == groundTag && showBehindLegs)
@@ -138,7 +142,7 @@ public class MeasureController : MonoBehaviour
         }
     }
 
-
+    // sets the behindlegs to the ground below
     private void SetBehindLegs(Transform leg)
     {
         // Cast a ray straight down.

@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//***************** Manages info of a part of the waterpassingtabel *************//
+
+
 public class WaterpassigTabelDeel : MonoBehaviour
 {
+    [Header("Objects")]
     public Text station;
     public Text meetpuntAchter;
     public Text meetpuntVoor;
@@ -14,14 +18,10 @@ public class WaterpassigTabelDeel : MonoBehaviour
     public Text afstandVoor;
     public Text afstandAchter;
 
+    [HideInInspector]
     public float hoogteVerschil;
     public float afstand;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
