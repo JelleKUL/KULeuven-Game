@@ -104,9 +104,14 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerY = correctAnswerArray[1] * GameManager.worldScale;
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
                 titleQuestionText.text = "Bepaal het coördinaat van punt P";
-                questionText.text = " Via de verkregen meting van A: \n\u2022 x: " + (Mathf.Round(correctAnswerArray[2] * 1000)/1000f) * GameManager.worldScale + "m \n\u2022 y: " + (Mathf.Round(correctAnswerArray[3] * 1000) / 1000f) * GameManager.worldScale + "m";
-                Debug.Log(correctAnswerArray[0] * GameManager.worldScale + "," + correctAnswerArray[1] * GameManager.worldScale);
-
+                // vorige code:
+				//questionText.text = " Via de verkregen meting van A: \n\u2022 x: " + (Mathf.Round(correctAnswerArray[2] * 1000)/1000f) * GameManager.worldScale + "m \n\u2022 y: " + (Mathf.Round(correctAnswerArray[3] * 1000) / 1000f) * GameManager.worldScale + "m";
+                
+				// nieuw (met string interpolation $), kan ook via x.ToString("F2"):
+				float x = correctAnswerArray[2] * GameManager.worldScale;
+				float y = correctAnswerArray[2] * GameManager.worldScale;
+				questionText.text = $" Via de verkregen meting van A: \n\u2022 x: {x:F2}m \n\u2022 y: {y:F2}m";
+                Debug.Log("{x} ,{y}");
                 break;
 
             case QuestionType.AnderAssenStelsel:
