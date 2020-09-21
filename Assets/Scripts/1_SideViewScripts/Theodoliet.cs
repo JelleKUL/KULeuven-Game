@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//***************** Manages the theodoliet in the scfeefstand oefening *************//
+
 public class Theodoliet : MonoBehaviour
 {
   

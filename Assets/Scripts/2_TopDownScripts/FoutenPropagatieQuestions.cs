@@ -8,10 +8,9 @@ using UnityEngine.UI;
 
 public class FoutenPropagatieQuestions : MonoBehaviour
 {
-    [Header("Predefined TextFields")]
+    [Header("Predefined Object")]
     public Text titleQuestionText;
     public Text questionText;
-
     public GameObject winMenu;
 
     public int maxPoints;
@@ -84,7 +83,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 break;
         }
     }
-
+    // checks the answer
     public void CheckAnswer()
     {
         switch (SoortVraag)

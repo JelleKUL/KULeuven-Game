@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//**************** The UI manager for the campaign select menu ******************//
+
 public class CampaignSelectUI : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("the textfield which should be changed")]
     private Text levelCamp1, scoreCamp1, levelCamp2, scoreCamp2, scoreFreeTotal;
 
     // Start is called before the first frame update
@@ -14,15 +17,10 @@ public class CampaignSelectUI : MonoBehaviour
         SetValues();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // sets the text fields to the correct values from the gamemanager's static variables from the login
     void SetValues()
     {
-        if (levelCamp1 && scoreCamp1)
+        if (levelCamp1 && scoreCamp1) //if added
         {
             levelCamp1.text = GameManager.levelCamp1.ToString() + " / " + GameManager.scoreCamp1.Length;
 
@@ -34,7 +32,7 @@ public class CampaignSelectUI : MonoBehaviour
             scoreCamp1.text = scoreTotal.ToString();
         }
 
-        if (levelCamp2 && scoreCamp2)
+        if (levelCamp2 && scoreCamp2) //if added
         {
             levelCamp2.text = GameManager.levelCamp2.ToString() + " / " + GameManager.scoreCamp2.Length;
 
@@ -45,7 +43,7 @@ public class CampaignSelectUI : MonoBehaviour
             }
             scoreCamp2.text = scoreTotal.ToString();
         }
-        if (scoreFreeTotal)
+        if (scoreFreeTotal) //if added
         {
             scoreFreeTotal.text = GameManager.scoreFreeTotal.ToString();
         }

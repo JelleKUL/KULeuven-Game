@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//************* old script ***********//
 
 public class Polygonation : MonoBehaviour
 {

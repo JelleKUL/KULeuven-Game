@@ -141,7 +141,9 @@ public class PolygonationQuestions : MonoBehaviour
                 titleQuestionText.text = "Bilateratie bepaal P";
                 questionText.text = "A = x:" + obsructedPointsArray[0] * GameManager.worldScale + ", y:" + obsructedPointsArray[1] * GameManager.worldScale + " B = x:" + obsructedPointsArray[2] * GameManager.worldScale + ", y:" + obsructedPointsArray[3] * GameManager.worldScale;
                 break;
+  
         }
+        if (GameManager.showDebugAnswer) Debug.Log(correctAnswer);
     }
 
     //checks if the given anwser is correct

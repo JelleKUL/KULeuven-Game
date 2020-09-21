@@ -21,6 +21,8 @@ public class PolygonPointController : MonoBehaviour
     [HideInInspector]
     public float errorEllipsSize;
     public bool IsSnapped;
+    [HideInInspector]
+    public bool displayError;
 
     private float lengthError;
     private float angleError;
@@ -29,11 +31,9 @@ public class PolygonPointController : MonoBehaviour
     private void Start()
     {
         transform.rotation = Quaternion.identity;
-        lengthError = Random.Range(-3 * maxLengthError, 3 * maxLengthError);
-        angleError = Random.Range(-3 * maxAngleError, 3 * maxAngleError);
-
-
-
+        
+        lengthError = displayError? Random.Range(-maxLengthError, maxLengthError) : 0f;
+        angleError = displayError? Random.Range(-maxAngleError, maxAngleError) : 0f;
 
     }
 

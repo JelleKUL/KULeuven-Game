@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//*************** Manages the physics of sideview objects ****************//
+
+[RequireComponent(typeof(Rigidbody2D))]
 public class Physics2DObject : MonoBehaviour
 {
-    
+    [Header("Parameters")]
     [Tooltip ("Check-off if you want to allow the object to be placed upside down")]
     public bool allowUpsideDown;
+    [HideInInspector]
+    public bool isHeld; // managed by the waterpassing controller
+
     private Rigidbody2D rb;
     private GameManager gm;
-
-    public bool isHeld;
-
 
     // Start is called before the first frame update
     void Start()

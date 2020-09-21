@@ -162,7 +162,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
                 break;
         }
-        Debug.Log(correctAnswer);
+        if(GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + correctAnswer);
     }
 
 
