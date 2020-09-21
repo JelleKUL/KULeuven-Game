@@ -193,10 +193,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterPassingStandardScene Tabel
       objectReference: {fileID: 0}
+    - target: {fileID: 6232935651290367227, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_Text
+      value: Hoogteverschil
+      objectReference: {fileID: 0}
     - target: {fileID: 6840881715961567466, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: addPointOutLoop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376037602940607507, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_Text
+      value: Submit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3f16918dd96e42e0baf32203e1602c6, type: 3}

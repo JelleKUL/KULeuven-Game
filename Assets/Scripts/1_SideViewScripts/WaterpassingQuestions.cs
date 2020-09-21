@@ -100,7 +100,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = waterpassing.correctHeight;
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & B";
-                questionText.text = "Plaats de meetbaken op de meetpunten en meet met het meettoestel het verschil tussen beide punten";
+                questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het verschil tussen beide punten";
 
                 break;
 
@@ -108,7 +108,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 waterpassing.SetParameters(4, 4, 1, false, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = waterpassing.correctHeight;
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & D";
-                questionText.text = "Plaats de meetbaken op de meetpunten en meet met het meettoestel het verschil tussen beide punten";
+                questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het hoogteverschil tussen beide punten";
 
                 break;
 
@@ -116,9 +116,8 @@ public class WaterpassingQuestions : MonoBehaviour
                 waterpassing.SetParameters(2, 2, 1, true, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = waterpassing.correctDistance * GameManager.worldScale;
                 questionHeaderText.text = "Bepaal de afstand tussen A & B";
-                questionText.text = "Plaats de meetbaken op de meetpunten en meet met het meettoestel het verschil tussen beide punten." +
-                    "Gebruik de boven en onderlijn om de afstanden te bepalen." +
-                    "Onthoud wat de standaarddivergentie is van het meettoestel.";
+                questionText.text = "Plaats de meetbaken op A en B en het waterpastoestel tussen beide meetpunten." +
+                    " Gebruik de boven en onderlijn van het vizier om de afstanden te berekenen.";
 
                 break;
 
@@ -126,7 +125,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 waterpassing.SetParameters(0, 1, 1, true, true, new Vector2(4,1), true, new Vector2(7,1), false);
                 correctAnswer = waterpassing.correctErrorAngle * 4/3.6f;
                 questionHeaderText.text = "Bepaal de collimatiefout van het toestel";
-                questionText.text = "Aan de hand van een exentrieke plaatsing en de afstand tot de meetbaak.";
+                questionText.text = "Bereken de collimatiefout d.m.v. een exentrieke plaatsing en de afstanden tot de meetbaak.";
 
                 break;
 
