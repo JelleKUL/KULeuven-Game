@@ -29,7 +29,7 @@ public class PolygonLineController : MonoBehaviour
     [Tooltip("the measure error of the angle")]
     [Range(0, 100)]
     public float angleError;
-    [Tooltip ("Should the first point be locked in place an where?")]
+    [Tooltip ("Should the first point be locked in place and where?")]
     public bool lockFirstPoint;
     public Vector2 firstPointPosition;
     public bool showEllipses;

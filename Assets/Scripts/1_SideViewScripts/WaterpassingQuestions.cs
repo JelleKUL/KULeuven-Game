@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 //*********** The WaterpassingQuestions sets the required parameters for a specific question ******************//
 
 
@@ -220,7 +221,7 @@ public class WaterpassingQuestions : MonoBehaviour
         {
             case QuestionType.Hoogteverschil2Punten:
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight),3);
+                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
 
             case QuestionType.HoogteVerschilMeerPunten:
 

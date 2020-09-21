@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -148,11 +149,18 @@ public class MapAngleQuestions : MonoBehaviour
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
-                correctAnswerH = Mathf.Sqrt(Mathf.Pow(correctAnswerArray[0] + correctAnswerArray[2], 2) + Mathf.Pow(correctAnswerArray[1] + correctAnswerArray[3], 2)) * GameManager.worldScale;
-                correctAnswer = correctAnswerH.ToString();
+                correctAnswerH = Mathf.Sqrt(Mathf.Pow(correctAnswerArray[0] - correctAnswerArray[2], 2) + Mathf.Pow(correctAnswerArray[1] - correctAnswerArray[3], 2)) * GameManager.worldScale;
+                //correctAnswerH = (float)Math.Round(Convert.ToDouble(correctAnswerH), 3);
+                //correctAnswer = correctAnswerH.ToString();
+                var a = (correctAnswerArray[0] *GameManager.worldScale).ToString();
+                    
+                var b = (correctAnswerArray[1] * GameManager.worldScale).ToString();
+
+                correctAnswer = a + "," +b;
+
 
                 titleQuestionText.text = "Bepaal de afstand tussen de punten P & A";
-                questionText.text = "aan de hand van de kaarthoek, bepaal de afstand in vogelvlucht.";
+                questionText.text = "Bereken de Euclidische afstand ||AB|| m.b.v. de kaarthoeken.";
 
                 if (GameManager.showDebugAnswer) Debug.Log(correctAnswerH);
 
