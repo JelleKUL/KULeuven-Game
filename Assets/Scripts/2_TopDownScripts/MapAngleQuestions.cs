@@ -117,10 +117,11 @@ public class MapAngleQuestions : MonoBehaviour
 				//questionText.text = " Via de verkregen meting van A: \n\u2022 x: " + (Mathf.Round(correctAnswerArray[2] * 1000)/1000f) * GameManager.worldScale + "m \n\u2022 y: " + (Mathf.Round(correctAnswerArray[3] * 1000) / 1000f) * GameManager.worldScale + "m";
                 
 				// nieuw (met string interpolation $), kan ook via x.ToString("F2"):
-				float x = correctAnswerArray[2] * GameManager.worldScale;
-				float y = correctAnswerArray[3] * GameManager.worldScale;
-				questionText.text = $" Via de verkregen meting van A: \n\u2022 x: {x:F2}m \n\u2022 y: {y:F2}m";
-                Debug.Log("{x} ,{y}");
+				float xx = correctAnswerArray[2] * GameManager.worldScale;
+				float yy = correctAnswerArray[3] * GameManager.worldScale;
+				questionText.text = $" Via de verkregen meting van A: \n\u2022 x: {xx:F2}m \n\u2022 y: {yy:F2}m";
+				if (GameManager.showDebugAnswer)
+					Debug.Log("{x} ,{y}");
                 break;
 
             case QuestionType.AnderAssenStelsel:
