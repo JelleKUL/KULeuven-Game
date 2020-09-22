@@ -10,18 +10,6 @@ public class WaterPassingTabelTotaal : MonoBehaviour
     public Text nieuwHoogteText;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
     public void SetValues(float hoogte, float afstand)
     {
         hoogteVerschilText.text = hoogte.ToString() + " m";

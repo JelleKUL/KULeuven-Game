@@ -13,6 +13,7 @@ public class WaterPassingTabelVereffening : MonoBehaviour
     public float hoogteVerschil;
     public float vereffenigsHoogte;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +26,9 @@ public class WaterPassingTabelVereffening : MonoBehaviour
         vereffenigsHoogte = 0f;
         if (float.TryParse(vereffeningsHoogteText.text, out float result))
         {
-            vereffenigsHoogte = result;
+            vereffenigsHoogte =result;
         }
-        else vereffenigsHoogte = 0f;
+        else vereffenigsHoogte = 0.000f;
 
     }
 
@@ -35,6 +36,7 @@ public class WaterPassingTabelVereffening : MonoBehaviour
     {
         station.text = nr.ToString();
     }
+
     public void SetValues(string hoogteVerschilVoor, string afstandVoor)
     {
         hoogteVerschilText.text = hoogteVerschilVoor;
@@ -49,8 +51,12 @@ public class WaterPassingTabelVereffening : MonoBehaviour
         afstandText.text = afstandVoor + " m";
     }
 
-    public void SetColor(Color col)
-    {
 
+    public void SetColor(Color col, bool correct)
+    {
+        if (correct)
+        {
+
+        }
     }
 }

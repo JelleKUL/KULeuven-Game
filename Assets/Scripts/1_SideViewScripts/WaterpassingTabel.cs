@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//************* This maneges everything about the waterpassings tabel, there are child scripts for the seperate parts**********//
+
 public class WaterpassingTabel : MonoBehaviour
 {
-    public Color correctColor, falseColor;
-
+    
+    [Header ("Objets")]
     public GameObject waterPassingHeader;
     public GameObject waterPassingHeaderVereffening;
 
@@ -14,7 +16,12 @@ public class WaterpassingTabel : MonoBehaviour
     public GameObject waterPassingTotaal;
     public GameObject waterPassingTotaalVereffening;
 
+    [Header("Parameters")]
+    
     public float titleHeight = 25f;
+    public bool overrideErrorMargin = true;
+    public float errormarginOverride = 0.002f;
+    public Color correctColor, falseColor;
 
     private GameObject totaal;
     private GameObject totaalVereffening;
@@ -22,19 +29,29 @@ public class WaterpassingTabel : MonoBehaviour
     private List<WaterpassigTabelDeel> tabelParts = new List<WaterpassigTabelDeel>();
     private List<WaterPassingTabelVereffening> tabelVereffeningParts = new List<WaterPassingTabelVereffening>();
 
+    [HideInInspector]
     public float[] inputHoogteverschillen;
+    [HideInInspector]
     public float[] inputHoogteverschillenVereffening;
-
+    [HideInInspector]
     public float totalHoogte;
+    [HideInInspector]
     public float totalAfstand;
+    [HideInInspector]
     public float nieuwTotalHoogte;
-    private int amount; 
 
+    private int amount; 
     private bool VereffeningsMode;
+
+    private WaterPassingTabelTotaal waterPassingTabelTotaal;
+    private GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
         //CreateTable(4);
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        
     }
 
     // Update is called once per frame
@@ -47,6 +64,7 @@ public class WaterpassingTabel : MonoBehaviour
         inputHoogteverschillen = new float[tabelParts.Count];
         inputHoogteverschillenVereffening = new float[tabelParts.Count];
 
+        // add the values to totaal-hoogte and -afstand
         for (int i = 0; i < tabelParts.Count; i++)
         {
             totalHoogte += tabelParts[i].hoogteVerschil;
@@ -56,7 +74,7 @@ public class WaterpassingTabel : MonoBehaviour
 
         if (totaal != null)
         {
-            totaal.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
+            waterPassingTabelTotaal.SetValues(totalHoogte, totalAfstand);
         }
         
         
@@ -68,14 +86,13 @@ public class WaterpassingTabel : MonoBehaviour
 
         }
 
+
         if (totaalVereffening != null)
         {
             totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetNieuwHoogte(nieuwTotalHoogte);
             totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
         }
             
-        
-        
     }
 
     public void CreateTable(int nrOfPoints)
@@ -97,8 +114,11 @@ public class WaterpassingTabel : MonoBehaviour
             else 
                 deel.SetNames(i + 1, SetNameText(i-1), SetNameText(i));
         }
+
         totaal = Instantiate(waterPassingTotaal, transform, false);
+        waterPassingTabelTotaal = totaal.GetComponent<WaterPassingTabelTotaal>();
         totaal.GetComponent<RectTransform>().localPosition = new Vector2(0, -titleHeight - (nrOfPoints) * size);
+
 
         //creating the VereffeningsTable and setting it False
         
@@ -158,47 +178,60 @@ public class WaterpassingTabel : MonoBehaviour
         totaalVereffening.SetActive(!input);
     }
 
-    public bool CheckAnswers(float[] inputs)
+
+    public bool CheckAnswers(float[] heights, float[] distances)
     {
         bool correct = true;
         if (VereffeningsMode)
         {
             
-                for (int i = 0; i < tabelVereffeningParts.Count; i++)
+            for (int i = 0; i < tabelVereffeningParts.Count; i++)
+            {
+                if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - heights[i]) > (overrideErrorMargin ? errormarginOverride : gm.errorMargin))
                 {
-                    if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - inputs[i]) > 0.02)
-                    {
-                        tabelVereffeningParts[i].vereffeningsHoogteText.color = falseColor;
-                        correct = false;
-                    }
-                    else
-                    {
-                        tabelVereffeningParts[i].vereffeningsHoogteText.color = correctColor;
+                    tabelVereffeningParts[i].vereffeningsHoogteText.color = falseColor;
+                    correct = false;
+                }
 
-                    }
+                else
+                {
+                    tabelVereffeningParts[i].vereffeningsHoogteText.color = correctColor;
 
                 }
-            
-            
+                if (Mathf.Abs(tabelParts[i].afstand - distances[i]) > (overrideErrorMargin ? errormarginOverride: gm.errorMargin))
+                {
+                    tabelVereffeningParts[i].afstandText.color = falseColor;
+                    correct = false;
+                }
+
+                else
+                {
+                    tabelVereffeningParts[i].afstandText.color = correctColor;
+
+                }
+
+            }
+
         }
+
         else
         { 
                 
             for (int i = 0; i < tabelParts.Count; i++)
             {
-                if (Mathf.Abs(tabelParts[i].hoogteVerschil - inputs[i]) > 0.01)
+
+                if (Mathf.Abs(tabelParts[i].hoogteVerschil - heights[i]) > (overrideErrorMargin ? errormarginOverride : gm.errorMargin))
                 {
                     tabelParts[i].hoogteVerschilText.color = falseColor;
-                    correct = false;
+                    
                 }
                 else
                 {
                     tabelParts[i].hoogteVerschilText.color = correctColor;
                 }
                 
-
             }
-           
+            correct = false;
         }
         return correct;
     }

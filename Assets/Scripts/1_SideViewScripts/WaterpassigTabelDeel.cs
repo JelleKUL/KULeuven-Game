@@ -20,6 +20,7 @@ public class WaterpassigTabelDeel : MonoBehaviour
 
     [HideInInspector]
     public float hoogteVerschil;
+    [HideInInspector]
     public float afstand;
 
 
@@ -40,12 +41,12 @@ public class WaterpassigTabelDeel : MonoBehaviour
 
         if (float.TryParse(metingAchter.text, out result) && float.TryParse(metingVoor.text, out result2))
         {
-            hoogteVerschil = result2 - result;
+            hoogteVerschil = result - result2;
             
         }
         else hoogteVerschil = 0f;
 
-        hoogteVerschilText.text = hoogteVerschil.ToString() + " m";
+        hoogteVerschilText.text = (Mathf.Round(hoogteVerschil * 1000) / 1000f).ToString() + " m";
 
     }
 

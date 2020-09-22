@@ -58,6 +58,7 @@ public class WaterPassingController : MonoBehaviour
     [Range(0, 0.5f)]
     public float maxHeightGroundPoint;
     public bool extremeHeightDiff;
+    public float startAndEndPointOffset = 0.1f;
   
     
     private GameManager gm;
@@ -76,6 +77,8 @@ public class WaterPassingController : MonoBehaviour
     public float correctHeight;
     [HideInInspector]
     public float[] correctHeightDifferences;
+    [HideInInspector]
+    public float [] correctDistances;
     [HideInInspector]
     public float correctDistance;
     [HideInInspector]
@@ -397,10 +400,10 @@ public class WaterPassingController : MonoBehaviour
 
     public void AddStartAndEndGroundPoint()
     {
-        GameObject newPoint = Instantiate(groundPoint, new Vector2(gm.screenMin.x+0.1f,0), Quaternion.identity);
+        GameObject newPoint = Instantiate(groundPoint, new Vector2(gm.screenMin.x+ startAndEndPointOffset, 0), Quaternion.identity);
         newPoint.GetComponent<PolygonPointController>().SetNameNrText(0);
 
-        newPoint = Instantiate(groundPoint, new Vector2(gm.screenMax.x - 0.1f, 0), Quaternion.identity);
+        newPoint = Instantiate(groundPoint, new Vector2(gm.screenMax.x - startAndEndPointOffset, 0), Quaternion.identity);
         newPoint.GetComponent<PolygonPointController>().SetNameNrText(0);
     }
 
@@ -455,18 +458,33 @@ public class WaterPassingController : MonoBehaviour
         if (loopAround)
         {
             correctHeightDifferences = new float[nrOfPoints + 1];
-            correctHeightDifferences[0] = groundPoints[0].transform.position.y;
+            correctDistances = new float[nrOfPoints + 1];
 
+            // correct heights
+            correctHeightDifferences[0] = groundPoints[0].transform.position.y;
             for (int i = 1; i < nrOfPoints; i++)
             {
                 correctHeightDifferences[i] = groundPoints[i].transform.position.y - groundPoints[i - 1].transform.position.y;
+                
             }
             correctHeightDifferences[nrOfPoints] = -groundPoints[nrOfPoints-1].transform.position.y;
 
-            for (int i = 0; i < nrOfPoints+1; i++)
+            //correct distances
+            correctDistances[0] = groundPoints[0].transform.position.x - (gm.screenMin.x + startAndEndPointOffset);
+            for (int i = 1; i < nrOfPoints; i++)
             {
-                Debug.Log(correctHeightDifferences[i]);
+                correctDistances[i] = groundPoints[i].transform.position.x - groundPoints[i-1].transform.position.x;
             }
+            correctDistances[nrOfPoints] = (gm.screenMax.x - startAndEndPointOffset) - groundPoints[nrOfPoints-1].transform.position.x;
+
+            if (GameManager.showDebugAnswer || true)
+            {
+                for (int i = 0; i < nrOfPoints + 1; i++)
+                {
+                    Debug.Log(i + "-> Height: " + correctHeightDifferences[i] + " m, Distance: " + correctDistances[i]);
+                }
+            }
+            
         }
         
 
@@ -607,7 +625,7 @@ public class WaterPassingController : MonoBehaviour
     }
     public bool CheckTabelAnswer()
     {
-        return waterpassingTabel.CheckAnswers(correctHeightDifferences);
+        return waterpassingTabel.CheckAnswers(correctHeightDifferences, correctDistances);
     }
 
 
