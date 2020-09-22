@@ -19,4 +19,5 @@ public class WaterPassingTabelTotaal : MonoBehaviour
     {
         nieuwHoogteText.text = nieuwhoogte.ToString() + " m";
     }
+
 }

@@ -39,55 +39,8 @@ public class WaterpassingQuestions : MonoBehaviour
 
         SetQuestionType(SoortVraag);
     }
-    public void ResetCurrentQuestion()
-    {
-        switch (SoortVraag)
-        {
-            case QuestionType.Geen:
-                break;
-
-            case QuestionType.Hoogteverschil2Punten:
-                waterpassing.ChangePoints();
-                correctAnswer = waterpassing.correctHeight;
-
-                break;
-
-            case QuestionType.HoogteVerschilMeerPunten:
-                waterpassing.ChangePoints();
-                correctAnswer = waterpassing.correctHeight;
-
-                break;
-
-            case QuestionType.Afstand2Punten:
-                waterpassing.ChangePoints();
-                correctAnswer = waterpassing.correctDistance;
-
-                break;
-
-            case QuestionType.Hoekfout:
-                waterpassing.ChangePoints();
-                correctAnswer = waterpassing.correctErrorAngle;
-
-                break;
-
-            case QuestionType.KringWaterpassing:
-                waterpassing.ChangePoints();
-                correctAnswer = waterpassing.correctHeight;
-
-                break;
-
-            case QuestionType.Scheefstand:
-                waterpassing.ChangePoints();
-                correctAnswer = waterpassing.correctHeight;
-
-                break;
-            case QuestionType.ScheveWaterpassing:
-                waterpassing.ChangePoints();
-                correctAnswer = waterpassing.correctHeight;
-
-                break;
-        }
-    }
+    
+    
 
     //sets the parameters for the type of question
     public void SetQuestionType(QuestionType vraag)
@@ -243,6 +196,14 @@ public class WaterpassingQuestions : MonoBehaviour
                 return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
 
             case QuestionType.Scheefstand:
+
+                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
+
+            case QuestionType.OmgekeerdeBaak:
+
+                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
+
+            case QuestionType.ScheveWaterpassing:
 
                 return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
 

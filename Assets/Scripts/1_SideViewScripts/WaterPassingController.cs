@@ -369,12 +369,8 @@ public class WaterPassingController : MonoBehaviour
     // randomizes the playfield
     public void ChangePoints()
     {
-        AddGroundPoints();
-        if (placeTopPoints)
-        {
-            addTopPoints();
-
-        }
+        AddGroundPoints( placeTopPoints);
+        
 
         for (int i = 0; i < measures.Count; i++)
         {
@@ -408,52 +404,83 @@ public class WaterPassingController : MonoBehaviour
     }
 
     //place new groundpoints
-    public void AddGroundPoints()
+    public void AddGroundPoints( bool placeTop)
     {
         
-        float Increment = (gm.screenMax.x - gm.screenMin.x - 2) / (float)nrOfPoints;
-        
+        float Increment = (gm.screenMax.x - gm.screenMin.x - 2) / (float)(nrOfPoints + (placeTop? nrOfTopPoints : 0));
+        int pointSkipper = 0;
 
+        // creating the groundpoints
         if (groundPoints.Count < nrOfPoints)
         {
             Debug.Log(groundPoints.Count + " placed -> " + nrOfPoints + " to Place");
-
+            pointSkipper = 0;
             for (int i = groundPoints.Count; i < nrOfPoints; i++)
             {
                 GameObject newPoint = Instantiate(groundPoint, Vector2.zero, Quaternion.identity);
-                newPoint.GetComponent<PolygonPointController>().SetNameText(i + 1);
+                
+                newPoint.GetComponent<PolygonPointController>().SetNameText(i + 1 + pointSkipper);
+                pointSkipper += (nrOfTopPoints > i) ? 1 : 0;
                 groundPoints.Add(newPoint);
+                Debug.Log("placed " + i + 1 + pointSkipper);
+            }
+
+            // moving the points to the correct location
+            pointSkipper = 0;
+            for (int i = 0; i < nrOfPoints; i++)
+            {
+                Vector2 newPos;
+                if (extremeHeightDiff)
+                {
+                    newPos = new Vector2(gm.screenMin.x + 1 + Increment * (i + pointSkipper) + Random.Range(minDistance / 2f, Increment - minDistance / 2f), (gm.screenMax.y) * maxHeightGroundPoint * i * 2 / (float)nrOfPoints + Random.Range(0, 0.5f));
+                }
+                else newPos = new Vector2(gm.screenMin.x + 1 + Increment * (i + pointSkipper) + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(0, (gm.screenMax.y) * maxHeightGroundPoint));
+                groundPoints[i].transform.position = newPos;
+                pointSkipper += (nrOfTopPoints > i) ? 1 : 0;
+                Debug.Log("moved " + i);
+            }
+        }
+        
+
+        // creating the toppoints
+        if (topPoints.Count < nrOfTopPoints && placeTopPoints)
+        {
+            Debug.Log(topPoints.Count + " " + nrOfTopPoints);
+            pointSkipper = 1;
+            for (int i = topPoints.Count; i < nrOfTopPoints; i++)
+            {
+                GameObject newPoint = Instantiate(topPoint, Vector2.zero, Quaternion.identity);
+                newPoint.GetComponent<PolygonPointController>().SetNameText(i + 1 + pointSkipper);
+                pointSkipper += (nrOfPoints > i) ? 1 : 0;
+                topPoints.Add(newPoint);
                 Debug.Log("placed " + i);
             }
-        }
-        if (groundPoints.Count > nrOfPoints)
-        {
-            for (int i = groundPoints.Count; i > nrOfPoints; i--)
-            {
-                GameObject lastPoint = groundPoints[i - 1];
-                groundPoints.RemoveAt(i - 1);
 
-                Destroy(lastPoint);
-                Debug.Log("destroyed" + i);
+            // moving the toppoints to the correct position
+            pointSkipper = 1;
+            for (int i = 0; i < nrOfTopPoints; i++)
+            {
+                Vector2 newPos = new Vector2(gm.screenMin.x + 1 + Increment * (i + pointSkipper) + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(gm.screenMax.y - 0.5f, (gm.screenMax.y - 0.5f) * (1 - maxHeightGroundPoint)));
+                topPoints[i].transform.position = newPos;
+                pointSkipper += (nrOfPoints > i) ? 1 : 0;
+                Debug.Log("moved top " + i);
             }
         }
 
-        for (int i = 0; i < nrOfPoints; i++)
+        if (!placeTopPoints)
         {
-            Vector2 newPos;
-            if (extremeHeightDiff)
-            {
-                 newPos = new Vector2(gm.screenMin.x + 1 + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), (gm.screenMax.y) * maxHeightGroundPoint * i * 2 / (float)nrOfPoints + Random.Range(0, 0.5f));
-            }
-            else newPos = new Vector2(gm.screenMin.x + 1 + Increment * i + Random.Range(minDistance / 2f, Increment - minDistance / 2f), Random.Range(0, (gm.screenMax.y) * maxHeightGroundPoint));
-            groundPoints[i].transform.position = newPos;
-            Debug.Log("moved " + i);
+            correctHeight = groundPoints[groundPoints.Count - 1].transform.position.y - groundPoints[0].transform.position.y;
+            correctDistance = groundPoints[groundPoints.Count - 1].transform.position.x - groundPoints[0].transform.position.x;
         }
-
-
-        correctHeight = groundPoints[groundPoints.Count - 1].transform.position.y - groundPoints[0].transform.position.y;
-        correctDistance = groundPoints[groundPoints.Count - 1].transform.position.x - groundPoints[0].transform.position.x;
+        else
+        {
+            // check what the last point is, the first point is alsways the groundpoint
+            Vector2 lastPoint = nrOfPoints > nrOfTopPoints ? groundPoints[groundPoints.Count - 1].transform.position : topPoints[topPoints.Count - 1].transform.position;
+            correctHeight = lastPoint.y - groundPoints[0].transform.position.y;
+            correctDistance = lastPoint.x - groundPoints[0].transform.position.x;
+        }
         Debug.Log(correctHeight);
+
 
         if (loopAround)
         {

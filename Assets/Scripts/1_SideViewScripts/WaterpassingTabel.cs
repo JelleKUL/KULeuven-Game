@@ -191,6 +191,8 @@ public class WaterpassingTabel : MonoBehaviour
                 {
                     tabelVereffeningParts[i].vereffeningsHoogteText.color = falseColor;
                     correct = false;
+
+                    
                 }
 
                 else

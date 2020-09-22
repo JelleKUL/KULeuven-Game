@@ -101,7 +101,7 @@ public class MeasureController : MonoBehaviour
             {
                 hasHitL = true;
             }
-            return new Vector4( hit.point.x, hit.point.y, -1, hit.distance);
+            return new Vector4( hit.transform.position.x, hit.point.y, -1, Mathf.Abs(origin.x - hit.transform.position.x));
         }
         if (direction == 1)
         {
@@ -125,7 +125,7 @@ public class MeasureController : MonoBehaviour
     void scaleMagnify(int direction, MagnifyGlass magnify)
     {
         Vector4 beaconHitPoint = CastLaser(measureHead.position, new Vector2(direction * Mathf.Cos((errorAngle + direction * scheefstandsHoek) * Mathf.Deg2Rad), Mathf.Sin((errorAngle + direction * scheefstandsHoek) * Mathf.Deg2Rad)),direction);
-        magnify.SetPositionAndScale(beaconHitPoint + new Vector4(1, 0, 0, 0) * direction * beaconOffset, beaconHitPoint.w * DistanceMultiplier, true);
+        magnify.SetPositionAndScale(beaconHitPoint, beaconHitPoint.w * DistanceMultiplier, true);
 
         //magnify.transform.position = beaconHitPoint + new Vector4(1, 0,0,0) * direction * beaconOffset;
         //magnify.transform.localScale = new Vector3(beaconHitPoint.w * DistanceMultiplier, beaconHitPoint.w * DistanceMultiplier, 1);
