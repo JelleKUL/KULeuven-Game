@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("PlayField")]
     [Header ("Global Parameters")]
     [Tooltip ("the errormargin for answers")]
-    public float errorMargin = 0.1f;
+    public float errorMargin = 0.001f;
     public static float worldScale = 10f;
 
 

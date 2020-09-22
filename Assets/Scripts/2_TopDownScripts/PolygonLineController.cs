@@ -29,7 +29,7 @@ public class PolygonLineController : MonoBehaviour
     [Tooltip("the measure error of the angle")]
     [Range(0, 100)]
     public float angleError;
-    [Tooltip ("Should the first point be locked in place an where?")]
+    [Tooltip ("Should the first point be locked in place and where?")]
     public bool lockFirstPoint;
     public Vector2 firstPointPosition;
     public bool showEllipses;
@@ -257,8 +257,12 @@ public class PolygonLineController : MonoBehaviour
     public float GetMapAngle(Vector2 endPoint, Vector2 startPoint)
     {
         float angle = Vector2.SignedAngle(endPoint, startPoint);
-
-        return (Mathf.Round(angle / 360 * 400 * 100) / 100f);
+        angle = Mathf.Round(angle / 360 * 400 * 1000) / 1000f +200f;
+        //if (angle < -0F)
+        //{
+        //    angle = Mathf.Abs(angle) + 200f;
+        //}
+        return angle;
     }
 
 
