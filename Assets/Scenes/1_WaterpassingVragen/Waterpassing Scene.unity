@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: SoortVraag
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4311065015931094051, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_Text
+      value: "Error Margin: \n0.001"
+      objectReference: {fileID: 0}
     - target: {fileID: 7093937433697466476, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: nrOfPoints

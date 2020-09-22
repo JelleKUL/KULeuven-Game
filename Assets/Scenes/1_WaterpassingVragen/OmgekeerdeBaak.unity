@@ -353,6 +353,11 @@ PrefabInstance:
       propertyPath: m_Points.Array.data[9].y
       value: 10.48512
       objectReference: {fileID: 0}
+    - target: {fileID: 4311065015931094051, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_Text
+      value: "Error Margin: \n0.001m"
+      objectReference: {fileID: 0}
     - target: {fileID: 4344728549182195325, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_IsActive
