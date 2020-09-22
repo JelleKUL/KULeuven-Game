@@ -836,6 +836,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7093937433697466476, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: extremeHeightDiff
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7386341644308525282, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_AnchoredPosition.x

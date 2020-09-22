@@ -201,7 +201,7 @@ PrefabInstance:
     - target: {fileID: 1992287482420203316, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4311065015931094051, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
@@ -217,21 +217,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7093937433697466476, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
-        type: 3}
-      propertyPath: distanceMeasureAngle
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7093937433697466476, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
-        type: 3}
-      propertyPath: maxAngleError
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 7093937433697466476, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
-        type: 3}
-      propertyPath: minDistance
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8568660867024383014, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
