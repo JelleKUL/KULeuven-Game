@@ -258,10 +258,6 @@ public class PolygonLineController : MonoBehaviour
     {
         float angle = Vector2.SignedAngle(endPoint, startPoint);
         angle = Mathf.Round(angle / 360 * 400 * 1000) / 1000f +200f;
-        //if (angle < -0F)
-        //{
-        //    angle = Mathf.Abs(angle) + 200f;
-        //}
         return angle;
     }
 

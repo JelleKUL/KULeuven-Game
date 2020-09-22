@@ -71,8 +71,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 waterpassing.SetParameters(2, 2, 1, true, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = waterpassing.correctDistance * GameManager.worldScale;
                 questionHeaderText.text = "Bepaal de afstand tussen A & B";
-                questionText.text = "Plaats de meetbaken op A en B en het waterpastoestel tussen beide meetpunten." +
-                    " Gebruik de boven en onderlijn van het vizier om de afstanden te berekenen.";
+                questionText.text = "Plaats de meetbaken op de meetpunten en gebruik het vizier om de afstand te berekenen.";
 
                 break;
 
@@ -174,7 +173,7 @@ public class WaterpassingQuestions : MonoBehaviour
         {
             case QuestionType.Hoogteverschil2Punten:
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
+                return waterpassing.correctHeight; 
 
             case QuestionType.HoogteVerschilMeerPunten:
 
@@ -183,7 +182,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.Afstand2Punten:
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctDistance * GameManager.worldScale), 1);
+                return waterpassing.correctDistance;// (float)Math.Round(Convert.ToDouble(waterpassing.correctDistance * GameManager.worldScale), 1);
 
 
             case QuestionType.Hoekfout:
