@@ -290,7 +290,7 @@ public class WaterPassingController : MonoBehaviour
         measureController.errorAngle = correctErrorAngle;
         if (nrOfPoints > 0)
         {
-            measureController.maxDistance = (gm.screenMax.x - gm.screenMin.x) / nrOfPoints - minDistance;
+            measureController.maxDistance = (gm.screenMax.x - gm.screenMin.x) / nrOfPoints - 0.7f*minDistance;
         }
         else
         {
