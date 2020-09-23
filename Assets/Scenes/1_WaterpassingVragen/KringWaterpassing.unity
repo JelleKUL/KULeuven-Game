@@ -152,8 +152,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMove: {x: 0.1, y: 0.5, z: 0}
+  maxScale: 0
   movementSpeed: 0.2
   moveLocal: 0
+  move: 0
+  scale: 0
 --- !u!212 &1960039117
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -303,6 +306,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 526624175823479973, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_Text
+      value: "Error Margin: \n0.003m"
+      objectReference: {fileID: 0}
     - target: {fileID: 619562792141047562, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -418,6 +426,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6232935651290367227, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_Text
+      value: Hoogteverschil
+      objectReference: {fileID: 0}
     - target: {fileID: 7723304667681023593, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: m_Name
@@ -437,6 +450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376037602940607507, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_Text
+      value: Submit
       objectReference: {fileID: 0}
     - target: {fileID: 8482660664670102572, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}

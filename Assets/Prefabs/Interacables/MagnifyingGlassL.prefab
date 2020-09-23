@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7637951493619502472}
   - component: {fileID: 5853991456685845984}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: MovingCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -606,7 +606,7 @@ PrefabInstance:
     - target: {fileID: 939078881808828710, guid: 58eab502b124c44f38fa2da86f98e965,
         type: 3}
       propertyPath: m_Name
-      value: KruisDraden (1)
+      value: KruisDraden Zoomed
       objectReference: {fileID: 0}
     - target: {fileID: 939078881808828710, guid: 58eab502b124c44f38fa2da86f98e965,
         type: 3}
