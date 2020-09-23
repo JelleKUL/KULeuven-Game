@@ -648,6 +648,8 @@ public class WaterPassingController : MonoBehaviour
         lockBeacon = lockbeacon;
         lockedBeaconLocation = beaconLocation;
         loopAround = loop;
+
+        Start();
     }
     public bool CheckTabelAnswer()
     {

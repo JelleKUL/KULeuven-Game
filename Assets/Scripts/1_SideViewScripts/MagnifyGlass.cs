@@ -21,6 +21,12 @@ public class MagnifyGlass : MonoBehaviour
     private GameManager gm;
     private bool ShowAssenkruis;
 
+    private Vector3 viewerStartScale;
+
+    private void Awake()
+    {
+        viewerStartScale = viewer.transform.localScale;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +34,7 @@ public class MagnifyGlass : MonoBehaviour
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         circleCollider = GetComponent<CircleCollider2D>();
         zoomedCollider = GetComponent<BoxCollider2D>();
+
 
     }
 
@@ -77,8 +84,8 @@ public class MagnifyGlass : MonoBehaviour
             circleCollider = GetComponent<CircleCollider2D>();
         }
 
-        viewerCamera.orthographicSize = scale;
-        viewer.transform.localScale = Vector3.one * scale;
+        viewerCamera.orthographicSize = viewerStartScale.x * scale;
+        viewer.transform.localScale = viewerStartScale * scale;
         circleCollider.radius = scale * 1.1f;
 
         transform.position = position;

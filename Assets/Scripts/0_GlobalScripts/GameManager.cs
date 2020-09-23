@@ -232,6 +232,11 @@ public class GameManager : MonoBehaviour
        
     }
 
+    public static float RoundFloat(float input, int digits)
+    {
+        return Mathf.Round(input * Mathf.Pow(10, digits)) / (float)Mathf.Pow(10.0f, digits);
+    }
+
 // playAreaSetting
     void SetPlayArea()
     {

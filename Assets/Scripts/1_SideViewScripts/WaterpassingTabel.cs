@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //************* This maneges everything about the waterpassings tabel, there are child scripts for the seperate parts**********//
 
@@ -46,6 +47,8 @@ public class WaterpassingTabel : MonoBehaviour
     private WaterPassingTabelTotaal waterPassingTabelTotaal;
     private GameManager gm;
 
+    private bool playing = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,41 +60,44 @@ public class WaterpassingTabel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playing)
+        {
+            totalHoogte = 0f;
+            totalAfstand = 0f;
+            nieuwTotalHoogte = 0f;
+            inputHoogteverschillen = new float[tabelParts.Count];
+            inputHoogteverschillenVereffening = new float[tabelParts.Count];
+
+            // add the values to totaal-hoogte and -afstand
+            for (int i = 0; i < tabelParts.Count; i++)
+            {
+                totalHoogte += tabelParts[i].hoogteVerschil;
+                inputHoogteverschillen[i] = tabelParts[i].hoogteVerschil;
+                totalAfstand += tabelParts[i].afstand;
+            }
+
+            if (totaal != null)
+            {
+                waterPassingTabelTotaal.SetValues(totalHoogte, totalAfstand);
+            }
+
+
+            for (int i = 0; i < tabelVereffeningParts.Count; i++)
+            {
+                nieuwTotalHoogte += tabelVereffeningParts[i].vereffenigsHoogte;
+                inputHoogteverschillenVereffening[i] = tabelVereffeningParts[i].vereffenigsHoogte;
+                tabelVereffeningParts[i].GetComponent<WaterPassingTabelVereffening>().SetValues(tabelParts[i].hoogteVerschilText.text, tabelParts[i].afstand.ToString());
+
+            }
+
+
+            if (totaalVereffening != null)
+            {
+                totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetNieuwHoogte(nieuwTotalHoogte);
+                totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
+            }
+        }
         
-        totalHoogte = 0f;
-        totalAfstand = 0f;
-        nieuwTotalHoogte = 0f;
-        inputHoogteverschillen = new float[tabelParts.Count];
-        inputHoogteverschillenVereffening = new float[tabelParts.Count];
-
-        // add the values to totaal-hoogte and -afstand
-        for (int i = 0; i < tabelParts.Count; i++)
-        {
-            totalHoogte += tabelParts[i].hoogteVerschil;
-            inputHoogteverschillen[i] = tabelParts[i].hoogteVerschil;
-            totalAfstand += tabelParts[i].afstand;
-        }
-
-        if (totaal != null)
-        {
-            waterPassingTabelTotaal.SetValues(totalHoogte, totalAfstand);
-        }
-        
-        
-        for (int i = 0; i < tabelVereffeningParts.Count; i++)
-        {
-            nieuwTotalHoogte += tabelVereffeningParts[i].vereffenigsHoogte;
-            inputHoogteverschillenVereffening[i] = tabelVereffeningParts[i].vereffenigsHoogte;
-            tabelVereffeningParts[i].GetComponent<WaterPassingTabelVereffening>().SetValues(tabelParts[i].hoogteVerschilText.text, tabelParts[i].afstand.ToString());
-
-        }
-
-
-        if (totaalVereffening != null)
-        {
-            totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetNieuwHoogte(nieuwTotalHoogte);
-            totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
-        }
             
     }
 
@@ -236,5 +242,25 @@ public class WaterpassingTabel : MonoBehaviour
             correct = false;
         }
         return correct;
+    }
+
+    public void ShowCorrectValues(float[] heights, float[] distances)
+    {
+        ActiveTable(false);
+        playing = false;
+
+        for (int i = 0; i < tabelVereffeningParts.Count; i++)
+        {
+            
+            tabelVereffeningParts[i].vereffeningsHoogteText.color = falseColor;
+            tabelVereffeningParts[i].vereffeningsHoogteText.text = GameManager.RoundFloat(heights[i],3).ToString() + "m";
+            tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInParent<InputField>().interactable = false;
+
+            tabelVereffeningParts[i].afstandText.color = correctColor;
+            tabelVereffeningParts[i].afstandText.text = GameManager.RoundFloat(distances[i], 3).ToString() + "m";
+           
+
+        }
+
     }
 }

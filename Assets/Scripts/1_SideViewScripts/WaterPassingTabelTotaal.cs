@@ -12,12 +12,12 @@ public class WaterPassingTabelTotaal : MonoBehaviour
 
     public void SetValues(float hoogte, float afstand)
     {
-        hoogteVerschilText.text = hoogte.ToString() + " m";
-        afstandText.text = afstand.ToString() + " m";
+        hoogteVerschilText.text = GameManager.RoundFloat(hoogte,3).ToString() + " m";
+        afstandText.text = GameManager.RoundFloat(afstand,3).ToString() + " m";
     }
     public void SetNieuwHoogte(float nieuwhoogte)
     {
-        nieuwHoogteText.text = nieuwhoogte.ToString() + " m";
+        nieuwHoogteText.text = GameManager.RoundFloat(nieuwhoogte,3).ToString() + " m";
     }
 
 }
