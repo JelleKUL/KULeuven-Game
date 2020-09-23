@@ -28,6 +28,7 @@ public class ScheefstandController : MonoBehaviour
     public float correctDistance;
 
     private GameObject building;
+    [HideInInspector]
     public Transform[] points = new Transform[2];
     private GameManager gm;
     private GameObject hitObject;

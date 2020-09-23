@@ -69,7 +69,6 @@ public class WaterPassingController : MonoBehaviour
     private List<GameObject> groundPointsTopDown = new List<GameObject>();
 
 
-
     private bool holdingObject;
     private GameObject hitObject;
 

@@ -95,7 +95,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 //waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
                 //correctAnswer = waterpassing.correctHeight;
                 questionHeaderText.text = "Bepaal de scheefstand van het gebouw";
-                questionText.text = "Plaats de theodoliet en meet de horizontale verschuiving tussen beide punten.";
+                questionText.text = "Plaats de theodoliet en meet de horizontale verschuiving tussen beide punten, gemeten van onder naar boven.";
 
                 break;
 

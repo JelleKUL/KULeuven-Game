@@ -208,6 +208,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2827be7ef67ba4b4daf2017b4fb740d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &878706659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3527560091515094673, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+    type: 3}
+  m_PrefabInstance: {fileID: 1880690856}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1543158126
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,6 +378,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648255619}
   m_CullTransparentMesh: 0
+--- !u!1 &1695596193 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 554227613668425901, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+    type: 3}
+  m_PrefabInstance: {fileID: 1880690856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1880690856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -394,25 +412,45 @@ PrefabInstance:
       propertyPath: m_Text
       value: Scheefstand
       objectReference: {fileID: 0}
+    - target: {fileID: 64816552633057813, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 438774115}
+    - target: {fileID: 64816552633057813, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckAnswer
+      objectReference: {fileID: 0}
+    - target: {fileID: 477972843721001047, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 512599026343199982, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.595
+      value: 3.579
       objectReference: {fileID: 0}
     - target: {fileID: 512599026343199982, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 5.955197
+      value: 7.966653
       objectReference: {fileID: 0}
     - target: {fileID: 512599026343199982, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.809
+      value: 8.565
       objectReference: {fileID: 0}
     - target: {fileID: 512599026343199982, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 16.252947
+      value: 15.766111
+      objectReference: {fileID: 0}
+    - target: {fileID: 512599026343199983, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: showDebug
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 874825781601848763, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
@@ -583,6 +621,21 @@ PrefabInstance:
         type: 3}
       propertyPath: maxSkewAngle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1864724783906478679, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: answerText
+      value: 
+      objectReference: {fileID: 878706659}
+    - target: {fileID: 1864724783906478679, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: winMenu
+      value: 
+      objectReference: {fileID: 1695596193}
+    - target: {fileID: 1864724783906478679, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1992287482420203316, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}

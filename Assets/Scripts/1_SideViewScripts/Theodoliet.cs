@@ -57,10 +57,21 @@ public class Theodoliet : MonoBehaviour
         scaleMagnify(1, magnifyRScript);
         laserline.SetPositions(laserLinePositions);
 
-        measureHead.right = (laserline.GetPosition(0) - measureHead.position);
+        if (gm.IsBetweenValues(transform.position))
+        {
+            Vector2 mousePos = gm.SetObjectToMouse(Input.mousePosition, 0);
 
-        MagnifyR.SetActive( showMagnify);
-        MagnifyL.SetActive( showMagnify);
+            float distPoint1 = Vector2.Distance(laserline.GetPosition(0), mousePos);
+            float distPoint2 = Vector2.Distance(laserline.GetPosition(2), mousePos);
+
+            measureHead.right = distPoint1 < distPoint2 ? laserline.GetPosition(0) : laserline.GetPosition(2) - measureHead.position;
+        }
+        else measureHead.right = Vector2.right;
+
+
+
+
+
     }
 
 
@@ -78,13 +89,20 @@ public class Theodoliet : MonoBehaviour
         //magnify.transform.localScale = Vector3.one * Vector2.Distance(scheefstandController.points[point].position, measureHead.position) * DistanceMultiplier; //new Vector3(beaconHitPoint.w * DistanceMultiplier, beaconHitPoint.w * DistanceMultiplier, 1);
         if (gm.IsBetweenValues(transform.position))
         {
+
+            magnify.gameObject.SetActive(true);
             magnify.SetPositionAndScale(scheefstandController.points[point].position, Vector2.Distance(scheefstandController.points[point].position, measureHead.position) * DistanceMultiplier, false);
+            laserLinePositions[2 * point] = magnify.transform.position;
         }
 
-        else magnify.SetPositionAndScale(transform.position, 0f, false);
+        else
+        {
+            magnify.gameObject.SetActive(false);
+            magnify.SetPositionAndScale(transform.position, 0f, false);
+            laserLinePositions[2 * point] = measureHead.position;
+        }
 
-
-        laserLinePositions[2*point] = magnify.transform.position;
+        
     }
 
 

@@ -19,7 +19,7 @@ public class SkewBuildingController : MonoBehaviour
     public void SetLine( float error)
     {
         straightLine.SetPosition(0, beaconPoints[0].position + Vector3.back);
-        straightLine.SetPosition(1, new Vector3(beaconPoints[0].position.x + error, beaconPoints[1].position.y, -1));
+        straightLine.SetPosition(1, new Vector3(beaconPoints[0].position.x + error, beaconPoints[1].position.y -1, -1));
     }
 
 

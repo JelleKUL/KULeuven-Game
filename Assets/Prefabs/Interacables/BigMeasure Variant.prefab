@@ -7,10 +7,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1244427466444565787, guid: 998ae4e66d110474789197b610c330cc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2774208
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244427466444565787, guid: 998ae4e66d110474789197b610c330cc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2774208
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244427466444565787, guid: 998ae4e66d110474789197b610c330cc,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2774208
+      objectReference: {fileID: 0}
     - target: {fileID: 1354509410431150012, guid: 998ae4e66d110474789197b610c330cc,
         type: 3}
       propertyPath: m_Name
       value: BigMeasure Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933334659828387537, guid: 998ae4e66d110474789197b610c330cc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.270243
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933334659828387537, guid: 998ae4e66d110474789197b610c330cc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.270243
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933334659828387537, guid: 998ae4e66d110474789197b610c330cc,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.270243
       objectReference: {fileID: 0}
     - target: {fileID: 6646755462341769681, guid: 998ae4e66d110474789197b610c330cc,
         type: 3}
