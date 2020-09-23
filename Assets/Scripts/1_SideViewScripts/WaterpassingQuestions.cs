@@ -182,7 +182,9 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.Afstand2Punten:
 
+
                 return (float)Math.Round(Convert.ToDouble(waterpassing.correctDistance * GameManager.worldScale), 3);
+
 
 
             case QuestionType.Hoekfout:
