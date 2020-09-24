@@ -321,7 +321,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Afstandsfout [m]
+  m_Text: Afstandsfout [ppm]
 --- !u!1 &2212603973905175022
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,15 +473,15 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1105840872352551232}
   m_FillRect: {fileID: 7713925214608139483}
   m_HandleRect: {fileID: 6033192034388923138}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 50
+  m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -978,9 +978,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4146919851160622237}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 50
+  m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1671,7 +1671,7 @@ PrefabInstance:
     - target: {fileID: 2603560719369488480, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2664136748962988520, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -1686,33 +1686,8 @@ PrefabInstance:
     - target: {fileID: 3036988599956082936, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_Text
-      value: Next Example
+      value: Submit
       objectReference: {fileID: 0}
-    - target: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: angleError
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: distanceError
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: distanceErrorSlider
-      value: 
-      objectReference: {fileID: 303230168984442033}
-    - target: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: angleErrorSlider
-      value: 
-      objectReference: {fileID: 6912606847586380560}
-    - target: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
-        type: 3}
-      propertyPath: errorEllipsDisplay
-      value: 
-      objectReference: {fileID: 6682845841011053424}
     - target: {fileID: 4251954296214266472, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_Name
@@ -1742,7 +1717,7 @@ PrefabInstance:
     - target: {fileID: 6239610400638983503, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -399
+      value: -252
       objectReference: {fileID: 0}
     - target: {fileID: 6679475374029918907, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -1934,18 +1909,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6486637507790772775}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6682845841011053424 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 485006194963974487, guid: fedf2ec0e39744ebf85ff34b14446f74,
-    type: 3}
-  m_PrefabInstance: {fileID: 6486637507790772775}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6962354727790383029 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,

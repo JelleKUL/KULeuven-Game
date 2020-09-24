@@ -128,16 +128,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 303230168984442033, guid: 91116a3ecaf7848d8bae380f2695dd18,
-        type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 303230168984442033, guid: 91116a3ecaf7848d8bae380f2695dd18,
-        type: 3}
-      propertyPath: m_Value
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 1960717497911712034, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -258,6 +248,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoutenpropagatieStandardScene Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5005284199311738599, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6033192034388923138, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -272,31 +267,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6912606847586380560, guid: 91116a3ecaf7848d8bae380f2695dd18,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6912606847586380560, guid: 91116a3ecaf7848d8bae380f2695dd18,
-        type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6912606847586380560, guid: 91116a3ecaf7848d8bae380f2695dd18,
-        type: 3}
-      propertyPath: m_Value
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6962354727790383029, guid: 91116a3ecaf7848d8bae380f2695dd18,
-        type: 3}
-      propertyPath: distanceError
-      value: 63.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6962354727790383029, guid: 91116a3ecaf7848d8bae380f2695dd18,
-        type: 3}
-      propertyPath: angleError
-      value: 37.2
       objectReference: {fileID: 0}
     - target: {fileID: 7713925214608139483, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}

@@ -74,8 +74,8 @@ public class PolygonLineController : MonoBehaviour
         // initializes a random value
         if (randomizeErrors)
         {
-            distanceError = Random.Range(1f, 99f);
-            angleError = Random.Range(1f, 99f);
+            distanceError = Random.Range(0f, 5f);
+            angleError = Random.Range(0f, 5f);
         }
 
         // finds the sliders and then sets the foutenellips to those values at the starts
@@ -257,7 +257,7 @@ public class PolygonLineController : MonoBehaviour
     public float GetMapAngle(Vector2 endPoint, Vector2 startPoint)
     {
         float angle = Vector2.SignedAngle(endPoint, startPoint);
-        angle = Mathf.Round(angle / 360 * 400 * 1000) / 1000f +200f;
+        angle = Mathf.Round(Mathf.Abs(angle) / 360 * 400 * 1000) / 1000f +200f;
         return angle;
     }
 

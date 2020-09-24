@@ -175,7 +175,7 @@ public class WaterpassingQuestions : MonoBehaviour
         {
             case QuestionType.Hoogteverschil2Punten:
 
-                return waterpassing.correctHeight; 
+                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
 
             case QuestionType.HoogteVerschilMeerPunten:
 
@@ -185,7 +185,7 @@ public class WaterpassingQuestions : MonoBehaviour
             case QuestionType.Afstand2Punten:
 
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctDistance * GameManager.worldScale), 3);
+                return (float)Math.Round(Convert.ToDouble(waterpassing.correctDistance * GameManager.worldScale), 1);
 
 
 

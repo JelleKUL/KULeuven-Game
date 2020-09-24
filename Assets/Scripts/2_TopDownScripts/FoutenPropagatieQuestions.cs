@@ -20,7 +20,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     //public Text answerInputY;
     //public Text answerOutput;
 
-    public enum QuestionType { geen, Werking1Punt, Werking1Puntxy, WerkingMeerderePunten, MinimaleGrootte, DragEnDropEllips }
+    public enum QuestionType { geen, Werking1Punt, Werking1Puntxy, MinimaleGrootte, WerkingMeerderePunten, DragEnDropEllips }
     [Tooltip ("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -53,8 +53,8 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 lineController.SetVisibles(true, true, false, true, false, false, 2);
                 lineController.lockAngleError = false;
                 lineController.lockDistanceError = false;
-                titleQuestionText.text = "Bepaal de grootste standaardafwijking van P";
-                questionText.text = "Bereken a.d.v. de hoekfout en de afstandsfout de standaardafwijking van de errorellips "; 
+                titleQuestionText.text = "Bepaal de standaardafwijking van P";
+                questionText.text = "Bereken a.d.v. de hoekfout en de afstandsfout de maximale standaardafwijking van de errorellips"; 
                 break;
             case QuestionType.Werking1Puntxy:
                 //demo van de foutenellips 1 punt
@@ -62,21 +62,9 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 lineController.lockAngleError = false;
                 lineController.lockDistanceError = false;
                 titleQuestionText.text = "Bepaal de standaardafwijking van P in X en Y";
-                questionText.text = "splits de error ellips in de X-en Y-component";
+                questionText.text = "Bereken de X-en Y-component van de errorellips.";
                 break;
-            case QuestionType.WerkingMeerderePunten:
-                //start oefening TekenFoutenEllips
-                lineController.SetVisibles(true, true, false, true, false, false, 10);
-                placer.PlaceObstacles(1);
-                titleQuestionText.text = "Kijk hoe de foutenellips eruit ziet met meerdere punten";
-                questionText.text = "Klik in het veld om meetpunten te paatsen met een maximum van 10 punten.";
-                break;
-
-            case QuestionType.DragEnDropEllips:
-                //start oefening DragEnDropEllips
-                
-                break;
-
+            
             case QuestionType.MinimaleGrootte:
                 //start oefening MinimaleGrote
                 lineController.randomizeErrors = false;
@@ -87,8 +75,21 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 placer.PlaceCalculatePoints(1);
                 placer.PlaceObstacleBtwn(1);
                 titleQuestionText.text = "Bepaal P met een zo klein mogelijke errorellips";
-                questionText.text = "Meet P via tussenopstellingen. Tracht daarbij de foutenpropagatie te minimaliseren.";
+                questionText.text = "Meet P via tussenopstellingen met een zo klein mogelijke fout.";
                 break;
+            case QuestionType.WerkingMeerderePunten:
+                //start oefening TekenFoutenEllips
+                lineController.SetVisibles(true, true, false, true, false, false, 10);
+                placer.PlaceObstacles(1);
+                titleQuestionText.text = "Bepaal de standaardafwijking van P in X en Y";
+                questionText.text = "Bereken de X-en Y-component van de errorellips van P via meerdere punten.";
+                break;
+
+            case QuestionType.DragEnDropEllips:
+                //start oefening DragEnDropEllips
+
+                break;
+
         }
     }
     // checks the answer
@@ -108,16 +109,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 gm.IncreaseScore(0, 2);
                 winMenu.SetActive(true);
                 break;
-            case QuestionType.WerkingMeerderePunten:
-                gm.IncreaseScore(0, 2);
-                winMenu.SetActive(true);
-                break;
-
-            case QuestionType.DragEnDropEllips:
-                
-
-                break;
-
+           
             case QuestionType.MinimaleGrootte:
 
                 Debug.Log(lineController.LastPointSnapped());
@@ -130,6 +122,15 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 }
                
                 break;
+            case QuestionType.WerkingMeerderePunten:
+                gm.IncreaseScore(0, 2);
+                winMenu.SetActive(true);
+                break;
+
+            case QuestionType.DragEnDropEllips:
+
+                break;
+
         }
     }
 }
