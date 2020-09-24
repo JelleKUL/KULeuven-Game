@@ -71,6 +71,7 @@ public class WaterPassingController : MonoBehaviour
 
     private bool holdingObject;
     private GameObject hitObject;
+    private bool hasStarted;
 
     [HideInInspector]
     public float correctHeight;
@@ -84,8 +85,15 @@ public class WaterPassingController : MonoBehaviour
     public float correctErrorAngle;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        if (!hasStarted) StartSetup();
+    }
+
+    void StartSetup()
+    {
+        hasStarted = true;
+
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         //magnifyGlass.SetActive(false);
         
@@ -649,7 +657,7 @@ public class WaterPassingController : MonoBehaviour
         lockedBeaconLocation = beaconLocation;
         loopAround = loop;
 
-        Start();
+        StartSetup();
     }
     public bool CheckTabelAnswer()
     {
