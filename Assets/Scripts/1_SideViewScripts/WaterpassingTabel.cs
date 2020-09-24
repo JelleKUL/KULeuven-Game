@@ -48,6 +48,7 @@ public class WaterpassingTabel : MonoBehaviour
     private GameManager gm;
 
     private bool playing = true;
+    
 
     // Start is called before the first frame update
     void Start()
