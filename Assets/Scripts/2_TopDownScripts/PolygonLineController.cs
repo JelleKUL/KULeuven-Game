@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,10 +25,10 @@ public class PolygonLineController : MonoBehaviour
     public bool lockDistanceError;
     public bool lockAngleError;
     [Tooltip ("the measure error of distance")]
-    [Range(0, 100)]
+    [Range(0, 5)]
     public float distanceError;
     [Tooltip("the measure error of the angle")]
-    [Range(0, 100)]
+    [Range(0, 5)]
     public float angleError;
     [Tooltip ("Should the first point be locked in place and where?")]
     public bool lockFirstPoint;
@@ -42,7 +43,11 @@ public class PolygonLineController : MonoBehaviour
 
     [HideInInspector]
     public float biggestEllips;
-    
+    public float ellipsX;
+    public float ellipsY;
+
+
+
     private List<GameObject> linePoints = new List<GameObject>();
     private bool holdingObject;
     private GameObject hitObject;
@@ -74,8 +79,8 @@ public class PolygonLineController : MonoBehaviour
         // initializes a random value
         if (randomizeErrors)
         {
-            distanceError = Random.Range(0f, 5f);
-            angleError = Random.Range(0f, 5f);
+            distanceError = UnityEngine.Random.Range(0f, 5f);
+            angleError = UnityEngine.Random.Range(0f, 5f);
         }
 
         // finds the sliders and then sets the foutenellips to those values at the starts
@@ -188,15 +193,19 @@ public class PolygonLineController : MonoBehaviour
                 Vector3 prevEllipse = linePoints[i - 1].GetComponent<PolygonPointController>().GetEllipseInfo();
                 //Debug.Log(prevEllipse.z);
                 PolygonPointController thisPoint = linePoints[i].GetComponent<PolygonPointController>();
-                thisPoint.SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError, angleError);
+                thisPoint.SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError *50f, angleError * 50f); // multiplied by 50 to increase visual size
 
                 if(i == linePoints.Count - 1)
                 {
-                    Vector3 ellips = thisPoint.GetEllipseInfo();
-                    biggestEllips = ellips.x * ellips.y * Mathf.PI / 4f;
+                    Vector3 ellips = thisPoint.GetEllipseInfo(); // the ellips will be 50 times to large !
+                    //biggestEllips = ellips.x * ellips.y * Mathf.PI / 4f;
+                    biggestEllips = Mathf.Round((Mathf.Max(ellips.x, ellips.y)*1000f)/1000f);
+                    ellipsX = Mathf.Round((ellips.x * 1000f) / 1000f);
+                    ellipsY = Mathf.Round((ellips.y * 1000f) / 1000f);
+
                     if (errorEllipsDisplay)
                     {
-                        errorEllipsDisplay.text = (Mathf.Round(biggestEllips * 100) / 100f).ToString();
+                        errorEllipsDisplay.text = biggestEllips.ToString(); //(Mathf.Round(biggestEllips * 100f) / 100f).ToString()
                     }
                 }
                

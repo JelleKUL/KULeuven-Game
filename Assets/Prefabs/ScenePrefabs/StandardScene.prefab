@@ -12281,12 +12281,12 @@ PrefabInstance:
     - target: {fileID: 4222805036568096265, guid: e5504b34600944f4ba5765c6209affd6,
         type: 3}
       propertyPath: distanceError
-      value: 1.2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4222805036568096265, guid: e5504b34600944f4ba5765c6209affd6,
         type: 3}
       propertyPath: angleError
-      value: 6.1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4222805036568096265, guid: e5504b34600944f4ba5765c6209affd6,
         type: 3}
@@ -12318,6 +12318,21 @@ PrefabInstance:
         type: 3}
       propertyPath: showAngles
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222805036568096265, guid: e5504b34600944f4ba5765c6209affd6,
+        type: 3}
+      propertyPath: randomizeErrors
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222805036568096265, guid: e5504b34600944f4ba5765c6209affd6,
+        type: 3}
+      propertyPath: lockDistanceError
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222805036568096265, guid: e5504b34600944f4ba5765c6209affd6,
+        type: 3}
+      propertyPath: lockAngleError
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5504b34600944f4ba5765c6209affd6, type: 3}

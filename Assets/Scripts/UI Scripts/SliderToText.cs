@@ -14,6 +14,6 @@ public class SliderToText : MonoBehaviour
 
     public void FloatToText(float input)
     {
-        targetText.text = (Mathf.Round(input) / 1000f  ).ToString();
+        targetText.text = input.ToString(); //(Mathf.Round(input) / 1000f  ).ToString()
     }
 }

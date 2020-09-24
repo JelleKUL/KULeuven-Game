@@ -480,7 +480,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 5
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
@@ -882,7 +882,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0.003
+  m_Text: 3
 --- !u!114 &2223502631199208322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,14 +972,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 4008135020184350402}
   m_FillRect: {fileID: 4155747484170744883}
   m_HandleRect: {fileID: 4146919851160622237}
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 5
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1232,7 +1232,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0.003
+  m_Text: 3
 --- !u!114 &295258663631216451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,7 +1512,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hoekfout [gon]
+  m_Text: Hoekfout [mgon]
 --- !u!1 &8387705601812143113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,6 +1688,26 @@ PrefabInstance:
       propertyPath: m_Text
       value: Submit
       objectReference: {fileID: 0}
+    - target: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: distanceErrorSlider
+      value: 
+      objectReference: {fileID: 303230168984442033}
+    - target: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: angleErrorSlider
+      value: 
+      objectReference: {fileID: 6912606847586380560}
+    - target: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: lockDistanceError
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: lockAngleError
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4251954296214266472, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_Name
@@ -1763,6 +1783,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128626482935168968, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128626482935169015, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7216796521992512570, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}

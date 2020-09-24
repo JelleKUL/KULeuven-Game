@@ -51,26 +51,26 @@ public class FoutenPropagatieQuestions : MonoBehaviour
             case QuestionType.Werking1Punt:
                 //demo van de foutenellips 1 punt
                 lineController.SetVisibles(true, true, false, true, false, false, 2);
-                lineController.lockAngleError = false;
-                lineController.lockDistanceError = false;
+                //lineController.lockAngleError = false;
+                //lineController.lockDistanceError = false;
                 titleQuestionText.text = "Bepaal de standaardafwijking van P";
                 questionText.text = "Bereken a.d.v. de hoekfout en de afstandsfout de maximale standaardafwijking van de errorellips"; 
                 break;
             case QuestionType.Werking1Puntxy:
                 //demo van de foutenellips 1 punt
                 lineController.SetVisibles(true, true, false, true, false, false, 2);
-                lineController.lockAngleError = false;
-                lineController.lockDistanceError = false;
+                //lineController.lockAngleError = false;
+                //lineController.lockDistanceError = false;
                 titleQuestionText.text = "Bepaal de standaardafwijking van P in X en Y";
                 questionText.text = "Bereken de X-en Y-component van de errorellips.";
                 break;
             
             case QuestionType.MinimaleGrootte:
                 //start oefening MinimaleGrote
-                lineController.randomizeErrors = false;
+                //lineController.randomizeErrors = false;
                 lineController.SetVisibles(true, true, true, true, false, false, 10);
-                lineController.lockAngleError = true;
-                lineController.lockDistanceError = true;
+                //lineController.lockAngleError = false;
+                //lineController.lockDistanceError = false;
                 
                 placer.PlaceCalculatePoints(1);
                 placer.PlaceObstacleBtwn(1);
