@@ -20,7 +20,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     //public Text answerInputY;
     //public Text answerOutput;
 
-    public enum QuestionType { geen, Werking1Punt, WerkingMeerderePunten, MinimaleGrootte, DragEnDropEllips }
+    public enum QuestionType { geen, Werking1Punt, Werking1Puntxy, WerkingMeerderePunten, MinimaleGrootte, DragEnDropEllips }
     [Tooltip ("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -53,8 +53,16 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 lineController.SetVisibles(true, true, false, true, false, false, 2);
                 lineController.lockAngleError = false;
                 lineController.lockDistanceError = false;
-                titleQuestionText.text = "Kijk hoe de foutenellips eruit ziet";
-                questionText.text = "Klik in het veld om een meetpunt te paatsen.";
+                titleQuestionText.text = "Bepaal de grootste standaardafwijking van P";
+                questionText.text = "Bereken a.d.v. de hoekfout en de afstandsfout de standaardafwijking van de errorellips "; 
+                break;
+            case QuestionType.Werking1Puntxy:
+                //demo van de foutenellips 1 punt
+                lineController.SetVisibles(true, true, false, true, false, false, 2);
+                lineController.lockAngleError = false;
+                lineController.lockDistanceError = false;
+                titleQuestionText.text = "Bepaal de standaardafwijking van P in X en Y";
+                questionText.text = "splits de error ellips in de X-en Y-component";
                 break;
             case QuestionType.WerkingMeerderePunten:
                 //start oefening TekenFoutenEllips
@@ -78,8 +86,8 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 
                 placer.PlaceCalculatePoints(1);
                 placer.PlaceObstacleBtwn(1);
-                titleQuestionText.text = "Hoe kan je de foutenellips zo klein mogelijk maken?";
-                questionText.text = "Probeer via een zo kort mogelijke weg het punt te bereiken.";
+                titleQuestionText.text = "Bepaal P met een zo klein mogelijke errorellips";
+                questionText.text = "Meet P via tussenopstellingen. Tracht daarbij de foutenpropagatie te minimaliseren.";
                 break;
         }
     }
@@ -93,6 +101,10 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 break;
 
             case QuestionType.Werking1Punt:
+                gm.IncreaseScore(0, 2);
+                winMenu.SetActive(true);
+                break;
+            case QuestionType.Werking1Puntxy:
                 gm.IncreaseScore(0, 2);
                 winMenu.SetActive(true);
                 break;

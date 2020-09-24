@@ -135,6 +135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 512599026343199983, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
+      propertyPath: errorMargin
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 512599026343199983, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
       propertyPath: showDebug
       value: 0
       objectReference: {fileID: 0}
@@ -211,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 4311065015931094051, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_Text
-      value: "Error Margin: \n0.020m"
+      value: "Error Margin: \n0.20m"
       objectReference: {fileID: 0}
     - target: {fileID: 4344728549182195325, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
