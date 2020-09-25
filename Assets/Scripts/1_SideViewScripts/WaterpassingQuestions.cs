@@ -31,6 +31,8 @@ public class WaterpassingQuestions : MonoBehaviour
     private float correctAnswer;
     private float[] correctPoints;
 
+    private float DEGtoGON = 4 / 3.6f;
+
 
 
     // awake is called before start
@@ -55,7 +57,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.Hoogteverschil2Punten:
                 waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
-                correctAnswer = waterpassing.correctHeight;
+                correctAnswer = GameManager.RoundFloat(waterpassing.correctHeight,3);
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het verschil tussen beide punten";
 
@@ -63,7 +65,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.HoogteVerschilMeerPunten:
                 waterpassing.SetParameters(4, 4, 1, false, false, Vector2.zero, false, Vector2.zero, false);
-                correctAnswer = waterpassing.correctHeight;
+                correctAnswer = GameManager.RoundFloat(waterpassing.correctHeight,3);
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & D";
                 questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het hoogteverschil tussen beide punten";
 
@@ -71,15 +73,15 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.Afstand2Punten:
                 waterpassing.SetParameters(2, 2, 1, true, false, Vector2.zero, false, Vector2.zero, false);
-                correctAnswer = waterpassing.correctDistance * GameManager.worldScale;
+                correctAnswer = GameManager.RoundFloat(waterpassing.correctDistance * GameManager.worldScale,1);
                 questionHeaderText.text = "Bepaal de afstand tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en gebruik het vizier om de afstand te berekenen.";
 
                 break;
 
             case QuestionType.Hoekfout:
-                waterpassing.SetParameters(0, 1, 1, true, true, new Vector2(4,1), true, new Vector2(7,1), false);
-                correctAnswer = waterpassing.correctErrorAngle * 4/3.6f;
+                waterpassing.SetParameters(0, 1, 1, true, true, new Vector2(6,1), true, new Vector2(9,1), false);
+                correctAnswer = GameManager.RoundFloat(waterpassing.correctScaledErrorAngle * DEGtoGON, 3);
                 questionHeaderText.text = "Bepaal de collimatiefout van het toestel";
                 questionText.text = "Bereken de collimatiefout d.m.v. een exentrieke plaatsing en de afstanden tot de meetbaak.";
 
@@ -95,7 +97,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.Scheefstand:
                 //waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
-                //correctAnswer = waterpassing.correctHeight;
+                //correctAnswer = waterpassing.correctHeight; calculated in the scheefstandsmanager
                 questionHeaderText.text = "Bepaal de scheefstand van het gebouw";
                 questionText.text = "Plaats de theodoliet en meet de horizontale verschuiving tussen beide punten, gemeten van onder naar boven.";
 
@@ -103,7 +105,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.OmgekeerdeBaak:
                 waterpassing.SetParameters(1, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
-                correctAnswer = waterpassing.correctHeight;
+                correctAnswer = GameManager.RoundFloat(waterpassing.correctHeight,3);
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het verschil tussen beide punten." +
                     " Opgelet, één van de baken staat omgekeerd.";
@@ -111,13 +113,13 @@ public class WaterpassingQuestions : MonoBehaviour
                 break;
             case QuestionType.ScheveWaterpassing:
                 waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
-                correctAnswer = waterpassing.correctHeight;
+                correctAnswer = GameManager.RoundFloat(waterpassing.correctHeight,3);
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en meet met de theodoliet het verschil tussen beide punten.";
 
                 break;
         }
-        if(GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + correctAnswer);
+        if(GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + correctAnswer + " m of gon");
     }
 
 
@@ -175,40 +177,40 @@ public class WaterpassingQuestions : MonoBehaviour
         {
             case QuestionType.Hoogteverschil2Punten:
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
+                return GameManager.RoundFloat(waterpassing.correctHeight, 3);
 
             case QuestionType.HoogteVerschilMeerPunten:
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
+                return GameManager.RoundFloat(waterpassing.correctHeight, 3);
 
 
             case QuestionType.Afstand2Punten:
 
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctDistance * GameManager.worldScale), 1);
+                return GameManager.RoundFloat(waterpassing.correctDistance * GameManager.worldScale, 1);
 
 
 
             case QuestionType.Hoekfout:
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctErrorAngle * 4/3.6f), 3);
+                return GameManager.RoundFloat(waterpassing.correctScaledErrorAngle * DEGtoGON, 3);
 
 
             case QuestionType.KringWaterpassing:
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
+                return GameManager.RoundFloat(waterpassing.correctHeight, 3);
 
             case QuestionType.Scheefstand:
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
+                return GameManager.RoundFloat(waterpassing.correctHeight, 3);
 
             case QuestionType.OmgekeerdeBaak:
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
+                return GameManager.RoundFloat(waterpassing.correctHeight, 3);
 
             case QuestionType.ScheveWaterpassing:
 
-                return (float)Math.Round(Convert.ToDouble(waterpassing.correctHeight), 3);
+                return GameManager.RoundFloat(waterpassing.correctHeight, 3);
 
         }
         return 0;

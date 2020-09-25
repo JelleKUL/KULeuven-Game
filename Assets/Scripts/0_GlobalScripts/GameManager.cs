@@ -26,9 +26,7 @@ public class GameManager : MonoBehaviour
     public int nrOfCamp2Levels;
 
     [Header("ShowAnswersInDebug")]
-    [SerializeField]
-    private bool showDebug;
-    public static bool showDebugAnswer; 
+    public static bool showDebugAnswer = true; 
 
     // the static variables that are used all over the place
         public static int loginID;
@@ -61,7 +59,6 @@ public class GameManager : MonoBehaviour
 
         if (usernameText) ShowUsername();
 
-        SetDebugPreference(showDebug);
     }
 
 
@@ -141,10 +138,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SetDebugPreference(bool check)
-    {
-        showDebugAnswer = check;
-    }
+    
 
 
 //scenemanagement
