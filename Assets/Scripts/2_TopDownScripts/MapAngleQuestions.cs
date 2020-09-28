@@ -36,15 +36,15 @@ public class MapAngleQuestions : MonoBehaviour
     public int scoreIncrease;
 
 
-    
+    // answers
     private float[] correctAnswerArray;
     private float correctAnswerX;
     private float correctAnswerY;
     private float correctAnswerH;
     private float errorMargin = 0.001f;
-
     private string correctAnswer;
 
+    //initiate scripts
     private PolygonLineController lineController;
     private GameManager gm;
     private ObjectPlacer placer;
