@@ -30,6 +30,7 @@ public class WaterpassingQuestions : MonoBehaviour
     private GameManager gm;
     private float correctAnswer;
     private float[] correctPoints;
+    private string AnswerExplanation;
 
     private float DEGtoGON = 4 / 3.6f;
 
@@ -60,6 +61,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 correctAnswer = GameManager.RoundFloat(waterpassing.correctHeight,3);
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het verschil tussen beide punten";
+                AnswerExplanation = "Het hoogteverschil kan gevonden worden door beide middendraden te vergelijken.";
 
                 break;
 
@@ -68,6 +70,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 correctAnswer = GameManager.RoundFloat(waterpassing.correctHeight,3);
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & D";
                 questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het hoogteverschil tussen beide punten";
+                AnswerExplanation = "Het hoogteverschil kan gevonden worden door de middendraden te vergelijken.";
 
                 break;
 
@@ -76,6 +79,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 correctAnswer = GameManager.RoundFloat(waterpassing.correctDistance * GameManager.worldScale,1);
                 questionHeaderText.text = "Bepaal de afstand tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en gebruik het vizier om de afstand te berekenen.";
+                AnswerExplanation = "De Afstand kan gevonden worden door de afstand tussen de top en onderdraad te meten";
 
                 break;
 
@@ -84,6 +88,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 correctAnswer = GameManager.RoundFloat(waterpassing.correctScaledErrorAngle * DEGtoGON, 3);
                 questionHeaderText.text = "Bepaal de collimatiefout van het toestel";
                 questionText.text = "Bereken de collimatiefout d.m.v. een exentrieke plaatsing en de afstanden tot de meetbaak.";
+                AnswerExplanation = "De collimatiefout kan bepaald worden door het veschil in hoogte te vergeijken in functie van de afstand";
 
                 break;
 
@@ -92,6 +97,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 correctPoints = waterpassing.correctHeightDifferences;
                 questionHeaderText.text = "Vervolledig de waterpassingtabel";
                 questionText.text = "Voer alle noodzakelijke metingen uit en vul de juiste waardes in in de tabel.";
+                AnswerExplanation = "Het hoogteverschil kan gevonden worden door de middendraden te vergelijken.";
 
                 break;
 
@@ -100,6 +106,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 //correctAnswer = waterpassing.correctHeight; calculated in the scheefstandsmanager
                 questionHeaderText.text = "Bepaal de scheefstand van het gebouw";
                 questionText.text = "Plaats de theodoliet en meet de horizontale verschuiving tussen beide punten, gemeten van onder naar boven.";
+                AnswerExplanation = "de scheefstand kan gevonden worden door de ondermeetband te vergelijken met de laserlijn.";
 
                 break;
 
@@ -109,6 +116,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het verschil tussen beide punten." +
                     " Opgelet, één van de baken staat omgekeerd.";
+                AnswerExplanation = "Het hoogteverschil kan gevonden worden door beide middendraden te vergelijken.";
 
                 break;
             case QuestionType.ScheveWaterpassing:
@@ -116,6 +124,7 @@ public class WaterpassingQuestions : MonoBehaviour
                 correctAnswer = GameManager.RoundFloat(waterpassing.correctHeight,3);
                 questionHeaderText.text = "Bepaal het hoogteveschil tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en meet met de theodoliet het verschil tussen beide punten.";
+                AnswerExplanation = "Het hoogteverschil kan gevonden worden door beide middendraden te vergelijken.";
 
                 break;
         }
@@ -137,6 +146,7 @@ public class WaterpassingQuestions : MonoBehaviour
         }
         else
         {
+            answerOutput.text = "Waarde incorrect...";
             answerInputH.color = falseColor;
             Debug.Log("false");
         }
@@ -163,10 +173,18 @@ public class WaterpassingQuestions : MonoBehaviour
     //displays the correct answer
     public void ShowAnswer()
     {
-        answerOutput.text = "Het antwoord is: " + CorrectAnswer().ToString();
-        answerInputH.color = falseColor;
-        //answerInputH.text = "Het antwoord is: " + CorrectAnswer().ToString();
-        //waterpassing.ShowAnswer();
+        if (answerInputH.transform.parent.GetComponent<InputField>())
+        {
+            answerInputH.color = falseColor;
+            InputField answerDisplay = answerInputH.transform.parent.GetComponent<InputField>();
+            answerDisplay.text = CorrectAnswer().ToString();
+            answerDisplay.interactable = false;
+        }
+
+        answerOutput.text = AnswerExplanation;
+
+
+
         Debug.Log("showing answer");
 
     }
