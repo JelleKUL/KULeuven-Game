@@ -510,6 +510,24 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 525025792}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &525025794 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8705791247899038999, guid: 91116a3ecaf7848d8bae380f2695dd18,
+    type: 3}
+  m_PrefabInstance: {fileID: 525025792}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4bb45b2299544073ae4bff92aed2366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &525025795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5005284199311738599, guid: 91116a3ecaf7848d8bae380f2695dd18,
+    type: 3}
+  m_PrefabInstance: {fileID: 525025792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &525186323
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +688,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 525025794}
         m_MethodName: CheckAnswerXY
         m_Mode: 1
         m_Arguments:
@@ -1890,7 +1908,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 525025795}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
