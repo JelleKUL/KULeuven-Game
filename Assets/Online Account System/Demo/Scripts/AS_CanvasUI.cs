@@ -62,6 +62,13 @@ public class AS_CanvasUI : MonoBehaviour
 
 	}
 
+	
+
+	void LeaderboardDownloaded(string message)
+    {
+		Debug.Log("Canvas UI: " + message);
+    }
+
 	// Messages to the user
 	/// <summary>
 	/// Make sure there's a child with that name in every canvas group

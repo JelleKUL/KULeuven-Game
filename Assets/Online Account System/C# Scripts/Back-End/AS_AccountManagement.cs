@@ -202,6 +202,92 @@ public static class AS_AccountManagement
 
     }
 
+    const string getAllAccountInfoPhp = "/LeaderBoards.php?";
+    /// <summary>
+    /// Attempt to login to our database. When we are done with that attempt, return something meaningful or an error message.
+    /// </summary>
+    public static IEnumerator TryToDownloadAllAccountInfoFromDb( string[,] leaderBoardData, System.Action<string> callback, string phpScriptsLocation = null)
+    {
+
+        if (phpScriptsLocation == null)
+            phpScriptsLocation = AS_Credentials.phpScriptsLocation;
+
+        if (phpScriptsLocation == "")
+        {
+            Log(LogType.Error, "PHP Scripts Location not set..! Please load the Setup scene located in ../AccountSystem/Setup/");
+
+            if (callback != null)
+                callback("error: PHP Scripts Location unknown");
+            yield break;
+        }
+
+        Log(LogType.Log, "Downloading Account Info for all users");
+
+
+        // Location of our download info script
+        string url = phpScriptsLocation + getAllAccountInfoPhp;
+
+        url += "&requiredForMobile=" + UnityEngine.Random.Range(0, int.MaxValue).ToString();
+
+        // Create a new form
+        WWWForm form = new WWWForm();
+
+        // Add The required fields
+        //form.AddField("id", WWW.EscapeURL(id.ToString()));
+
+        // Connect to the script
+        WWW www = new WWW(url, form);
+
+        // Wait for it to respond
+        Log(LogType.Log, "Awaiting response from: " + url);
+        yield return www;
+
+        if (www.error != null && www.error != "")
+        {
+            Log(LogType.Error, "WWW Error:\n" + www.error);
+            if (callback != null)
+                callback("error: " + www.text);
+            yield break;
+        }
+        if (www.text.ToLower().Contains("error"))
+        {
+            Log(LogType.Error, "PHP/MySQL Error:\n" + www.text);
+            if (callback != null)
+                callback("error: " + www.text);
+            yield break;
+        }
+
+        Log(LogType.Log, www.text);
+
+        // Attempt to deserialize the text we got
+        string[] temp = www.text.ToLeaderboardArray();
+        string[,] leaderboardArray = new string[temp.Length / 2,2];
+        LeaderBoard.names = new string[temp.Length / 2];
+        LeaderBoard.scores = new int[temp.Length / 2];
+        AS_AccountInfo tempAccount = new AS_AccountInfo();
+        tempAccount.fields.Add(new AS_MySQLField("custominfo", "", "".GetEnumType(), false, true, ""));
+
+        for (int i = 0; i < temp.Length / 2; i++)
+        {
+            leaderboardArray[i, 0] = temp[i * 2];
+            LeaderBoard.names[i] = temp[i * 2];
+
+            tempAccount.SetFieldValue("custominfo", temp[2 * i + 1]);
+            if (!tempAccount.DeSerializeCustomInfo())
+                Log(LogType.Warning, "Could not deserialize Custom Info");
+
+            leaderboardArray[i, 1] = tempAccount.customInfo.totalScore.ToString();
+            LeaderBoard.scores[i] = tempAccount.customInfo.totalScore;
+        }
+        // reduntant
+        LeaderBoard.LeaderBoardValues = leaderboardArray;
+
+
+        if (callback != null)
+            callback("Account Info downloaded successfully");
+
+    }
+
     const string getSimilarAccountsPhp = "/getsimilaraccounts.php?";
     /// <summary>
     /// Attempt to login to our database. When we are done with that attempt, return something meaningful or an error message.

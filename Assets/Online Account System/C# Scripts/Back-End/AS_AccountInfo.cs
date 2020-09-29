@@ -116,6 +116,7 @@ public static class AS_MySQLFieldMethods
             return false;
 
         accountInfo.fields.SetFieldValue(fieldKey, fieldVal);
+        Log(LogType.Log, "Successfully set thefield value to: " + fieldVal);
         return true;
 
     }
@@ -221,6 +222,21 @@ public static class AS_MySQLFieldMethods
         caller.StartCoroutine(AS_AccountManagement.TryToDownloadAccountInfoFromDb
                                (accountId,
                                 accountInfo,
+                                 value =>
+                                 {
+                                     caller.Destroy();
+                                     callback(value);
+                                 },
+                                phpScriptsLocation));
+    }
+
+    public static void TryToDownloadLeaderBoard(this string[,] leaderBoardData, Action<string> callback, string phpScriptsLocation = null)
+    {
+
+        AS_CoroutineCaller caller = AS_CoroutineCaller.Create();
+        caller.StartCoroutine(AS_AccountManagement.TryToDownloadAllAccountInfoFromDb
+                               (
+                                leaderBoardData,
                                  value =>
                                  {
                                      caller.Destroy();

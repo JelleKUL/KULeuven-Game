@@ -6,6 +6,8 @@ using System.Xml.Serialization;
 using System.Security.Cryptography; 
 using System.Globalization;
 using System.Reflection;
+using System.Collections.Generic;
+
 
 
 public class AS_CoroutineCaller : MonoBehaviour
@@ -87,6 +89,14 @@ public static class AS_Methods
         }
 
         return accInfo;
+    }
+
+    public static string[] ToLeaderboardArray(this string message)
+    {
+        string[] splitter = new string[] { fieldsSeparator };
+        string[] array = message.Split(splitter, StringSplitOptions.None);
+
+        return array;
     }
 
     public static string AccInfoToString(this AS_AccountInfo accInfo, bool checkForOmmit)
@@ -280,7 +290,7 @@ public class AS_Credentials
             PlayerPrefs.SetString("AS_EmailAccount", value);
         }
     }
-	const string _phpScriptsLocation = "https://game.jens.app/AccountSystem";
+	const string _phpScriptsLocation = "https://game.jens.app/AccountSystem/";
     public static string phpScriptsLocation
     {
         get
