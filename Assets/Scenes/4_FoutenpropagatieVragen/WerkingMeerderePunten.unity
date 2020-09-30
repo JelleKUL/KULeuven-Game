@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &170604082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -382,6 +382,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 483970953242331292, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 908611121461786901, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -396,6 +401,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838890861287622866, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_Text
+      value: mm
       objectReference: {fileID: 0}
     - target: {fileID: 3214932071230178211, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
@@ -472,6 +482,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4064010249453909087, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckAnswer
+      objectReference: {fileID: 0}
     - target: {fileID: 4146919851160622237, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -495,6 +510,11 @@ PrefabInstance:
     - target: {fileID: 4155747484170744883, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477172046186118685, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4977664478558708398, guid: 91116a3ecaf7848d8bae380f2695dd18,
@@ -530,7 +550,7 @@ PrefabInstance:
     - target: {fileID: 7443491380407290925, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7713925214608139483, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
@@ -1121,7 +1141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &936326621
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1167,7 +1187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1001215671
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1266,7 +1286,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: m
+  m_Text: mm
 --- !u!222 &1013319393
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1292,7 +1312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1055120925
 RectTransform:
   m_ObjectHideFlags: 0

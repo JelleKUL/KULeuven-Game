@@ -478,7 +478,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 7713925214608139483}
   m_HandleRect: {fileID: 6033192034388923138}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 1
   m_MaxValue: 5
   m_WholeNumbers: 1
   m_Value: 3
@@ -486,7 +486,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6962354727790383029}
-        m_MethodName: SetDistanceError
+        m_MethodName: SetDistanceError1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -650,8 +650,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: -0.06399536, y: 0}
+  m_SizeDelta: {x: -16.167553, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3946133683321662873
 GameObject:
@@ -1002,8 +1002,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 0.09199524, y: 0}
+  m_SizeDelta: {x: -9.81604, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6102900580819724522
 GameObject:
@@ -1178,7 +1178,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 4155747484170744883}
   m_HandleRect: {fileID: 4146919851160622237}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 1
   m_MaxValue: 5
   m_WholeNumbers: 1
   m_Value: 3
@@ -1437,7 +1437,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 5316187440025739887}
   m_HandleRect: {fileID: 908611121461786901}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 1
   m_MaxValue: 5
   m_WholeNumbers: 1
   m_Value: 3
@@ -1445,7 +1445,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6962354727790383029}
-        m_MethodName: SetDistanceError
+        m_MethodName: SetDistanceError2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2008,8 +2008,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: -0.89, y: 0}
+  m_SizeDelta: {x: -11.785206, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8387705601812143113
 GameObject:
@@ -2302,6 +2302,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6033477681518525482, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6225006562212499319, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_RootOrder
@@ -2340,7 +2345,7 @@ PrefabInstance:
     - target: {fileID: 7089626478021127800, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CheckAnswerH
+      value: CheckAnswer
       objectReference: {fileID: 0}
     - target: {fileID: 7128626482070279231, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -2376,6 +2381,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320656095557494914, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7320656095557494915, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -2518,6 +2528,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737323259495658550, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fedf2ec0e39744ebf85ff34b14446f74, type: 3}
