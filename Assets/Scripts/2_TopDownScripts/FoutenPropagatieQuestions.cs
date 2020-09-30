@@ -40,6 +40,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     //initiate scripts
     private GameManager gm;
     private PolygonLineController lineController;
+    private PolygonPointController thisPoint;
 
     private ObjectPlacer placer;
 
@@ -67,50 +68,53 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
             case QuestionType.Werking1Punt:
                 //demo van de foutenellips 1 punt
-                lineController.SetVisibles(true, true, false, true, false, false, 2);
-                correctAnswerH = lineController.biggestEllips;
-                correctAnswer = correctAnswerH.ToString();
-                //lineController.lockAngleError = false;
-                //lineController.lockDistanceError = false;
+                
+                lineController.SetVisibles(true, true, true, true, true, true, 2);
                 titleQuestionText.text = "Bepaal de standaardafwijking van P";
-                questionText.text = "Bereken a.d.v. de hoekfout en de afstandsfout de maximale standaardafwijking van de errorellips"; 
+                questionText.text = "Bereken a.d.v. de hoekfout en de afstandsfout de maximale standaardafwijking van de errorellips";
+                //lineController.randomizeErrors = true;
+                correctAnswerArray = placer.PlaceCalculatePoints(1);
+
+                correctAnswerH = lineController.GetErrorH(correctAnswerArray);
+                correctAnswer = correctAnswerH.ToString();
                 break;
+
             case QuestionType.Werking1Puntxy:
                 //demo van de foutenellips 1 punt
-                lineController.SetVisibles(true, true, false, true, false, false, 2);
-                correctAnswerX = lineController.ellipsX;
-                correctAnswerY = lineController.ellipsY;
-                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
-
-                //lineController.lockAngleError = false;
-                //lineController.lockDistanceError = false;
+                lineController.SetVisibles(true, true, true, true, true, true, 2);
                 titleQuestionText.text = "Bepaal de standaardafwijking van P in X en Y";
                 questionText.text = "Bereken de X-en Y-component van de errorellips.";
+                correctAnswerArray=placer.PlaceCalculatePoints(1);
+
+                correctAnswerX = lineController.ellipsX+30;
+                correctAnswerY = lineController.ellipsY+20;
+                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
                 break;
             
             case QuestionType.MinimaleGrootte:
                 //start oefening MinimaleGrote
-                //lineController.randomizeErrors = false;
-                lineController.SetVisibles(true, true, true, true, false, false, 10);
-                //correctAnswer = lineController.correctErrorMinimal;
-                //lineController.lockAngleError = false;
-                //lineController.lockDistanceError = false;
-
-                correctAnswer = "Minimal error ellips: " ; // full in minimal error ellips
-
-
-                placer.PlaceCalculatePoints(1);
-                placer.PlaceObstacleBtwn(1);
+                lineController.SetVisibles(true, true, true, true, true, true, 10);
                 titleQuestionText.text = "Bepaal P met een zo klein mogelijke errorellips";
                 questionText.text = "Meet P via tussenopstellingen met een zo klein mogelijke fout.";
+                placer.PlaceCalculatePoints(1);
+                placer.PlaceObstacleBtwn(3);
+
+
+                correctAnswerH = lineController.biggestEllips * 2; // error margin multiplier
+                correctAnswer = "<" + correctAnswerH; 
                 break;
 
             case QuestionType.WerkingMeerderePunten:
                 //start oefening TekenFoutenEllips
-                lineController.SetVisibles(true, true, false, true, false, false, 10);
-                placer.PlaceObstacles(1);
+                lineController.SetVisibles(true, true, true, true, true, true, 10);
                 titleQuestionText.text = "Bepaal de standaardafwijking van P in X en Y";
                 questionText.text = "Bereken de X-en Y-component van de errorellips van P via meerdere punten.";
+                placer.PlaceCalculatePoints(1);
+                placer.PlaceObstacles(3);
+
+                correctAnswerX = lineController.ellipsX + 30;
+                correctAnswerY = lineController.ellipsY + 20;
+                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
                 break;
 
             case QuestionType.DragEnDropEllips:
@@ -119,7 +123,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 break;
 
         }
-        if (GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + correctAnswer + " m ");
+        if (GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + correctAnswer + " mm ");
 
     }
     // checks the answer (old version)
@@ -207,7 +211,8 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     //displays the correct answer
     public void ShowAnswer()
     {
-        answerOutput.text = "Het antwoord is: " + correctAnswer;
+        
+        answerOutput.text = "Het antwoord is: " + correctAnswer + " mm ";
         answerInputH.color = falseColor;
         //answerInputH.text = "Het antwoord is: " + CorrectAnswer().ToString();
         //waterpassing.ShowAnswer();

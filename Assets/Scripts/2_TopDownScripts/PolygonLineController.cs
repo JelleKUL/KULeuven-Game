@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,21 +16,28 @@ public class PolygonLineController : MonoBehaviour
     public LayerMask pointMask;
     public LayerMask Obstacles;
     public LayerMask ObstructionPoints;
-    public Slider distanceErrorSlider;
+    public Slider distanceError1Slider;
+    public Slider distanceError2Slider;
+
     public Slider angleErrorSlider;
     public Text errorEllipsDisplay;
     public Material fullLine;
     public Material dottedLine;
 
     [Header("Changeable Parameters")]
-    public bool randomizeErrors;
-    public bool lockDistanceError;
+    public bool randomizeErrors =true;
+    public bool lockDistanceError1;
+    public bool lockDistanceError2;
     public bool lockAngleError;
-    [Tooltip ("the measure error of distance")]
-    [Range(0, 5)]
-    public float distanceError;
+
+    [Tooltip ("the base measure error of distance")]
+    [Range(1, 5)]
+    public float distanceError1;
+    [Tooltip("the ppm measure error of distance")]
+    [Range(1, 5)]
+    public float distanceError2;
     [Tooltip("the measure error of the angle")]
-    [Range(0, 5)]
+    [Range(1, 5)]
     public float angleError;
     [Tooltip ("Should the first point be locked in place and where?")]
     public bool lockFirstPoint;
@@ -43,7 +52,9 @@ public class PolygonLineController : MonoBehaviour
 
     [HideInInspector]
     public float biggestEllips;
+    [HideInInspector]
     public float ellipsX;
+    [HideInInspector]
     public float ellipsY;
 
 
@@ -55,7 +66,8 @@ public class PolygonLineController : MonoBehaviour
 
     private GameManager gm;
     private LineRenderer line;
-
+    private ObjectPlacer placer;
+    private PolygonPointController thisPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -79,23 +91,28 @@ public class PolygonLineController : MonoBehaviour
         // initializes a random value
         if (randomizeErrors)
         {
-            distanceError = UnityEngine.Random.Range(0f, 5f);
-            angleError = UnityEngine.Random.Range(0f, 5f);
+            distanceError1 = Mathf.Round(UnityEngine.Random.Range(0f, 5f));
+            distanceError2 = Mathf.Round(UnityEngine.Random.Range(0f, 5f));
+            angleError = Mathf.Round(UnityEngine.Random.Range(0f, 5f));
         }
 
         // finds the sliders and then sets the foutenellips to those values at the starts
-        if (distanceErrorSlider != null && angleErrorSlider != null)
+        if (distanceError1Slider != null && distanceError2Slider != null && angleErrorSlider != null )
         {
             
 
-            distanceErrorSlider.value = distanceError;
+            distanceError1Slider.value = distanceError1;
+            distanceError2Slider.value = distanceError2;
+
             angleErrorSlider.value = angleError;
 
 
             if (lockAngleError) angleErrorSlider.interactable = false;
             else angleErrorSlider.interactable = true;
-            if (lockDistanceError) distanceErrorSlider.interactable = false;
-            else distanceErrorSlider.interactable = true;
+            if (lockDistanceError1) distanceError1Slider.interactable = false;
+            else distanceError1Slider.interactable = true;
+            if (lockDistanceError2) distanceError2Slider.interactable = false;
+            else distanceError2Slider.interactable = true;
         }
         
     }
@@ -193,15 +210,18 @@ public class PolygonLineController : MonoBehaviour
                 Vector3 prevEllipse = linePoints[i - 1].GetComponent<PolygonPointController>().GetEllipseInfo();
                 //Debug.Log(prevEllipse.z);
                 PolygonPointController thisPoint = linePoints[i].GetComponent<PolygonPointController>();
-                thisPoint.SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError *50f, angleError * 50f); // multiplied by 50 to increase visual size
-
-                if(i == linePoints.Count - 1)
+                thisPoint.SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError1 *50f, angleError * 50f); // multiplied by 50 to increase visual size
+                
+                
+                if (i == linePoints.Count - 1)
                 {
                     Vector3 ellips = thisPoint.GetEllipseInfo(); // the ellips will be 50 times to large !
                     //biggestEllips = ellips.x * ellips.y * Mathf.PI / 4f;
-                    biggestEllips = Mathf.Round((Mathf.Max(ellips.x, ellips.y)*1000f)/1000f);
-                    ellipsX = Mathf.Round((ellips.x * 1000f) / 1000f);
-                    ellipsY = Mathf.Round((ellips.y * 1000f) / 1000f);
+                    biggestEllips = Mathf.Round((Mathf.Max(ellips.x, ellips.y)/5*100f)/100f);
+                    biggestEllips = Mathf.Max(ellips.x, ellips.y) / 5 ;
+
+                    ellipsX = Mathf.Round((ellips.x/5 * 100f) / 100f);
+                    ellipsY = Mathf.Round((ellips.y/5 * 100f) / 100f);
 
                     if (errorEllipsDisplay)
                     {
@@ -323,15 +343,66 @@ public class PolygonLineController : MonoBehaviour
 
     }
 
+    public float GetErrorH(float[] correctAnswerArray) // this is a test
+    {
+        //if (showAngleError)
+        //{
+        //    angleErrorText.text = "De Collimatiefout is: \n " + GameManager.RoundFloat(correctScaledErrorAngle * (4 / 3.6f), 3).ToString() + " gon";
+        //}
+        //else angleErrorText.text = "De Collimatiefout is: \n " + "? gon";
+        //         ObjectPlacer pointP = placer.calculatePoints[-1].GetComponent<PolygonPointController>();
+        //PolygonPointController thisPoint = linePoints[i].GetComponent<PolygonPointController>();
+        //thisPoint.SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError * 50f, angleError * 50f); // multiplied by 50 to increase visual size
+
+        //PolygonPointController thisPoint = placer.calculatePoints[-1];
+
+        Vector2 basePoint = new Vector2(0f,0f);
+        Vector2 pointP = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
+        //thisPoint.SetErrorEllips(basePoint, 0, 0, 0, distanceError * 50f, angleError * 50f); // multiplied by 50 to increase visual size
+
+        //Vector3 ellips = thisPoint.GetEllipseInfo(); // the ellips will be 50 times to large !
+
+        //errorEllipse.transform.right = prevPoint - new Vector2(errorEllipse.transform.position.x, errorEllipse.transform.position.y);
+        //float angleDif = (errorEllipse.transform.eulerAngles.z - prevAngle) * Mathf.Deg2Rad;
+        //Debug.Log(angleDif);
+
+        float d = Vector2.Distance(pointP, basePoint) ;
+        float foutd = 0.001f * (distanceError1 + (0.001f * d * distanceError2) ); // correctie m->mm
+
+        float fouta = d* Mathf.Sin(0.001f * angleError * 360f / 400f) ;// correctie m->mm
+
+        //return Mathf.Max(foutd, fouta);
+        return angleError;
+
+        //float newx = Mathf.Sqrt(Mathf.Pow(correctAnswerArray[0] * Mathf.Cos(angleDif), 2) + Mathf.Pow(correctAnswerArray[1] * Mathf.Sin(angleDif), 2));
+        //float newy = Mathf.Sqrt(Mathf.Pow(correctAnswerArray[0] * Mathf.Sin(angleDif), 2) + Mathf.Pow(correctAnswerArray[1] * Mathf.Cos(angleDif), 2));
+
+
+        //errorEllipse.transform.localScale = new Vector3((Vector2.Distance(errorEllipse.transform.position, prevPoint) * distanceError / 100f) + newx, (Vector2.Distance(errorEllipse.transform.position, prevPoint) * angleError / 100f) + newy, 1);
+
+
+
+        ////test
+        //ellipsX = Mathf.Round((ellips.x / 5 * 100f) / 100f);
+        //ellipsY = Mathf.Round((ellips.y / 5 * 100f) / 100f);
+        // / 5;
+
+        ////
+
+    }
+
     public void SetAngleError(float value)
     {
         angleError = value;
     }
-    public void SetDistanceError(float value)
+    public void SetDistanceError1(float value)
     {
-        distanceError = value;
+        distanceError1 = value;
     }
-
+    public void SetDistanceError2(float value)
+    {
+        distanceError2 = value;
+    }
     public void CreateShortestPath()
     {
 
