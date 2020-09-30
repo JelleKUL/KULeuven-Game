@@ -20,9 +20,13 @@ public class GameManager : MonoBehaviour
 
 
     [Header("CampaignOrder")]
+    [Tooltip("the number of the first scene of campaign 1 in the build settings")]
     public int firstCamp1Level;
+    [Tooltip("the number of scenes/levels of campaign 1 in the build settings")]
     public int nrOfCamp1Levels;
+    [Tooltip("the number of the first scene of campaign 2 in the build settings")]
     public int firstCamp2Level;
+    [Tooltip("the number of scenes/levels of campaign 1 in the build settings")]
     public int nrOfCamp2Levels;
 
     [Header("ShowAnswersInDebug")]
@@ -35,8 +39,12 @@ public class GameManager : MonoBehaviour
 
         public static int levelCamp1;
         public static int[] scoreCamp1 = new int[11];
+        public bool[] compLevelCamp1 = new bool[11];
+
         public static int levelCamp2;
         public static int[] scoreCamp2 = new int[13];
+        public bool[] compLevelCamp2 = new bool[13];
+
         public static int scoreFreeTotal = 0;
         //public static int[] scoreFree = new int[13];
 
@@ -77,6 +85,7 @@ public class GameManager : MonoBehaviour
             if (sceneNr - firstCamp1Level >= levelCamp1)
             {
                 levelCamp1 = sceneNr - firstCamp1Level + 1;
+                compLevelCamp1[levelCamp1 - 1] = true;
             }
 
             if (scoreCamp1[sceneNr - firstCamp1Level] < amount)
@@ -90,6 +99,7 @@ public class GameManager : MonoBehaviour
             if (sceneNr - firstCamp2Level >= levelCamp2)
             {
                 levelCamp2 = sceneNr - firstCamp2Level + 1;
+                compLevelCamp2[levelCamp2 - 1] = true;
             }
 
             if (scoreCamp2[sceneNr - firstCamp2Level] < amount)
@@ -125,6 +135,7 @@ public class GameManager : MonoBehaviour
             if(sceneNr - firstCamp1Level >= levelCamp1)
             {
                 levelCamp1 = sceneNr - firstCamp1Level + 1;
+
             }
         }
         if (campaignNr == 2)
@@ -158,15 +169,40 @@ public class GameManager : MonoBehaviour
 
     public void LoadCampaign1()
     {
-        campaignMode = true;
+        campaignMode = true; //set the campaignmode so the game can count the points to the campaign instead of free mode
         Debug.Log(firstCamp1Level + " & " + levelCamp1);
-        SceneManager.LoadScene(firstCamp1Level + levelCamp1);
+        //SceneManager.LoadScene(firstCamp1Level + levelCamp1);
+
+        for (int i = 0; i < compLevelCamp1.Length; i++) // checks the first uncompleted level
+        {
+            if (!compLevelCamp1[i])
+            {
+                SceneManager.LoadScene(firstCamp1Level + i);
+
+                break;
+            }
+        }
+
+        SceneManager.LoadScene(firstCamp1Level); // loads the first level if all levels are completed
+
     }
     public void LoadCampaign2()
     {
         campaignMode = true;
         Debug.Log(firstCamp2Level + " & " + levelCamp2);
-        SceneManager.LoadScene(firstCamp2Level + levelCamp2);
+        //SceneManager.LoadScene(firstCamp2Level + levelCamp2);
+
+        for (int i = 0; i < compLevelCamp2.Length; i++) // checks the first uncompleted level
+        {
+            if (!compLevelCamp2[i])
+            {
+                SceneManager.LoadScene(firstCamp2Level + i);
+
+                break;
+            }
+        }
+
+        SceneManager.LoadScene(firstCamp2Level); // loads the first level if all levels are completed
     }
     public void LoadFreeMode()
     {

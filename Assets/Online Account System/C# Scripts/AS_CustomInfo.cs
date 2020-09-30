@@ -37,10 +37,15 @@ public class AS_CustomInfo
     // !! IF THEY ARE NOT, Add the [XmlIgnore] property on them
     // !! NOTE THAT ANY VARIABLE WHICH HAS A TRANSFORM PROPERTY CAN NOT BE SERIALIZED!
     public int totalScore = 0;
+
     public int levelCamp1 = 0;
     public int [] scoreCamp1 = new int[11];
+    public bool[] compLevelCamp1 = new bool[11];
+
     public int levelCamp2 = 0;
     public int[] scoreCamp2 = new int[13];
+    public bool[] compLevelCamp2 = new bool[13];
+
     public int scoreFreeTotal = 0;
     public int[] scoreFree = new int[13];
 
