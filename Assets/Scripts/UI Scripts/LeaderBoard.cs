@@ -10,7 +10,9 @@ public class LeaderBoard : MonoBehaviour
     [SerializeField]
     private GameObject leaderBoardPart;
     [SerializeField]
-    private GameObject leaderBoeardDots;
+    private GameObject leaderBoardDots;
+    [SerializeField]
+    private GameObject loadingText;
 
 
     [Header ("parameters")]
@@ -80,6 +82,8 @@ public class LeaderBoard : MonoBehaviour
     // lays out the values on the screen
     void SetElements()
     {
+        loadingText.SetActive(false);
+
         containerHeight = GetComponent<RectTransform>().rect.height;
         Debug.Log(containerHeight);
         int nrOfElelementsToPlace = Mathf.Min(maxNrOfEntries, names.Length);
@@ -156,7 +160,7 @@ public class LeaderBoard : MonoBehaviour
 
     void SpawnPlayerDisplay(int playerPos, float offset)
     {
-        LeaderBoardElement newDotElement = Instantiate(leaderBoeardDots, transform).GetComponent<LeaderBoardElement>();
+        LeaderBoardElement newDotElement = Instantiate(leaderBoardDots, transform).GetComponent<LeaderBoardElement>();
         newDotElement.SetLayout(defaultColor, defaultFont, basicElementHeight * 0.25f, offset);
 
         offset += basicElementHeight * 0.25f;

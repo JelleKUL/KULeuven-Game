@@ -38,12 +38,12 @@ public class GameManager : MonoBehaviour
         public static int playerScore;
 
         public static int levelCamp1;
-        public static int[] scoreCamp1 = new int[11];
-        public bool[] compLevelCamp1 = new bool[11];
+        public static int[] scoreCamp1 = new int[10];
+        public static bool[] compLevelCamp1 = new bool[10];
 
         public static int levelCamp2;
-        public static int[] scoreCamp2 = new int[13];
-        public bool[] compLevelCamp2 = new bool[13];
+        public static int[] scoreCamp2 = new int[14];
+        public static bool[] compLevelCamp2 = new bool[14];
 
         public static int scoreFreeTotal = 0;
         //public static int[] scoreFree = new int[13];
@@ -297,10 +297,34 @@ public class GameManager : MonoBehaviour
         Debug.Log("gamemanager: id= " + accountInfo.GetFieldValue("id") + " name= " + accountInfo.GetFieldValue("username") + " score: " + accountInfo.customInfo.totalScore);
 
         accountInfo.customInfo.totalScore = playerScore;
+
         accountInfo.customInfo.levelCamp1 = levelCamp1;
         accountInfo.customInfo.scoreCamp1 = scoreCamp1;
+        accountInfo.customInfo.compLevelCamp1 = compLevelCamp1;
+
         accountInfo.customInfo.levelCamp2 = levelCamp2;
         accountInfo.customInfo.scoreCamp2 = scoreCamp2;
+        accountInfo.customInfo.compLevelCamp2 = compLevelCamp2;
+
+        accountInfo.customInfo.scoreFreeTotal = scoreFreeTotal;
+
+        accountInfo.TryToUpload(loginID, OnUpload);
+    }
+
+    private void UpdateArrayLengths()
+    {
+        Debug.Log("gamemanager: id= " + accountInfo.GetFieldValue("id") + " name= " + accountInfo.GetFieldValue("username") + " score: " + accountInfo.customInfo.totalScore);
+
+        accountInfo.customInfo.totalScore = playerScore;
+
+        accountInfo.customInfo.levelCamp1 = levelCamp1;
+        accountInfo.customInfo.scoreCamp1 = scoreCamp1;
+        accountInfo.customInfo.compLevelCamp1 = compLevelCamp1;
+
+        accountInfo.customInfo.levelCamp2 = levelCamp2;
+        accountInfo.customInfo.scoreCamp2 = scoreCamp2;
+        accountInfo.customInfo.compLevelCamp2 = compLevelCamp2;
+
         accountInfo.customInfo.scoreFreeTotal = scoreFreeTotal;
 
         accountInfo.TryToUpload(loginID, OnUpload);

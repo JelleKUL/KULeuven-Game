@@ -207,7 +207,7 @@ public class AS_AccountManagementGUI : MonoBehaviour
             if (GUILayout.Button("Go to Account Management", GUILayout.Width(200)))
                 currentPage = ManagementPage.AccountInfo;
 
-            accountInfo.customInfo = accountInfo.customInfo.CustomInfoOnGUI();
+            //accountInfo.customInfo = accountInfo.customInfo.CustomInfoOnGUI();
         }
 
 		
