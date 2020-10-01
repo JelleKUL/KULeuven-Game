@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//************* This maneges everything about the waterpassings tabel, there are child scripts for the seperate parts**********//
+//************* This manages everything about the waterpassings tabel, there are child scripts for the seperate parts**********//
 
 public class WaterpassingTabel : MonoBehaviour
 {

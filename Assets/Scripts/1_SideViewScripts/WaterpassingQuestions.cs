@@ -20,7 +20,7 @@ public class WaterpassingQuestions : MonoBehaviour
     public Color falseColor, CorrectColor;
 
     
-    public enum QuestionType { Geen, Hoogteverschil2Punten, HoogteVerschilMeerPunten, Afstand2Punten, Hoekfout, KringWaterpassing, Scheefstand, OmgekeerdeBaak, ScheveWaterpassing }
+    public enum QuestionType { Geen, Hoogteverschil2Punten, HoogteVerschilMeerPunten, Afstand2Punten, Hoekfout, KringWaterpassing, Scheefstand, OmgekeerdeBaak, ScheveWaterpassing, AfstandMeerPunten }
     [Tooltip("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -78,6 +78,15 @@ public class WaterpassingQuestions : MonoBehaviour
                 waterpassing.SetParameters(2, 2, 1, true, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = GameManager.RoundFloat(waterpassing.correctDistance * GameManager.worldScale,1);
                 questionHeaderText.text = "Bepaal de afstand tussen A & B";
+                questionText.text = "Plaats de meetbaken op de meetpunten en gebruik het vizier om de afstand te berekenen.";
+                AnswerExplanation = "De Afstand kan gevonden worden door de afstand tussen de top en onderdraad te meten";
+
+                break;
+
+            case QuestionType.AfstandMeerPunten:
+                waterpassing.SetParameters(4, 4, 1, true, false, Vector2.zero, false, Vector2.zero, false);
+                correctAnswer = GameManager.RoundFloat(waterpassing.correctDistance * GameManager.worldScale, 1);
+                questionHeaderText.text = "Bepaal de afstand tussen A & D";
                 questionText.text = "Plaats de meetbaken op de meetpunten en gebruik het vizier om de afstand te berekenen.";
                 AnswerExplanation = "De Afstand kan gevonden worden door de afstand tussen de top en onderdraad te meten";
 
@@ -207,7 +216,10 @@ public class WaterpassingQuestions : MonoBehaviour
 
                 return GameManager.RoundFloat(waterpassing.correctDistance * GameManager.worldScale, 1);
 
+            case QuestionType.AfstandMeerPunten:
 
+
+                return GameManager.RoundFloat(waterpassing.correctDistance * GameManager.worldScale, 1);
 
             case QuestionType.Hoekfout:
 
