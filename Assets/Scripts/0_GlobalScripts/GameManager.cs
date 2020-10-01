@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Vector2 screenMin, screenMax; // calculated based on the x&y scale of the gamamanager
 
+    public bool[] test1;
+    public bool[] test2;
+
+    public int[] test3;
+
     // a new instance for the account system
     private AS_AccountInfo accountInfo = new AS_AccountInfo();
 
@@ -69,9 +74,16 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        test1 = compLevelCamp1;
+        test2 = compLevelCamp2;
+        test3 = scoreCamp1;
+    }
 
-//score Control
-    
+
+    //score Control
+
     // increases the score by a set amount
     public void IncreaseScore(int amount, int campaignNr)
     {
@@ -82,11 +94,12 @@ public class GameManager : MonoBehaviour
         
         if (campaignNr == 1 && campaignMode)
         {
-            if (sceneNr - firstCamp1Level >= levelCamp1)
-            {
-                levelCamp1 = sceneNr - firstCamp1Level + 1;
-                compLevelCamp1[levelCamp1 - 1] = true;
-            }
+            
+            
+            compLevelCamp1[sceneNr - firstCamp1Level] = true;
+
+            levelCamp1 = CountBoolTrue(compLevelCamp1);
+            
 
             if (scoreCamp1[sceneNr - firstCamp1Level] < amount)
             {
@@ -96,11 +109,10 @@ public class GameManager : MonoBehaviour
         }
         else if(campaignNr == 2 && campaignMode)
         {
-            if (sceneNr - firstCamp2Level >= levelCamp2)
-            {
-                levelCamp2 = sceneNr - firstCamp2Level + 1;
-                compLevelCamp2[levelCamp2 - 1] = true;
-            }
+           
+            compLevelCamp2[sceneNr - firstCamp2Level] = true;
+
+            levelCamp2 = CountBoolTrue(compLevelCamp2);
 
             if (scoreCamp2[sceneNr - firstCamp2Level] < amount)
             {
@@ -173,13 +185,17 @@ public class GameManager : MonoBehaviour
         Debug.Log(firstCamp1Level + " & " + levelCamp1);
         //SceneManager.LoadScene(firstCamp1Level + levelCamp1);
 
+       
+
         for (int i = 0; i < compLevelCamp1.Length; i++) // checks the first uncompleted level
         {
             if (!compLevelCamp1[i])
             {
+                Debug.Log(i + " Completed");
+
                 SceneManager.LoadScene(firstCamp1Level + i);
 
-                break;
+                return;
             }
         }
 
@@ -198,7 +214,7 @@ public class GameManager : MonoBehaviour
             {
                 SceneManager.LoadScene(firstCamp2Level + i);
 
-                break;
+                return;
             }
         }
 
@@ -328,5 +344,17 @@ public class GameManager : MonoBehaviour
         accountInfo.customInfo.scoreFreeTotal = scoreFreeTotal;
 
         accountInfo.TryToUpload(loginID, OnUpload);
+    }
+
+    private int CountBoolTrue(bool[] boolArray)
+    {
+        int counter = 0;
+
+        for (int i = 0; i < boolArray.Length; i++)
+        {
+            if (boolArray[i]) counter++;
+        }
+
+        return counter;
     }
 }
