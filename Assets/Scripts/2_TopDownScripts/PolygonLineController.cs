@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,23 +16,32 @@ public class PolygonLineController : MonoBehaviour
     public LayerMask pointMask;
     public LayerMask Obstacles;
     public LayerMask ObstructionPoints;
-    public Slider distanceErrorSlider;
+
+    public Slider distanceError1Slider;
+    public Slider distanceError2Slider;
     public Slider angleErrorSlider;
+
     public Text errorEllipsDisplay;
     public Material fullLine;
     public Material dottedLine;
 
     [Header("Changeable Parameters")]
-    public bool randomizeErrors;
-    public bool lockDistanceError;
+    public int nrOfPoints;
+    //public bool randomizeErrors;
+    public bool lockDistanceError1;
+    public bool lockDistanceError2;
     public bool lockAngleError;
-    [Tooltip ("the measure error of distance")]
+
+    [Tooltip("the base measure error of distance")]
     [Range(0, 5)]
-    public float distanceError;
+    public float distanceError1;
+    [Tooltip("the ppm measure error of distance")]
+    [Range(0, 5)]
+    public float distanceError2;
     [Tooltip("the measure error of the angle")]
     [Range(0, 5)]
     public float angleError;
-    [Tooltip ("Should the first point be locked in place and where?")]
+    [Tooltip("Should the first point be locked in place and where?")]
     public bool lockFirstPoint;
     public Vector2 firstPointPosition;
     public bool showEllipses;
@@ -43,7 +54,9 @@ public class PolygonLineController : MonoBehaviour
 
     [HideInInspector]
     public float biggestEllips;
+    [HideInInspector]
     public float ellipsX;
+    [HideInInspector]
     public float ellipsY;
 
 
@@ -52,17 +65,29 @@ public class PolygonLineController : MonoBehaviour
     private bool holdingObject;
     private GameObject hitObject;
     private Vector2 obstacleHitPoint;
+    //private bool hasStarted;
+    //private float[] correctAnswerArray;
+
 
     private GameManager gm;
     private LineRenderer line;
+    private ObjectPlacer placer;
 
-
+    //private PolygonPointController thisPoint;
     // Start is called before the first frame update
+    //private void Start()
+    //{
+    //    if (!hasStarted) StartSetup(); //only calls when Start() hasn't gone yet
+    //}
+
+    // the startscript, can be called by the setparametersfunction to get the correct answers before the start function is called in this script
     void Start()
     {
+        //hasStarted = true;
+
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         line = GetComponent<LineRenderer>();
-
+        
         // sets the type of line renderer
         if (showLengths || showStartLength)
         {
@@ -77,27 +102,28 @@ public class PolygonLineController : MonoBehaviour
             linePoints[0].GetComponent<CircleCollider2D>().enabled = false;
         }
         // initializes a random value
-        if (randomizeErrors)
-        {
-            distanceError = UnityEngine.Random.Range(0f, 5f);
-            angleError = UnityEngine.Random.Range(0f, 5f);
-        }
+        //if (randomizeErrors)
+        //{
+        //    //distanceError1 = Mathf.Round(UnityEngine.Random.Range(1f, 5f)); // this change has no effect
+        //    SetDistanceError1(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
+        //    //distanceError2 = Mathf.Round(UnityEngine.Random.Range(1f, 5f));
+        //    SetDistanceError2(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
+        //    //angleError = Mathf.Round(UnityEngine.Random.Range(1f, 5f));
+        //    SetAngleError(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
+        //}
+        distanceError1Slider.value = distanceError1;
+        distanceError2Slider.value = distanceError2;
+        angleErrorSlider.value = angleError;
 
-        // finds the sliders and then sets the foutenellips to those values at the starts
-        if (distanceErrorSlider != null && angleErrorSlider != null)
-        {
-            
+        if (lockAngleError) angleErrorSlider.interactable = false;
+        else angleErrorSlider.interactable = true;
+        if (lockDistanceError1) distanceError1Slider.interactable = false;
+        else distanceError1Slider.interactable = true;
+        if (lockDistanceError2) distanceError2Slider.interactable = false;
+        else distanceError2Slider.interactable = true;
 
-            distanceErrorSlider.value = distanceError;
-            angleErrorSlider.value = angleError;
 
 
-            if (lockAngleError) angleErrorSlider.interactable = false;
-            else angleErrorSlider.interactable = true;
-            if (lockDistanceError) distanceErrorSlider.interactable = false;
-            else distanceErrorSlider.interactable = true;
-        }
-        
     }
 
     // Update is called once per frame
@@ -120,7 +146,7 @@ public class PolygonLineController : MonoBehaviour
         // checks is mousebutton is clicked and sets the point to that position
         if (Input.GetMouseButton(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
-            if (!holdingObject )
+            if (!holdingObject)
             {
                 hitObject = CastMouseRay();
 
@@ -193,40 +219,43 @@ public class PolygonLineController : MonoBehaviour
                 Vector3 prevEllipse = linePoints[i - 1].GetComponent<PolygonPointController>().GetEllipseInfo();
                 //Debug.Log(prevEllipse.z);
                 PolygonPointController thisPoint = linePoints[i].GetComponent<PolygonPointController>();
-                thisPoint.SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError *50f, angleError * 50f); // multiplied by 50 to increase visual size
+                thisPoint.SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError1 * 50f, angleError * 50f); // multiplied by 50 to increase visual size
 
-                if(i == linePoints.Count - 1)
+
+                if (i == linePoints.Count - 1)
                 {
                     Vector3 ellips = thisPoint.GetEllipseInfo(); // the ellips will be 50 times to large !
                     //biggestEllips = ellips.x * ellips.y * Mathf.PI / 4f;
-                    biggestEllips = Mathf.Round((Mathf.Max(ellips.x, ellips.y)*1000f)/1000f);
-                    ellipsX = Mathf.Round((ellips.x * 1000f) / 1000f);
-                    ellipsY = Mathf.Round((ellips.y * 1000f) / 1000f);
+                    biggestEllips = Mathf.Round((Mathf.Max(ellips.x, ellips.y) / 5 * 100f) / 100f);
+                    biggestEllips = Mathf.Max(ellips.x, ellips.y) / 5;
+
+                    ellipsX = Mathf.Round((ellips.x / 5 * 100f) / 100f);
+                    ellipsY = Mathf.Round((ellips.y / 5 * 100f) / 100f);
 
                     if (errorEllipsDisplay)
                     {
                         errorEllipsDisplay.text = biggestEllips.ToString(); //(Mathf.Round(biggestEllips * 100f) / 100f).ToString()
                     }
                 }
-               
+
             }
-            
+
             //checks if the line intersects with an obstacle
             if (i != linePoints.Count - 1 && !CheckVisible(linePoints[i], linePoints[i + 1], Obstacles))
             {
-                
+
                 line.positionCount = i + 2;
                 line.SetPosition(i + 1, obstacleHitPoint);
 
                 break;
-                
+
             }
             //sets the anglevalues of the points
             if (showAngles && i != 0 && i != linePoints.Count - 1)
             {
                 if (!CheckVisible(linePoints[1], linePoints[1], ObstructionPoints))
                 {
-                    
+
                 }
                 else linePoints[i].GetComponent<PolygonPointController>().SetAngleText(linePoints[i - 1].transform.position, linePoints[i + 1].transform.position);
             }
@@ -253,6 +282,12 @@ public class PolygonLineController : MonoBehaviour
     //sets the parameters to a specific value so it matches the question
     public void SetVisibles(bool lock1stPoint, bool ellipses, bool angles, bool lengths, bool startAngle, bool startLength, int nrPoints)
     {
+        //correctAnswerArray = placer.PlaceCalculatePoints(1);
+        SetDistanceError1(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
+        SetDistanceError2(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
+        SetAngleError(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
+
+
         lockFirstPoint = lock1stPoint;
         showEllipses = ellipses;
         showLengths = lengths;
@@ -260,13 +295,15 @@ public class PolygonLineController : MonoBehaviour
         showStartAngle = startAngle;
         showStartLength = startLength;
         maxPoints = nrPoints;
+
+        //StartSetup();
     }
 
     //returs the mapangle between two points
     public float GetMapAngle(Vector2 endPoint, Vector2 startPoint)
     {
         float angle = Vector2.SignedAngle(endPoint, startPoint);
-        angle = Mathf.Round(Mathf.Abs(angle) / 360 * 400 * 1000) / 1000f +200f;
+        angle = Mathf.Round(Mathf.Abs(angle) / 360 * 400 * 1000) / 1000f + 200f;
         return angle;
     }
 
@@ -275,7 +312,7 @@ public class PolygonLineController : MonoBehaviour
     public void AddPoint(Vector2 pos)
     {
         line.positionCount++;
-        if(linePoints.Count == 0)
+        if (linePoints.Count == 0)
         {
             GameObject newPoint = Instantiate(firstPoint, pos, Quaternion.identity);
             newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
@@ -286,7 +323,7 @@ public class PolygonLineController : MonoBehaviour
         {
             GameObject newPoint = Instantiate(linePoint, pos, Quaternion.identity);
             newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
-            linePoints.Insert(0,newPoint);
+            linePoints.Insert(0, newPoint);
         }
         else
         {
@@ -294,7 +331,7 @@ public class PolygonLineController : MonoBehaviour
             newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
             linePoints.Add(newPoint);
         }
-        
+
     }
 
     //removes the last point
@@ -314,24 +351,62 @@ public class PolygonLineController : MonoBehaviour
     {
         line = GetComponent<LineRenderer>();
         maxPoints = positions.Length / 2;
-        for (int i = 0; i < maxPoints-1; i++)
+        for (int i = 0; i < maxPoints - 1; i++)
         {
-            AddPoint(new Vector2(positions[i * 2],positions[i * 2 + 1] ) );
+            AddPoint(new Vector2(positions[i * 2], positions[i * 2 + 1]));
         }
         AddPoint(new Vector2(positions[0], positions[1]));
-        AddPoint(new Vector2(positions[(maxPoints-1)*2], positions[(maxPoints - 1) * 2 +1]));
+        AddPoint(new Vector2(positions[(maxPoints - 1) * 2], positions[(maxPoints - 1) * 2 + 1]));
 
+    }
+
+    public float GetErrorH(float[] correctAnswerArray) // compute largest axis of ellips
+    {
+
+        Vector2 startPoint = new Vector2(0f, 0f);
+        Vector2 pointP = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
+
+        float d = Vector2.Distance(pointP, startPoint) * GameManager.worldScale;
+        float sigmaD = distanceError1 + (0.001f * d * distanceError2); // correctie m->mm
+        float sigmaH = d * Mathf.Tan(AngleToRad(angleError));// correctie m->mm
+
+        return GameManager.RoundFloat(Mathf.Max(sigmaD, sigmaH), 1);
+   
+    }
+
+    public float GetErrorA(float[] correctAnswerArray) // compute sigmaA
+    {
+
+        Vector2 startPoint = new Vector2(0f, 0f);
+        Vector2 pointP = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
+        float angle = Vector2.SignedAngle(pointP, startPoint);
+
+        float d = Vector2.Distance(pointP, startPoint) * GameManager.worldScale;
+        float sigmaD = distanceError1 + (0.001f * d * distanceError2); // correctie m->mm
+        float sigmaH = 1.5f * d * angleError / 100f ;// correctie m->mm
+        float sigmaA = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaH, 2));
+
+        return GameManager.RoundFloat(sigmaA, 1);
+        
+    }
+
+    public float AngleToRad(float value)
+    {
+        return value * 2 * Mathf.PI / 400f ;
     }
 
     public void SetAngleError(float value)
     {
         angleError = value;
     }
-    public void SetDistanceError(float value)
+    public void SetDistanceError1(float value)
     {
-        distanceError = value;
+        distanceError1 = value;
     }
-
+    public void SetDistanceError2(float value)
+    {
+        distanceError2 = value;
+    }
     public void CreateShortestPath()
     {
 
@@ -339,7 +414,10 @@ public class PolygonLineController : MonoBehaviour
 
     public bool LastPointSnapped()
     {
-        return linePoints[linePoints.Count-1].GetComponent<PolygonPointController>().IsSnapped;
-    }
+        return linePoints[linePoints.Count - 1].GetComponent<PolygonPointController>().IsSnapped;
 
+    }
 }
+
+
+
