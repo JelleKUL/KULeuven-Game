@@ -68,11 +68,11 @@ public class FoutenPropagatieQuestions : MonoBehaviour
             case QuestionType.Errorellips_sigmaDH:
                 //demo van de foutenellips 1 punt
               
-                lineController.SetVisibles(true, true, true, true, true, true, 2);
-                titleQuestionText.text = "Bepaal de standaardafwijking van P";
+                lineController.SetVisibles(false, true, true, true, true, true, 2);
+                titleQuestionText.text = "Bepaal de standaardafwijking van A gemeten vanaf P";
                 questionText.text = "Bereken a.d.v. de hoekfout en de afstandsfout de maximale standaardafwijking van de errorellips";
 
-                correctAnswerArray = placer.PlaceCalculatePoints(1);// place the points on the field
+                correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
                 lineController.SetAnswerArray(correctAnswerArray);
                 lineController.UpdateErrors();
 
@@ -81,11 +81,11 @@ public class FoutenPropagatieQuestions : MonoBehaviour
             case QuestionType.Errorellips_sigmaA:
                 //demo van de foutenellips 1 punt
 
-                lineController.SetVisibles(true, true, true, true, true, true, 2);
-                titleQuestionText.text = "Bepaal sigma a van P";
+                lineController.SetVisibles(false, true, true, true, true, true, 2);
+                titleQuestionText.text = "Bepaal sigma a van A gemeten vanaf P";
                 questionText.text = "Bereken de sigma a-component van de errorellips.";
 
-                correctAnswerArray = placer.PlaceCalculatePoints(1);// place the points on the field
+                correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
                 lineController.SetAnswerArray(correctAnswerArray);
                 lineController.UpdateErrors();
                 break;
@@ -93,11 +93,11 @@ public class FoutenPropagatieQuestions : MonoBehaviour
             case QuestionType.MinimaleGrootte:
                 //start oefening MinimaleGrote
 
-                lineController.SetVisibles(true, true, true, true, true, true, 10);
-                titleQuestionText.text = "Bepaal P met een zo klein mogelijke errorellips";
-                questionText.text = "Meet P via tussenopstellingen met een zo klein mogelijke fout.";
+                lineController.SetVisibles(false, true, true, true, true, true, 10);
+                titleQuestionText.text = "Bepaal A gemeten vanaf P met een zo klein mogelijke errorellips";
+                questionText.text = "Kies zorgvuldig tussenopstelling om de fout zo klein mogelijk te houden.";
 
-                correctAnswerArray = placer.PlaceCalculatePoints(1);// place the points on the field
+                correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
                 placer.PlaceObstacleBtwn(1);
                 lineController.SetAnswerArray(correctAnswerArray);
                 lineController.UpdateErrors();
@@ -107,13 +107,13 @@ public class FoutenPropagatieQuestions : MonoBehaviour
             case QuestionType.WerkingMeerderePunten:
                 //start oefening TekenFoutenEllips
 
-                lineController.SetVisibles(true, true, true, true, true, true, 10);
-                titleQuestionText.text = "Bepaal sigma a van P";
+                lineController.SetVisibles(false, true, true, true, true, true, 10);
+                titleQuestionText.text = "Bepaal sigma a van A gemeten vanaf P";
                 questionText.text = "Bereken via tussenopstellingen de sigma a-component van de errorellips.";
 
-                correctAnswerArray = placer.PlaceCalculatePoints(1);// place the points on the field
+                correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
                 placer.PlaceObstacleBtwn(1);
-                placer.PlaceObstacles(4);
+                //placer.PlaceObstacles(4);
                 lineController.SetAnswerArray(correctAnswerArray);
                 lineController.UpdateErrors();
 
@@ -135,6 +135,30 @@ public class FoutenPropagatieQuestions : MonoBehaviour
         if (lineController.CheckPointP())
         {
             if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer()) )
+            {
+                gm.IncreaseScore(scoreIncrease, 2);
+                Debug.Log("true");
+                winMenu.SetActive(true);
+
+
+            }
+            else
+            {
+                answerInputH.color = falseColor;
+                Debug.Log("false");
+                answerOutput.text = "Incorrect";
+            }
+
+        }
+        else answerOutput.text = "Measure to P before submitting";
+    }
+
+    //checks if the given anwser is correct
+    public void CheckAnswerMinimaal()
+    {
+        if (lineController.CheckPointP())
+        {
+            if (Mathf.Abs(lineController.GetSigmaA() - CorrectAnswer()) <=0.2 * CorrectAnswer() )
             {
                 gm.IncreaseScore(scoreIncrease, 2);
                 Debug.Log("true");
@@ -181,8 +205,6 @@ public class FoutenPropagatieQuestions : MonoBehaviour
             case QuestionType.MinimaleGrootte:
 
                 (float dd, float hh, float aa) = lineController.GetErrorDH();
-                answerInputH.text= lineController.GetSigmaA().ToString();
-
                 return aa;
 
             case QuestionType.WerkingMeerderePunten:

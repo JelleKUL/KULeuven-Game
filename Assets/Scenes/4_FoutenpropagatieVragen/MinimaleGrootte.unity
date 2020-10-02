@@ -218,6 +218,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4064010249453909087, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckAnswerMinimaal
+      objectReference: {fileID: 0}
     - target: {fileID: 4146919851160622237, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -261,7 +266,7 @@ PrefabInstance:
     - target: {fileID: 4583850355314963109, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: errorMargin
-      value: 0.002
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4977664478558708398, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
@@ -338,6 +343,11 @@ PrefabInstance:
       propertyPath: answerOutput
       value: 
       objectReference: {fileID: 1852796473}
+    - target: {fileID: 8940063364423383408, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00012207031
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91116a3ecaf7848d8bae380f2695dd18, type: 3}
 --- !u!114 &211958750 stripped
