@@ -3397,7 +3397,17 @@ PrefabInstance:
     - target: {fileID: 147409740929465715, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.0000076
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042849088078168, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042849088078168, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_Name
+      value: Minimale errorpropagatie
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849088078168, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3417,17 +3427,17 @@ PrefabInstance:
     - target: {fileID: 1169042849088078171, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.0001297
+      value: 5.000122
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042849266344793, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_Text
+      value: Errorellips sigmaA
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849088078171, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -201
-      objectReference: {fileID: 0}
-    - target: {fileID: 1169042849266344793, guid: a0ec51f37b19546e1bc3d28cc09af294,
-        type: 3}
-      propertyPath: m_Text
-      value: Errorellips meerdere punten
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849372670477, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3438,6 +3448,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_BestFit
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042849419286564, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042849419286564, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_Name
+      value: Errorellips sigmaA
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849419286564, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3452,12 +3472,17 @@ PrefabInstance:
     - target: {fileID: 1169042849419286566, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: WerkingMeerderePunten
+      value: Errorellips_sigmaA
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849419286567, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.0001297
+      value: 5.000122
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042849419286567, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -139.9
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849419286567, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3472,7 +3497,7 @@ PrefabInstance:
     - target: {fileID: 1169042849577834200, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.0001297
+      value: 5.000122
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849577834201, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3607,7 +3632,7 @@ PrefabInstance:
     - target: {fileID: 1169042849640620421, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.0001297
+      value: 5.000122
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849666190284, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3633,7 +3658,12 @@ PrefabInstance:
     - target: {fileID: 1169042850178306684, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Errorpropagatie
+      value: Minimale errorpropagatie
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042850197352884, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_Name
+      value: Errorellips sigmaD,H
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850197352884, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3648,12 +3678,12 @@ PrefabInstance:
     - target: {fileID: 1169042850197352886, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Werking1Punt
+      value: Errorellips_sigmaDH
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850197352887, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.0001297
+      value: 5.000122
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3673,7 +3703,7 @@ PrefabInstance:
     - target: {fileID: 1169042850654280299, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Errorellips
+      value: Errorellips sigma D,H
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850670976434, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3683,7 +3713,7 @@ PrefabInstance:
     - target: {fileID: 1169042850990681116, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.0001297
+      value: 5.000122
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850990681117, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3698,6 +3728,11 @@ PrefabInstance:
     - target: {fileID: 1169042851081461713, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
+      value: Errorellips meerdere punten
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042851081461713, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_Text
       value: Errorellips in X en Y
       objectReference: {fileID: 0}
     - target: {fileID: 1169042851099215600, guid: a0ec51f37b19546e1bc3d28cc09af294,
@@ -3708,12 +3743,27 @@ PrefabInstance:
     - target: {fileID: 1169042851099215600, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Werking1Puntxy
+      value: WerkingMeerderePunten
       objectReference: {fileID: 0}
     - target: {fileID: 1169042851099215601, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.0001297
+      value: 5.000122
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042851099215614, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042851099215614, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_Name
+      value: Errorellips meerdere punten
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042851099215600, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Werking1Puntxy
       objectReference: {fileID: 0}
     - target: {fileID: 1169042851099215614, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4056,8 +4106,7 @@ PrefabInstance:
     - target: {fileID: 1169042849941321376, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Oefeningen over het bepalen van coordinaten door middel van hoek en
-        afstandsmetingen
+      value: Oefeningen over het bepalen van coordinaten door middel van hoek en afstandsmetingen
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850178306684, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -6231,8 +6280,8 @@ PrefabInstance:
     - target: {fileID: 2136807368235567028, guid: eae1ce2426bf44204b507a937d758524,
         type: 3}
       propertyPath: m_Text
-      value: In deze campaign leer je peilen en scheefstanden bepalen m.b.v. het
-        waterpastoestel en de theodoliet
+      value: In deze campaign leer je peilen en scheefstanden bepalen m.b.v. het waterpastoestel
+        en de theodoliet
       objectReference: {fileID: 0}
     - target: {fileID: 2136807368618834622, guid: eae1ce2426bf44204b507a937d758524,
         type: 3}

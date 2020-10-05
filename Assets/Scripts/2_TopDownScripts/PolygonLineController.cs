@@ -34,13 +34,13 @@ public class PolygonLineController : MonoBehaviour
 
     [Tooltip("the base measure error of distance")]
     [Range(0, 5)]
-    public float distanceError1;
+    public float distanceError1 =0f;
     [Tooltip("the ppm measure error of distance")]
     [Range(0, 5)]
-    public float distanceError2;
+    public float distanceError2 =0f;
     [Tooltip("the measure error of the angle")]
     [Range(0, 5)]
-    public float angleError;
+    public float angleError =0f;
     [Tooltip("Should the first point be locked in place and where?")]
     public bool lockFirstPoint;
     public Vector2 firstPointPosition;
@@ -52,33 +52,20 @@ public class PolygonLineController : MonoBehaviour
     public int maxPoints;
     public bool startCenterPoint;
 
-    [HideInInspector]
-    public float biggestEllips;
-    [HideInInspector]
-    public float ellipsX;
-    [HideInInspector]
-    public float ellipsY;
-
-
 
     private List<GameObject> linePoints = new List<GameObject>();
     private bool holdingObject;
     private GameObject hitObject;
     private Vector2 obstacleHitPoint;
-    //private bool hasStarted;
-    //private float[] correctAnswerArray;
-
+    public float[] correctAnswerArray;
+    //[HideInInspector]
+    private float sigmaD = 0f;
+    private float sigmaH = 0f;
+    private float sigmaA = 0f;
 
     private GameManager gm;
     private LineRenderer line;
     private ObjectPlacer placer;
-
-    //private PolygonPointController thisPoint;
-    // Start is called before the first frame update
-    //private void Start()
-    //{
-    //    if (!hasStarted) StartSetup(); //only calls when Start() hasn't gone yet
-    //}
 
     // the startscript, can be called by the setparametersfunction to get the correct answers before the start function is called in this script
     void Start()
@@ -101,16 +88,7 @@ public class PolygonLineController : MonoBehaviour
             AddPoint(firstPointPosition);
             linePoints[0].GetComponent<CircleCollider2D>().enabled = false;
         }
-        // initializes a random value
-        //if (randomizeErrors)
-        //{
-        //    //distanceError1 = Mathf.Round(UnityEngine.Random.Range(1f, 5f)); // this change has no effect
-        //    SetDistanceError1(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
-        //    //distanceError2 = Mathf.Round(UnityEngine.Random.Range(1f, 5f));
-        //    SetDistanceError2(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
-        //    //angleError = Mathf.Round(UnityEngine.Random.Range(1f, 5f));
-        //    SetAngleError(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
-        //}
+
         distanceError1Slider.value = distanceError1;
         distanceError2Slider.value = distanceError2;
         angleErrorSlider.value = angleError;
@@ -137,6 +115,9 @@ public class PolygonLineController : MonoBehaviour
         //also stops when it encounters an object.
         DrawLineAndValues();
 
+        // updates sigmaD,H and A in function of the new linepoint
+        //UpdateErrors();
+
     }
 
 
@@ -154,6 +135,7 @@ public class PolygonLineController : MonoBehaviour
                 {
                     Debug.Log("adding point");
                     AddPoint(gm.SetObjectToMouse(Input.mousePosition, 0));
+                    UpdateErrors();
                 }
 
             }
@@ -224,17 +206,12 @@ public class PolygonLineController : MonoBehaviour
 
                 if (i == linePoints.Count - 1)
                 {
-                    Vector3 ellips = thisPoint.GetEllipseInfo(); // the ellips will be 50 times to large !
+                    //Vector3 ellips = thisPoint.GetEllipseInfo(); // the ellips will be 50 times to large !
                     //biggestEllips = ellips.x * ellips.y * Mathf.PI / 4f;
-                    biggestEllips = Mathf.Round((Mathf.Max(ellips.x, ellips.y) / 5 * 100f) / 100f);
-                    biggestEllips = Mathf.Max(ellips.x, ellips.y) / 5;
-
-                    ellipsX = Mathf.Round((ellips.x / 5 * 100f) / 100f);
-                    ellipsY = Mathf.Round((ellips.y / 5 * 100f) / 100f);
-
+ 
                     if (errorEllipsDisplay)
                     {
-                        errorEllipsDisplay.text = biggestEllips.ToString(); //(Mathf.Round(biggestEllips * 100f) / 100f).ToString()
+                        errorEllipsDisplay.text = GetSigmaA().ToString(); 
                     }
                 }
 
@@ -265,9 +242,42 @@ public class PolygonLineController : MonoBehaviour
         }
     }
 
+    public void UpdateErrors()
+    {
+        List<float> distances = new List<float>();
 
-    // checks if next point is visible
-    bool CheckVisible(GameObject point, GameObject nextPoint, LayerMask layerMask)
+
+        if (linePoints.Count > 1)
+        {
+            sigmaD = 0f;
+            sigmaH = 0f;
+            sigmaA = 0f;
+            for (int i = 0; i < linePoints.Count-1; i++)
+            {
+                float d = Vector2.Distance(linePoints[i+1].transform.position, linePoints[i].transform.position) * GameManager.worldScale;
+                distances.Add(d);
+                sigmaD = sigmaD + Mathf.Pow(distanceError1 + (0.001f * distances[i] * distanceError2), 2); // correctie m->mm
+                sigmaH = sigmaH + Mathf.Pow(distances[i] * 1.5f * angleError / 100f, 2);
+            }
+            sigmaA = Mathf.Sqrt(sigmaD + sigmaH);
+            //sigmaA = distances[distances.Count- 1];
+        }
+        else
+        {
+            Vector2 startPoint = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
+            Vector2 pointP = new Vector2(correctAnswerArray[2], correctAnswerArray[3]);
+            float angle = Vector2.SignedAngle(pointP, startPoint);
+
+            float d = Vector2.Distance(pointP, startPoint) * GameManager.worldScale;
+            sigmaD = distanceError1 + (0.001f * d * distanceError2); // correctie m->mm
+            sigmaH = 1.5f * d * angleError / 100f;// correctie m->mm
+            sigmaA = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaH, 2));
+        }
+
+    }
+
+        // checks if next point is visible
+        bool CheckVisible(GameObject point, GameObject nextPoint, LayerMask layerMask)
     {
         RaycastHit2D hit = Physics2D.Raycast(point.transform.position, nextPoint.transform.position - point.transform.position, (nextPoint.transform.position - point.transform.position).magnitude, layerMask);
 
@@ -282,8 +292,7 @@ public class PolygonLineController : MonoBehaviour
     //sets the parameters to a specific value so it matches the question
     public void SetVisibles(bool lock1stPoint, bool ellipses, bool angles, bool lengths, bool startAngle, bool startLength, int nrPoints)
     {
-        //correctAnswerArray = placer.PlaceCalculatePoints(1);
-        SetDistanceError1(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
+        SetDistanceError1(Mathf.Round(UnityEngine.Random.Range(1f, 5f))); // be careful as this can affect polygon questions aswell
         SetDistanceError2(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
         SetAngleError(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
 
@@ -332,6 +341,8 @@ public class PolygonLineController : MonoBehaviour
             linePoints.Add(newPoint);
         }
 
+
+
     }
 
     //removes the last point
@@ -360,34 +371,48 @@ public class PolygonLineController : MonoBehaviour
 
     }
 
-    public float GetErrorH(float[] correctAnswerArray) // compute largest axis of ellips
+    public (float,float,float) GetErrorDH() // compute errors for 1 point
     {
-
-        Vector2 startPoint = new Vector2(0f, 0f);
-        Vector2 pointP = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
+        Vector2 startPoint = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
+        Vector2 pointP = new Vector2(correctAnswerArray[2], correctAnswerArray[3]);
 
         float d = Vector2.Distance(pointP, startPoint) * GameManager.worldScale;
-        float sigmaD = distanceError1 + (0.001f * d * distanceError2); // correctie m->mm
-        float sigmaH = d * Mathf.Tan(AngleToRad(angleError));// correctie m->mm
+        float sigmad = distanceError1 + (0.001f * d * distanceError2); // correctie m->mm
+        float sigmah = 1.5f * d * angleError / 100f;// correctie m->mm
+        float errora = Mathf.Sqrt(Mathf.Pow(sigmad, 2) + Mathf.Pow(sigmah, 2));
 
-        return GameManager.RoundFloat(Mathf.Max(sigmaD, sigmaH), 1);
-   
+        return (GameManager.RoundFloat(sigmad, 1),GameManager.RoundFloat(sigmah, 1), GameManager.RoundFloat(errora, 1));
+
     }
 
-    public float GetErrorA(float[] correctAnswerArray) // compute sigmaA
+    public float GetSigmaD() // compute sigmaA multiple points
     {
+        return GameManager.RoundFloat(sigmaD, 1);
+    }
 
-        Vector2 startPoint = new Vector2(0f, 0f);
-        Vector2 pointP = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
-        float angle = Vector2.SignedAngle(pointP, startPoint);
+    public float GetSigmaH() // compute sigmaA multiple points
+    {
+        return GameManager.RoundFloat(sigmaH, 1);
+    }
 
-        float d = Vector2.Distance(pointP, startPoint) * GameManager.worldScale;
-        float sigmaD = distanceError1 + (0.001f * d * distanceError2); // correctie m->mm
-        float sigmaH = 1.5f * d * angleError / 100f ;// correctie m->mm
-        float sigmaA = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaH, 2));
-
+    public float GetSigmaA() // compute sigmaA multiple points
+    {
         return GameManager.RoundFloat(sigmaA, 1);
-        
+    }
+
+    public void SetAnswerArray(float[] array) // compute sigmaA multiple points
+    {
+        correctAnswerArray = array;
+    }
+
+    public bool CheckPointP() // check whether last linepoint == pointP
+    {
+        if ((linePoints.Last().transform.position.x - correctAnswerArray[correctAnswerArray.Length-2]) <= 0.001 && (linePoints.Last().transform.position.y - correctAnswerArray[correctAnswerArray.Length-1]) <= 0.001) 
+        {
+            return true;
+
+        }
+        else return false;
     }
 
     public float AngleToRad(float value)
