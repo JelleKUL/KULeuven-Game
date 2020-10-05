@@ -16,7 +16,7 @@ public class WaterpassingQuestions : MonoBehaviour
     public Text answerInputH;   
     public Text answerOutput;
 
-    public GameObject winMenu;
+    public GameObject winMenu, winMenuFree;
     public Color falseColor, CorrectColor;
 
     
@@ -150,7 +150,16 @@ public class WaterpassingQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease, 1);
             Debug.Log(answerInputH.text + " is correct!");
-            winMenu.SetActive(true);
+
+            if (GameManager.campaignMode)
+            {
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                winMenuFree.SetActive(true);
+            }
+            
             //gm.ReloadScene();
         }
         else
@@ -168,7 +177,14 @@ public class WaterpassingQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease, 1);
             Debug.Log("true");
-            winMenu.SetActive(true);
+            if (GameManager.campaignMode)
+            {
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                winMenuFree.SetActive(true);
+            }
             //gm.ReloadScene();
             answerOutput.text = "De Waarden die zijn ingevoerd zijn correct";
         }

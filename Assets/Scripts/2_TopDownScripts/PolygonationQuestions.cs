@@ -16,7 +16,7 @@ public class PolygonationQuestions : MonoBehaviour
     public Text answerInputH;
     public Text answerOutput;
 
-    public GameObject winMenu;
+    public GameObject winMenu, winMenuFree;
     public Color falseColor, CorrectColor;
 
 
@@ -171,7 +171,14 @@ public class PolygonationQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
-            winMenu.SetActive(true);
+            if (GameManager.campaignMode)
+            {
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                winMenuFree.SetActive(true);
+            }
 
         }
         else
@@ -187,7 +194,14 @@ public class PolygonationQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
-            winMenu.SetActive(true);
+            if (GameManager.campaignMode)
+            {
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                winMenuFree.SetActive(true);
+            }
 
         }
         else Debug.Log("false");

@@ -19,7 +19,7 @@ public class MapAngleQuestions : MonoBehaviour
     public Text answerOutput;
     public GameObject assenkruis;
 
-    public GameObject winMenu;
+    public GameObject winMenu, winMenuFree;
     public Color falseColor, CorrectColor;
 
 
@@ -179,7 +179,15 @@ public class MapAngleQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
-            winMenu.SetActive(true);
+
+            if (GameManager.campaignMode)
+            {
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                winMenuFree.SetActive(true);
+            }
 
 
         }
@@ -198,7 +206,15 @@ public class MapAngleQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
-            winMenu.SetActive(true);
+
+            if (GameManager.campaignMode)
+            {
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                winMenuFree.SetActive(true);
+            }
 
         }
         else

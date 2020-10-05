@@ -19,7 +19,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     public Text answerInputH;
     public Text answerOutput;
 
-    public GameObject winMenu;
+    public GameObject winMenu, winMenuFree;
     public Color falseColor, CorrectColor;
 
     public enum QuestionType { geen, Werking1Punt, Werking1Puntxy, MinimaleGrootte, WerkingMeerderePunten, DragEnDropEllips }
@@ -177,7 +177,15 @@ public class FoutenPropagatieQuestions : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
-            winMenu.SetActive(true);
+
+            if (GameManager.campaignMode)
+            {
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                winMenuFree.SetActive(true);
+            }
 
 
         }
