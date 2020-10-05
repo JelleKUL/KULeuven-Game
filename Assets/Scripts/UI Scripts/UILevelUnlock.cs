@@ -9,10 +9,16 @@ public class UILevelUnlock : MonoBehaviour
     private Button[] Camp1Buttons;
     [SerializeField]
     private Button[] Camp2Buttons;
+    [SerializeField]
+    private Button[] randomButtons;
+
+    private GameManager gm;
 
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
         if(Camp1Buttons.Length != GameManager.compLevelCamp1.Length || Camp2Buttons.Length != GameManager.compLevelCamp2.Length)
         {
             Debug.Log("ERROR: non matching nr of buttons on display and in Gamemanager / Custominfo");
@@ -21,6 +27,7 @@ public class UILevelUnlock : MonoBehaviour
         {
             DeactivateAllButtons();
             ActivateButtons();
+            ActivateRandomButton();
         }
       
     }
@@ -29,6 +36,21 @@ public class UILevelUnlock : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void ActivateRandomButton()
+    {
+
+        randomButtons[0].interactable = GameManager.levelCamp1 > 1; //gm.CountBoolTrue(GameManager.compLevelCamp1) > 0;
+
+        int nrOfScenes = 1;
+        for (int i = 1; i < randomButtons.Length; i++)
+        {
+            randomButtons[i].interactable = (GameManager.levelCamp2 > nrOfScenes);
+
+            nrOfScenes += gm.NrOfCamp2ChapterScenes[i - 1];
+        }
+     
     }
 
     void DeactivateAllButtons()

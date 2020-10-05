@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour
     public int firstCamp2Level;
     [Tooltip("the number of scenes/levels of campaign 1 in the build settings")]
     public int nrOfCamp2Levels;
+    [Tooltip("the amount of scenes of the 3 Campaign2 chapters, the total musr be equal to nrOfCamp2Levels")]
+    public int[] NrOfCamp2ChapterScenes;
+
+
 
     [Header("ShowAnswersInDebug")]
     public static bool showDebugAnswer = true; 
@@ -57,10 +61,6 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Vector2 screenMin, screenMax; // calculated based on the x&y scale of the gamamanager
 
-    public bool[] test1;
-    public bool[] test2;
-
-    public int[] test3;
 
     // a new instance for the account system
     private AS_AccountInfo accountInfo = new AS_AccountInfo();
@@ -72,13 +72,6 @@ public class GameManager : MonoBehaviour
 
         if (usernameText) ShowUsername();
 
-    }
-
-    private void Update()
-    {
-        test1 = compLevelCamp1;
-        test2 = compLevelCamp2;
-        test3 = scoreCamp1;
     }
 
 
@@ -234,11 +227,72 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // loading random available scenes
+
+    public void LoadRandomCamp1() // load a random level that is unlocked if logged in, or all if not
+    {
+
+        if (isLoggedIn)
+        {
+            List<int> availableLevels = new List<int>();
+
+            for (int i = 0; i < compLevelCamp1.Length; i++)
+            {
+                if (compLevelCamp1[i])
+                {
+                    availableLevels.Add(i);
+                }
+            }
+            Debug.Log("Loading scene: " + (firstCamp1Level + availableLevels[Random.Range(0, availableLevels.Count)]));
+            SceneManager.LoadScene(firstCamp1Level + availableLevels[Random.Range(0,availableLevels.Count)]);
+        }
+        else
+        {
+            SceneManager.LoadScene(firstCamp1Level + Random.Range(0,nrOfCamp1Levels));
+        }
+
+    }
+
+    public void LoadRandomCamp2(int chapter) // load a random level that is unlocked if logged in, or all if not
+    {
+
+        int firstLevel = firstCamp2Level;
+
+        for (int i = 0; i < chapter; i++)
+        {
+            firstLevel += NrOfCamp2ChapterScenes[i];
+
+        }
+
+        if (isLoggedIn)
+        {
+            List<int> availableLevels = new List<int>();
+
+            for (int i = 0; i < NrOfCamp2ChapterScenes[chapter]; i++)
+            {
+                if (compLevelCamp2[firstLevel - firstCamp2Level + i])
+                {
+                    availableLevels.Add(i);
+                }
+            }
+            Debug.Log("Loading scene: " + (firstLevel + availableLevels[Random.Range(0, availableLevels.Count)]));
+            SceneManager.LoadScene(firstLevel + availableLevels[Random.Range(0, availableLevels.Count)]);
+        }
+        else
+        {
+            Debug.Log("Loading scene: " + (firstLevel + Random.Range(0, NrOfCamp2ChapterScenes[chapter])));
+            SceneManager.LoadScene(firstLevel + Random.Range(0, NrOfCamp2ChapterScenes[chapter]));
+        }
+
+    }
+
     public void LogOut()
     {
         isLoggedIn = false;
         SceneManager.LoadScene("LoginMenu");
     }
+
+
 
 //CampaignManagement
     
@@ -346,7 +400,7 @@ public class GameManager : MonoBehaviour
         accountInfo.TryToUpload(loginID, OnUpload);
     }
 
-    private int CountBoolTrue(bool[] boolArray)
+    public int CountBoolTrue(bool[] boolArray)
     {
         int counter = 0;
 
