@@ -22,7 +22,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     public GameObject winMenu, winMenuFree;
     public Color falseColor, CorrectColor;
 
-    public enum QuestionType { geen, Werking1Punt, Werking1Puntxy, MinimaleGrootte, WerkingMeerderePunten, DragEnDropEllips }
+    public enum QuestionType { geen, Errorellips_sigmaDH, Errorellips_sigmaA, MinimaleGrootte, WerkingMeerderePunten, DragEnDropEllips }
     [Tooltip ("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -33,7 +33,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     private float[] correctAnswerArray;
     //private float correctAnswerA;
     private float correctAnswerH;
-    private float errorMargin = 0.001f;
+    //private float errorMargin = 0.001f;
     private string correctAnswer;
 
     //initiate scripts
@@ -65,57 +65,58 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
                 break;
 
-            case QuestionType.Werking1Punt:
+            case QuestionType.Errorellips_sigmaDH:
                 //demo van de foutenellips 1 punt
-                
-                lineController.SetVisibles(true, true, true, true, true, true, 2);
-                titleQuestionText.text = "Bepaal de standaardafwijking van P";
+              
+                lineController.SetVisibles(false, true, true, true, true, true, 2);
+                titleQuestionText.text = "Bepaal de standaardafwijking van A gemeten vanaf P";
                 questionText.text = "Bereken a.d.v. de hoekfout en de afstandsfout de maximale standaardafwijking van de errorellips";
-                correctAnswerArray = placer.PlaceCalculatePoints(1);// place the points on the field
-                correctAnswerH = lineController.GetErrorH(correctAnswerArray);
-                correctAnswer = correctAnswerH.ToString();
+
+                correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
+                lineController.SetAnswerArray(correctAnswerArray);
+                lineController.UpdateErrors();
+
                 break;
 
-            case QuestionType.Werking1Puntxy:
+            case QuestionType.Errorellips_sigmaA:
                 //demo van de foutenellips 1 punt
-                lineController.SetVisibles(true, true, true, true, true, true, 2);
-                titleQuestionText.text = "Bepaal sigma a van P";
-                questionText.text = "Bereken de sigma a-component van de errorellips.";
-                correctAnswerArray = placer.PlaceCalculatePoints(1);// place the points on the field
-                correctAnswerH = lineController.GetErrorA(correctAnswerArray);
-                correctAnswer = correctAnswerH.ToString();
 
-                //correctAnswerX = lineController.ellipsX+30;
-                //correctAnswerY = lineController.ellipsY+20;
-                //correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                lineController.SetVisibles(false, true, true, true, true, true, 2);
+                titleQuestionText.text = "Bepaal sigma a van A gemeten vanaf P";
+                questionText.text = "Bereken de sigma a-component van de errorellips.";
+
+                correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
+                lineController.SetAnswerArray(correctAnswerArray);
+                lineController.UpdateErrors();
                 break;
             
             case QuestionType.MinimaleGrootte:
                 //start oefening MinimaleGrote
-                lineController.SetVisibles(true, true, true, true, true, true, 10);
-                titleQuestionText.text = "Bepaal P met een zo klein mogelijke errorellips";
-                questionText.text = "Meet P via tussenopstellingen met een zo klein mogelijke fout.";
-                correctAnswerArray = placer.PlaceCalculatePoints(1);// place the points on the field
-                placer.PlaceObstacleBtwn(3);
 
-                correctAnswerH = lineController.biggestEllips * 2; // error margin multiplier
-                correctAnswer = "<" + correctAnswerH; 
+                lineController.SetVisibles(false, true, true, true, true, true, 10);
+                titleQuestionText.text = "Bepaal A gemeten vanaf P met een zo klein mogelijke errorellips";
+                questionText.text = "Kies zorgvuldig tussenopstelling om de fout zo klein mogelijk te houden.";
+
+                correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
+                placer.PlaceObstacleBtwn(1);
+                lineController.SetAnswerArray(correctAnswerArray);
+                lineController.UpdateErrors();
+
                 break;
 
             case QuestionType.WerkingMeerderePunten:
                 //start oefening TekenFoutenEllips
-                lineController.SetVisibles(true, true, true, true, true, true, 10);
-                titleQuestionText.text = "Bepaal de standaardafwijking van P in X en Y";
-                questionText.text = "Bereken de X-en Y-component van de errorellips van P via meerdere punten.";
+
+                lineController.SetVisibles(false, true, true, true, true, true, 10);
+                titleQuestionText.text = "Bepaal sigma a van A gemeten vanaf P";
+                questionText.text = "Bereken via tussenopstellingen de sigma a-component van de errorellips.";
+
                 correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
-                placer.PlaceObstacles(1);
+                placer.PlaceObstacleBtwn(1);
+                //placer.PlaceObstacles(4);
+                lineController.SetAnswerArray(correctAnswerArray);
+                lineController.UpdateErrors();
 
-                correctAnswerH = lineController.GetErrorA(correctAnswerArray);
-                correctAnswer = correctAnswerH.ToString();
-
-                //correctAnswerX = lineController.ellipsX + 30;
-                //correctAnswerY = lineController.ellipsY + 20;
-                //correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
                 break;
 
             case QuestionType.DragEnDropEllips:
@@ -124,61 +125,45 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 break;
 
         }
-        if (GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + correctAnswer + " mm ");
+        if (GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + CorrectAnswer() + " mm ");
 
     }
-    // checks the answer (old version)
-    //public void CheckAnswer()
-    //{
-    //    switch (SoortVraag)
-    //    {
-    //        case QuestionType.geen:
-
-    //            break;
-
-    //        case QuestionType.Werking1Punt:
-    //            gm.IncreaseScore(0, 2);
-    //            winMenu.SetActive(true);
-    //            break;
-
-    //        case QuestionType.Werking1Puntxy:
-    //            gm.IncreaseScore(0, 2);
-    //            winMenu.SetActive(true);
-    //            break;
-
-    //        case QuestionType.MinimaleGrootte:
-
-    //            Debug.Log(lineController.LastPointSnapped());
-    //            if (lineController.LastPointSnapped())
-    //            {
-    //                int points = Mathf.Max(0, maxPoints - Mathf.FloorToInt(lineController.biggestEllips / 10f));
-
-    //                gm.IncreaseScore(points, 2);
-    //                winMenu.SetActive(true);
-    //            }
-
-    //            break;
-    //        case QuestionType.WerkingMeerderePunten:
-    //            gm.IncreaseScore(0, 2);
-    //            winMenu.SetActive(true);
-    //            break;
-
-    //        case QuestionType.DragEnDropEllips:
-
-    //            break;
-
-    //    }
-    //}
-
+  
     //checks if the given anwser is correct
     public void CheckAnswer()
     {
-        if (gm.CheckCorrectAnswer(answerInputH.text, correctAnswerH))
+        if (lineController.CheckPointP())
         {
-            gm.IncreaseScore(scoreIncrease, 2);
-            Debug.Log("true");
+            if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer()) )
+            {
+                gm.IncreaseScore(scoreIncrease, 2);
+                Debug.Log("true");
+                winMenu.SetActive(true);
 
-            if (GameManager.campaignMode)
+
+            }
+            else
+            {
+                answerInputH.color = falseColor;
+                Debug.Log("false");
+                answerOutput.text = "Incorrect";
+            }
+
+        }
+        else answerOutput.text = "Measure to P before submitting";
+    }
+
+    //checks if the given anwser is correct
+    public void CheckAnswerMinimaal()
+    {
+        if (lineController.CheckPointP())
+        {
+
+            if (Mathf.Abs(lineController.GetSigmaA() - CorrectAnswer()) <=0.2 * CorrectAnswer() )
+            {
+                gm.IncreaseScore(scoreIncrease, 2);
+                Debug.Log("true");
+                if (GameManager.campaignMode)
             {
                 winMenu.SetActive(true);
             }
@@ -187,45 +172,53 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 winMenuFree.SetActive(true);
             }
 
-
         }
         else
-        {
-            answerInputH.color = falseColor;
-            Debug.Log("false");
-            answerOutput.text = "Incorrect";
+            {
+                answerInputH.color = falseColor;
+                Debug.Log("false");
+                answerOutput.text = "Incorrect";
+            }
+
         }
+        else answerOutput.text = "Measure to P before submitting";
     }
-
-    //// checks if a given coordinate is correct
-    //public void CheckAnswerXY()
-    //{
-    //    if (gm.CheckCorrectAnswer(answerInputX.text, correctAnswerX) && gm.CheckCorrectAnswer(answerInputY.text, correctAnswerY))
-    //    {
-    //        gm.IncreaseScore(scoreIncrease, 2);
-    //        Debug.Log("true");
-    //        winMenu.SetActive(true);
-
-    //    }
-    //    else
-    //    {
-    //        answerInputX.color = falseColor;
-    //        answerInputY.color = falseColor;
-    //        Debug.Log("false");
-    //        answerOutput.text = "Incorrect";
-    //    }
-
-    //}
 
     //displays the correct answer
     public void ShowAnswer()
     {
-        
+        correctAnswer = CorrectAnswer().ToString();
+
         answerOutput.text = "Het antwoord is: " + correctAnswer + " mm ";
         answerInputH.color = falseColor;
-        //answerInputH.text = "Het antwoord is: " + CorrectAnswer().ToString();
-        //waterpassing.ShowAnswer();
-        Debug.Log("showing answer");
+         Debug.Log("showing answer");
 
     }
+
+    public float CorrectAnswer()
+    {
+        switch (SoortVraag)
+        {
+            case QuestionType.Errorellips_sigmaDH:
+
+                (float d, float h, float a) = lineController.GetErrorDH();
+
+                return Mathf.Max(d, h);
+
+            case QuestionType.Errorellips_sigmaA:
+
+                return lineController.GetSigmaA();
+
+            case QuestionType.MinimaleGrootte:
+
+                (float dd, float hh, float aa) = lineController.GetErrorDH();
+                return aa;
+
+            case QuestionType.WerkingMeerderePunten:
+
+                return lineController.GetSigmaA();
+        }
+        return 0;
+    }
+
 }
