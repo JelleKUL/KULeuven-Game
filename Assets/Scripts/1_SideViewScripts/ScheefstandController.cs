@@ -11,7 +11,7 @@ public class ScheefstandController : MonoBehaviour
     
     public GameObject theodoliet;
     public GameObject skewBuilding;
-    public GameObject winMenu;
+    public GameObject winMenu, winMenuFree;
     public Transform MeasurePlacer;
     public Button magnifyButton;
     public LayerMask pointMask;
@@ -148,7 +148,15 @@ public class ScheefstandController : MonoBehaviour
         {
             gm.IncreaseScore(scoreIncrease, 1);
             Debug.Log(answerText.text + " is correct!");
-            winMenu.SetActive(true);
+
+            if (GameManager.campaignMode)
+            {
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                winMenuFree.SetActive(true);
+            }
             //gm.ReloadScene();
         }
         else

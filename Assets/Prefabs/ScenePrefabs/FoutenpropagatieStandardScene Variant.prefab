@@ -2335,7 +2335,7 @@ PrefabInstance:
     - target: {fileID: 6225006562212499319, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -42.466644
+      value: -42.466705
       objectReference: {fileID: 0}
     - target: {fileID: 6225006562212499319, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -2542,6 +2542,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8451151730030314919, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8545740672990681476, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -2606,12 +2611,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fedf2ec0e39744ebf85ff34b14446f74, type: 3}
---- !u!224 &4100758865033159844 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7128626481618353795, guid: fedf2ec0e39744ebf85ff34b14446f74,
-    type: 3}
-  m_PrefabInstance: {fileID: 6486637507790772775}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6962354727790383029 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4222805035902113170, guid: fedf2ec0e39744ebf85ff34b14446f74,
@@ -2636,3 +2635,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4bb45b2299544073ae4bff92aed2366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &4100758865033159844 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7128626481618353795, guid: fedf2ec0e39744ebf85ff34b14446f74,
+    type: 3}
+  m_PrefabInstance: {fileID: 6486637507790772775}
+  m_PrefabAsset: {fileID: 0}
