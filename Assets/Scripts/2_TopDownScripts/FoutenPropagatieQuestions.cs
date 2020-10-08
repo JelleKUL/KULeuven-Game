@@ -133,7 +133,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     //checks if the given anwser is correct
     public void CheckAnswer()
     {
-        if (lineController.CheckPoints() )
+        if (lineController.CheckPoints() && lineController.CheckPointsVisibility())
         {
             if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer()) )
             {
@@ -157,7 +157,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     //checks if the given anwser is correct
     public void CheckAnswerMinimaal()
     {
-        if (lineController.CheckPoints() )
+        if (lineController.CheckPoints() && lineController.CheckPointsVisibility())
         {
 
             if (Mathf.Abs(lineController.GetSigmaA() - CorrectAnswer()) <=0.6* lineController.GetDistanceError1() )

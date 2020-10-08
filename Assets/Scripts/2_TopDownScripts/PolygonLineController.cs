@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
@@ -58,7 +59,7 @@ public class PolygonLineController : MonoBehaviour
     private GameObject hitObject;
     private Vector2 obstacleHitPoint;
     public float[] correctAnswerArray;
-    //[HideInInspector]
+    [HideInInspector]
     private float sigmaD = 0f;
     private float sigmaH = 0f;
     private float sigmaA = 0f;
@@ -107,17 +108,12 @@ public class PolygonLineController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         // checks is mousebutton is clicked and sets the point to that position or adds a new point
         SetPointsToMouse();
 
         //draws the line and sets the values of the points.
         //also stops when it encounters an object.
         DrawLineAndValues();
-
-        // updates sigmaD,H and A in function of the new linepoint
-        //UpdateErrors();
-
     }
 
 
@@ -142,7 +138,7 @@ public class PolygonLineController : MonoBehaviour
             else
             {
                 hitObject.transform.position = gm.SetObjectToMouse(Input.mousePosition, 0);
-
+                UpdateErrors();
             }
 
         }
@@ -170,8 +166,6 @@ public class PolygonLineController : MonoBehaviour
     //draws the line and values
     void DrawLineAndValues()
     {
-
-
         for (int i = 0; i < linePoints.Count; i++)
         {
             linePoints[i].GetComponent<PolygonPointController>().HideInfo();
@@ -203,20 +197,15 @@ public class PolygonLineController : MonoBehaviour
                 PolygonPointController thisPoint = linePoints[i].GetComponent<PolygonPointController>();
                 thisPoint.SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError1 * 50f, angleError * 50f); // multiplied by 50 to increase visual size
 
-                float a = 0f;
-
-                if ((i == linePoints.Count - 1)) //&& !CheckVisible(linePoints[i - 1], linePoints[i], Obstacles)
+                if (i == linePoints.Count - 1) //&& !CheckVisible(linePoints[i - 1], linePoints[i], Obstacles)
                 {
                     //Vector3 ellips = thisPoint.GetEllipseInfo(); // the ellips will be 50 times to large !
                     //biggestEllips = ellips.x * ellips.y * Mathf.PI / 4f;
-
                     if (errorEllipsDisplay)
                     {
                         errorEllipsDisplay.text = GetSigmaA().ToString();
+                    }
                 }
-                    else errorEllipsDisplay.text = a.ToString();
-                }
-
             }
 
             //checks if the line intersects with an obstacle
@@ -262,7 +251,6 @@ public class PolygonLineController : MonoBehaviour
                 sigmaH = sigmaH + Mathf.Pow(distances[i] * 1.5f * angleError / 100f, 2);
             }
             sigmaA = Mathf.Sqrt(sigmaD + sigmaH);
-            //sigmaA = distances[distances.Count- 1];
         }
         else
         {
@@ -294,10 +282,10 @@ public class PolygonLineController : MonoBehaviour
     //sets the parameters to a specific value so it matches the question
     public void SetVisibles(bool lock1stPoint, bool ellipses, bool angles, bool lengths, bool startAngle, bool startLength, int nrPoints)
     {
-        SetDistanceError1(Mathf.Round(UnityEngine.Random.Range(1f, 5f))); // be careful as this can affect polygon questions aswell
+        // set random distance (fixed + ppm) and angle error
+        SetDistanceError1(Mathf.Round(UnityEngine.Random.Range(1f, 5f))); 
         SetDistanceError2(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
         SetAngleError(Mathf.Round(UnityEngine.Random.Range(1f, 5f)));
-
 
         lockFirstPoint = lock1stPoint;
         showEllipses = ellipses;
@@ -306,8 +294,6 @@ public class PolygonLineController : MonoBehaviour
         showStartAngle = startAngle;
         showStartLength = startLength;
         maxPoints = nrPoints;
-
-        //StartSetup();
     }
 
     //returs the mapangle between two points
@@ -373,7 +359,7 @@ public class PolygonLineController : MonoBehaviour
 
     }
 
-    public (float,float,float) GetErrorDH() // compute errors for 1 point
+    public (float,float,float) GetErrorDH() // compute distance, angle, and sigmaA error for P to A
     {
         Vector2 startPoint = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
         Vector2 pointP = new Vector2(correctAnswerArray[2], correctAnswerArray[3]);
@@ -387,37 +373,27 @@ public class PolygonLineController : MonoBehaviour
 
     }
 
-    public float GetSigmaD() // compute sigmaA multiple points
+    public float GetSigmaD() // compute distance error of last linePoint
     {
         return GameManager.RoundFloat(sigmaD, 1);
     }
 
-    public float GetSigmaH() // compute sigmaA multiple points
+    public float GetSigmaH() // compute angle error of last linePoint
     {
         return GameManager.RoundFloat(sigmaH, 1);
     }
 
-    public float GetSigmaA() // compute sigmaA multiple points
+    public float GetSigmaA() // compute sigmaA of last linePoint
     {
         return GameManager.RoundFloat(sigmaA, 1);
     }
 
-    public void SetAnswerArray(float[] array) // compute sigmaA multiple points
+    public void SetAnswerArray(float[] array) 
     {
         correctAnswerArray = array;
     }
 
-    //public bool CheckPointP() // check whether last linepoint == pointP
-    //{
-    //    if ((linePoints.Last().transform.position.x - correctAnswerArray[correctAnswerArray.Length-2]) <= 0.001 && (linePoints.Last().transform.position.y - correctAnswerArray[correctAnswerArray.Length-1]) <= 0.001) 
-    //    {
-    //        return true;
-
-    //    }
-    //    else return false;
-    //}
-
-    public bool CheckPoints() // check whether each linepoint == pointP
+    public bool CheckPoints() // check whether first and last linepoint are equal to the start (P) and endpoint(A)
     {
         bool match = true;
 
@@ -435,7 +411,20 @@ public class PolygonLineController : MonoBehaviour
         return match;
     }
 
-    public float AngleToRad(float value)
+    public bool CheckPointsVisibility() // check visibility of all consecutive points (returns true if this is the case)
+    {
+        for (int i = 0; i < linePoints.Count-1; i++)
+        {
+            if (!CheckVisible(linePoints[i], linePoints[i + 1], Obstacles))
+            {
+                return false;
+                break;
+            }
+        }
+        return true;
+    }
+
+    public float AngleToRad(float value) // convert angle to radians
     {
         return value * 2 * Mathf.PI / 400f ;
     }
