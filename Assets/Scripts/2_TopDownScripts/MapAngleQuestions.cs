@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,7 +29,7 @@ public class MapAngleQuestions : MonoBehaviour
     [Header ("Axis transform controls")]
     public bool rotateAxis;
     [Tooltip("X & Y value: position offset, Z value rotation offset")]
-    public Vector3 axisTransform; // X & Y value: position offset, Z value rotation offset
+    public Vector3 maxAxisTransform; // X & Y value: position offset, Z value rotation offset
 
     public int numberOfPoints;
     public int scoreIncrease;
@@ -41,7 +40,6 @@ public class MapAngleQuestions : MonoBehaviour
     private float correctAnswerX;
     private float correctAnswerY;
     private float correctAnswerH;
-    private float errorMargin = 0.001f;
     private string correctAnswer;
 
     //initiate scripts
@@ -124,8 +122,7 @@ public class MapAngleQuestions : MonoBehaviour
 				float xx = Mathf.Round(correctAnswerArray[2] * GameManager.worldScale * 1000f) / 1000f;
                 float yy = Mathf.Round(correctAnswerArray[3] * GameManager.worldScale * 1000f) / 1000f;
                 questionText.text = $" Gegeven de coördinaten van A: \n\u2022 x: {xx:F2}m \n\u2022 y: {yy:F2}m";
-				if (GameManager.showDebugAnswer)
-					Debug.Log("{x} ,{y}");
+				if (GameManager.showDebugAnswer) Debug.Log("{x} ,{y}");
                 break;
 
             case QuestionType.AnderAssenStelsel:
@@ -133,8 +130,9 @@ public class MapAngleQuestions : MonoBehaviour
 
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 placer.calculatePoints[0].transform.SetParent(assenkruis.transform);
-                assenkruis.transform.position += new Vector3(axisTransform.x, axisTransform.y, 0);
-                assenkruis.transform.Rotate(0, 0, axisTransform.z);
+                assenkruis.transform.position += new Vector3(Random.Range(0f,1f) *  maxAxisTransform.x, Random.Range(0f, 1f) * maxAxisTransform.y, 0);
+                assenkruis.transform.Rotate(0, 0, Random.Range(-1f, 1f) * maxAxisTransform.z);
+                
 
                 correctAnswerX = Mathf.Round(correctAnswerArray[0] * GameManager.worldScale * 1000f) / 1000f;
                 correctAnswerY = Mathf.Round(correctAnswerArray[1] * GameManager.worldScale * 1000f) / 1000f;
@@ -165,7 +163,7 @@ public class MapAngleQuestions : MonoBehaviour
                 titleQuestionText.text = "Bepaal de afstand tussen de punten P & A";
                 questionText.text = "Bereken de Euclidische afstand ||AB||.";
 
-                if (GameManager.showDebugAnswer) Debug.Log(correctAnswerH);
+                if (GameManager.showDebugAnswer) Debug.Log("Correct answer: " + correctAnswer);
 
                 break;
 

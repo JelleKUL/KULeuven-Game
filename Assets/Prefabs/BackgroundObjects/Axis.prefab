@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6872219743077172742}
   - component: {fileID: 6872219743077172743}
+  - component: {fileID: 4878968332315489798}
+  - component: {fileID: 3729854603737215120}
   m_Layer: 0
   m_Name: Pointer (1)
-  m_TagString: Untagged
+  m_TagString: GroundPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,6 +83,48 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &4878968332315489798
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872219743077172740}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.09
+--- !u!114 &3729854603737215120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872219743077172740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609061cc5e7194a619969a4d60cc96fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showName: 0
+  resetRotation: 0
+  maxLengthError: 0
+  maxAngleError: 0
+  nameText: {fileID: 0}
+  distanceText: {fileID: 0}
+  angleText: {fileID: 0}
+  anglePointer: {fileID: 0}
+  errorEllipse: {fileID: 0}
+  angleDisplay: {fileID: 0}
+  errorEllipsSize: 0
+  errorEllips: 0
+  IsSnapped: 0
+  displayError: 0
 --- !u!1 &6872219743729214901
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,9 +266,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6872219743945147930}
   - component: {fileID: 6872219743945147931}
+  - component: {fileID: 1331694214756897941}
+  - component: {fileID: 4345088034747923435}
   m_Layer: 0
   m_Name: Pointer
-  m_TagString: Untagged
+  m_TagString: GroundPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -293,3 +339,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &1331694214756897941
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872219743945147928}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.09
+--- !u!114 &4345088034747923435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872219743945147928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609061cc5e7194a619969a4d60cc96fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showName: 0
+  resetRotation: 0
+  maxLengthError: 0
+  maxAngleError: 0
+  nameText: {fileID: 0}
+  distanceText: {fileID: 0}
+  angleText: {fileID: 0}
+  anglePointer: {fileID: 0}
+  errorEllipse: {fileID: 0}
+  angleDisplay: {fileID: 0}
+  errorEllipsSize: 0
+  errorEllips: 0
+  IsSnapped: 0
+  displayError: 0

@@ -431,8 +431,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7320656095557494914}
-        m_MethodName: LoadRandomCamp1
-        m_Mode: 1
+        m_MethodName: LoadRandomCamp
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2020,7 +2020,7 @@ MonoBehaviour:
   falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
   CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
   SoortVraag: 0
-  scoreIncrease: 1
+  scoreIncrease: 50
   tabel: {fileID: 0}
 --- !u!114 &6249460733618340913
 MonoBehaviour:
@@ -4360,7 +4360,7 @@ MonoBehaviour:
   maxSkewAngle: 3
   maxSkewError: 0
   skewBuildingLocation: {x: 5, y: 0}
-  scoreIncrease: 0
+  scoreIncrease: 50
   correctDistance: 0
   points:
   - {fileID: 0}

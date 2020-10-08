@@ -7,6 +7,7 @@ using UnityEngine;
 public class PolygonPointController : MonoBehaviour
 {
     public bool showName;
+    public bool resetRotation = true;
     public float maxLengthError;
     public float maxAngleError;
 
@@ -30,7 +31,7 @@ public class PolygonPointController : MonoBehaviour
     //sets the name of the point as a number
     private void Start()
     {
-        transform.rotation = Quaternion.identity;
+        if(resetRotation) transform.rotation = Quaternion.identity;
         
         lengthError = displayError? Random.Range(-maxLengthError, maxLengthError) : 0f;
         angleError = displayError? Random.Range(-maxAngleError, maxAngleError) : 0f;
