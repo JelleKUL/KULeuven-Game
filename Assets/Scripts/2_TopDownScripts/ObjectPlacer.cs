@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 //*********** The ObjectPlacer manages the placement of random objects such as the to-be-calculated points and the obstacles ******************//
 
@@ -16,8 +18,9 @@ public class ObjectPlacer : MonoBehaviour
     public GameManager gm;
 
     [Header("Randomized Constrains")]
-    public bool placeBtwnPoints;
-    public float minDistanceBtwPoints = 2;
+    //public bool placeBtwnPoints;
+    public float minDistanceBtwPoints;
+    public float minDistanceToObstacles;
     public Vector2 minOffset;
     public Vector2 maxOffset;
     public float maxRandomAngle;
@@ -218,58 +221,159 @@ public class ObjectPlacer : MonoBehaviour
     //returns a random position that is far enough from all the other obstacles and points
     public Vector2 FarEnoughRandomPoint()
     {
-        float minDist = Mathf.Infinity;
+        float minDistPoints = Mathf.Infinity;
+        float minDistObstacles = Mathf.Infinity;
+        float minDistObstructed = Mathf.Infinity;
+        bool repeat = true;
+
         Vector2 randPos;
+        int a = 0;
         do
         {
-            randPos = new Vector2(Random.Range(gm.screenMin.x + minOffset.x, gm.screenMax.x - maxOffset.x), Random.Range(gm.screenMin.y + minOffset.y, gm.screenMax.y - maxOffset.y));
-            minDist = Mathf.Infinity;
+            randPos = new Vector2(Random.Range(gm.screenMin.x + minOffset.x, gm.screenMax.x - maxOffset.x) , Random.Range(gm.screenMin.y + minOffset.y, gm.screenMax.y - maxOffset.y));
+            minDistPoints = Mathf.Infinity;
+            minDistObstacles = Mathf.Infinity;
+            minDistObstructed = Mathf.Infinity;
+ 
+            a=a+1;
 
             for (int i = 0; i < calculatePoints.Count; i++)
             {
-                if (Vector2.Distance(randPos, calculatePoints[i].transform.position) < minDist)
+                if (Vector2.Distance(randPos, calculatePoints[i].transform.position) < minDistPoints)
                 {
-                    minDist = Vector2.Distance(randPos, calculatePoints[i].transform.position);
+                    minDistPoints = Vector2.Distance(randPos, calculatePoints[i].transform.position);
+
                 }
             }
-            for (int i = 0; i < obstructedCalculatePoints.Count; i++)
+            if (obstructedCalculatePoints.Count > 0)
             {
-                if (Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position) < minDist)
+                for (int i = 0; i < obstructedCalculatePoints.Count; i++)
                 {
-                    minDist = Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position);
+                    if (Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position) < minDistObstructed)
+                    {
+                        minDistObstructed = Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position);
+                    }
                 }
             }
-            for (int i = 0; i < obstacles.Count; i++)
+
+            if (obstacles.Count > 0)
             {
-                if (Vector2.Distance(randPos, calculatePoints[i].transform.position) < minDist)
+                for (int i = 0; i < obstacles.Count; i++)
                 {
-                    minDist = Vector2.Distance(randPos, calculatePoints[i].transform.position);
+                    if (Vector2.Distance(randPos, obstacles[i].transform.position) < minDistObstacles)
+                    {
+                        minDistObstacles = Vector2.Distance(randPos, obstacles[i].transform.position);
+                    }
                 }
             }
-        } while (minDist < minDistanceBtwPoints);
-        
+
+            if ((minDistPoints >= minDistanceBtwPoints) && (minDistObstructed >= minDistanceBtwPoints) && (minDistObstacles >= minDistanceToObstacles))
+                {
+                repeat = false;
+                }
+
+        } while (repeat && a < 1000);
+
+        return randPos;
+    }
+    public Vector2 FarEnoughObstacle()    //returns a random position that is far enough from all the other obstacles and points
+    {
+        float minDistPoints = Mathf.Infinity;
+        float minDistObstacles = Mathf.Infinity;
+        float minDistObstructed = Mathf.Infinity;
+        bool repeat = true;
+
+        Vector2 randPos;
+        int a = 0;
+        do
+        {
+            randPos = new Vector2(Random.Range(gm.screenMin.x + minOffset.x, gm.screenMax.x - maxOffset.x), Random.Range(gm.screenMin.y + minOffset.y, gm.screenMax.y - maxOffset.y));
+            minDistPoints = Mathf.Infinity;
+            minDistObstacles = Mathf.Infinity;
+            minDistObstructed = Mathf.Infinity;
+
+            a = a + 1;
+
+            for (int i = 0; i < calculatePoints.Count; i++)
+            {
+                if (Vector2.Distance(randPos, calculatePoints[i].transform.position) < minDistPoints)
+                {
+                    minDistPoints = Vector2.Distance(randPos, calculatePoints[i].transform.position);
+
+                }
+            }
+            if (obstructedCalculatePoints.Count > 0)
+            {
+                for (int i = 0; i < obstructedCalculatePoints.Count; i++)
+                {
+                    if (Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position) < minDistObstructed)
+                    {
+                        minDistObstructed = Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position);
+                    }
+                }
+            }
+
+            if (obstacles.Count > 0)
+            {
+                for (int i = 0; i < obstacles.Count; i++)
+                {
+                    if (Vector2.Distance(randPos, obstacles[i].transform.position) < minDistObstacles)
+                    {
+                        minDistObstacles = Vector2.Distance(randPos, obstacles[i].transform.position);
+                    }
+                }
+            }
+
+            if ((minDistPoints >= minDistanceToObstacles) && (minDistObstructed >= minDistanceToObstacles) && (minDistObstacles >= minDistanceToObstacles))
+            {
+                repeat = false;
+            }
+
+        } while (repeat && a < 1000);
+
         return randPos;
     }
 
-    //returns a random rotationvalue
-    public Quaternion RandomAngle()
+    public Quaternion RandomAngle()    //returns a random rotationvalue
     {
         return Quaternion.Euler(0, 0, Random.Range(-maxRandomAngle, maxRandomAngle));
     }
 
-    public void PlaceObstacleBtwn(int amount)
+    //public void PlaceObstacleBtwn(int amount)
+    //{
+    //    for (int i = 0; i < amount; i++)
+    //    {
+    //        Vector3 obsPosition;
+    //        if (i == 0) obsPosition = calculatePoints[0].transform.position / 2f;
+    //        else obsPosition = (calculatePoints[i-1].transform.position + calculatePoints[i].transform.position) / 2f;
+    //        GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], obsPosition, RandomAngle());
+    //        obstacles.Add(newObstacle);
+    //    }
+        
+    //}
+
+    public void PlaceObstacleBtwn() // compute location in between points
     {
-        for (int i = 0; i < amount; i++)
+        for (int i = 1; i < calculatePoints.Count; i++)
         {
             Vector3 obsPosition;
-            if (i == 0) obsPosition = calculatePoints[0].transform.position / 2f;
-            else obsPosition = (calculatePoints[i-1].transform.position + calculatePoints[i].transform.position) / 2f;
+            obsPosition = (calculatePoints[i - 1].transform.position + calculatePoints[i].transform.position) / Random.Range(1.5f, 2.5f);
             GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], obsPosition, RandomAngle());
             obstacles.Add(newObstacle);
         }
-        
+
     }
 
-    
+    public void PlaceRandomObstacles(int amount) // compute random location obstacle
+    {
+        for (int i = 0; i < amount ; i++)
+        {
+            GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], FarEnoughObstacle(), RandomAngle());
+            obstacles.Add(newObstacle);
+        }
+
+    }
+
+
 
 }
