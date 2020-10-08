@@ -110,6 +110,8 @@ public class MapAngleQuestions : MonoBehaviour
                 lineController.SetVisibles(false, false, false, false, true, true, 2);
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
+                lineController.SetAnswerArray(correctAnswerArray);
+
                 correctAnswerX = Mathf.Round(correctAnswerArray[0] * GameManager.worldScale * 1000f) / 1000f;
                 correctAnswerY = Mathf.Round(correctAnswerArray[1] * GameManager.worldScale * 1000f) / 1000f;
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
@@ -121,14 +123,19 @@ public class MapAngleQuestions : MonoBehaviour
 				// nieuw (met string interpolation $), kan ook via x.ToString("F2"):
 				float xx = Mathf.Round(correctAnswerArray[2] * GameManager.worldScale * 1000f) / 1000f;
                 float yy = Mathf.Round(correctAnswerArray[3] * GameManager.worldScale * 1000f) / 1000f;
-                questionText.text = $" Gegeven de coördinaten van A: \n\u2022 x: {xx:F2}m \n\u2022 y: {yy:F2}m";
-				if (GameManager.showDebugAnswer) Debug.Log("{x} ,{y}");
+
+                questionText.text = " Gegeven de coördinaten van A \n\u2022 \n\u2022 x: {xx:F2}m \n\u2022 y: {yy:F2}m";
+				if (GameManager.showDebugAnswer)
+					Debug.Log("{x} ,{y}");
+
                 break;
 
             case QuestionType.AnderAssenStelsel:
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
 
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
+                lineController.SetAnswerArray(correctAnswerArray);
+
                 placer.calculatePoints[0].transform.SetParent(assenkruis.transform);
                 assenkruis.transform.position += new Vector3(Random.Range(0f,1f) *  maxAxisTransform.x, Random.Range(0f, 1f) * maxAxisTransform.y, 0);
                 assenkruis.transform.Rotate(0, 0, Random.Range(-1f, 1f) * maxAxisTransform.z);
@@ -150,6 +157,8 @@ public class MapAngleQuestions : MonoBehaviour
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
+                lineController.SetAnswerArray(correctAnswerArray);
+
                 correctAnswerH = Mathf.Sqrt(Mathf.Pow(correctAnswerArray[0] - correctAnswerArray[2], 2) + Mathf.Pow(correctAnswerArray[1] - correctAnswerArray[3], 2)) * GameManager.worldScale;
                 correctAnswerH = Mathf.Round(correctAnswerH * 1000f) / 1000f;
                 correctAnswer = correctAnswerH.ToString();
