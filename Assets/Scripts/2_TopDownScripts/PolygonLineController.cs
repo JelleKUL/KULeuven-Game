@@ -203,16 +203,18 @@ public class PolygonLineController : MonoBehaviour
                 PolygonPointController thisPoint = linePoints[i].GetComponent<PolygonPointController>();
                 thisPoint.SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, distanceError1 * 50f, angleError * 50f); // multiplied by 50 to increase visual size
 
+                float a = 0f;
 
-                if (i == linePoints.Count - 1)
+                if ((i == linePoints.Count - 1)) //&& !CheckVisible(linePoints[i - 1], linePoints[i], Obstacles)
                 {
                     //Vector3 ellips = thisPoint.GetEllipseInfo(); // the ellips will be 50 times to large !
                     //biggestEllips = ellips.x * ellips.y * Mathf.PI / 4f;
- 
+
                     if (errorEllipsDisplay)
                     {
-                        errorEllipsDisplay.text = GetSigmaA().ToString(); 
-                    }
+                        errorEllipsDisplay.text = GetSigmaA().ToString();
+                }
+                    else errorEllipsDisplay.text = a.ToString();
                 }
 
             }
@@ -405,14 +407,32 @@ public class PolygonLineController : MonoBehaviour
         correctAnswerArray = array;
     }
 
-    public bool CheckPointP() // check whether last linepoint == pointP
-    {
-        if ((linePoints.Last().transform.position.x - correctAnswerArray[correctAnswerArray.Length-2]) <= 0.001 && (linePoints.Last().transform.position.y - correctAnswerArray[correctAnswerArray.Length-1]) <= 0.001) 
-        {
-            return true;
+    //public bool CheckPointP() // check whether last linepoint == pointP
+    //{
+    //    if ((linePoints.Last().transform.position.x - correctAnswerArray[correctAnswerArray.Length-2]) <= 0.001 && (linePoints.Last().transform.position.y - correctAnswerArray[correctAnswerArray.Length-1]) <= 0.001) 
+    //    {
+    //        return true;
 
+    //    }
+    //    else return false;
+    //}
+
+    public bool CheckPoints() // check whether each linepoint == pointP
+    {
+        bool match = true;
+
+        if (linePoints.Count >= 2)
+        {
+            Vector2 startPoint = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
+            Vector2 endPoint = new Vector2(correctAnswerArray[correctAnswerArray.Length - 2], correctAnswerArray[correctAnswerArray.Length - 1]);
+
+            if ((Vector2.Distance(linePoints[0].transform.position, startPoint) > 0.001) || (Vector2.Distance(linePoints.Last().transform.position, endPoint) > 0.001))
+            {
+                match = false;
+            }
         }
-        else return false;
+        else match = false;
+        return match;
     }
 
     public float AngleToRad(float value)
@@ -424,13 +444,25 @@ public class PolygonLineController : MonoBehaviour
     {
         angleError = value;
     }
+    public float GetAngleError()
+    {
+        return angleError;
+    }
     public void SetDistanceError1(float value)
     {
         distanceError1 = value;
     }
+    public float GetDistanceError1()
+    {
+        return distanceError1;
+    }
     public void SetDistanceError2(float value)
     {
         distanceError2 = value;
+    }
+    public float GetDistanceError2()
+    {
+        return distanceError2;
     }
     public void CreateShortestPath()
     {

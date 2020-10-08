@@ -98,7 +98,8 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 questionText.text = "Kies zorgvuldig tussenopstelling om de fout zo klein mogelijk te houden.";
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
-                placer.PlaceObstacleBtwn(1);
+                placer.PlaceObstacleBtwn();
+                placer.PlaceRandomObstacles(4);
                 lineController.SetAnswerArray(correctAnswerArray);
                 lineController.UpdateErrors();
 
@@ -112,8 +113,8 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 questionText.text = "Bereken via tussenopstellingen de sigma a-component van de errorellips.";
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
-                placer.PlaceObstacleBtwn(1);
-                //placer.PlaceObstacles(4);
+                placer.PlaceObstacleBtwn();
+                placer.PlaceRandomObstacles(4);
                 lineController.SetAnswerArray(correctAnswerArray);
                 lineController.UpdateErrors();
 
@@ -132,7 +133,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     //checks if the given anwser is correct
     public void CheckAnswer()
     {
-        if (lineController.CheckPointP())
+        if (lineController.CheckPoints() )
         {
             if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer()) )
             {
@@ -150,16 +151,16 @@ public class FoutenPropagatieQuestions : MonoBehaviour
             }
 
         }
-        else answerOutput.text = "Measure to P before submitting";
+        else answerOutput.text = "Setup in P and measure to A before submitting";
     }
 
     //checks if the given anwser is correct
     public void CheckAnswerMinimaal()
     {
-        if (lineController.CheckPointP())
+        if (lineController.CheckPoints() )
         {
 
-            if (Mathf.Abs(lineController.GetSigmaA() - CorrectAnswer()) <=0.2 * CorrectAnswer() )
+            if (Mathf.Abs(lineController.GetSigmaA() - CorrectAnswer()) <=0.6* lineController.GetDistanceError1() )
             {
                 gm.IncreaseScore(scoreIncrease, 2);
                 Debug.Log("true");
@@ -181,7 +182,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
             }
 
         }
-        else answerOutput.text = "Measure to P before submitting";
+        else answerOutput.text = "Setup in P and measure to A before submitting";
     }
 
     //displays the correct answer

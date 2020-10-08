@@ -2567,12 +2567,12 @@ PrefabInstance:
     - target: {fileID: 8624441735927071720, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: minOffset.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8624441735927071720, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: maxOffset.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8624441735927071720, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
@@ -2587,7 +2587,22 @@ PrefabInstance:
     - target: {fileID: 8624441735927071720, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
       propertyPath: minDistanceBtwPoints
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624441735927071720, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: placeBtwnPoints
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624441735927071720, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: minDistanceBtwObstacles
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624441735927071720, guid: fedf2ec0e39744ebf85ff34b14446f74,
+        type: 3}
+      propertyPath: minDistanceToObstacles
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8728865717773427545, guid: fedf2ec0e39744ebf85ff34b14446f74,
         type: 3}
