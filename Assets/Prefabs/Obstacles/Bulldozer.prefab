@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8418990332130332996
 Transform:
   m_ObjectHideFlags: 0
@@ -96,8 +96,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMove: {x: 0, y: 1, z: 0}
+  maxScale: 0
   movementSpeed: 1
   moveLocal: 1
+  move: 1
+  scale: 0
 --- !u!61 &8418990332130332997
 BoxCollider2D:
   m_ObjectHideFlags: 0

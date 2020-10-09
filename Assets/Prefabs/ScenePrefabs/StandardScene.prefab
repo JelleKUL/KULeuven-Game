@@ -2042,8 +2042,8 @@ MonoBehaviour:
   - {fileID: 4023926246308375095, guid: 29a30f260d24b4ffea411af6c4a568ee, type: 3}
   mobileObstaclePrefabs: []
   gm: {fileID: 7320656095557494914}
-  placeBtwnPoints: 0
   minDistanceBtwPoints: 2
+  minDistanceToObstacles: 0
   minOffset: {x: 1, y: 1}
   maxOffset: {x: 1, y: 1}
   maxRandomAngle: 30
@@ -11309,8 +11309,8 @@ MonoBehaviour:
   - {fileID: 4023926246308375095, guid: 29a30f260d24b4ffea411af6c4a568ee, type: 3}
   mobileObstaclePrefabs: []
   gm: {fileID: 7320656095557494914}
-  placeBtwnPoints: 0
   minDistanceBtwPoints: 2
+  minDistanceToObstacles: 0
   minOffset: {x: 0.2, y: 0.2}
   maxOffset: {x: 0.2, y: 0.2}
   maxRandomAngle: 30
@@ -15516,9 +15516,32 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
         type: 3}
+      propertyPath: obstaclePrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
       propertyPath: gm
       value: 
       objectReference: {fileID: 7320656095557494914}
+    - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: obstaclePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 4023926246308375095, guid: 29a30f260d24b4ffea411af6c4a568ee,
+        type: 3}
+    - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: obstaclePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 7982059319238469490, guid: 4f69c5454d7f847a78041d7a5dc4e307,
+        type: 3}
+    - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: obstaclePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8754387217503673072, guid: a21380d93b0db44768b2d2eb4fff2ff6,
+        type: 3}
     - target: {fileID: 5963890913328120985, guid: 2338229750975421abe8cad584921f17,
         type: 3}
       propertyPath: m_Name
