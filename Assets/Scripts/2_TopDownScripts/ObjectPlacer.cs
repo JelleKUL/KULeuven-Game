@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 //*********** The ObjectPlacer manages the placement of random objects such as the to-be-calculated points and the obstacles ******************//
 
@@ -21,6 +19,7 @@ public class ObjectPlacer : MonoBehaviour
     //public bool placeBtwnPoints;
     public float minDistanceBtwPoints;
     public float minDistanceToObstacles;
+    public float minDistanceFromOrigin;
     public Vector2 minOffset;
     public Vector2 maxOffset;
     public float maxRandomAngle;
@@ -198,6 +197,7 @@ public class ObjectPlacer : MonoBehaviour
             {
                 GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0,obstaclePrefabs.Length)], FarEnoughRandomPoint(), RandomAngle());
                 obstacles.Add(newObstacle);
+                
             }
         }
         
@@ -235,16 +235,24 @@ public class ObjectPlacer : MonoBehaviour
             minDistObstacles = Mathf.Infinity;
             minDistObstructed = Mathf.Infinity;
  
-            a=a+1;
+            a++;
 
-            for (int i = 0; i < calculatePoints.Count; i++)
+            if (Vector2.Distance(randPos, Vector2.zero) < minDistanceFromOrigin)
             {
-                if (Vector2.Distance(randPos, calculatePoints[i].transform.position) < minDistPoints)
+                minDistPoints = 0f;
+            }
+            else
+            {
+                for (int i = 0; i < calculatePoints.Count; i++)
                 {
-                    minDistPoints = Vector2.Distance(randPos, calculatePoints[i].transform.position);
+                    if (Vector2.Distance(randPos, calculatePoints[i].transform.position) < minDistPoints)
+                    {
+                        minDistPoints = Vector2.Distance(randPos, calculatePoints[i].transform.position);
 
+                    }
                 }
             }
+
             if (obstructedCalculatePoints.Count > 0)
             {
                 for (int i = 0; i < obstructedCalculatePoints.Count; i++)
@@ -273,7 +281,7 @@ public class ObjectPlacer : MonoBehaviour
                 }
 
         } while (repeat && a < 1000);
-
+        Debug.Log(randPos + " = pos, " + gm.screenMin + ", " + gm.screenMax);
         return randPos;
     }
     public Vector2 FarEnoughObstacle()    //returns a random position that is far enough from all the other obstacles and points

@@ -333,6 +333,11 @@ PrefabInstance:
       propertyPath: hoekStandaardAfwijking
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 3883128868348204849, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 3973255305326179780, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_IsActive
@@ -396,7 +401,7 @@ PrefabInstance:
     - target: {fileID: 7932477422160264948, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5000305
+      value: 2.5000267
       objectReference: {fileID: 0}
     - target: {fileID: 8314618659170050361, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}

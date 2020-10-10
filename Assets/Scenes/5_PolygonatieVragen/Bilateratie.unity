@@ -198,6 +198,11 @@ PrefabInstance:
       propertyPath: SoortVraag
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3883128868348204849, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 6765280077774144171, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: showObstructedValues

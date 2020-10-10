@@ -170,7 +170,7 @@ public class MapAngleQuestions : MonoBehaviour
 
 
                 titleQuestionText.text = "Bepaal de afstand tussen de punten P & A";
-                questionText.text = "Bereken de Euclidische afstand ||AB||.";
+                questionText.text = "Bereken de Euclidische afstand ||AP||.";
 
                 if (GameManager.showDebugAnswer) Debug.Log("Correct answer: " + correctAnswer);
 

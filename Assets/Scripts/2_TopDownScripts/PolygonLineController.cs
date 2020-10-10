@@ -18,17 +18,18 @@ public class PolygonLineController : MonoBehaviour
     public LayerMask Obstacles;
     public LayerMask ObstructionPoints;
 
+    [Space(10)]
     public Slider distanceError1Slider;
     public Slider distanceError2Slider;
     public Slider angleErrorSlider;
 
+    [Space(10)]
     public Text errorEllipsDisplay;
     public Material fullLine;
     public Material dottedLine;
 
     [Header("Changeable Parameters")]
     public int nrOfPoints;
-    //public bool randomizeErrors;
     public bool lockDistanceError1;
     public bool lockDistanceError2;
     public bool lockAngleError;
@@ -42,6 +43,8 @@ public class PolygonLineController : MonoBehaviour
     [Tooltip("the measure error of the angle")]
     [Range(0, 5)]
     public float angleError =0f;
+
+    [Space(10)]
     [Tooltip("Should the first point be locked in place and where?")]
     public bool lockFirstPoint;
     public Vector2 firstPointPosition;
@@ -58,15 +61,15 @@ public class PolygonLineController : MonoBehaviour
     private bool holdingObject;
     private GameObject hitObject;
     private Vector2 obstacleHitPoint;
-    public float[] correctAnswerArray;
+
     [HideInInspector]
+    public float[] correctAnswerArray;
     private float sigmaD = 0f;
     private float sigmaH = 0f;
     private float sigmaA = 0f;
 
     private GameManager gm;
     private LineRenderer line;
-    private ObjectPlacer placer;
 
     // the startscript, can be called by the setparametersfunction to get the correct answers before the start function is called in this script
     void Start()
@@ -90,16 +93,22 @@ public class PolygonLineController : MonoBehaviour
             linePoints[0].GetComponent<CircleCollider2D>().enabled = false;
         }
 
-        distanceError1Slider.value = distanceError1;
-        distanceError2Slider.value = distanceError2;
-        angleErrorSlider.value = angleError;
-
-        if (lockAngleError) angleErrorSlider.interactable = false;
-        else angleErrorSlider.interactable = true;
-        if (lockDistanceError1) distanceError1Slider.interactable = false;
-        else distanceError1Slider.interactable = true;
-        if (lockDistanceError2) distanceError2Slider.interactable = false;
-        else distanceError2Slider.interactable = true;
+        // set the values of the sliders if they are available
+        if (distanceError1Slider)
+        {
+            distanceError1Slider.value = distanceError1;
+            distanceError1Slider.interactable = !lockDistanceError1;
+        }
+        if (distanceError2Slider)
+        {
+            distanceError2Slider.value = distanceError2;
+            distanceError2Slider.interactable = !lockDistanceError2;
+        }
+        if (angleErrorSlider)
+        {
+            angleErrorSlider.value = angleError;
+            angleErrorSlider.interactable = !lockAngleError;
+        }
 
 
 
@@ -129,7 +138,7 @@ public class PolygonLineController : MonoBehaviour
 
                 if (!holdingObject && linePoints.Count < maxPoints && Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log("adding point");
+                    //Debug.Log("adding point");
                     AddPoint(gm.SetObjectToMouse(Input.mousePosition, 0));
                     UpdateErrors();
                 }
@@ -155,7 +164,7 @@ public class PolygonLineController : MonoBehaviour
         if (rayHit.collider != null)
         {
             holdingObject = true;
-            Debug.Log(rayHit.transform.gameObject.name);
+            //Debug.Log(rayHit.transform.gameObject.name);
             return rayHit.transform.gameObject;
 
         }
@@ -233,6 +242,7 @@ public class PolygonLineController : MonoBehaviour
         }
     }
 
+    //updates the errors of the foutenpropagatie
     public void UpdateErrors()
     {
         List<float> distances = new List<float>();
@@ -266,8 +276,8 @@ public class PolygonLineController : MonoBehaviour
 
     }
 
-        // checks if next point is visible
-        bool CheckVisible(GameObject point, GameObject nextPoint, LayerMask layerMask)
+    // checks if next point is visible
+    bool CheckVisible(GameObject point, GameObject nextPoint, LayerMask layerMask)
     {
         RaycastHit2D hit = Physics2D.Raycast(point.transform.position, nextPoint.transform.position - point.transform.position, (nextPoint.transform.position - point.transform.position).magnitude, layerMask);
 
@@ -346,6 +356,7 @@ public class PolygonLineController : MonoBehaviour
         }
 
     }
+
     public void SetPoints(float[] positions)
     {
         line = GetComponent<LineRenderer>();
@@ -418,13 +429,12 @@ public class PolygonLineController : MonoBehaviour
             if (!CheckVisible(linePoints[i], linePoints[i + 1], Obstacles))
             {
                 return false;
-                break;
             }
         }
         return true;
     }
 
-    public float AngleToRad(float value) // convert angle to radians
+     float AngleToRad(float value) // convert angle to radians
     {
         return value * 2 * Mathf.PI / 400f ;
     }
@@ -458,7 +468,7 @@ public class PolygonLineController : MonoBehaviour
 
     }
 
-    public bool LastPointSnapped()
+    bool LastPointSnapped() // check if the last point is snapped
     {
         return linePoints[linePoints.Count - 1].GetComponent<PolygonPointController>().IsSnapped;
 

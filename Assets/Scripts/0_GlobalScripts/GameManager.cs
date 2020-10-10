@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         public static bool campaignMode;
 
 
-    [HideInInspector]
+    //[HideInInspector]
     public Vector2 screenMin, screenMax; // calculated based on the x&y scale of the gamamanager
 
 

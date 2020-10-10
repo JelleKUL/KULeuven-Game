@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -360,6 +361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883128868348204849, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 8676305250189455280, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}

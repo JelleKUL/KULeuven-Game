@@ -161,7 +161,7 @@ PrefabInstance:
     - target: {fileID: 271289531687891774, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: minOffset.x
-      value: 0.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 271289531687891774, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
@@ -176,7 +176,12 @@ PrefabInstance:
     - target: {fileID: 271289531687891774, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: minOffset.y
-      value: 0.5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 271289531687891774, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: minDistanceFromOrigin
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2076948251693405740, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}

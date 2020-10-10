@@ -145,6 +145,11 @@ PrefabInstance:
       propertyPath: SoortVraag
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 271289531687891773, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1572138720533481058, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: m_AnchoredPosition.x

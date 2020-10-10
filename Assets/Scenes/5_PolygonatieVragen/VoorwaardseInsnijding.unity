@@ -218,6 +218,11 @@ PrefabInstance:
       propertyPath: SoortVraag
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3883128868348204849, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 5146478976307846148, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_IsActive
