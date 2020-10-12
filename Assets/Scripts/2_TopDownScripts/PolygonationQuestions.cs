@@ -20,7 +20,7 @@ public class PolygonationQuestions : MonoBehaviour
     public Color falseColor, CorrectColor;
 
 
-    public enum QuestionType { Geen, Coordinaat1Punt, Afstand2PuntenPolygoon, VoorwaardseInsnijding, AchterwaardseInsnijding, Tabel, Bilateratie }
+    public enum QuestionType { Geen, Coordinaat1Punt, Afstand2PuntenPolygoon, VoorwaardseInsnijding, AchterwaardseInsnijding, Tabel, Bilateratie, VrijePolygonatie }
     [Tooltip("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -38,6 +38,8 @@ public class PolygonationQuestions : MonoBehaviour
     private float correctAnswerY;
     private float correctAnswerH;
     private string correctAnswer;
+    private string AnswerExplanation;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -72,6 +74,7 @@ public class PolygonationQuestions : MonoBehaviour
 
                 titleQuestionText.text = "Bepaal het coördinaat van punt P";
                 questionText.text = "Met behulp van de afstand en map angle vanaf het meetpunt.";
+                AnswerExplanation = "";
                 break;
 
             case QuestionType.Afstand2PuntenPolygoon:
@@ -83,6 +86,8 @@ public class PolygonationQuestions : MonoBehaviour
 
                 titleQuestionText.text = "Bepaal de afstand tussen A en B";
                 questionText.text = "Met behulp van de afstand en map angle vanaf het meetpunt.";
+                AnswerExplanation = "";
+
                 break;
 
             case QuestionType.VoorwaardseInsnijding:
@@ -99,6 +104,8 @@ public class PolygonationQuestions : MonoBehaviour
                 titleQuestionText.text = "Voorwaardse Insnijding bepaal P";
                 questionText.text = "\n\u2022 A = x:" + GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale, 3) + 
                                     "\n\u2022 B = x:" + GameManager.RoundFloat(correctAnswerArray[2] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(correctAnswerArray[3] * GameManager.worldScale, 3);
+                AnswerExplanation = "";
+
                 break;
 
             case QuestionType.AchterwaardseInsnijding:
@@ -115,20 +122,24 @@ public class PolygonationQuestions : MonoBehaviour
                 questionText.text = "\n\u2022 A = x: " + GameManager.RoundFloat(obsructedPointsArray[0] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(obsructedPointsArray[1] * GameManager.worldScale, 3) + 
                                     "\n\u2022 B = x: " + GameManager.RoundFloat(obsructedPointsArray[2] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(obsructedPointsArray[3] * GameManager.worldScale, 3) + 
                                     "\n\u2022 C = x: " + GameManager.RoundFloat(obsructedPointsArray[4] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(obsructedPointsArray[5] * GameManager.worldScale, 3) ;
+                AnswerExplanation = "";
                 break;
 
             case QuestionType.Tabel:
                 //start oefening tabel
-                lineController.SetVisibles(false, true, true, true, false, false, 3);
-                correctAnswerArray = placer.placeLoopedPoints(2);
+                lineController.SetVisibles(false, false, true, true, true, false, 8);
+                correctAnswerArray = placer.placeLoopedPoints(3);
                 
-                correctAnswerX = GameManager.RoundFloat(correctAnswerArray[12] * GameManager.worldScale, 3);
-                correctAnswerY = GameManager.RoundFloat(correctAnswerArray[13] * GameManager.worldScale, 3);
+                correctAnswerX = GameManager.RoundFloat(correctAnswerArray[10] * GameManager.worldScale, 3);
+                correctAnswerY = GameManager.RoundFloat(correctAnswerArray[11] * GameManager.worldScale, 3);
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 lineController.SetPoints(correctAnswerArray);
                 //placer.PlaceObstacles(2);
                 titleQuestionText.text = "Vervolledig onderstaande tabel";
+                questionText.text = "Punt A ligt op (0,0)";
+                AnswerExplanation = "";
+
                 break;
 
             case QuestionType.Bilateratie:
@@ -144,6 +155,14 @@ public class PolygonationQuestions : MonoBehaviour
                 titleQuestionText.text = "Bilateratie bepaal P";
                 questionText.text = "\n\u2022 A = x:" + GameManager.RoundFloat(obsructedPointsArray[0] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(obsructedPointsArray[1] * GameManager.worldScale, 3) +
                                     "\n\u2022 B = x:" + GameManager.RoundFloat(obsructedPointsArray[2] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(obsructedPointsArray[3] * GameManager.worldScale, 3);
+                AnswerExplanation = "";
+
+                break;
+
+            case QuestionType.VrijePolygonatie:
+
+                AnswerExplanation = "";
+
                 break;
   
         }
@@ -192,9 +211,10 @@ public class PolygonationQuestions : MonoBehaviour
             Debug.Log("false");
         }
     }
+    
     public void CheckAnswerArray()
     {
-        if (tabel.checkAnswers())
+        if (tabel.checkAnswers(correctAnswerArray))
         {
             gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
@@ -210,6 +230,12 @@ public class PolygonationQuestions : MonoBehaviour
         }
         else Debug.Log("false");
 
+    }
+    
+
+    public void ShowAnswerArray()
+    {
+        tabel.ShowCorrectValues(correctAnswerArray);
     }
 
     //displays the correct answer

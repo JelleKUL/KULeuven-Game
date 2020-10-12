@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class PolygonatieLoopTabel : MonoBehaviour
 {
-    private bool coordinateMode;
+
+    public Color correctColor, falseColor;
 
 
     public GameObject[] tabelParts;
     public ObjectPlacer placer;
+    public PolygonLineController polyline;
 
     public GameObject Title1;
     public GameObject Title2;
+
+    private bool coordinateMode;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +30,7 @@ public class PolygonatieLoopTabel : MonoBehaviour
     {
         
     }
+
     public Vector2[] GetInputs()
     {
         Vector2[] inputs = new Vector2[tabelParts.Length]; 
@@ -37,7 +42,7 @@ public class PolygonatieLoopTabel : MonoBehaviour
         return inputs;
     }
 
-    public bool checkAnswers()
+    public bool checkAnswers(float[] correctPoints )
     {
         bool correct = true;
         Vector2[] answerinputs = GetInputs();
@@ -45,10 +50,15 @@ public class PolygonatieLoopTabel : MonoBehaviour
 
         for (int i = 0; i < correctCoordinates.Length; i++)
         {
-            if(Vector2.SqrMagnitude(answerinputs[i+1] - correctCoordinates[i]) > 0.02)
+            Debug.Log(Vector2.Distance(answerinputs[i], correctCoordinates[i]));
+            tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(correctColor);
+            if (Vector2.Distance(answerinputs[i],correctCoordinates[i]) > 0.003)
             {
                 correct = false;
+                tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(falseColor);
+                Debug.Log("incorrect: " + i);
             }
+           
         }
 
         return correct;
@@ -66,5 +76,34 @@ public class PolygonatieLoopTabel : MonoBehaviour
             tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SwitchModes();
         }
     }
+    
+    public void ShowCorrectValues(float[] correctValues)
+    {
+        coordinateMode = true;
+        Title1.SetActive(false);
+        Title2.SetActive(true);
+
+        Vector2 firstPoint = new Vector2(correctValues[0], correctValues[1]);
+        Vector2 point = firstPoint;
+
+
+        for (int i = 0; i < correctValues.Length/2-1; i++)
+        {
+            Vector2 currentPoint = point;
+            Vector2 nextPoint = new Vector2(correctValues[i * 2 + 2 ], correctValues[i * 2 + 3]);
+            tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetValues(currentPoint, nextPoint, false);
+            //Debug.Log("this point: " + currentPoint + ", nextpoint: " + nextPoint + ", " + (i * 2 + 2) + ", " + (i * 2 + 3));
+            point = nextPoint;
+
+
+        }
+        Vector2 lastPoint = new Vector2(correctValues[correctValues.Length - 2], correctValues[correctValues.Length - 1]);
+        tabelParts[correctValues.Length / 2 - 1].GetComponent<PolygonatieLoopTabelDeel>().SetValues(point,firstPoint, false);
+        tabelParts[correctValues.Length / 2].GetComponent<PolygonatieLoopTabelDeel>().SetValues(firstPoint,firstPoint,true);
+
+
+    }
+ 
+
 
 }

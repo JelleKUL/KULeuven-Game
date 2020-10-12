@@ -15,6 +15,7 @@ public class MapAngleQuestions : MonoBehaviour
     public Text answerInputX;
     public Text answerInputY;
     public Text answerInputH;
+
     public Text answerOutput;
     public GameObject assenkruis;
 
@@ -41,6 +42,7 @@ public class MapAngleQuestions : MonoBehaviour
     private float correctAnswerY;
     private float correctAnswerH;
     private string correctAnswer;
+    private string AnswerExplanation;
 
     //initiate scripts
     private PolygonLineController lineController;
@@ -74,18 +76,19 @@ public class MapAngleQuestions : MonoBehaviour
 
             case QuestionType.BepaalMapAngle:
                 //start oefening BepaalMapAngle
-                lineController.SetVisibles(true, false, false, false, true, true, 2);
+                lineController.SetVisibles(true, false, false, false, true, false, 2);
 
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 correctAnswerH = lineController.GetMapAngle( Vector2.up, new Vector2(correctAnswerArray[0], correctAnswerArray[1]));
 
-                correctAnswerH = Mathf.Round(correctAnswerH * 1000f) / 1000f;
+                correctAnswerH = GameManager.RoundFloat(correctAnswerH,3);
                 correctAnswer = correctAnswerH.ToString();
 
                 titleQuestionText.text = "Bepaal de kaarthoek";
                 questionText.text = "Van het punt P naar het opstelpunt.";
+                AnswerExplanation = "De mapangle wordt gemeten vanaf het noorden naar de bestemming in wijzers in.";
 
-                if (GameManager.showDebugAnswer) Debug.Log(correctAnswerArray[0]+ "," + correctAnswerArray[1] + ",  " + correctAnswerH);
+                if (GameManager.showDebugAnswer) Debug.Log( "Correct Mapangle: " + correctAnswerH);
 
                 break;
 
@@ -94,12 +97,13 @@ public class MapAngleQuestions : MonoBehaviour
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
 
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
-                correctAnswerX = Mathf.Round(correctAnswerArray[0] * GameManager.worldScale * 1000f) / 1000f;
-                correctAnswerY = Mathf.Round(correctAnswerArray[1] * GameManager.worldScale * 1000f) / 1000f;
+                correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale,3);
+                correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale,3);
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 titleQuestionText.text = "Bepaal de coördinaten van punt P";
                 questionText.text = "Het totaalstation staat opgesteld in (0,0).";
+                AnswerExplanation = "Het coordinaat kan bepaald worden via de hoekmeting en afstand.";
 
                 if (GameManager.showDebugAnswer) Debug.Log(correctAnswerX + "," + correctAnswerY);
 
@@ -112,21 +116,18 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
                 lineController.SetAnswerArray(correctAnswerArray);
 
-                correctAnswerX = Mathf.Round(correctAnswerArray[0] * GameManager.worldScale * 1000f) / 1000f;
-                correctAnswerY = Mathf.Round(correctAnswerArray[1] * GameManager.worldScale * 1000f) / 1000f;
+                correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale,3);
+                correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale,3);
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                AnswerExplanation = "Het coordinaat kan bepaald worden via de hoekmeting en afstand.";
 
                 titleQuestionText.text = "Bepaal de coördinaten van punt P";
-                // vorige code:
-				//questionText.text = " Via de verkregen meting van A: \n\u2022 x: " + (Mathf.Round(correctAnswerArray[2] * 1000)/1000f) * GameManager.worldScale + "m \n\u2022 y: " + (Mathf.Round(correctAnswerArray[3] * 1000) / 1000f) * GameManager.worldScale + "m";
-                
-				// nieuw (met string interpolation $), kan ook via x.ToString("F2"):
-				float xx = Mathf.Round(correctAnswerArray[2] * GameManager.worldScale * 1000f) / 1000f;
-                float yy = Mathf.Round(correctAnswerArray[3] * GameManager.worldScale * 1000f) / 1000f;
+				float xx = GameManager.RoundFloat(correctAnswerArray[2] * GameManager.worldScale,3);
+                float yy = GameManager.RoundFloat(correctAnswerArray[3] * GameManager.worldScale,3);
 
-                questionText.text = " Gegeven de coördinaten van A \n\u2022 \n\u2022 x: {xx:F2}m \n\u2022 y: {yy:F2}m";
+                questionText.text = " Gegeven de coördinaten van A \n\u2022 x: " + xx + "m \n\u2022 y: " + yy + "m";
 				if (GameManager.showDebugAnswer)
-					Debug.Log("{x} ,{y}");
+					Debug.Log(correctAnswerX + ", " + correctAnswerY);
 
                 break;
 
@@ -139,10 +140,10 @@ public class MapAngleQuestions : MonoBehaviour
                 placer.calculatePoints[0].transform.SetParent(assenkruis.transform);
                 assenkruis.transform.position += new Vector3(Random.Range(0f,1f) *  maxAxisTransform.x, Random.Range(0f, 1f) * maxAxisTransform.y, 0);
                 assenkruis.transform.Rotate(0, 0, Random.Range(-1f, 1f) * maxAxisTransform.z);
-                
+                AnswerExplanation = "Gebruik het hoekverschil om te kaarthoek te berekenen.";
 
-                correctAnswerX = Mathf.Round(correctAnswerArray[0] * GameManager.worldScale * 1000f) / 1000f;
-                correctAnswerY = Mathf.Round(correctAnswerArray[1] * GameManager.worldScale * 1000f) / 1000f;
+                correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale,3);
+                correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale,3);
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 titleQuestionText.text = "Bepaal de coördinaten van punt P";
@@ -160,13 +161,10 @@ public class MapAngleQuestions : MonoBehaviour
                 lineController.SetAnswerArray(correctAnswerArray);
 
                 correctAnswerH = Mathf.Sqrt(Mathf.Pow(correctAnswerArray[0] - correctAnswerArray[2], 2) + Mathf.Pow(correctAnswerArray[1] - correctAnswerArray[3], 2)) * GameManager.worldScale;
-                correctAnswerH = Mathf.Round(correctAnswerH * 1000f) / 1000f;
+                correctAnswerH = GameManager.RoundFloat(correctAnswerH,3);
                 correctAnswer = correctAnswerH.ToString();
-                //var a = (correctAnswerArray[0] *GameManager.worldScale).ToString();
-                    
-                //var b = (correctAnswerArray[1] * GameManager.worldScale).ToString();
+                AnswerExplanation = "Bepaal de afstand door beide coordinaten te berekenen.";
 
-                //correctAnswer = a + "," +b;
 
 
                 titleQuestionText.text = "Bepaal de afstand tussen de punten P & A";
@@ -237,10 +235,44 @@ public class MapAngleQuestions : MonoBehaviour
     //displays the correct answer
     public void ShowAnswer()
     {
-        answerOutput.text = "Het antwoord is: " + correctAnswer;
-        answerInputH.color = falseColor;
-        //answerInputH.text = "Het antwoord is: " + CorrectAnswer().ToString();
-        //waterpassing.ShowAnswer();
+        if (answerInputH.transform.parent.GetComponent<InputField>())
+        {
+            answerInputH.color = falseColor;
+            InputField answerDisplay = answerInputH.transform.parent.GetComponent<InputField>();
+            answerDisplay.text = correctAnswer;
+            answerDisplay.interactable = false;
+        }
+
+        answerOutput.text = AnswerExplanation;
+
+
+
+        Debug.Log("showing answer");
+
+    }
+
+    //displays the correct answer
+    public void ShowAnswerXY()
+    {
+        if (answerInputX.transform.parent.GetComponent<InputField>())
+        {
+            answerInputX.color = falseColor;
+            InputField answerDisplay = answerInputX.transform.parent.GetComponent<InputField>();
+            answerDisplay.text = correctAnswerX.ToString();
+            answerDisplay.interactable = false;
+        }
+        if (answerInputY.transform.parent.GetComponent<InputField>())
+        {
+            answerInputY.color = falseColor;
+            InputField answerDisplay = answerInputY.transform.parent.GetComponent<InputField>();
+            answerDisplay.text = correctAnswerY.ToString();
+            answerDisplay.interactable = false;
+        }
+
+        answerOutput.text = AnswerExplanation;
+
+
+
         Debug.Log("showing answer");
 
     }

@@ -31,10 +31,10 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
     // internal answers
     private float[] correctAnswerArray;
-    //private float correctAnswerA;
     private float correctAnswerH;
-    //private float errorMargin = 0.001f;
     private string correctAnswer;
+    private string AnswerExplanation;
+
 
     //initiate scripts
     private GameManager gm;
@@ -71,6 +71,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 lineController.SetVisibles(false, true, true, true, true, true, 2);
                 titleQuestionText.text = "Bepaal de standaardafwijking van A gemeten vanaf P";
                 questionText.text = "Bereken a.d.v. de hoekfout en de afstandsfout de maximale standaardafwijking van de errorellips";
+                AnswerExplanation = "de grootste waarde kan je ook waarnemen op het speelveld.";
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
                 lineController.SetAnswerArray(correctAnswerArray);
@@ -84,6 +85,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 lineController.SetVisibles(false, true, true, true, true, true, 2);
                 titleQuestionText.text = "Bepaal sigma a van A gemeten vanaf P";
                 questionText.text = "Bereken de sigma a-component van de errorellips.";
+                AnswerExplanation = "gebruik de vaste en variablele afstandsfout.";
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
                 lineController.SetAnswerArray(correctAnswerArray);
@@ -96,6 +98,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 lineController.SetVisibles(false, true, true, true, true, true, 10);
                 titleQuestionText.text = "Bepaal A gemeten vanaf P met een zo klein mogelijke errorellips";
                 questionText.text = "Kies zorgvuldig tussenopstelling om de fout zo klein mogelijk te houden.";
+                AnswerExplanation = "probeer de afstand zo laag mogelijk te houden";
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
                 placer.PlaceObstacleBtwn();
@@ -111,6 +114,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 lineController.SetVisibles(false, true, true, true, true, true, 10);
                 titleQuestionText.text = "Bepaal sigma a van A gemeten vanaf P";
                 questionText.text = "Bereken via tussenopstellingen de sigma a-component van de errorellips.";
+                AnswerExplanation = " houd rekening met de verschillende componenten van te opstelpunten.";
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
                 placer.PlaceObstacleBtwn();
@@ -188,11 +192,19 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     //displays the correct answer
     public void ShowAnswer()
     {
-        correctAnswer = CorrectAnswer().ToString();
+        if (answerInputH.transform.parent.GetComponent<InputField>())
+        {
+            answerInputH.color = falseColor;
+            InputField answerDisplay = answerInputH.transform.parent.GetComponent<InputField>();
+            answerDisplay.text = CorrectAnswer().ToString();
+            answerDisplay.interactable = false;
+        }
 
-        answerOutput.text = "Het antwoord is: " + correctAnswer + " mm ";
-        answerInputH.color = falseColor;
-         Debug.Log("showing answer");
+        answerOutput.text = AnswerExplanation;
+
+
+
+        Debug.Log("showing answer");
 
     }
 

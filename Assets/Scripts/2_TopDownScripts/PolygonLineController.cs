@@ -53,6 +53,7 @@ public class PolygonLineController : MonoBehaviour
     public bool showLengths;
     public bool showStartAngle;
     public bool showStartLength;
+    public bool showSmallErrors;
     public int maxPoints;
     public bool startCenterPoint;
 
@@ -262,7 +263,7 @@ public class PolygonLineController : MonoBehaviour
             }
             sigmaA = Mathf.Sqrt(sigmaD + sigmaH);
         }
-        else
+        else if(!startCenterPoint)
         {
             Vector2 startPoint = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
             Vector2 pointP = new Vector2(correctAnswerArray[2], correctAnswerArray[3]);
@@ -319,25 +320,30 @@ public class PolygonLineController : MonoBehaviour
     public void AddPoint(Vector2 pos)
     {
         line.positionCount++;
+
+        GameObject newPoint;
+
         if (linePoints.Count == 0)
         {
-            GameObject newPoint = Instantiate(firstPoint, pos, Quaternion.identity);
+            newPoint = Instantiate(firstPoint, pos, Quaternion.identity);
             newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
             linePoints.Add(newPoint);
         }
 
         else if (startCenterPoint && line.positionCount == 2)
         {
-            GameObject newPoint = Instantiate(linePoint, pos, Quaternion.identity);
+            newPoint = Instantiate(linePoint, pos, Quaternion.identity);
             newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
             linePoints.Insert(0, newPoint);
         }
         else
         {
-            GameObject newPoint = Instantiate(linePoint, pos, Quaternion.identity);
+            newPoint = Instantiate(linePoint, pos, Quaternion.identity);
             newPoint.GetComponent<PolygonPointController>().SetNameNrText(line.positionCount);
             linePoints.Add(newPoint);
         }
+
+        newPoint.GetComponent<PolygonPointController>().displayError = showSmallErrors;
 
 
 
@@ -360,13 +366,14 @@ public class PolygonLineController : MonoBehaviour
     public void SetPoints(float[] positions)
     {
         line = GetComponent<LineRenderer>();
-        maxPoints = positions.Length / 2;
-        for (int i = 0; i < maxPoints - 1; i++)
+        maxPoints = Mathf.Max(positions.Length / 2, maxPoints);
+        int maxPlacedpoints = positions.Length / 2;
+        for (int i = 0; i < maxPlacedpoints; i++)
         {
             AddPoint(new Vector2(positions[i * 2], positions[i * 2 + 1]));
         }
         AddPoint(new Vector2(positions[0], positions[1]));
-        AddPoint(new Vector2(positions[(maxPoints - 1) * 2], positions[(maxPoints - 1) * 2 + 1]));
+        //AddPoint(new Vector2(positions[(maxPoints - 1) * 2], positions[(maxPoints - 1) * 2 + 1]));
 
     }
 

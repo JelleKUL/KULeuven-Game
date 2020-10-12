@@ -13,6 +13,7 @@ public class WaterpassingQuestions : MonoBehaviour
     [Header("Predefined TextFields")]
     public Text questionHeaderText;
     public Text questionText;
+
     public Text answerInputH;   
     public Text answerOutput;
 
@@ -198,6 +199,11 @@ public class WaterpassingQuestions : MonoBehaviour
     //displays the correct answer
     public void ShowAnswer()
     {
+        if(SoortVraag == QuestionType.KringWaterpassing)
+        {
+            waterpassing.ShowAnswersTabel();
+        }
+
         if (answerInputH.transform.parent.GetComponent<InputField>())
         {
             answerInputH.color = falseColor;

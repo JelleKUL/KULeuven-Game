@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         public static bool campaignMode;
 
 
-    //[HideInInspector]
+    [HideInInspector]
     public Vector2 screenMin, screenMax; // calculated based on the x&y scale of the gamamanager
 
 
@@ -275,7 +275,7 @@ public class GameManager : MonoBehaviour
 
             for (int i = 1; i < chapter; i++)
             {
-                firstLevel += NrOfCamp2ChapterScenes[i];
+                firstLevel += NrOfCamp2ChapterScenes[i-1];
 
             }
 
@@ -290,12 +290,12 @@ public class GameManager : MonoBehaviour
                         availableLevels.Add(i);
                     }
                 }
-                Debug.Log("Loading scene: " + (firstLevel + availableLevels[Random.Range(0, availableLevels.Count)]));
+                Debug.Log("Loading scene: " + (firstLevel + availableLevels[Random.Range(0, availableLevels.Count)]) + ", from chapter: " + chapter);
                 SceneManager.LoadScene(firstLevel + availableLevels[Random.Range(0, availableLevels.Count)]);
             }
             else
             {
-                Debug.Log("Loading scene: " + (firstLevel + Random.Range(0, NrOfCamp2ChapterScenes[chapter - 1])));
+                Debug.Log("Loading scene: " + firstLevel +  Random.Range(0, NrOfCamp2ChapterScenes[chapter - 1]));
                 SceneManager.LoadScene(firstLevel + Random.Range(0, NrOfCamp2ChapterScenes[chapter - 1]));
             }
         }

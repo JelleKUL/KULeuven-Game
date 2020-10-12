@@ -196,7 +196,7 @@ public class WaterpassingTabel : MonoBehaviour
             {
                 if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - heights[i]) > (overrideErrorMargin ? errormarginOverride : gm.errorMargin))
                 {
-                    tabelVereffeningParts[i].vereffeningsHoogteText.color = falseColor;
+                    tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = falseColor;
                     correct = false;
 
                     
@@ -204,7 +204,7 @@ public class WaterpassingTabel : MonoBehaviour
 
                 else
                 {
-                    tabelVereffeningParts[i].vereffeningsHoogteText.color = correctColor;
+                    tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = correctColor;
 
                 }
                 if (Mathf.Abs(tabelParts[i].afstand - distances[i]) > (overrideErrorMargin ? errormarginOverride: gm.errorMargin))
@@ -253,7 +253,7 @@ public class WaterpassingTabel : MonoBehaviour
         for (int i = 0; i < tabelVereffeningParts.Count; i++)
         {
             
-            tabelVereffeningParts[i].vereffeningsHoogteText.color = falseColor;
+            tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = falseColor;
             tabelVereffeningParts[i].vereffeningsHoogteText.text = GameManager.RoundFloat(heights[i],3).ToString() + "m";
             tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInParent<InputField>().interactable = false;
 

@@ -8,7 +8,7 @@ public class WaterPassingTabelVereffening : MonoBehaviour
     public Text station;
     public Text hoogteVerschilText;
     public Text afstandText;
-    public Text vereffeningsHoogteText;
+    public InputField vereffeningsHoogteText;
 
     public float hoogteVerschil;
     public float vereffenigsHoogte;

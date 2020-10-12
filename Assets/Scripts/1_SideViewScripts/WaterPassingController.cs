@@ -627,5 +627,10 @@ public class WaterPassingController : MonoBehaviour
         return waterpassingTabel.CheckAnswers(correctHeightDifferences, correctDistances);
     }
 
+    public void ShowAnswersTabel()
+    {
+        waterpassingTabel.ShowCorrectValues(correctHeightDifferences, correctDistances);
+    }
+
 
 }

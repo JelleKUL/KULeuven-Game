@@ -213,6 +213,11 @@ PrefabInstance:
       propertyPath: startCenterPoint
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6765280077774144171, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: showSmallErrors
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8676305250189455280, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_Name
