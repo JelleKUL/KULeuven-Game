@@ -165,16 +165,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 271289531687891774, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
-      propertyPath: maxOffset.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 271289531687891774, guid: a63067732c6884dd59186a198fc1d824,
-        type: 3}
-      propertyPath: maxOffset.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 271289531687891774, guid: a63067732c6884dd59186a198fc1d824,
-        type: 3}
       propertyPath: minOffset.y
       value: 2
       objectReference: {fileID: 0}

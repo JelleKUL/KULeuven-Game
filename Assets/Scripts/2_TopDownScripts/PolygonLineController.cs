@@ -75,8 +75,6 @@ public class PolygonLineController : MonoBehaviour
     // the startscript, can be called by the setparametersfunction to get the correct answers before the start function is called in this script
     void Start()
     {
-        //hasStarted = true;
-
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         line = GetComponent<LineRenderer>();
         

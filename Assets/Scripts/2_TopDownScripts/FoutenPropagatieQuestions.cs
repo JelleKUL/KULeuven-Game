@@ -102,7 +102,9 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
                 placer.PlaceObstacleBtwn();
-                placer.PlaceRandomObstacles(4);
+                placer.PlaceRandomObstacles(2);
+                placer.PlaceRandomMobileObstacles(2);
+
                 lineController.SetAnswerArray(correctAnswerArray);
                 lineController.UpdateErrors();
 
@@ -118,7 +120,8 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
                 correctAnswerArray = placer.PlaceCalculatePoints(2);// place the points on the field
                 placer.PlaceObstacleBtwn();
-                placer.PlaceRandomObstacles(4);
+                placer.PlaceRandomObstacles(2);
+                placer.PlaceRandomMobileObstacles(2);
                 lineController.SetAnswerArray(correctAnswerArray);
                 lineController.UpdateErrors();
 
