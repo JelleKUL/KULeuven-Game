@@ -362,8 +362,10 @@ public class ObjectPlacer : MonoBehaviour
         for (int i = 1; i < calculatePoints.Count; i++)
         {
             Vector3 obsPosition;
-            obsPosition = (calculatePoints[i - 1].transform.position + calculatePoints[i].transform.position) / Random.Range(1.5f, 2.5f);
+            obsPosition = (calculatePoints[i - 1].transform.position + calculatePoints[i].transform.position) / 2f;
             GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], obsPosition, RandomAngle());
+            newObstacle.transform.localScale = new Vector3(Random.Range(10, 15), Random.Range(10, 15), Random.Range(10, 15));
+
             obstacles.Add(newObstacle);
         }
 
@@ -374,11 +376,19 @@ public class ObjectPlacer : MonoBehaviour
         for (int i = 0; i < amount ; i++)
         {
             GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], FarEnoughObstacle(), RandomAngle());
+            newObstacle.transform.localScale = new Vector3(Random.Range(10,15),Random.Range(10,15), Random.Range(10,15));
             obstacles.Add(newObstacle);
         }
 
     }
 
+    public void PlaceRandomMobileObstacles(int amount) // compute random location obstacle
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject newObstacle = Instantiate(mobileObstaclePrefabs[Random.Range(0, mobileObstaclePrefabs.Length)], FarEnoughObstacle(), RandomAngle());
+            obstacles.Add(newObstacle);
+        }
 
-
+    }
 }

@@ -128,10 +128,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 873165599893372850, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_Text
+      value: "Error Margin: \n1.0mm"
+      objectReference: {fileID: 0}
     - target: {fileID: 893542376780256592, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -42.466644
+      value: -75.100006
+      objectReference: {fileID: 0}
+    - target: {fileID: 893542376780256592, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.0002593994
       objectReference: {fileID: 0}
     - target: {fileID: 908611121461786901, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
