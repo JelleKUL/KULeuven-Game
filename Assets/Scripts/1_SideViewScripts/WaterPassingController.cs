@@ -70,6 +70,7 @@ public class WaterPassingController : MonoBehaviour
     private bool holdingObject;
     private GameObject hitObject;
     private bool hasStarted;
+    private int pointOutLoopNr = -1;
 
 
     // values used by other scripts, the correct answers
@@ -108,7 +109,7 @@ public class WaterPassingController : MonoBehaviour
         {
             AddStartAndEndGroundPoint(); 
             SetGroundPointsTopDown();
-            waterpassingTabel.CreateTable(nrOfPoints + 1);
+            waterpassingTabel.CreateTable(nrOfPoints + 1, pointOutLoopNr);
         }
 
         SetGroundSprite();
@@ -298,10 +299,15 @@ public class WaterPassingController : MonoBehaviour
         MeasureController measureController = newMeasure.GetComponent<MeasureController>();
         measureController.errorAngle = correctErrorAngle;
 
-        if (nrOfPoints > 0)
+        if (nrOfPoints > 0 && !loopAround)
         {
-            measureController.maxDistance = (gm.screenMax.x - gm.screenMin.x) / (nrOfPoints * 2) + 0.4f * minDistance; //- 0.7f*minDistance;
+            measureController.maxDistance = maxDistanceBetweenPoints(1) * 0.6f; //(gm.screenMax.x - gm.screenMin.x) / (nrOfPoints * 2) + 0.4f * minDistance; //- 0.7f*minDistance;
         }
+        else if (loopAround)
+        {
+            measureController.maxDistance = maxDistanceBetweenPoints(2) * 0.6f; //(gm.screenMax.x - gm.screenMin.x) / (nrOfPoints * 2) + 0.4f * minDistance; //- 0.7f*minDistance;
+        }
+
         else
         {
             measureController.maxDistance = (gm.screenMax.x - gm.screenMin.x);
@@ -517,7 +523,7 @@ public class WaterPassingController : MonoBehaviour
             {
                 for (int i = 0; i < nrOfPoints + 1; i++)
                 {
-                    Debug.Log(i + "-> Height: " + correctHeightDifferences[i] + " m, Distance: " + correctDistances[i]);
+                    Debug.Log(i + "-> HeightDiff: " + correctHeightDifferences[i] + " m, Distance: " + correctDistances[i] * GameManager.worldScale);
                 }
             }
             
@@ -534,7 +540,7 @@ public class WaterPassingController : MonoBehaviour
         float radius = (gm.screenMax.x - gm.screenMin.x) / ( 2 * Mathf.PI);
         //groundPointTopDownCenter.localScale = Vector3.one * radius;
         float cummAngle = 0f;
-        int pointOutLoopNr = 0;
+        pointOutLoopNr = 0;
         //chooses one point to leave out of the loop
         if (addPointOutLoop)
         {
@@ -630,6 +636,23 @@ public class WaterPassingController : MonoBehaviour
     public void ShowAnswersTabel()
     {
         waterpassingTabel.ShowCorrectValues(correctHeightDifferences, correctDistances);
+    }
+
+    float maxDistanceBetweenPoints(int nrBtwn)
+    {
+        float maxDist = 0f;
+
+        for (int i = 0; i < nrOfPoints - nrBtwn; i++)
+        {
+            float newDist = Vector2.Distance(groundPoints[i].transform.position, groundPoints[(i + nrBtwn)].transform.position);
+            //Debug.Log(i + "newDist: " + newDist + " coor: " + groundPoints[i].transform.position + " 2: " + groundPoints[(i) % (nrOfPoints)].transform.position);
+            if ( newDist > maxDist)
+            {
+                maxDist = newDist;
+            }
+        }
+        //Debug.Log(maxDist);
+        return maxDist;
     }
 
 

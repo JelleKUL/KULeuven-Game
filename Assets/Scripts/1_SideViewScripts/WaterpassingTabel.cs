@@ -49,6 +49,7 @@ public class WaterpassingTabel : MonoBehaviour
     private GameManager gm;
 
     private bool playing = true;
+    private int pointOutLoop = -1;
     
 
     // Start is called before the first frame update
@@ -103,9 +104,10 @@ public class WaterpassingTabel : MonoBehaviour
             
     }
 
-    public void CreateTable(int nrOfPoints)
+    public void CreateTable(int nrOfPoints, int pointOutLoopNr)
     {
         amount = nrOfPoints;
+        pointOutLoop = pointOutLoopNr;
         float size = waterPassingTabelPart.GetComponent<RectTransform>().rect.height;
        
         for (int i = 0; i < nrOfPoints; i++)
@@ -115,9 +117,14 @@ public class WaterpassingTabel : MonoBehaviour
             newPart.GetComponent<RectTransform>().localPosition = new Vector2(0,-titleHeight - i * size);
             tabelParts.Add(deel);
 
+
             if(i+1 == nrOfPoints)
             {
                 deel.SetNames(i + 1, SetNameText(i - 1), SetNameText(-1));
+            }
+            else if(i == pointOutLoopNr)
+            {
+                deel.SetNames(i + 1, SetNameText(i - 2), SetNameText(i));
             }
             else 
                 deel.SetNames(i + 1, SetNameText(i-1), SetNameText(i));
@@ -191,13 +198,17 @@ public class WaterpassingTabel : MonoBehaviour
 
     public bool CheckAnswers(float[] heights, float[] distances)
     {
+        float totalHeight = 0;
+
         bool correct = true;
         if (VereffeningsMode)
         {
             
-            for (int i = 0; i < tabelVereffeningParts.Count; i++)
+            for (int i = 1; i < tabelVereffeningParts.Count; i++)
             {
-                if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - heights[i]) > (overrideErrorMargin ? errormarginOverride : gm.errorMargin))
+                totalHeight += heights[i - 1];
+
+                if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - totalHeight) > (overrideErrorMargin ? errormarginOverride : gm.errorMargin))
                 {
                     tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = falseColor;
                     correct = false;
@@ -210,7 +221,7 @@ public class WaterpassingTabel : MonoBehaviour
                     tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = correctColor;
 
                 }
-                if (Mathf.Abs(tabelParts[i].afstand - distances[i] * GameManager.worldScale) > (overrideErrorMargin ? lengthErrormarginOverride : gm.errorMargin))
+                if (Mathf.Abs(tabelParts[i].afstand - distances[i-1] * GameManager.worldScale) > (overrideErrorMargin ? lengthErrormarginOverride : gm.errorMargin))
                 {
                     tabelVereffeningParts[i].afstandText.color = falseColor;
                     correct = false;
@@ -234,8 +245,7 @@ public class WaterpassingTabel : MonoBehaviour
 
                 if (Mathf.Abs(tabelParts[i].hoogteVerschil - heights[i]) > (overrideErrorMargin ? errormarginOverride : gm.errorMargin))
                 {
-                    tabelParts[i].hoogteVerschilText.color = falseColor;
-                    
+                    tabelParts[i].hoogteVerschilText.color = falseColor;              
                 }
                 else
                 {
@@ -253,16 +263,22 @@ public class WaterpassingTabel : MonoBehaviour
         ActiveTable(false);
         playing = false;
 
-        for (int i = 0; i < tabelVereffeningParts.Count; i++)
+        float totalHeight = 0;
+
+        for (int i = 1; i < tabelVereffeningParts.Count; i++)
         {
-            
-            tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = falseColor;
-            tabelVereffeningParts[i].vereffeningsHoogteText.text = GameManager.RoundFloat(heights[i],3).ToString() + "m";
+            totalHeight += heights[i - 1];
+            tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = correctColor;
+            tabelVereffeningParts[i].vereffeningsHoogteText.text = GameManager.RoundFloat(totalHeight, 3).ToString() + "m";
             tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInParent<InputField>().interactable = false;
 
             tabelVereffeningParts[i].afstandText.color = correctColor;
-            tabelVereffeningParts[i].afstandText.text = GameManager.RoundFloat(distances[i] * GameManager.worldScale, 3).ToString() + "m";
-           
+            tabelVereffeningParts[i].afstandText.text = GameManager.RoundFloat((distances[i-1] + (i==pointOutLoop+1? distances[i-2]:0) )* GameManager.worldScale, 3).ToString() + "m";
+
+            tabelVereffeningParts[i].hoogteVerschilText.GetComponentInChildren<Text>().color = correctColor;
+            tabelVereffeningParts[i].hoogteVerschilText.text = GameManager.RoundFloat(heights[i - 1] + (i == pointOutLoop + 1 ? heights[i - 2] : 0), 3).ToString() + "m";
+
+
 
         }
 
