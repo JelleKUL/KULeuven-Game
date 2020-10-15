@@ -152,6 +152,8 @@ public class AS_CanvasUI : MonoBehaviour
 	/// </summary>
 	public GridLayoutGroup registrationFieldsContainer;
 
+	public GridLayoutGroup changePasswordFieldsContainer;
+
 	/// <summary>
 	/// A prefab to serve as a registration input field
 	/// </summary>
@@ -164,7 +166,7 @@ public class AS_CanvasUI : MonoBehaviour
 
 	Text guiMessageText;
 	AS_AccountInfo accountInfo = new AS_AccountInfo();
-	AS_MySQLField passwordConfirm, emailConfirm;
+	AS_MySQLField passwordConfirm, emailConfirm, newPassword, newPasswordConfirm;
 	AS_AccountManagementGUI accountManagementGUI;
 
 	// Shut everything off
@@ -298,7 +300,29 @@ public class AS_CanvasUI : MonoBehaviour
 		// StartCoroutine ( AS_Login.TryToRegister( accountInfo, RegistrationAttempted ) ) ;
 
 	}
-	
+
+	public void OnChangePasswordSubmitted()
+	{
+		// Offline field check
+		string errorMessage = "";
+		string emailValue = "";
+		if (AS_Preferences.askUserForEmail && emailConfirm != null)
+			emailValue = emailConfirm.stringValue;
+
+		if (!AS_Login.CheckFields(accountInfo, passwordConfirm.stringValue, emailValue, ref errorMessage))
+		{
+			guiMessage = errorMessage;
+			return;
+		}
+
+		// Online check with the given database
+		guiMessage = "Attempting to Register..";
+		accountInfo.TryToRegister(RegistrationAttempted);
+		// Equivalent to: 
+		// StartCoroutine ( AS_Login.TryToRegister( accountInfo, RegistrationAttempted ) ) ;
+
+	}
+
 	public void OnRecoveryRequested()
 	{ 
 		loginState = AS_LoginState.RecoverPassword;
@@ -503,5 +527,51 @@ public class AS_CanvasUI : MonoBehaviour
 			}
 		}
 	}
-	#endregion 
+
+	void PopulateChangePasswordGroup()
+	{
+		// Clean up first
+		for (int c = 0; c < changePasswordFieldsContainer.transform.childCount; c++)
+			Destroy(changePasswordFieldsContainer.transform.GetChild(c).gameObject);
+
+		// Registration Info has the fields the user should fill in
+		foreach (AS_MySQLField field in accountInfo.fields)
+		{
+
+			// Id is an auto-increment unique identifier
+			// and custom info is not specified during registration
+			if (field.name.ToLower() == "id" | field.name.ToLower() == "custominfo" | field.name.ToLower() == "isactive" | field.name.ToLower() == "studentnr")
+				continue;
+
+			// For any other field, create an InputField prefab
+
+			// Initialize it
+			CreateInputField(field);
+
+			// User requires one more space for PWD & Confirm to allign
+			if (field.name.ToLower().Contains("username"))
+			{
+				AS_MySQLField dummyField = new AS_MySQLField();
+				dummyField.name = "<b>Bold *</b>: Required Field";
+				AS_InputField dummy = CreateInputField(dummyField);
+				dummy.background.gameObject.SetActive(false);
+			}
+
+			/// Password / Email -> Require confirmation
+			if (field.name.ToLower().Contains("password"))
+			{
+				newPassword = new AS_MySQLField(field);
+				passwordConfirm.name = "New Password";
+				CreateInputField(passwordConfirm);
+
+				newPasswordConfirm = new AS_MySQLField(field);
+				newPasswordConfirm.name = "Confirm New Password";
+				CreateInputField(passwordConfirm);
+			}
+			
+		}
+		
+
+	}
+	#endregion
 }

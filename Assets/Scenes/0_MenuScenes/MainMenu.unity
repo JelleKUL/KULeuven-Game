@@ -1033,7 +1033,7 @@ PrefabInstance:
     - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
@@ -1043,12 +1043,22 @@ PrefabInstance:
     - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LogOut
+      value: LoadSceneName
       objectReference: {fileID: 0}
     - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: AccountManagement
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62ec06f89826440aab5bb4683f758d6b, type: 3}
@@ -2535,7 +2545,6 @@ MonoBehaviour:
   - {fileID: 1707875523}
   - {fileID: 835255269}
   - {fileID: 1476551301}
-  - {fileID: 1829117721}
   randomButtons:
   - {fileID: 1761188339}
   - {fileID: 1349197}
@@ -5188,18 +5197,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0ec51f37b19546e1bc3d28cc09af294, type: 3}
---- !u!114 &1829117721 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1169042850990681119, guid: a0ec51f37b19546e1bc3d28cc09af294,
-    type: 3}
-  m_PrefabInstance: {fileID: 1707875522}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1830137081
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,6 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usernameText: {fileID: 0}
   errorMargin: 0.002
+  adminNames:
+  - admin
+  - jelle
   firstCamp1Level: 2
   nrOfCamp1Levels: 10
   firstCamp2Level: 13

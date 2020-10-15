@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public float errorMargin = 0.001f;
     public static float worldScale = 10f;
     [SerializeField]
-    private string adminName = "admin";
+    private List<string> adminNames;
 
 
     [Header("CampaignOrder")]
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
 
         if (usernameText) ShowUsername();
 
-        if (userName == adminName || !isLoggedIn) showDebugAnswer = true;
+        if (adminNames.Contains(userName) || !isLoggedIn) showDebugAnswer = true;
         else showDebugAnswer = false;
 
     }
