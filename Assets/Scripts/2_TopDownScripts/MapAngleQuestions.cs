@@ -90,8 +90,8 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswer = correctAnswerH.ToString();
 
                 titleQuestionText.text = "Bepaal de kaarthoek";
-                questionText.text = "Van het punt P naar het opstelpunt.";
-                AnswerExplanation = "De mapangle wordt gemeten vanaf het noorden naar de bestemming in wijzers in.";
+                questionText.text = "Van het punt P naar het opstelpunt";
+                AnswerExplanation = "De kaarthoek wordt gemeten vanaf het noorden naar P in wijzerzin";
 
                 if (GameManager.showDebugAnswer) Debug.Log( "Correct Mapangle: " + correctAnswerH);
 
@@ -107,8 +107,8 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 titleQuestionText.text = "Bepaal de coördinaten van punt P";
-                questionText.text = "Het totaalstation staat opgesteld in (0,0).";
-                AnswerExplanation = "Het coordinaat kan bepaald worden via de hoekmeting en afstand.";
+                questionText.text = "Het totaalstation staat opgesteld in (0,0)";
+                AnswerExplanation = "De coördinaten kunnen bepaald worden via een hoekmeting en een afstand";
 
                 if (GameManager.showDebugAnswer) Debug.Log(correctAnswerX + "," + correctAnswerY);
 
@@ -124,7 +124,7 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale,3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale,3);
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
-                AnswerExplanation = "Het coordinaat kan bepaald worden via de hoekmeting en afstand.";
+                AnswerExplanation = "De coördinaten kunnen bepaald worden via een hoekmeting en een afstand";
 
                 titleQuestionText.text = "Bepaal de coördinaten van punt P";
 				float xx = GameManager.RoundFloat(correctAnswerArray[2] * GameManager.worldScale,3);
@@ -145,7 +145,7 @@ public class MapAngleQuestions : MonoBehaviour
                 placer.calculatePoints[0].transform.SetParent(assenkruis.transform);
                 assenkruis.transform.position += new Vector3(Random.Range(0f,1f) *  maxAxisTransform.x, Random.Range(0f, 1f) * maxAxisTransform.y, 0);
                 assenkruis.transform.Rotate(0, 0, Random.Range(-1f, 1f) * maxAxisTransform.z);
-                AnswerExplanation = "Gebruik het hoekverschil om te kaarthoek te berekenen.";
+                AnswerExplanation = "Gebruik de assen van het verdraaide assenstelsel om de kaarthoek te berekenen";
 
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale,3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale,3);
@@ -168,12 +168,12 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerH = Mathf.Sqrt(Mathf.Pow(correctAnswerArray[0] - correctAnswerArray[2], 2) + Mathf.Pow(correctAnswerArray[1] - correctAnswerArray[3], 2)) * GameManager.worldScale;
                 correctAnswerH = GameManager.RoundFloat(correctAnswerH,3);
                 correctAnswer = correctAnswerH.ToString();
-                AnswerExplanation = "Bepaal de afstand door beide coordinaten te berekenen.";
+                AnswerExplanation = "Bepaal de Euclidische afstand door beide coördinaten te berekenen";
 
 
 
                 titleQuestionText.text = "Bepaal de afstand tussen de punten P & A";
-                questionText.text = "Bereken de Euclidische afstand ||AP||.";
+                questionText.text = "Bereken de Euclidische afstand ||AP||";
 
                 if (GameManager.showDebugAnswer) Debug.Log("Correct answer: " + correctAnswer);
 
