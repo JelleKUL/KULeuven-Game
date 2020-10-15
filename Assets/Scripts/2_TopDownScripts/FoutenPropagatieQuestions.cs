@@ -73,7 +73,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 //demo van de foutenellips 1 punt
               
                 lineController.SetVisibles(false, true, true, true, true, true, 2);
-                titleQuestionText.text = "Bepaal de standaardafwijking van A gemeten vanaf P";
+                titleQuestionText.text = "I. Bepaal de standaardafwijking van A gemeten vanaf P";
                 questionText.text = "Bereken a.d.v. de hoekfout en de afstandsfout de maximale standaardafwijking van de errorellips";
                 AnswerExplanation = "de grootste waarde kan je ook waarnemen op het speelveld.";
 
@@ -87,7 +87,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 //demo van de foutenellips 1 punt
 
                 lineController.SetVisibles(false, true, true, true, true, true, 2);
-                titleQuestionText.text = "Bepaal sigma a van A gemeten vanaf P";
+                titleQuestionText.text = "II. Bepaal sigma a van A gemeten vanaf P";
                 questionText.text = "Bereken de sigma a-component van de errorellips.";
                 AnswerExplanation = "gebruik de vaste en variablele afstandsfout.";
 
@@ -100,7 +100,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 //start oefening MinimaleGrote
 
                 lineController.SetVisibles(false, true, true, true, true, true, 10);
-                titleQuestionText.text = "Bepaal A gemeten vanaf P met een zo klein mogelijke errorellips";
+                titleQuestionText.text = "III. Bepaal A gemeten vanaf P met een zo klein mogelijke errorellips";
                 questionText.text = "Kies zorgvuldig tussenopstelling om de fout zo klein mogelijk te houden.";
                 AnswerExplanation = "probeer de afstand zo laag mogelijk te houden";
 
@@ -118,7 +118,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 //start oefening TekenFoutenEllips
 
                 lineController.SetVisibles(false, true, true, true, true, true, 10);
-                titleQuestionText.text = "Bepaal sigma a van A gemeten vanaf P";
+                titleQuestionText.text = "IV. Bepaal sigma a van A gemeten vanaf P";
                 questionText.text = "Bereken via tussenopstellingen de sigma a-component van de errorellips.";
                 AnswerExplanation = " houd rekening met de verschillende componenten van te opstelpunten.";
 

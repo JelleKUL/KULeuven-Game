@@ -89,7 +89,7 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerH = GameManager.RoundFloat(correctAnswerH,3);
                 correctAnswer = correctAnswerH.ToString();
 
-                titleQuestionText.text = "Bepaal de kaarthoek";
+                titleQuestionText.text = "I. Bepaal de kaarthoek";
                 questionText.text = "Van het punt P naar het opstelpunt";
                 AnswerExplanation = "De kaarthoek wordt gemeten vanaf het noorden naar P in wijzerzin";
 
@@ -106,7 +106,7 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale,3);
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
-                titleQuestionText.text = "Bepaal de coördinaten van punt P";
+                titleQuestionText.text = "II. Bepaal de coördinaten van punt P";
                 questionText.text = "Het totaalstation staat opgesteld in (0,0)";
                 AnswerExplanation = "De coördinaten kunnen bepaald worden via een hoekmeting en een afstand";
 
@@ -126,7 +126,7 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
                 AnswerExplanation = "De coördinaten kunnen bepaald worden via een hoekmeting en een afstand";
 
-                titleQuestionText.text = "Bepaal de coördinaten van punt P";
+                titleQuestionText.text = "III. Bepaal de coördinaten van punt P";
 				float xx = GameManager.RoundFloat(correctAnswerArray[2] * GameManager.worldScale,3);
                 float yy = GameManager.RoundFloat(correctAnswerArray[3] * GameManager.worldScale,3);
 
@@ -151,7 +151,7 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale,3);
                 correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
-                titleQuestionText.text = "Bepaal de coördinaten van punt P";
+                titleQuestionText.text = "V. Bepaal de coördinaten van punt P";
                 questionText.text = "Bereken P in het rode assenstelsel. Bepaal hiervoor de verdraaing t.o.v. het blauwe assenstelsel";
 
                 if (GameManager.showDebugAnswer) Debug.Log(correctAnswerX + " , " + correctAnswerY);
@@ -172,7 +172,7 @@ public class MapAngleQuestions : MonoBehaviour
 
 
 
-                titleQuestionText.text = "Bepaal de afstand tussen de punten P & A";
+                titleQuestionText.text = "IV. Bepaal de afstand tussen de punten P & A";
                 questionText.text = "Bereken de Euclidische afstand ||AP||";
 
                 if (GameManager.showDebugAnswer) Debug.Log("Correct answer: " + correctAnswer);
