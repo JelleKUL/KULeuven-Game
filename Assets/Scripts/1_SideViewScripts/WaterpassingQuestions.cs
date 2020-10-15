@@ -279,7 +279,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
             case QuestionType.Scheefstand:
 
-                return GameManager.RoundFloat(scheefstandController.GetCorrectDistance(), 3);
+                return GameManager.RoundFloat(waterpassing.correctHeight, 3);
 
             case QuestionType.OmgekeerdeBaak:
 
