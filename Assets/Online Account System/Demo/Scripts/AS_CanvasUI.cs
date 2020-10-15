@@ -53,12 +53,12 @@ public class AS_CanvasUI : MonoBehaviour
 
 			GameManager.levelCamp1 = accountInfo.customInfo.levelCamp1;
 			
-			GameManager.scoreCamp1 = accountInfo.customInfo.scoreCamp1;
-			GameManager.compLevelCamp1 = accountInfo.customInfo.compLevelCamp1;
+			GameManager.scoreCamp1 = MatchLevelsInt(accountInfo.customInfo.scoreCamp1, GameManager.scoreCamp1);
+			GameManager.compLevelCamp1 = MatchLevelsBool(accountInfo.customInfo.compLevelCamp1, GameManager.compLevelCamp1);
 
 			GameManager.levelCamp2 = accountInfo.customInfo.levelCamp2;
-			GameManager.scoreCamp2 = accountInfo.customInfo.scoreCamp2;
-			GameManager.compLevelCamp2 = accountInfo.customInfo.compLevelCamp2;
+			GameManager.scoreCamp2 = MatchLevelsInt(accountInfo.customInfo.scoreCamp2, GameManager.scoreCamp2);
+			GameManager.compLevelCamp2 = MatchLevelsBool(accountInfo.customInfo.compLevelCamp2, GameManager.compLevelCamp2);
 
 			GameManager.scoreFreeTotal = accountInfo.customInfo.scoreFreeTotal;
 
@@ -66,18 +66,67 @@ public class AS_CanvasUI : MonoBehaviour
 		}
 
 	}
-	/*
-	int[] MatchLevels(int[] inputArray, int[] gamemanagerArray)
+	
+	int[] MatchLevelsInt(int[] inputArray, int[] gamemanagerArray)
     {
-		if(inputArray.Length == )
-
 		int[] outputArray = new int[gamemanagerArray.Length];
 
+		if (inputArray.Length == gamemanagerArray.Length)
+		{
+			return inputArray;
+		} 
 
-    }
-	*/
+		else if(inputArray.Length < gamemanagerArray.Length)
+		{
+			for (int i = 0; i  < inputArray.Length; i ++)
+            {
+				outputArray[i] = inputArray[i];
+            }
 
-	
+        }
+		else
+		{
+			for (int i = 0; i < outputArray.Length; i++)
+			{
+				outputArray[i] = inputArray[i];
+			}
+		}
+		
+		return outputArray;
+
+	}
+
+	bool[] MatchLevelsBool(bool[] inputArray, bool[] gamemanagerArray)
+	{
+		bool[] outputArray = new bool[gamemanagerArray.Length];
+
+		if (inputArray.Length == gamemanagerArray.Length)
+		{
+			return inputArray;
+		}
+
+		else if (inputArray.Length < gamemanagerArray.Length)
+		{
+			for (int i = 0; i < inputArray.Length; i++)
+			{
+				outputArray[i] = inputArray[i];
+			}
+
+		}
+		else
+		{
+			for (int i = 0; i < outputArray.Length; i++)
+			{
+				outputArray[i] = inputArray[i];
+			}
+		}
+
+		return outputArray;
+
+	}
+
+
+
 
 	void LeaderboardDownloaded(string message)
     {
