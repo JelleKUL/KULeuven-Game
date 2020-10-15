@@ -128,6 +128,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 182998084849741470, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 4.9999695
+      objectReference: {fileID: 0}
     - target: {fileID: 207518814859755450, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -147,6 +152,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 9.6252575
+      objectReference: {fileID: 0}
+    - target: {fileID: 207518814859755451, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.0035
       objectReference: {fileID: 0}
     - target: {fileID: 402096529527602023, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
@@ -283,6 +293,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.00012207031
       objectReference: {fileID: 0}
+    - target: {fileID: 3558478824922968748, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: m_Text
+      value: "   Error Margin:    \n0.003m"
+      objectReference: {fileID: 0}
     - target: {fileID: 3585986532793553672, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: obstaclePrefabs.Array.size
@@ -348,6 +363,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.00024414062
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322843685254893069, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 4.9999695
       objectReference: {fileID: 0}
     - target: {fileID: 6765280077774144171, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}

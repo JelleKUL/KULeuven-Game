@@ -3442,7 +3442,7 @@ PrefabInstance:
     - target: {fileID: 147409740929465715, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: 5.0000076
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849088078168, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3467,7 +3467,7 @@ PrefabInstance:
     - target: {fileID: 1169042849088078171, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.000122
+      value: 5.0001297
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849088078171, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3477,7 +3477,7 @@ PrefabInstance:
     - target: {fileID: 1169042849266344793, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Errorellips sigmaA
+      value: Errorellips sigma A
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849372670477, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3512,7 +3512,7 @@ PrefabInstance:
     - target: {fileID: 1169042849419286567, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.000122
+      value: 5.0001297
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849419286567, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3527,7 +3527,7 @@ PrefabInstance:
     - target: {fileID: 1169042849577834200, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.000122
+      value: 5.0001297
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849577834201, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3662,7 +3662,7 @@ PrefabInstance:
     - target: {fileID: 1169042849640620421, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.000122
+      value: 5.0001297
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849666190284, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3708,12 +3708,12 @@ PrefabInstance:
     - target: {fileID: 1169042850197352887, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.000122
+      value: 5.0001297
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.32799995
+      value: 0.20760006
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3728,7 +3728,7 @@ PrefabInstance:
     - target: {fileID: 1169042850654280299, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Errorellips sigma D,H
+      value: Errorellips sigma D, H
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850670976434, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3738,7 +3738,7 @@ PrefabInstance:
     - target: {fileID: 1169042850990681116, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.000122
+      value: 5.0001297
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850990681117, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3768,7 +3768,7 @@ PrefabInstance:
     - target: {fileID: 1169042851099215601, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.000122
+      value: 5.0001297
       objectReference: {fileID: 0}
     - target: {fileID: 1169042851099215614, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3913,6 +3913,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1169042849216077604, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1169042849266344793, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
@@ -3946,7 +3951,7 @@ PrefabInstance:
     - target: {fileID: 1169042849516795187, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849577834200, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4117,7 +4122,7 @@ PrefabInstance:
     - target: {fileID: 1169042850178306684, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Polygonatie tabel
+      value: Polygonatietabel
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850197352884, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4162,17 +4167,22 @@ PrefabInstance:
     - target: {fileID: 1169042850670976434, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850670976436, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Value
-      value: 1.0000012
+      value: 1.0000015
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850670976436, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Size
-      value: 0.79740536
+      value: 0.8475157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042850670976436, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850944884499, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4187,7 +4197,17 @@ PrefabInstance:
     - target: {fileID: 1169042850990681117, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Name
-      value: bilateratie
+      value: vrije polygonati
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042850990681117, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169042850990681118, guid: a0ec51f37b19546e1bc3d28cc09af294,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850990681119, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4207,7 +4227,7 @@ PrefabInstance:
     - target: {fileID: 1169042851081461713, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Vrije poligonatie
+      value: Bilateratie
       objectReference: {fileID: 0}
     - target: {fileID: 1169042851099215600, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4217,7 +4237,7 @@ PrefabInstance:
     - target: {fileID: 1169042851099215600, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: VrijePolygonatie
+      value: Bilateratie
       objectReference: {fileID: 0}
     - target: {fileID: 1169042851099215601, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4227,7 +4247,7 @@ PrefabInstance:
     - target: {fileID: 1169042851099215614, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Name
-      value: vrije polygonatie
+      value: Bilateratie
       objectReference: {fileID: 0}
     - target: {fileID: 1169042851166332672, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -4838,7 +4858,7 @@ PrefabInstance:
     - target: {fileID: 1169042849266344793, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: "Bepaal Co\xF6rdinaat"
+      value: "Bepaal co\xF6rdinaten"
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849372670477, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -5033,7 +5053,7 @@ PrefabInstance:
     - target: {fileID: 1169042850178306684, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: "Bepaal Co\xF6rdinaat via ander punt"
+      value: "Bepaal co\xF6rdinaten via ander punt"
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850197352884, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -5058,7 +5078,7 @@ PrefabInstance:
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.1723054
+      value: 0.17230527
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -5083,7 +5103,7 @@ PrefabInstance:
     - target: {fileID: 1169042850944884499, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: "Bepaal co\xF6rdinaat in gedraaid assenstelsel"
+      value: "Bepaal co\xF6rdinaten in gedraaid assenstelsel"
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850990681116, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -5349,7 +5369,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Zijslag Waterpassing
+  m_Text: Zijslag waterpassing
 --- !u!222 &1843341069
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5950,7 +5970,7 @@ PrefabInstance:
     - target: {fileID: 1169042849709985306, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: KringWaterpassing
+      value: Kringwaterpassing
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849941321376, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -5986,7 +6006,7 @@ PrefabInstance:
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5265205
+      value: 0.5265206
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850482165574, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -6006,7 +6026,7 @@ PrefabInstance:
     - target: {fileID: 1169042850654280299, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Calibratie waterpas toestel
+      value: Calibratie waterpastoestel
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850670976434, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
