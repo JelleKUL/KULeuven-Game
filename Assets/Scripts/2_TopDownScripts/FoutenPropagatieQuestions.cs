@@ -19,7 +19,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     public Text answerInputH;
     public Text answerOutput;
 
-    public GameObject winMenu, winMenuFree;
+    public GameObject winMenu, winMenuFree, submitBtn, restartBtn;
     public Color falseColor, CorrectColor;
 
     public enum QuestionType { geen, Errorellips_sigmaDH, Errorellips_sigmaA, MinimaleGrootte, WerkingMeerderePunten, DragEnDropEllips }
@@ -28,12 +28,16 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
     public int maxPoints;
     public int scoreIncrease;
+    [Tooltip("het aantal keren dat je mag proberen, 0 = oneindig")]
+    public int nrOfTries = 3;
 
     // internal answers
     private float[] correctAnswerArray;
     private float correctAnswerH;
     private string correctAnswer;
     private string AnswerExplanation;
+    private int currentTries = 0;
+
 
 
     //initiate scripts
@@ -155,6 +159,16 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 answerInputH.color = falseColor;
                 Debug.Log("false");
                 answerOutput.text = "Incorrect";
+
+                if (nrOfTries > 0)
+                {
+                    currentTries++;
+                    if (currentTries >= nrOfTries)
+                    {
+                        setRestart();
+                        return;
+                    }
+                }
             }
 
         }
@@ -186,6 +200,16 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 answerInputH.color = falseColor;
                 Debug.Log("false");
                 answerOutput.text = "Incorrect";
+
+                if (nrOfTries > 0)
+                {
+                    currentTries++;
+                    if (currentTries >= nrOfTries)
+                    {
+                        setRestart();
+                        return;
+                    }
+                }
             }
 
         }
@@ -235,6 +259,14 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 return lineController.GetSigmaA();
         }
         return 0;
+    }
+
+    public void setRestart()
+    {
+        ShowAnswer();
+        submitBtn.SetActive(false);
+        restartBtn.SetActive(true);
+        answerOutput.text = "Te veel pogingen, probeer opnieuw.";
     }
 
 }

@@ -337,7 +337,7 @@ public class GameManager : MonoBehaviour
         float answerNr;
         if(float.TryParse(answer,out answerNr))
         {
-            Debug.Log(correct + " = " + answerNr + " ? -> " + (Mathf.Abs(correct - answerNr) < errorMargin));
+            Debug.Log(correct + " = " + answerNr + " ? -> " + (Mathf.Abs(correct - answerNr) < errorMargin) + ", with errormargin: " + errorMargin);
             if (Mathf.Abs(correct - answerNr) < errorMargin)
             {
                 return true;

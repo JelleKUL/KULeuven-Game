@@ -17,7 +17,7 @@ public class WaterpassingQuestions : MonoBehaviour
     public Text answerInputH;   
     public Text answerOutput;
 
-    public GameObject winMenu, winMenuFree;
+    public GameObject winMenu, winMenuFree, submitBtn, restartBtn;
     public Color falseColor, CorrectColor;
 
     
@@ -27,6 +27,9 @@ public class WaterpassingQuestions : MonoBehaviour
 
     public int scoreIncrease = 1;
 
+    [Tooltip("het aantal keren dat je mag proberen, 0 = oneindig")]
+    public int nrOfTries = 0;
+
     private WaterPassingController waterpassing;
     private GameManager gm;
     private float correctAnswer;
@@ -34,6 +37,8 @@ public class WaterpassingQuestions : MonoBehaviour
     private string AnswerExplanation;
 
     private float DEGtoGON = 4 / 3.6f;
+
+    private int currentTries = 0;
 
 
 
@@ -44,6 +49,7 @@ public class WaterpassingQuestions : MonoBehaviour
         waterpassing = GetComponent<WaterPassingController>();
 
         SetQuestionType(SoortVraag);
+
     }
     
     
@@ -146,7 +152,7 @@ public class WaterpassingQuestions : MonoBehaviour
     //checks if the given anwser is correct
     public void CheckAnswer()
     {
-
+        
         if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer()))
         {
             gm.IncreaseScore(scoreIncrease, 1);
@@ -168,6 +174,16 @@ public class WaterpassingQuestions : MonoBehaviour
             answerOutput.text = "Waarde incorrect...";
             answerInputH.color = falseColor;
             Debug.Log("false");
+
+            if (nrOfTries > 0)
+            {
+                currentTries++;
+                if (currentTries >= nrOfTries)
+                {
+                    setRestart();
+                    return;
+                }
+            }
         }
 
     }
@@ -218,6 +234,14 @@ public class WaterpassingQuestions : MonoBehaviour
 
         Debug.Log("showing answer");
 
+    }
+
+    public void setRestart()
+    {
+        ShowAnswer();
+        submitBtn.SetActive(false);
+        restartBtn.SetActive(true);
+        answerOutput.text = "Te veel pogingen, probeer opnieuw.";
     }
     
     public float CorrectAnswer()

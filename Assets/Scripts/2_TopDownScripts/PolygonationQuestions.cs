@@ -16,7 +16,7 @@ public class PolygonationQuestions : MonoBehaviour
     public Text answerInputH;
     public Text answerOutput;
 
-    public GameObject winMenu, winMenuFree;
+    public GameObject winMenu, winMenuFree, submitBtn, restartBtn;
     public Color falseColor, CorrectColor;
 
 
@@ -25,7 +25,9 @@ public class PolygonationQuestions : MonoBehaviour
     public QuestionType SoortVraag;
 
     public int scoreIncrease;
-  
+    [Tooltip("het aantal keren dat je mag proberen, 0 = oneindig")]
+    public int nrOfTries = 0;
+
 
     private PolygonLineController lineController;
     private ObjectPlacer placer;
@@ -39,6 +41,8 @@ public class PolygonationQuestions : MonoBehaviour
     private float correctAnswerH;
     private string correctAnswer;
     private string AnswerExplanation;
+    private int currentTries = 0;
+
 
 
     // Start is called before the first frame update
@@ -184,6 +188,16 @@ public class PolygonationQuestions : MonoBehaviour
             answerInputH.color = falseColor;
 
             Debug.Log("false");
+
+            if (nrOfTries > 0)
+            {
+                currentTries++;
+                if (currentTries >= nrOfTries)
+                {
+                    setRestart();
+                    return;
+                }
+            }
         }
     }
 
@@ -209,6 +223,16 @@ public class PolygonationQuestions : MonoBehaviour
             answerInputX.color = falseColor;
             answerInputY.color = falseColor;
             Debug.Log("false");
+
+            if (nrOfTries > 0)
+            {
+                currentTries++;
+                if (currentTries >= nrOfTries)
+                {
+                    setRestart();
+                    return;
+                }
+            }
         }
     }
     
@@ -248,4 +272,13 @@ public class PolygonationQuestions : MonoBehaviour
         Debug.Log("showing answer");
 
     }
+
+    public void setRestart()
+    {
+        ShowAnswer();
+        submitBtn.SetActive(false);
+        restartBtn.SetActive(true);
+        answerOutput.text = "Te veel pogingen, probeer opnieuw.";
+    }
+
 }

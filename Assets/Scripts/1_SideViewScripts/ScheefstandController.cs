@@ -11,7 +11,7 @@ public class ScheefstandController : MonoBehaviour
     
     public GameObject theodoliet;
     public GameObject skewBuilding;
-    public GameObject winMenu, winMenuFree;
+    public GameObject winMenu, winMenuFree, submitBtn, restartBtn;
     public Transform MeasurePlacer;
     public Button magnifyButton;
     public LayerMask pointMask;
@@ -25,6 +25,8 @@ public class ScheefstandController : MonoBehaviour
     public float maxSkewError;
     public Vector2 skewBuildingLocation;
     public int scoreIncrease;
+    [Tooltip("het aantal keren dat je mag proberen, 0 = oneindig")]
+    public int nrOfTries = 3;
 
     [HideInInspector]
     public float correctDistance;
@@ -38,6 +40,7 @@ public class ScheefstandController : MonoBehaviour
     private bool holdingObject;
     private float skewError;
     private bool isFlipped;
+    private int currentTries = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +54,7 @@ public class ScheefstandController : MonoBehaviour
 
         if (GameManager.showDebugAnswer)
         {
-            Debug.Log("Correct distance = " + Mathf.Abs(correctDistance));
+            Debug.Log("Correct distance = " + GameManager.RoundFloat(Mathf.Abs(correctDistance),3));
         }
     }
 
@@ -166,7 +169,45 @@ public class ScheefstandController : MonoBehaviour
             answerText.color = falseColor;
             Debug.Log(answerText.text + " is False...");
             answerOutput.text = "Hou rekening met de collimatiefout.";
+
+            if (nrOfTries > 0)
+            {
+                currentTries++;
+                if (currentTries >= nrOfTries)
+                {
+                    setRestart();
+                    return;
+                }
+            }
         }
+    }
+
+    public void setRestart()
+    {
+        ShowAnswer();
+        submitBtn.SetActive(false);
+        restartBtn.SetActive(true);
+        answerOutput.text = "Te veel pogingen, probeer opnieuw.";
+    }
+
+    //displays the correct answer
+    public void ShowAnswer()
+    {
+        
+        if (answerText.transform.parent.GetComponent<InputField>())
+        {
+            answerText.color = falseColor;
+            InputField answerDisplay = answerText.transform.parent.GetComponent<InputField>();
+            answerDisplay.text = GameManager.RoundFloat(Mathf.Abs(correctDistance),3).ToString();
+            answerDisplay.interactable = false;
+        }
+
+        answerOutput.text = "Hou rekening met de collimatiefout.";
+
+
+
+        Debug.Log("showing answer");
+
     }
 
 

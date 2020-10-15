@@ -1334,10 +1334,13 @@ MonoBehaviour:
   answerOutput: {fileID: 698391461229908680}
   winMenu: {fileID: 7292503052413447360}
   winMenuFree: {fileID: 1334035556764012053}
+  submitBtn: {fileID: 6228398407819498973}
+  restartBtn: {fileID: 7787148456292054144}
   falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
   CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
   SoortVraag: 0
   scoreIncrease: 1
+  nrOfTries: 3
 --- !u!114 &69688649889305601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2095,10 +2098,13 @@ MonoBehaviour:
   answerOutput: {fileID: 698391461229908680}
   winMenu: {fileID: 7292503052413447360}
   winMenuFree: {fileID: 1334035556764012053}
+  submitBtn: {fileID: 6228398407819498973}
+  restartBtn: {fileID: 7787148456292054144}
   falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
   CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
   SoortVraag: 0
   scoreIncrease: 50
+  nrOfTries: 3
   tabel: {fileID: 0}
 --- !u!114 &6249460733618340913
 MonoBehaviour:
@@ -4348,20 +4354,24 @@ MonoBehaviour:
     type: 3}
   skewBuilding: {fileID: 3331951028963185800, guid: fb8b10bbf74c44475800ed4259aeefd8,
     type: 3}
-  winMenu: {fileID: 0}
-  winMenuFree: {fileID: 0}
+  winMenu: {fileID: 7292503052413447360}
+  winMenuFree: {fileID: 1334035556764012053}
+  submitBtn: {fileID: 6228398407819498973}
+  restartBtn: {fileID: 7787148456292054144}
   MeasurePlacer: {fileID: 7700334633352105136}
   magnifyButton: {fileID: 0}
   pointMask:
     serializedVersion: 2
     m_Bits: 9472
-  answerText: {fileID: 0}
+  answerText: {fileID: 4863930533297181429}
+  answerOutput: {fileID: 2093101269701048720}
   falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
   CorrectColor: {r: 0.574, g: 1, b: 0.59529996, a: 1}
   maxSkewAngle: 3
   maxSkewError: 0
   skewBuildingLocation: {x: 5, y: 0}
   scoreIncrease: 50
+  nrOfTries: 3
   correctDistance: 0
   points:
   - {fileID: 0}
@@ -11288,11 +11298,14 @@ MonoBehaviour:
   answerOutput: {fileID: 698391461229908680}
   winMenu: {fileID: 7292503052413447360}
   winMenuFree: {fileID: 1334035556764012053}
+  submitBtn: {fileID: 6228398407819498973}
+  restartBtn: {fileID: 7787148456292054144}
   falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
   CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
   SoortVraag: 0
   maxPoints: 10
   scoreIncrease: 0
+  nrOfTries: 3
 --- !u!114 &8624441735927071720
 MonoBehaviour:
   m_ObjectHideFlags: 0

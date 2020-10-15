@@ -18,18 +18,17 @@ public class PolygonatieLoopTabel : MonoBehaviour
 
     private bool coordinateMode;
 
+    private GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
         coordinateMode = false;
 
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public Vector2[] GetInputs()
     {
@@ -50,9 +49,9 @@ public class PolygonatieLoopTabel : MonoBehaviour
 
         for (int i = 0; i < correctCoordinates.Length; i++)
         {
-            Debug.Log(Vector2.Distance(answerinputs[i], correctCoordinates[i] * GameManager.worldScale));
+            if(GameManager.showDebugAnswer) Debug.Log("Point " + i+1 + ": " + Vector2.Distance(answerinputs[i], correctCoordinates[i] * GameManager.worldScale));
             tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(correctColor);
-            if (Vector2.Distance(answerinputs[i],correctCoordinates[i] * GameManager.worldScale) > 0.003)
+            if (Vector2.Distance(answerinputs[i],correctCoordinates[i] * GameManager.worldScale) > gm.errorMargin)
             {
                 correct = false;
                 tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(falseColor);

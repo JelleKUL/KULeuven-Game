@@ -19,7 +19,7 @@ public class MapAngleQuestions : MonoBehaviour
     public Text answerOutput;
     public GameObject assenkruis;
 
-    public GameObject winMenu, winMenuFree;
+    public GameObject winMenu, winMenuFree, submitBtn, restartBtn;
     public Color falseColor, CorrectColor;
 
 
@@ -35,6 +35,9 @@ public class MapAngleQuestions : MonoBehaviour
     public int numberOfPoints;
     public int scoreIncrease;
 
+    [Tooltip("het aantal keren dat je mag proberen, 0 = oneindig")]
+    public int nrOfTries = 3;
+
 
     // answers
     private float[] correctAnswerArray;
@@ -43,6 +46,8 @@ public class MapAngleQuestions : MonoBehaviour
     private float correctAnswerH;
     private string correctAnswer;
     private string AnswerExplanation;
+    private int currentTries = 0;
+
 
     //initiate scripts
     private PolygonLineController lineController;
@@ -201,6 +206,16 @@ public class MapAngleQuestions : MonoBehaviour
             answerInputH.color = falseColor;
             Debug.Log("false");
             answerOutput.text = "Incorrect";
+
+            if (nrOfTries > 0)
+            {
+                currentTries++;
+                if (currentTries >= nrOfTries)
+                {
+                    setRestartH();
+                    return;
+                }
+            }
         }
     }
 
@@ -228,6 +243,16 @@ public class MapAngleQuestions : MonoBehaviour
             answerInputY.color = falseColor;
             Debug.Log("false");
             answerOutput.text = "Incorrect";
+
+            if (nrOfTries > 0)
+            {
+                currentTries++;
+                if (currentTries >= nrOfTries)
+                {
+                    setRestartXY();
+                    return;
+                }
+            }
         }
 
     }
@@ -275,6 +300,22 @@ public class MapAngleQuestions : MonoBehaviour
 
         Debug.Log("showing answer");
 
+    }
+
+    public void setRestartH()
+    {
+        ShowAnswer();
+        submitBtn.SetActive(false);
+        restartBtn.SetActive(true);
+        answerOutput.text = "Te veel pogingen, probeer opnieuw.";
+    }
+
+    public void setRestartXY()
+    {
+        ShowAnswerXY();
+        submitBtn.SetActive(false);
+        restartBtn.SetActive(true);
+        answerOutput.text = "Te veel pogingen, probeer opnieuw.";
     }
 
 
