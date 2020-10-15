@@ -300,7 +300,7 @@ public class WaterPassingController : MonoBehaviour
 
         if (nrOfPoints > 0)
         {
-            measureController.maxDistance = (gm.screenMax.x - gm.screenMin.x) / (nrOfPoints * 2); //- 0.7f*minDistance;
+            measureController.maxDistance = (gm.screenMax.x - gm.screenMin.x) / (nrOfPoints * 2) + 0.4f * minDistance; //- 0.7f*minDistance;
         }
         else
         {
@@ -580,9 +580,9 @@ public class WaterPassingController : MonoBehaviour
     {
         if (showAngleError)
         {
-            angleErrorText.text = "De Collimatiefout is: \n " + GameManager.RoundFloat(correctScaledErrorAngle * (4 / 3.6f), 3).ToString() + " gon";
+            angleErrorText.text = "Collimatiefout: \n " + GameManager.RoundFloat(correctScaledErrorAngle * (4 / 3.6f), 3).ToString() + " gon";
         }
-        else angleErrorText.text = "De Collimatiefout is: \n " + "? gon";
+        else angleErrorText.text = "Collimatiefout: \n " + "? gon";
 
 
     }

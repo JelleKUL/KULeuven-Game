@@ -464,6 +464,11 @@ PrefabInstance:
       propertyPath: showDebug
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 512599026343199983, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.015
+      objectReference: {fileID: 0}
     - target: {fileID: 874825781601848763, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -729,6 +734,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3791501992073972216, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_Text
+      value: "Error Margin: \n0.01m"
+      objectReference: {fileID: 0}
     - target: {fileID: 4311065015931094051, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_Text
@@ -925,6 +935,11 @@ PrefabInstance:
         type: 3}
       propertyPath: extremeHeightDiff
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7325210877621794092, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7323075020994301804, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
