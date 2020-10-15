@@ -78,7 +78,7 @@ public class PolygonationQuestions : MonoBehaviour
 
                 titleQuestionText.text = "Bepaal het coördinaat van punt P";
                 questionText.text = "Met behulp van de afstand en map angle vanaf het meetpunt.";
-                AnswerExplanation = "";
+                AnswerExplanation = "Gebruik trigoniometrische formules om het coordinaat te berekenen";
                 break;
 
             case QuestionType.Afstand2PuntenPolygoon:
@@ -90,7 +90,7 @@ public class PolygonationQuestions : MonoBehaviour
 
                 titleQuestionText.text = "Bepaal de afstand tussen A en B";
                 questionText.text = "Met behulp van de afstand en map angle vanaf het meetpunt.";
-                AnswerExplanation = "";
+                AnswerExplanation = "Bepaal beide coordinaten en bereken dan de afstand";
 
                 break;
 
@@ -108,7 +108,7 @@ public class PolygonationQuestions : MonoBehaviour
                 titleQuestionText.text = "I. Voorwaardse Insnijding bepaal P";
                 questionText.text = "\n\u2022 A = x:" + GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale, 3) + 
                                     "\n\u2022 B = x:" + GameManager.RoundFloat(correctAnswerArray[2] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(correctAnswerArray[3] * GameManager.worldScale, 3);
-                AnswerExplanation = "";
+                AnswerExplanation = "meet de hoeken en bereken het coordinaat via de sinusregel en Pythagoras";
 
                 break;
 
@@ -126,7 +126,7 @@ public class PolygonationQuestions : MonoBehaviour
                 questionText.text = "\n\u2022 A = x: " + GameManager.RoundFloat(obsructedPointsArray[0] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(obsructedPointsArray[1] * GameManager.worldScale, 3) + 
                                     "\n\u2022 B = x: " + GameManager.RoundFloat(obsructedPointsArray[2] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(obsructedPointsArray[3] * GameManager.worldScale, 3) + 
                                     "\n\u2022 C = x: " + GameManager.RoundFloat(obsructedPointsArray[4] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(obsructedPointsArray[5] * GameManager.worldScale, 3) ;
-                AnswerExplanation = "";
+                AnswerExplanation = "meet de hoeken en bereken het coordinaat via de sinusregel en Pythagoras";
                 break;
 
             case QuestionType.Tabel:
@@ -159,7 +159,7 @@ public class PolygonationQuestions : MonoBehaviour
                 titleQuestionText.text = "IV. Bilateratie bepaal P";
                 questionText.text = "\n\u2022 A = x:" + GameManager.RoundFloat(obsructedPointsArray[0] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(obsructedPointsArray[1] * GameManager.worldScale, 3) +
                                     "\n\u2022 B = x:" + GameManager.RoundFloat(obsructedPointsArray[2] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(obsructedPointsArray[3] * GameManager.worldScale, 3);
-                AnswerExplanation = "";
+                AnswerExplanation = "Je hebt een gegeven te veel, gebruik dat om te vereffenen";
 
                 break;
 
@@ -220,6 +220,7 @@ public class PolygonationQuestions : MonoBehaviour
         }
         else
         {
+            answerOutput.text = "Waarde incorrect...";
             answerInputX.color = falseColor;
             answerInputY.color = falseColor;
             Debug.Log("false");
@@ -252,8 +253,11 @@ public class PolygonationQuestions : MonoBehaviour
             }
 
         }
-        else Debug.Log("false");
-
+        else
+        {
+            answerOutput.text = "De waarden die zijn ingevoerd zijn niet correct";
+            Debug.Log("false");
+        }
     }
     
 
@@ -265,14 +269,31 @@ public class PolygonationQuestions : MonoBehaviour
     //displays the correct answer
     public void ShowAnswer()
     {
-        answerOutput.text = "Het antwoord is: " + correctAnswer ;
+        answerOutput.text = AnswerExplanation;
         answerInputH.color = falseColor;
         answerInputX.color = falseColor;
         answerInputY.color = falseColor;
         Debug.Log("showing answer");
 
+        if (answerInputH.transform.parent.GetComponent<InputField>())
+        {
+            InputField answerDisplay = answerInputH.transform.parent.GetComponent<InputField>();
+            answerDisplay.text = correctAnswer.ToString();
+            answerDisplay.interactable = false;
+        }
+        if (answerInputX.transform.parent.GetComponent<InputField>())
+        {
+            InputField answerDisplay = answerInputX.transform.parent.GetComponent<InputField>();
+            answerDisplay.text = correctAnswerX.ToString();
+            answerDisplay.interactable = false;
+        }
+        if (answerInputY.transform.parent.GetComponent<InputField>())
+        {
+            InputField answerDisplay = answerInputY.transform.parent.GetComponent<InputField>();
+            answerDisplay.text = correctAnswerY.ToString();
+            answerDisplay.interactable = false;
+        }
     }
-
     public void setRestart()
     {
         ShowAnswer();
