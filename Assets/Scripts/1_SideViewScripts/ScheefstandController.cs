@@ -51,7 +51,7 @@ public class ScheefstandController : MonoBehaviour
 
         if (GameManager.showDebugAnswer)
         {
-            Debug.Log("Correct distance = " + correctDistance);
+            Debug.Log("Correct distance = " + Mathf.Abs(correctDistance));
         }
     }
 
@@ -146,7 +146,7 @@ public class ScheefstandController : MonoBehaviour
     public void CheckAnswer()
     {
 
-        if (gm.CheckCorrectAnswer(answerText.text, correctDistance))
+        if (gm.CheckCorrectAnswer(answerText.text, correctDistance) || gm.CheckCorrectAnswer(answerText.text, -correctDistance))
         {
             gm.IncreaseScore(scoreIncrease, 1);
             Debug.Log(answerText.text + " is correct!");
