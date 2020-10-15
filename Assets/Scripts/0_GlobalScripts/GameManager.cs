@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     [Tooltip ("the errormargin for answers")]
     public float errorMargin = 0.001f;
     public static float worldScale = 10f;
+    [SerializeField]
+    private string adminName = "admin";
 
 
     [Header("CampaignOrder")]
@@ -46,8 +48,8 @@ public class GameManager : MonoBehaviour
         public static bool[] compLevelCamp1 = new bool[10];
 
         public static int levelCamp2;
-        public static int[] scoreCamp2 = new int[14];
-        public static bool[] compLevelCamp2 = new bool[14];
+        public static int[] scoreCamp2 = new int[13];
+        public static bool[] compLevelCamp2 = new bool[13];
 
         public static int scoreFreeTotal = 0;
         //public static int[] scoreFree = new int[13];
@@ -71,6 +73,9 @@ public class GameManager : MonoBehaviour
         SetPlayArea();
 
         if (usernameText) ShowUsername();
+
+        if (userName == adminName || !isLoggedIn) showDebugAnswer = true;
+        else showDebugAnswer = false;
 
     }
 
