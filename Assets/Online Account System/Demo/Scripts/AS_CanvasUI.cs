@@ -52,6 +52,7 @@ public class AS_CanvasUI : MonoBehaviour
 			GameManager.isLoggedIn = true;
 
 			GameManager.levelCamp1 = accountInfo.customInfo.levelCamp1;
+			
 			GameManager.scoreCamp1 = accountInfo.customInfo.scoreCamp1;
 			GameManager.compLevelCamp1 = accountInfo.customInfo.compLevelCamp1;
 
@@ -65,6 +66,16 @@ public class AS_CanvasUI : MonoBehaviour
 		}
 
 	}
+	/*
+	int[] MatchLevels(int[] inputArray, int[] gamemanagerArray)
+    {
+		if(inputArray.Length == )
+
+		int[] outputArray = new int[gamemanagerArray.Length];
+
+
+    }
+	*/
 
 	
 

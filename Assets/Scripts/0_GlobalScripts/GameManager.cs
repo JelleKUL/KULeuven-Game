@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     [Tooltip ("the errormargin for answers")]
     public float errorMargin = 0.001f;
     public static float worldScale = 10f;
+    [SerializeField]
+    private string adminName = "admin";
 
 
     [Header("CampaignOrder")]
@@ -71,6 +73,9 @@ public class GameManager : MonoBehaviour
         SetPlayArea();
 
         if (usernameText) ShowUsername();
+
+        if (userName == adminName || !isLoggedIn) showDebugAnswer = true;
+        else showDebugAnswer = false;
 
     }
 

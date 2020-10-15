@@ -152,6 +152,10 @@ public class PolygonLineController : MonoBehaviour
         }
         else holdingObject = false;
 
+        if (Input.GetMouseButtonDown(1)){
+            RemovePoint();
+        }
+
 
     }
 
@@ -350,7 +354,15 @@ public class PolygonLineController : MonoBehaviour
     //removes the last point
     public void RemovePoint()
     {
-        if (linePoints.Count > 1)
+        if (linePoints.Count == 2 && startCenterPoint)
+        {
+            line.positionCount--;
+            GameObject removed = linePoints[0];
+            linePoints.RemoveAt(0);
+
+            Destroy(removed);
+        }
+        else if (linePoints.Count > 1)
         {
             line.positionCount--;
             GameObject removed = linePoints[linePoints.Count - 1];
@@ -358,6 +370,7 @@ public class PolygonLineController : MonoBehaviour
 
             Destroy(removed);
         }
+        
 
     }
 
