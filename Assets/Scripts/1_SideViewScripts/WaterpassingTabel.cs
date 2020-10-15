@@ -22,6 +22,7 @@ public class WaterpassingTabel : MonoBehaviour
     public float titleHeight = 25f;
     public bool overrideErrorMargin = true;
     public float errormarginOverride = 0.002f;
+    public float lengthErrormarginOverride = 0.2f;
     public Color correctColor, falseColor;
 
     private GameObject totaal;
@@ -209,7 +210,7 @@ public class WaterpassingTabel : MonoBehaviour
                     tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = correctColor;
 
                 }
-                if (Mathf.Abs(tabelParts[i].afstand - distances[i]) > (overrideErrorMargin ? errormarginOverride: gm.errorMargin))
+                if (Mathf.Abs(tabelParts[i].afstand - distances[i] * GameManager.worldScale) > (overrideErrorMargin ? lengthErrormarginOverride : gm.errorMargin))
                 {
                     tabelVereffeningParts[i].afstandText.color = falseColor;
                     correct = false;
@@ -260,7 +261,7 @@ public class WaterpassingTabel : MonoBehaviour
             tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInParent<InputField>().interactable = false;
 
             tabelVereffeningParts[i].afstandText.color = correctColor;
-            tabelVereffeningParts[i].afstandText.text = GameManager.RoundFloat(distances[i], 3).ToString() + "m";
+            tabelVereffeningParts[i].afstandText.text = GameManager.RoundFloat(distances[i] * GameManager.worldScale, 3).ToString() + "m";
            
 
         }

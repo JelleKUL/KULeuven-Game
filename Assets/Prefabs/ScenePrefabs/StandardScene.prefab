@@ -956,6 +956,7 @@ MonoBehaviour:
   titleHeight: 25
   overrideErrorMargin: 1
   errormarginOverride: 0.003
+  lengthErrormarginOverride: 0.2
   correctColor: {r: 0, g: 0, b: 0, a: 0}
   falseColor: {r: 0, g: 0, b: 0, a: 0}
   inputHoogteverschillen: []
@@ -15291,6 +15292,21 @@ PrefabInstance:
       propertyPath: winMenuFree
       value: 
       objectReference: {fileID: 1334035556764012053}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: nrOfTries
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: submitBtn
+      value: 
+      objectReference: {fileID: 6228398407819498973}
+    - target: {fileID: 5963890913328120987, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: restartBtn
+      value: 
+      objectReference: {fileID: 7787148456292054144}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2338229750975421abe8cad584921f17, type: 3}
 --- !u!4 &2039373209 stripped
