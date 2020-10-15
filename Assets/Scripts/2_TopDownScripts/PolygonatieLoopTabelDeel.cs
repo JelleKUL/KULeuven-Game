@@ -67,7 +67,7 @@ public class PolygonatieLoopTabelDeel : MonoBehaviour
         UpdateOutputs();
         if (!last)
         {
-            afstandsOutput.text = GameManager.RoundFloat(Vector2.Distance(coordinate, nextPoint) * GameManager.worldScale, 3).ToString();
+            afstandsOutput.text = GameManager.RoundFloat(Vector2.Distance(coordinate, nextPoint), 3).ToString();
             vereffendeKaarthoekOutput.text = GetMapAngle(coordinate, nextPoint).ToString();
 
             deltaXInput.text = GameManager.RoundFloat(nextPoint.x - coordinate.x, 3).ToString();

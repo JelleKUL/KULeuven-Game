@@ -141,6 +141,8 @@ public class WaterpassingTabel : MonoBehaviour
             deel.SetName(i + 1);
             deel.gameObject.SetActive(false);
 
+            if (i == 0) deel.ActiveInput(false); // set the first rowinput to not interactable
+
         }
         totaalVereffening = Instantiate(waterPassingTotaalVereffening, transform, false);
         totaalVereffening.GetComponent<RectTransform>().localPosition = new Vector2(0, -titleHeight - (amount) * size);

@@ -16,6 +16,8 @@ public class ScheefstandController : MonoBehaviour
     public Button magnifyButton;
     public LayerMask pointMask;
     public Text answerText;
+    public Text answerOutput;
+
     public Color falseColor, CorrectColor;
 
     [Header("Variables")]
@@ -163,6 +165,7 @@ public class ScheefstandController : MonoBehaviour
         {
             answerText.color = falseColor;
             Debug.Log(answerText.text + " is False...");
+            answerOutput.text = "Hou rekening met de collimatiefout.";
         }
     }
 

@@ -138,7 +138,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
                 break;
         }
-        if(GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + correctAnswer + " m of gon");
+        if(GameManager.showDebugAnswer && vraag != QuestionType.Scheefstand) Debug.Log("Correct antwoord = " + correctAnswer + " m of gon");
     }
 
 

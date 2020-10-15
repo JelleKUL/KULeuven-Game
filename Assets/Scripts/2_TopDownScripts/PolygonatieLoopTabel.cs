@@ -50,9 +50,9 @@ public class PolygonatieLoopTabel : MonoBehaviour
 
         for (int i = 0; i < correctCoordinates.Length; i++)
         {
-            Debug.Log(Vector2.Distance(answerinputs[i], correctCoordinates[i]));
+            Debug.Log(Vector2.Distance(answerinputs[i], correctCoordinates[i] * GameManager.worldScale));
             tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(correctColor);
-            if (Vector2.Distance(answerinputs[i],correctCoordinates[i]) > 0.003)
+            if (Vector2.Distance(answerinputs[i],correctCoordinates[i] * GameManager.worldScale) > 0.003)
             {
                 correct = false;
                 tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(falseColor);
@@ -83,21 +83,20 @@ public class PolygonatieLoopTabel : MonoBehaviour
         Title1.SetActive(false);
         Title2.SetActive(true);
 
-        Vector2 firstPoint = new Vector2(correctValues[0], correctValues[1]);
+        Vector2 firstPoint = new Vector2(correctValues[0], correctValues[1]) * GameManager.worldScale;
         Vector2 point = firstPoint;
 
 
         for (int i = 0; i < correctValues.Length/2-1; i++)
         {
             Vector2 currentPoint = point;
-            Vector2 nextPoint = new Vector2(correctValues[i * 2 + 2 ], correctValues[i * 2 + 3]);
+            Vector2 nextPoint = new Vector2(correctValues[i * 2 + 2 ], correctValues[i * 2 + 3]) * GameManager.worldScale;
             tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetValues(currentPoint, nextPoint, false);
             //Debug.Log("this point: " + currentPoint + ", nextpoint: " + nextPoint + ", " + (i * 2 + 2) + ", " + (i * 2 + 3));
             point = nextPoint;
 
 
         }
-        Vector2 lastPoint = new Vector2(correctValues[correctValues.Length - 2], correctValues[correctValues.Length - 1]);
         tabelParts[correctValues.Length / 2 - 1].GetComponent<PolygonatieLoopTabelDeel>().SetValues(point,firstPoint, false);
         tabelParts[correctValues.Length / 2].GetComponent<PolygonatieLoopTabelDeel>().SetValues(firstPoint,firstPoint,true);
 

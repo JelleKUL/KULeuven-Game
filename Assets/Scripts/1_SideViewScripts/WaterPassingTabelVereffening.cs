@@ -34,8 +34,18 @@ public class WaterPassingTabelVereffening : MonoBehaviour
 
     public void SetName(int nr)
     {
-        station.text = nr.ToString();
+        if (nr <= 1)
+        {
+            station.text = "0";
+        }
+        else
+        {
+            char c = (char)(63 + (nr));
+
+            station.text = c.ToString();
+        }
     }
+
 
     public void SetValues(string hoogteVerschilVoor, string afstandVoor)
     {
@@ -49,6 +59,13 @@ public class WaterPassingTabelVereffening : MonoBehaviour
         else hoogteVerschil = 0f;
 
         afstandText.text = afstandVoor + " m";
+    }
+
+    public void ActiveInput(bool input)
+    {
+        if (!input) vereffeningsHoogteText.text = "0";
+
+        vereffeningsHoogteText.interactable = input;
     }
 
 }
