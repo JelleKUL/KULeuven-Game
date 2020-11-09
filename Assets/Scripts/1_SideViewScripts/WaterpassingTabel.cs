@@ -49,7 +49,7 @@ public class WaterpassingTabel : MonoBehaviour
     private GameManager gm;
 
     private bool playing = true;
-    private int pointOutLoop = -1;
+    private int pointOutLoop = -10;
     
 
     // Start is called before the first frame update
@@ -267,13 +267,14 @@ public class WaterpassingTabel : MonoBehaviour
 
         for (int i = 1; i < tabelVereffeningParts.Count; i++)
         {
+
             totalHeight += heights[i - 1];
             tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = correctColor;
             tabelVereffeningParts[i].vereffeningsHoogteText.text = GameManager.RoundFloat(totalHeight, 3).ToString() + "m";
             tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInParent<InputField>().interactable = false;
 
             tabelVereffeningParts[i].afstandText.color = correctColor;
-            tabelVereffeningParts[i].afstandText.text = GameManager.RoundFloat((distances[i-1] + (i==pointOutLoop+1? distances[i-2]:0) )* GameManager.worldScale, 3).ToString() + "m";
+            tabelVereffeningParts[i].afstandText.text = GameManager.RoundFloat((distances[i-1] + (i==(pointOutLoop+1)? distances[i-2]:0) )* GameManager.worldScale, 3).ToString() + "m";
 
             tabelVereffeningParts[i].hoogteVerschilText.GetComponentInChildren<Text>().color = correctColor;
             tabelVereffeningParts[i].hoogteVerschilText.text = GameManager.RoundFloat(heights[i - 1] + (i == pointOutLoop + 1 ? heights[i - 2] : 0), 3).ToString() + "m";

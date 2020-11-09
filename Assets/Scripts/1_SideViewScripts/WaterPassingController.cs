@@ -540,7 +540,7 @@ public class WaterPassingController : MonoBehaviour
         float radius = (gm.screenMax.x - gm.screenMin.x) / ( 2 * Mathf.PI);
         //groundPointTopDownCenter.localScale = Vector3.one * radius;
         float cummAngle = 0f;
-        pointOutLoopNr = 0;
+        pointOutLoopNr = -1;
         //chooses one point to leave out of the loop
         if (addPointOutLoop)
         {
