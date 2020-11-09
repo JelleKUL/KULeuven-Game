@@ -65,10 +65,13 @@ public class PolygonatieLoopTabelDeel : MonoBehaviour
         part1.SetActive(false);
         part2.SetActive(true);
         UpdateOutputs();
+
+        vereffendeKaarthoekOutput.text = GetMapAngle(coordinate, nextPoint).ToString();
+
         if (!last)
         {
             afstandsOutput.text = GameManager.RoundFloat(Vector2.Distance(coordinate, nextPoint), 3).ToString();
-            vereffendeKaarthoekOutput.text = GetMapAngle(coordinate, nextPoint).ToString();
+            
 
             deltaXInput.text = GameManager.RoundFloat(nextPoint.x - coordinate.x, 3).ToString();
             deltaXInput.GetComponentInParent<InputField>().interactable = false;

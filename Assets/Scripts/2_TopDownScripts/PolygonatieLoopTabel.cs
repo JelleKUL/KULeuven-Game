@@ -84,6 +84,7 @@ public class PolygonatieLoopTabel : MonoBehaviour
 
         Vector2 firstPoint = new Vector2(correctValues[0], correctValues[1]) * GameManager.worldScale;
         Vector2 point = firstPoint;
+        Vector2 secondPoint = new Vector2(correctValues[2], correctValues[3]) * GameManager.worldScale;
 
 
         for (int i = 0; i < correctValues.Length/2-1; i++)
@@ -96,8 +97,8 @@ public class PolygonatieLoopTabel : MonoBehaviour
 
 
         }
-        tabelParts[correctValues.Length / 2 - 1].GetComponent<PolygonatieLoopTabelDeel>().SetValues(point,firstPoint, false);
-        tabelParts[correctValues.Length / 2].GetComponent<PolygonatieLoopTabelDeel>().SetValues(firstPoint,firstPoint,true);
+        tabelParts[correctValues.Length / 2 - 1].GetComponent<PolygonatieLoopTabelDeel>().SetValues(point,secondPoint, false);
+        tabelParts[correctValues.Length / 2].GetComponent<PolygonatieLoopTabelDeel>().SetValues(secondPoint,firstPoint,true);
 
 
     }

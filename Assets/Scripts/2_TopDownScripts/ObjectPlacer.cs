@@ -24,6 +24,7 @@ public class ObjectPlacer : MonoBehaviour
     public Vector2 maxOffset;
     public float maxRandomAngle;
     public Vector2 loopedStartPos;
+    public float maxDistanceError = 0.001f;
     
 
 
@@ -127,21 +128,27 @@ public class ObjectPlacer : MonoBehaviour
         int[] angles = new int[amount - 1]; // also substract the first point
         */
         int shape = Random.Range(0, angleArray.GetLength(1));
-        Debug.Log(shape);
+        Debug.Log("ShapeNr: " + shape);
 
-        float[] positions = new float[6 * 2];
-        for (int i = 0; i < 6; i++)
+        float[] positions = new float[7 * 2];
+        for (int i = 0; i < 7; i++)
         {
             Vector2 position = Vector2.zero;
-            if (i == 0)
+            if (i == 0) //place the first point out of the loop at the start position
             {
                 position = loopedStartPos;
             }
-            else if(i == 1)
+            else if(i == 1) //place the first point 45 deg away to start the loop
             {
-                position = loopedStartPos + Vector2.right * edgeLength;
+                position = loopedStartPos + Vector2.one.normalized * edgeLength;
+                //position = loopedStartPos + Vector2.right * edgeLength;
             }
-            else if(i > 1 && i < 6)
+            else if (i == 2) //place the first point 45 deg away to start the loop
+            {
+                //position = loopedStartPos + Vector2.one.normalized * edgeLength;
+                position = calculatePoints[i - 1].transform.position + Vector3.right * edgeLength;
+            }
+            else if(i > 2 && i < 7)
             {
                 position = calculatePoints[i - 2].transform.position;
             }
@@ -151,13 +158,14 @@ public class ObjectPlacer : MonoBehaviour
             }
 
             GameObject newPoint = Instantiate(calculatePoint, position, Quaternion.identity);
-            if(i> 1)
+            if(i> 2)
             {
                 newPoint.transform.RotateAround(calculatePoints[i - 1].transform.position, Vector3.back, angleArray[shape, i-1]);
             }
-            
+
+            if(i >0) newPoint.transform.position += new Vector3(Random.Range(-1f,1f) * maxDistanceError , Random.Range(-1f, 1f) * maxDistanceError, 0);
             calculatePoints.Add(newPoint);
-            newPoint.GetComponent<PolygonPointController>().SetNameText( i==6? 0 : nrofPointsPlaced+1);
+            newPoint.GetComponent<PolygonPointController>().SetNameText( i==0? 0 : nrofPointsPlaced);
             nrofPointsPlaced++;
 
             positions[i * 2] = newPoint.transform.position.x;

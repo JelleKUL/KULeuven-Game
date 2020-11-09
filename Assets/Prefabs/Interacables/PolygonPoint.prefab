@@ -606,8 +606,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showName: 0
+  resetRotation: 1
   maxLengthError: 0.01
   maxAngleError: 0.01
+  angleDisplayMargin: 5
+  angleDisplayRaduis: 0.7
   nameText: {fileID: 7427164158625011120}
   distanceText: {fileID: 5649992786286285215}
   angleText: {fileID: 3823113245226482730}
@@ -615,6 +618,9 @@ MonoBehaviour:
   errorEllipse: {fileID: 2983213894593883259}
   angleDisplay: {fileID: 6011247650400368846}
   errorEllipsSize: 0
+  errorEllips: 0
+  IsSnapped: 0
+  displayError: 0
 --- !u!58 &6925941611851908032
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -311,6 +311,25 @@ public class GameManager : MonoBehaviour
     {
         isLoggedIn = false;
         SceneManager.LoadScene("LoginMenu");
+
+         // the static variables that are used all over the place
+        loginID = -1;
+        userName = "";
+        playerScore = 0;
+
+        levelCamp1 = 0;
+        scoreCamp1 = new int[10];
+        compLevelCamp1 = new bool[10];
+
+        levelCamp2 = 0;
+        scoreCamp2 = new int[13];
+        compLevelCamp2 = new bool[13];
+
+        scoreFreeTotal = 0;
+        //scoreFree = new int[13];
+
+        highestLevel = 0;
+        currentLevel = 0;
     }
 
 
@@ -372,7 +391,9 @@ public class GameManager : MonoBehaviour
 
     void ShowUsername()
     {
-        usernameText.text = userName;
+        if (isLoggedIn) usernameText.text = userName;
+        else usernameText.text = "Gast";
+
     }
 
     // This is called when the upload has finished

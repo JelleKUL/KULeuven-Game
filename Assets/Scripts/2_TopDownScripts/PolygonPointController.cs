@@ -10,6 +10,9 @@ public class PolygonPointController : MonoBehaviour
     public bool resetRotation = true;
     public float maxLengthError;
     public float maxAngleError;
+    public float angleDisplayMargin = 5;
+    public float angleDisplayRaduis = 0.7f;
+    public float displayRadiusModifier =1;
 
     [Header("Prefab Childeren")]
     public TextMesh nameText;
@@ -20,7 +23,8 @@ public class PolygonPointController : MonoBehaviour
     public GameObject angleDisplay;
 
     [HideInInspector]
-    public float errorEllipsSize; public float errorEllips;
+    public float errorEllipsSize;
+    public float errorEllips;
     public bool IsSnapped;
     [HideInInspector]
     public bool displayError;
@@ -121,8 +125,9 @@ public class PolygonPointController : MonoBehaviour
         //angleDisplay.transform.up = prevPoint - pos;
         Vector2 dir = prevPoint - pos;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        angleDisplay.transform.rotation = Quaternion.AngleAxis(targetAngle, Vector3.forward);
-        angleDisplay.GetComponent<MeshRenderer>().material.SetFloat("_Arc2",360- angle);
+        angleDisplay.transform.localScale = Vector3.one * angleDisplayRaduis * displayRadiusModifier;
+        angleDisplay.transform.rotation = Quaternion.AngleAxis(targetAngle-angleDisplayMargin, Vector3.forward);
+        angleDisplay.GetComponent<MeshRenderer>().material.SetFloat("_Arc2",360- angle + 2* angleDisplayMargin);
         
         /*
         spriteMask1.transform.right = prevPoint - spriteMask1.transform.position;
@@ -147,14 +152,14 @@ public class PolygonPointController : MonoBehaviour
         if(direction > 0f)
         {
             angleText.anchor = TextAnchor.MiddleLeft;
-            angleText.transform.position += angleText.transform.right * 0.5f;
+            angleText.transform.position += angleText.transform.right * 0.5f * angleDisplayRaduis/0.7f * displayRadiusModifier;
             anglePointer.transform.position = angleText.transform.position;
             anglePointer.transform.up = angleText.transform.right;
         }
         else
         {
             angleText.anchor = TextAnchor.MiddleRight;
-            angleText.transform.position -= angleText.transform.right * 0.5f;
+            angleText.transform.position -= angleText.transform.right * 0.5f * angleDisplayRaduis/0.7f * displayRadiusModifier;
             anglePointer.transform.position = angleText.transform.position;
             anglePointer.transform.up = - angleText.transform.right;
         }

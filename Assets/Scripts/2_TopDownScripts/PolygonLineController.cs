@@ -56,6 +56,8 @@ public class PolygonLineController : MonoBehaviour
     public bool showSmallErrors;
     public int maxPoints;
     public bool startCenterPoint;
+    public bool loopLine;
+    public int loopOffset = 1;
 
 
     private List<GameObject> linePoints = new List<GameObject>();
@@ -201,7 +203,29 @@ public class PolygonLineController : MonoBehaviour
             //sets the lengthvalues of the points
             if (showLengths && i != 0)
             {
-                linePoints[i].GetComponent<PolygonPointController>().SetDistanceText(linePoints[i - 1].transform.position);
+                bool overlap = false;
+                for (int j = 0; j < i; j++)
+                {
+                    if(linePoints[j].transform.position == linePoints[i].transform.position)
+                    {
+                        if (j > 0)
+                        {
+                            if (linePoints[j - 1].transform.position == linePoints[i - 1].transform.position || linePoints[j + 1].transform.position == linePoints[i - 1].transform.position) overlap = true;
+                        }
+                        else
+                        {
+                            if (linePoints[j + 1].transform.position == linePoints[i - 1].transform.position) overlap = true;
+                        }
+
+                        
+
+                        
+                    }
+
+                }
+                if(!overlap) linePoints[i].GetComponent<PolygonPointController>().SetDistanceText(linePoints[i - 1].transform.position);
+
+
             }
             //sets the errorEllipses
             if (showEllipses && i != 0)
@@ -235,11 +259,23 @@ public class PolygonLineController : MonoBehaviour
             //sets the anglevalues of the points
             if (showAngles && i != 0 && i != linePoints.Count - 1)
             {
-                if (!CheckVisible(linePoints[1], linePoints[1], ObstructionPoints))
+                if (CheckVisible(linePoints[1], linePoints[1], ObstructionPoints))
                 {
+                    bool overlap = false;
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (linePoints[j].transform.position == linePoints[i].transform.position)
+                        {
+                            overlap = true;
+                        }
 
+                    }
+                    if (overlap) linePoints[i].GetComponent<PolygonPointController>().displayRadiusModifier = 1.3f;
+                    else linePoints[i].GetComponent<PolygonPointController>().displayRadiusModifier = 1;
+
+                    linePoints[i].GetComponent<PolygonPointController>().SetAngleText(linePoints[i - 1].transform.position, linePoints[i + 1].transform.position);
                 }
-                else linePoints[i].GetComponent<PolygonPointController>().SetAngleText(linePoints[i - 1].transform.position, linePoints[i + 1].transform.position);
+                
             }
 
             line.positionCount = linePoints.Count;
@@ -393,6 +429,7 @@ public class PolygonLineController : MonoBehaviour
         {
             AddPoint(new Vector2(positions[i * 2], positions[i * 2 + 1]));
         }
+        AddPoint(new Vector2(positions[2], positions[3]));
         AddPoint(new Vector2(positions[0], positions[1]));
         //AddPoint(new Vector2(positions[(maxPoints - 1) * 2], positions[(maxPoints - 1) * 2 + 1]));
 
