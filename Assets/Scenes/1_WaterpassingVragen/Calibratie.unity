@@ -128,6 +128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1380859680, guid: 4d233a20e80c34bc4bdc4f5e8e446f79, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 29510839122793103, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_Text
@@ -217,6 +221,11 @@ PrefabInstance:
         type: 3}
       propertyPath: loopAround
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7093937433697466476, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: maxAngleError
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8568660867024383014, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}

@@ -29,6 +29,11 @@ public class MapAngleQuestions : MonoBehaviour
 
     [Header ("Axis transform controls")]
     public bool rotateAxis;
+    [Tooltip("the max number of quadrants the axis can rotate to")]
+    [Range(1,4)]
+    public int maxQuadrants = 1;
+    [Tooltip("X & Y value: position offset, Z value rotation offset")]
+    public Vector3 minAxisTransform; // X & Y value: position offset, Z value rotation offset
     [Tooltip("X & Y value: position offset, Z value rotation offset")]
     public Vector3 maxAxisTransform; // X & Y value: position offset, Z value rotation offset
 
@@ -144,7 +149,8 @@ public class MapAngleQuestions : MonoBehaviour
 
                 placer.calculatePoints[0].transform.SetParent(assenkruis.transform);
                 assenkruis.transform.position += new Vector3(Random.Range(0f,1f) *  maxAxisTransform.x, Random.Range(0f, 1f) * maxAxisTransform.y, 0);
-                assenkruis.transform.Rotate(0, 0, Random.Range(-1f, 1f) * maxAxisTransform.z);
+
+                assenkruis.transform.Rotate(0, 0, Random.Range(0, maxQuadrants) * 90f + Mathf.Sign(Random.Range(-1,1)) *  Random.Range(minAxisTransform.z, maxAxisTransform.z));
                 AnswerExplanation = "Gebruik de assen van het verdraaide assenstelsel om de kaarthoek te berekenen";
 
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale,3);

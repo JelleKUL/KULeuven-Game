@@ -1386,7 +1386,7 @@ MonoBehaviour:
   addPointOutLoop: 0
   topDownPointRaduis: 0.5
   showAngleError: 1
-  maxAngleError: 2
+  maxAngleError: 0
   minDistance: 2.5
   maxHeightGroundPoint: 0.15
   extremeHeightDiff: 0
@@ -3696,7 +3696,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Vereffende Hoogte
+  m_Text: Peil
 --- !u!1 &3093730770546759139
 GameObject:
   m_ObjectHideFlags: 0
@@ -9816,7 +9816,7 @@ GameObject:
   - component: {fileID: 2821575977003425421}
   - component: {fileID: 7205288148396825549}
   m_Layer: 5
-  m_Name: Vereffende Hoogte
+  m_Name: Peil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13981,6 +13981,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3678163350333509455}
     m_Modifications:
+    - target: {fileID: 1943512873160265910, guid: 37ffaead3d2644740ad6b17785ebe591,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.259
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943512873160265910, guid: 37ffaead3d2644740ad6b17785ebe591,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.076
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949387917982779392, guid: 37ffaead3d2644740ad6b17785ebe591,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6872219743077172740, guid: 37ffaead3d2644740ad6b17785ebe591,
         type: 3}
       propertyPath: m_IsActive
@@ -14225,6 +14240,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.37051356
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471610971085001519, guid: 37ffaead3d2644740ad6b17785ebe591,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4284372447
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471610971085001519, guid: 37ffaead3d2644740ad6b17785ebe591,
+        type: 3}
+      propertyPath: m_CharacterSize
+      value: 0.015
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ffaead3d2644740ad6b17785ebe591, type: 3}

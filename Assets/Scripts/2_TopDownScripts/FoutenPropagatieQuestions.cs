@@ -137,7 +137,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
                 break;
 
         }
-        if (GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + CorrectAnswer() + " mm ");
+        if (GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + CorrectAnswer(false) + " mm ");
 
     }
   
@@ -146,7 +146,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
     {
         if (lineController.CheckPoints() && lineController.CheckPointsVisibility())
         {
-            if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer()) )
+            if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer(true)) || gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer(false)))
             {
                 gm.IncreaseScore(scoreIncrease, 2);
                 Debug.Log("true");
@@ -181,7 +181,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
         if (lineController.CheckPoints() && lineController.CheckPointsVisibility())
         {
 
-            if (Mathf.Abs(lineController.GetSigmaA() - CorrectAnswer()) <=0.6* lineController.GetDistanceError1() )
+            if (Mathf.Abs(lineController.GetSigmaA() - CorrectAnswer(false)) <=0.6* lineController.GetDistanceError1() )
             {
                 gm.IncreaseScore(scoreIncrease, 2);
                 Debug.Log("true");
@@ -223,7 +223,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
         {
             answerInputH.color = falseColor;
             InputField answerDisplay = answerInputH.transform.parent.GetComponent<InputField>();
-            answerDisplay.text = CorrectAnswer().ToString();
+            answerDisplay.text = CorrectAnswer(false).ToString();
             answerDisplay.interactable = false;
         }
 
@@ -235,7 +235,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
     }
 
-    public float CorrectAnswer()
+    public float CorrectAnswer( bool exact)//use the exact furmula *Pi/2 or rule of thumb *1.5
     {
         switch (SoortVraag)
         {
@@ -247,7 +247,8 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
             case QuestionType.Errorellips_sigmaA:
 
-                return lineController.GetSigmaA();
+                if(exact) return lineController.GetSigmaAExact();
+                else return lineController.GetSigmaA();
 
             case QuestionType.MinimaleGrootte:
 
@@ -256,7 +257,10 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
             case QuestionType.WerkingMeerderePunten:
 
-                return lineController.GetSigmaA();
+                if(exact) return lineController.GetSigmaAExact();
+                else return lineController.GetSigmaA();
+
+
         }
         return 0;
     }

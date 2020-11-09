@@ -67,7 +67,9 @@ public class PolygonLineController : MonoBehaviour
     public float[] correctAnswerArray;
     private float sigmaD = 0f;
     private float sigmaH = 0f;
+    private float sigmaHExact = 0f;
     private float sigmaA = 0f;
+    private float sigmaAExact = 0f;
 
     private GameManager gm;
     private LineRenderer line;
@@ -255,15 +257,20 @@ public class PolygonLineController : MonoBehaviour
         {
             sigmaD = 0f;
             sigmaH = 0f;
+            sigmaHExact = 0f;
             sigmaA = 0f;
+            sigmaAExact = 0f;
+
             for (int i = 0; i < linePoints.Count-1; i++)
             {
                 float d = Vector2.Distance(linePoints[i+1].transform.position, linePoints[i].transform.position) * GameManager.worldScale;
                 distances.Add(d);
                 sigmaD = sigmaD + Mathf.Pow(distanceError1 + (0.001f * distances[i] * distanceError2), 2); // correctie m->mm
                 sigmaH = sigmaH + Mathf.Pow(distances[i] * 1.5f * angleError / 100f, 2);
+                sigmaHExact = sigmaHExact + Mathf.Pow(distances[i] * (Mathf.PI/2f) * angleError / 100f, 2);
             }
             sigmaA = Mathf.Sqrt(sigmaD + sigmaH);
+            sigmaAExact = Mathf.Sqrt(sigmaD + sigmaHExact);
         }
         else if(!startCenterPoint)
         {
@@ -274,7 +281,10 @@ public class PolygonLineController : MonoBehaviour
             float d = Vector2.Distance(pointP, startPoint) * GameManager.worldScale;
             sigmaD = distanceError1 + (0.001f * d * distanceError2); // correctie m->mm
             sigmaH = 1.5f * d * angleError / 100f;// correctie m->mm
+            sigmaHExact = (Mathf.PI/2f) * d * angleError / 100f;// correctie m->mm
+
             sigmaA = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaH, 2));
+            sigmaAExact = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaHExact, 2));
         }
 
     }
@@ -412,9 +422,19 @@ public class PolygonLineController : MonoBehaviour
         return GameManager.RoundFloat(sigmaH, 1);
     }
 
+    public float GetSigmaHExact() // compute angle error of last linePoint
+    {
+        return GameManager.RoundFloat(sigmaHExact, 1);
+    }
+
     public float GetSigmaA() // compute sigmaA of last linePoint
     {
         return GameManager.RoundFloat(sigmaA, 1);
+    }
+
+    public float GetSigmaAExact() // compute sigmaA of last linePoint
+    {
+        return GameManager.RoundFloat(sigmaAExact, 1);
     }
 
     public void SetAnswerArray(float[] array) 

@@ -299,7 +299,7 @@ public class WaterPassingController : MonoBehaviour
         MeasureController measureController = newMeasure.GetComponent<MeasureController>();
         measureController.errorAngle = correctErrorAngle;
 
-        if (nrOfPoints > 0 && !loopAround)
+        if (nrOfPoints > 1 && !loopAround)
         {
             measureController.maxDistance = maxDistanceBetweenPoints(1) * 0.6f; //(gm.screenMax.x - gm.screenMin.x) / (nrOfPoints * 2) + 0.4f * minDistance; //- 0.7f*minDistance;
         }

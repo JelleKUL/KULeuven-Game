@@ -274,7 +274,7 @@ public class WaterpassingTabel : MonoBehaviour
             tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInParent<InputField>().interactable = false;
 
             tabelVereffeningParts[i].afstandText.color = correctColor;
-            tabelVereffeningParts[i].afstandText.text = GameManager.RoundFloat((distances[i-1] + (i==(pointOutLoop+1)? distances[i-2]:0) )* GameManager.worldScale, 3).ToString() + "m";
+            tabelVereffeningParts[i].afstandText.text = GameManager.RoundFloat((distances[i-1] + (i==pointOutLoop+1? distances[i-2]:0) )* GameManager.worldScale, 3).ToString() + "m";
 
             tabelVereffeningParts[i].hoogteVerschilText.GetComponentInChildren<Text>().color = correctColor;
             tabelVereffeningParts[i].hoogteVerschilText.text = GameManager.RoundFloat(heights[i - 1] + (i == pointOutLoop + 1 ? heights[i - 2] : 0), 3).ToString() + "m";

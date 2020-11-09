@@ -53,13 +53,17 @@ MonoBehaviour:
   assenkruis: {fileID: 0}
   winMenu: {fileID: 0}
   winMenuFree: {fileID: 0}
+  submitBtn: {fileID: 0}
+  restartBtn: {fileID: 0}
   falseColor: {r: 0, g: 0, b: 0, a: 0}
   CorrectColor: {r: 0, g: 0, b: 0, a: 0}
   SoortVraag: 3
   rotateAxis: 0
-  maxAxisTransform: {x: 0, y: 0, z: 30}
+  minAxisTransform: {x: 0, y: 0, z: 10}
+  maxAxisTransform: {x: 0, y: 0, z: 45}
   numberOfPoints: 2
   scoreIncrease: 0
+  nrOfTries: 3
 --- !u!114 &5963890913328120984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,10 +82,12 @@ MonoBehaviour:
   obstaclePrefabs: []
   mobileObstaclePrefabs: []
   gm: {fileID: 0}
-  placeBtwnPoints: 0
   minDistanceBtwPoints: 2
+  minDistanceToObstacles: 0
+  minDistanceFromOrigin: 0
   minOffset: {x: 1, y: 1}
   maxOffset: {x: 1, y: 1}
   maxRandomAngle: 30
+  loopedStartPos: {x: 0, y: 0}
   calculatePoints: []
   obstructedCalculatePoints: []

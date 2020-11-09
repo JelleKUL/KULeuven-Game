@@ -3486,7 +3486,7 @@ PrefabInstance:
     - target: {fileID: 1169042849266344793, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Errorellips sigma A
+      value: Sigma A over een punt
       objectReference: {fileID: 0}
     - target: {fileID: 1169042849372670477, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3697,7 +3697,7 @@ PrefabInstance:
     - target: {fileID: 1169042850178306684, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Minimale errorpropagatie
+      value: Minimale foutenpropagatie
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850197352884, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3737,7 +3737,7 @@ PrefabInstance:
     - target: {fileID: 1169042850654280299, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Errorellips sigma D, H
+      value: Standaardafwijking
       objectReference: {fileID: 0}
     - target: {fileID: 1169042850670976434, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
@@ -3762,7 +3762,7 @@ PrefabInstance:
     - target: {fileID: 1169042851081461713, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
       propertyPath: m_Text
-      value: Errorellips in X en Y
+      value: Sigma A over meerdere punten
       objectReference: {fileID: 0}
     - target: {fileID: 1169042851099215600, guid: a0ec51f37b19546e1bc3d28cc09af294,
         type: 3}
