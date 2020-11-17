@@ -53,11 +53,13 @@ public class PolygonLineController : MonoBehaviour
     public bool showLengths;
     public bool showStartAngle;
     public bool showStartLength;
+    public bool showEndLength = true;
     public bool showSmallErrors;
     public int maxPoints;
     public bool startCenterPoint;
     public bool loopLine;
     public int loopOffset = 1;
+    
 
 
     private List<GameObject> linePoints = new List<GameObject>();
@@ -223,8 +225,17 @@ public class PolygonLineController : MonoBehaviour
                     }
 
                 }
-                if(!overlap) linePoints[i].GetComponent<PolygonPointController>().SetDistanceText(linePoints[i - 1].transform.position);
-
+                if (!overlap)
+                {
+                    if((i == linePoints.Count - 1 || i == 1) && (!showEndLength))
+                    {
+                        
+                    }
+                    else
+                    {
+                        linePoints[i].GetComponent<PolygonPointController>().SetDistanceText(linePoints[i - 1].transform.position);
+                    }
+                }
 
             }
             //sets the errorEllipses

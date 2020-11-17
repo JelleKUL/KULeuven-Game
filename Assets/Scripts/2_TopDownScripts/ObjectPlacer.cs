@@ -136,11 +136,11 @@ public class ObjectPlacer : MonoBehaviour
             Vector2 position = Vector2.zero;
             if (i == 0) //place the first point out of the loop at the start position
             {
-                position = loopedStartPos;
+                position = loopedStartPos - Vector2.one.normalized * edgeLength;
             }
             else if(i == 1) //place the first point 45 deg away to start the loop
             {
-                position = loopedStartPos + Vector2.one.normalized * edgeLength;
+                position = loopedStartPos;
                 //position = loopedStartPos + Vector2.right * edgeLength;
             }
             else if (i == 2) //place the first point 45 deg away to start the loop
@@ -163,7 +163,7 @@ public class ObjectPlacer : MonoBehaviour
                 newPoint.transform.RotateAround(calculatePoints[i - 1].transform.position, Vector3.back, angleArray[shape, i-1]);
             }
 
-            if(i >0) newPoint.transform.position += new Vector3(Random.Range(-1f,1f) * maxDistanceError , Random.Range(-1f, 1f) * maxDistanceError, 0);
+            if(i >1) newPoint.transform.position += new Vector3(Random.Range(-1f,1f) * maxDistanceError , Random.Range(-1f, 1f) * maxDistanceError, 0);
             calculatePoints.Add(newPoint);
             newPoint.GetComponent<PolygonPointController>().SetNameText( i==0? 0 : nrofPointsPlaced);
             nrofPointsPlaced++;

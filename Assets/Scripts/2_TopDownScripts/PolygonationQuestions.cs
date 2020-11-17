@@ -141,7 +141,9 @@ public class PolygonationQuestions : MonoBehaviour
                 lineController.SetPoints(correctAnswerArray);
                 //placer.PlaceObstacles(2);
                 titleQuestionText.text = "III. Vervolledig onderstaande tabel";
-                questionText.text = "Punt P ligt op (0,0)";
+                questionText.text =     "De punten P en A zijn gegeven:" +
+                                        "\n\u2022 P (" + GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3) + ", " + GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale, 3)+ ") m" +
+                                        "\n\u2022 A (" + GameManager.RoundFloat(correctAnswerArray[2] * GameManager.worldScale, 3) + ", " + GameManager.RoundFloat(correctAnswerArray[3] * GameManager.worldScale, 3) + ") m";
                 AnswerExplanation = "";
                 if (GameManager.showDebugAnswer)
                 {
@@ -168,8 +170,9 @@ public class PolygonationQuestions : MonoBehaviour
 
                 //placer.PlaceObstacles(2);
                 titleQuestionText.text = "IV. Bilateratie bepaal P";
-                questionText.text = "\n\u2022 A = x:" + GameManager.RoundFloat(obsructedPointsArray[2] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(obsructedPointsArray[1] * GameManager.worldScale, 3) +
-                                    "\n\u2022 B = x:" + GameManager.RoundFloat(obsructedPointsArray[2] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(obsructedPointsArray[3] * GameManager.worldScale, 3);
+                questionText.text = "De punten A en B zijn gegeven:" +
+                                    "\n\u2022 A (" + GameManager.RoundFloat(obsructedPointsArray[0] * GameManager.worldScale, 3) + ", " + GameManager.RoundFloat(obsructedPointsArray[1] * GameManager.worldScale, 3)+ ") m" +
+                                    "\n\u2022 B (" + GameManager.RoundFloat(obsructedPointsArray[2] * GameManager.worldScale, 3) + ", " + GameManager.RoundFloat(obsructedPointsArray[3] * GameManager.worldScale, 3) + ") m";
                 AnswerExplanation = "Je hebt een gegeven te veel, gebruik dat om te vereffenen";
                 
 

@@ -46,7 +46,7 @@ public class PolygonatieLoopTabel : MonoBehaviour
         if (!coordinateMode)
         {
             //check vereffende kaarthoek
-            for (int i = 0; i < tabelParts.Length; i++)
+            for (int i = 1; i < tabelParts.Length; i++)
             {
                 PolygonatieLoopTabelDeel tabelPart = tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>();
                 tabelPart.SetColor(correctColor, false);
@@ -93,7 +93,7 @@ public class PolygonatieLoopTabel : MonoBehaviour
         Vector2[] answerinputs = GetInputs();
         Vector2[] correctCoordinates = placer.GetCoordinates();
 
-        for (int i = 0; i < correctCoordinates.Length; i++)
+        for (int i = 1; i < correctCoordinates.Length; i++)
         {
             if(GameManager.showDebugAnswer) Debug.Log("Point " + (i+1) + ": " + Vector2.Distance(answerinputs[i], correctCoordinates[i] * GameManager.worldScale));
             tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(correctColor, true);
