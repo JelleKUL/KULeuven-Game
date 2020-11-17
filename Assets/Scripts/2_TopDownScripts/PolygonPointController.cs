@@ -32,6 +32,7 @@ public class PolygonPointController : MonoBehaviour
     private float lengthError;
     private float angleError;
 
+
     //sets the name of the point as a number
     private void Start()
     {

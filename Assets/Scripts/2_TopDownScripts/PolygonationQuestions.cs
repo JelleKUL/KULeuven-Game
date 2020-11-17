@@ -141,9 +141,20 @@ public class PolygonationQuestions : MonoBehaviour
                 lineController.SetPoints(correctAnswerArray);
                 //placer.PlaceObstacles(2);
                 titleQuestionText.text = "III. Vervolledig onderstaande tabel";
-                questionText.text = "Punt A ligt op (0,0)";
+                questionText.text = "Punt P ligt op (0,0)";
                 AnswerExplanation = "";
-
+                if (GameManager.showDebugAnswer)
+                {
+                    Debug.Log(  "<b>Correct points:</b>" +
+                                "\n\u2022 P = x: " + GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale, 3) +
+                                "\n\u2022 A = x: " + GameManager.RoundFloat(correctAnswerArray[2] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(correctAnswerArray[3] * GameManager.worldScale, 3) +
+                                "\n\u2022 B = x: " + GameManager.RoundFloat(correctAnswerArray[4] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(correctAnswerArray[5] * GameManager.worldScale, 3) +
+                                "\n\u2022 C = x: " + GameManager.RoundFloat(correctAnswerArray[6] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(correctAnswerArray[7] * GameManager.worldScale, 3) +
+                                "\n\u2022 D = x: " + GameManager.RoundFloat(correctAnswerArray[8] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(correctAnswerArray[9] * GameManager.worldScale, 3) +
+                                "\n\u2022 E = x: " + GameManager.RoundFloat(correctAnswerArray[10] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(correctAnswerArray[11] * GameManager.worldScale, 3) +
+                                "\n\u2022 F = x: " + GameManager.RoundFloat(correctAnswerArray[12] * GameManager.worldScale, 3) + ", y: " + GameManager.RoundFloat(correctAnswerArray[13] * GameManager.worldScale, 3)
+                            );
+                }
                 break;
 
             case QuestionType.Bilateratie:
@@ -157,9 +168,10 @@ public class PolygonationQuestions : MonoBehaviour
 
                 //placer.PlaceObstacles(2);
                 titleQuestionText.text = "IV. Bilateratie bepaal P";
-                questionText.text = "\n\u2022 A = x:" + GameManager.RoundFloat(obsructedPointsArray[0] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(obsructedPointsArray[1] * GameManager.worldScale, 3) +
+                questionText.text = "\n\u2022 A = x:" + GameManager.RoundFloat(obsructedPointsArray[2] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(obsructedPointsArray[1] * GameManager.worldScale, 3) +
                                     "\n\u2022 B = x:" + GameManager.RoundFloat(obsructedPointsArray[2] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(obsructedPointsArray[3] * GameManager.worldScale, 3);
                 AnswerExplanation = "Je hebt een gegeven te veel, gebruik dat om te vereffenen";
+                
 
                 break;
 

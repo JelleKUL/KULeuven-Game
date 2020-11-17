@@ -178,6 +178,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapAngleStandardScene Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2259654287659822595, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2580940359688496536, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: m_IsActive
@@ -218,6 +223,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -2.76
       objectReference: {fileID: 0}
+    - target: {fileID: 4066077303531802981, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4069526412861743397, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -232,6 +242,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662525110669184144, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5689121470095568826, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
@@ -387,6 +402,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611972667801269238, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7788705635580669737, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}

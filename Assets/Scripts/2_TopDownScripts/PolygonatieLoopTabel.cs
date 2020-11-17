@@ -43,19 +43,69 @@ public class PolygonatieLoopTabel : MonoBehaviour
 
     public bool checkAnswers(float[] correctPoints )
     {
+        if (!coordinateMode)
+        {
+            //check vereffende kaarthoek
+            for (int i = 0; i < tabelParts.Length; i++)
+            {
+                PolygonatieLoopTabelDeel tabelPart = tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>();
+                tabelPart.SetColor(correctColor, false);
+                Vector3 thisPoint;
+                Vector3 targetPoint;
+
+                if (i < tabelParts.Length - 2)
+                {
+                    thisPoint = placer.calculatePoints[i].transform.position;
+                    targetPoint = placer.calculatePoints[i + 1].transform.position;
+                }
+                else if (i == tabelParts.Length - 2)
+                {
+                    thisPoint = placer.calculatePoints[i].transform.position;
+                    targetPoint = placer.calculatePoints[1].transform.position;
+                }
+                else
+                {
+                    thisPoint = placer.calculatePoints[1].transform.position;
+                    targetPoint = placer.calculatePoints[0].transform.position;
+                }
+
+                
+                if (Mathf.Abs(GetMapAngle(thisPoint, targetPoint) - tabelPart.GetMapAngleInput()) > gm.errorMargin)
+                {
+                    tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(falseColor, false);
+                    
+                    if(GameManager.showDebugAnswer) Debug.Log(i+ ": Incorrect inputvalue: " + tabelPart.GetMapAngleInput() + ", Correct answer: " + GetMapAngle(thisPoint, targetPoint) + ", Difference: " +
+                                                                (Mathf.Abs(GetMapAngle(thisPoint, targetPoint) - tabelPart.GetMapAngleInput())));
+                    else Debug.Log("Mapangle incorrect: " + i);
+                }
+                else
+                {
+                    Debug.Log("Mapangle correct: " + i);
+                }
+
+            }
+            return false;
+        }
+
+
+
         bool correct = true;
         Vector2[] answerinputs = GetInputs();
         Vector2[] correctCoordinates = placer.GetCoordinates();
 
         for (int i = 0; i < correctCoordinates.Length; i++)
         {
-            if(GameManager.showDebugAnswer) Debug.Log("Point " + i+1 + ": " + Vector2.Distance(answerinputs[i], correctCoordinates[i] * GameManager.worldScale));
-            tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(correctColor);
+            if(GameManager.showDebugAnswer) Debug.Log("Point " + (i+1) + ": " + Vector2.Distance(answerinputs[i], correctCoordinates[i] * GameManager.worldScale));
+            tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(correctColor, true);
             if (Vector2.Distance(answerinputs[i],correctCoordinates[i] * GameManager.worldScale) > gm.errorMargin)
             {
                 correct = false;
-                tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(falseColor);
-                Debug.Log("incorrect: " + i);
+                tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(falseColor, true);
+                Debug.Log("coordinate incorrect: " + i);
+            }
+            else
+            {
+                Debug.Log("coordinate correct: " + i);
             }
            
         }
@@ -102,7 +152,15 @@ public class PolygonatieLoopTabel : MonoBehaviour
 
 
     }
- 
+
+    float GetMapAngle(Vector2 point, Vector2 targetPoint)
+    {
+        float angle = Vector2.SignedAngle(targetPoint - point, Vector2.up);
+        if (angle < 0) angle = 360 + angle;
+        angle = GameManager.RoundFloat(angle / 360f * 400, 3);
+        return angle;
+    }
+
 
 
 }

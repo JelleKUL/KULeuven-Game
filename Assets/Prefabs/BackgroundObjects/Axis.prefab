@@ -196,7 +196,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6872219743077172740}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -221,6 +221,9 @@ MonoBehaviour:
   resetRotation: 0
   maxLengthError: 0
   maxAngleError: 0
+  angleDisplayMargin: 5
+  angleDisplayRaduis: 0.7
+  displayRadiusModifier: 1
   nameText: {fileID: 0}
   distanceText: {fileID: 0}
   angleText: {fileID: 0}
@@ -453,7 +456,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6872219743945147928}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -478,6 +481,9 @@ MonoBehaviour:
   resetRotation: 0
   maxLengthError: 0
   maxAngleError: 0
+  angleDisplayMargin: 5
+  angleDisplayRaduis: 0.7
+  displayRadiusModifier: 1
   nameText: {fileID: 0}
   distanceText: {fileID: 0}
   angleText: {fileID: 0}

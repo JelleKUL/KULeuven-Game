@@ -798,13 +798,14 @@ MonoBehaviour:
   angleInput: {fileID: 6741740019536869050}
   lengthInput: {fileID: 2951186592540147726}
   kaartHoekInput: {fileID: 176606943516871897}
-  vereffendeKaarthoekInput: {fileID: 3082167177286878236}
+  vereffendeKaarthoekInput: {fileID: 8274094730765035486}
   vereffendeKaarthoekOutput: {fileID: 2356395859047108455}
   afstandsOutput: {fileID: 346360601034461276}
   deltaXInput: {fileID: 6172411909757342892}
   deltaYInput: {fileID: 1611031012957162805}
   xInput: {fileID: 6813306410857574088}
   yInput: {fileID: 979615969420107854}
+  vereffendeKaarthoek: 0
 --- !u!1 &3259032311382469640
 GameObject:
   m_ObjectHideFlags: 0

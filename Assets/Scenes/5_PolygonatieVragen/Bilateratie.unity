@@ -128,6 +128,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 207518814859755451, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.003
+      objectReference: {fileID: 0}
     - target: {fileID: 709420518040827631, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -193,6 +198,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2940224520712303269, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 8.199951
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558478824922968748, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: m_Text
+      value: "   Error Margin:    \n0.003m"
+      objectReference: {fileID: 0}
     - target: {fileID: 3883128868348204849, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: SoortVraag
@@ -216,7 +231,7 @@ PrefabInstance:
     - target: {fileID: 6765280077774144171, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: showSmallErrors
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8676305250189455280, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}

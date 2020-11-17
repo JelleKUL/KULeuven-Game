@@ -14,7 +14,7 @@ public class PolygonatieLoopTabelDeel : MonoBehaviour
     public Text angleInput;
     public Text lengthInput;
     public Text kaartHoekInput;
-    public Text vereffendeKaarthoekInput;
+    public InputField vereffendeKaarthoekInput;
 
     [Header ("Part 2")]
     public Text vereffendeKaarthoekOutput;
@@ -23,6 +23,11 @@ public class PolygonatieLoopTabelDeel : MonoBehaviour
     public InputField deltaYInput;
     public InputField xInput;
     public InputField yInput;
+
+
+
+
+    public float vereffendeKaarthoek;
 
 
     // Start is called before the first frame update
@@ -51,12 +56,27 @@ public class PolygonatieLoopTabelDeel : MonoBehaviour
 
     public Vector2 getAnswer()
     {
+        xInput.text = xInput.text.Replace(",", ".");
+        yInput.text = yInput.text.Replace(",", ".");
+
+
         if (float.TryParse(xInput.text, out float resultX) && float.TryParse(yInput.text, out float resultY))
         {
             return new Vector2(resultX, resultY);
         }
         else return Vector2.zero;
 
+    }
+    public float GetMapAngleInput()
+    {
+        vereffendeKaarthoekInput.text = vereffendeKaarthoekInput.text.Replace(",", ".");
+
+        if (float.TryParse(vereffendeKaarthoekInput.text, out float angle))
+        {
+            vereffendeKaarthoek = angle;
+            return angle;
+        }
+        else return 0;
     }
 
     public void SetValues(Vector2 coordinate, Vector3 nextPoint, bool last)
@@ -96,10 +116,14 @@ public class PolygonatieLoopTabelDeel : MonoBehaviour
 
         if (float.TryParse(vereffendeKaarthoekInput.text, out float kaartHoek))
         {
-            vereffendeKaarthoekOutput.text = GameManager.RoundFloat(kaartHoek,3).ToString() + " gon";
+            vereffendeKaarthoek = GameManager.RoundFloat(kaartHoek, 3);
+            vereffendeKaarthoekOutput.text = vereffendeKaarthoek.ToString() + " gon";  
         }
-        else vereffendeKaarthoekOutput.text = " / ";
-
+        else
+        {
+            vereffendeKaarthoek = 0;
+            vereffendeKaarthoekOutput.text = " / ";
+        }
         lengthInput.text = lengthInput.text.Replace(",", ".");
 
         if (float.TryParse(lengthInput.text, out float length))
@@ -111,7 +135,7 @@ public class PolygonatieLoopTabelDeel : MonoBehaviour
     }
 
     //returns the mapangle of a targetpoint from a referencepoint
-    float GetMapAngle(Vector2 point, Vector2 targetPoint)
+    public float GetMapAngle(Vector2 point, Vector2 targetPoint)
     {
         float angle = Vector2.SignedAngle(targetPoint - point, Vector2.up);
         if (angle < 0) angle = 360 + angle;
@@ -119,18 +143,30 @@ public class PolygonatieLoopTabelDeel : MonoBehaviour
         return angle;
     }
 
-    public void SetColor(Color color)
+    public void SetColor(Color color, bool coordinate)
     {
-        Text[] values = xInput.GetComponentsInChildren<Text>();
-        foreach (var text in values)
+        if (coordinate)
         {
-            text.color = color;
+            Text[] values = xInput.GetComponentsInChildren<Text>();
+            foreach (var text in values)
+            {
+                text.color = color;
+            }
+            values = yInput.GetComponentsInChildren<Text>();
+            foreach (var text in values)
+            {
+                text.color = color;
+            }
         }
-        values = yInput.GetComponentsInChildren<Text>();
-        foreach (var text in values)
+        else
         {
-            text.color = color;
+            Text[] values = vereffendeKaarthoekInput.GetComponentsInChildren<Text>();
+            foreach (var text in values)
+            {
+                text.color = color;
+            }
         }
+        
     }
 
 
