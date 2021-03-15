@@ -77,8 +77,8 @@ public class WaterpassingQuestions : MonoBehaviour
                 waterpassing.SetParameters(4, 4, 1, false, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = GameManager.RoundFloat(waterpassing.correctHeight,3);
                 questionHeaderText.text = "III. Bepaal het hoogteveschil tussen A & D";
-                questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het hoogteverschil tussen beide punten";
-                AnswerExplanation = "Het hoogteverschil kan gevonden worden door de middendraden te vergelijken";
+                questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het hoogteverschil tussen de punten A en D";
+                AnswerExplanation = "Het hoogteverschil kan gevonden worden door de middendraden te vergelijken van elk punt, hou rekening met het teken van de verschillen";
 
                 break;
 

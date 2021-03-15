@@ -92,4 +92,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/6_DenkVragen/DenkVragen.unity
     guid: 1373173e49a8842d096fd8fad0d09a82
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 22010c0de46484691b80f71a1a93ec5c,
+      type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 0f8d688cea5864e20899cfbae0f21ff4,
+      type: 2}
