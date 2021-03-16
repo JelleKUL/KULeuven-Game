@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c2f39f951993c4875b19d5e9e70531c5, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -712,11 +712,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Campaign2EndScene
       objectReference: {fileID: 0}
-    - target: {fileID: 4740108085199846691, guid: eae1ce2426bf44204b507a937d758524,
-        type: 3}
-      propertyPath: m_Text
-      value: 0 / 12
-      objectReference: {fileID: 0}
     - target: {fileID: 7582143025626816204, guid: eae1ce2426bf44204b507a937d758524,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1032,34 +1027,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
-      propertyPath: m_Color.r
-      value: 0.03137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.25490198
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.36078432
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a827a0e56d22a4724ad054ddb908b316,
-        type: 3}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
       propertyPath: m_PreserveAspect
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
@@ -2306,21 +2280,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940762, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940762, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940762, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6958299036206940763, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
       propertyPath: m_Name
@@ -2330,21 +2289,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.03137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.25490198
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.36078432
       objectReference: {fileID: 0}
     - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
@@ -4624,21 +4568,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.03137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.25490198
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.36078432
-      objectReference: {fileID: 0}
     - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -6502,11 +6431,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Campaign1EndScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740108085199846691, guid: eae1ce2426bf44204b507a937d758524,
-        type: 3}
-      propertyPath: m_Text
-      value: 0 / 10
       objectReference: {fileID: 0}
     - target: {fileID: 7582143025626816204, guid: eae1ce2426bf44204b507a937d758524,
         type: 3}

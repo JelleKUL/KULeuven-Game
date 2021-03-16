@@ -121,7 +121,12 @@ public class WaterPassingController : MonoBehaviour
         }
         else
         {
-            AddMeasure(MeasurePlacer.position);
+            float offset = 0f;
+            if(measure.TryGetComponent(out BoxCollider2D box))
+            {
+                offset = box.offset.y;
+            }
+            AddMeasure(MeasurePlacer.position - MeasurePlacer.up * offset);
         }
 
         if (lockBeacon)
@@ -131,7 +136,12 @@ public class WaterPassingController : MonoBehaviour
         }
         else
         {
-            AddBeacon(BeaconPlacer.position);
+            float offset = 0f;
+            if (beacon.TryGetComponent(out BoxCollider2D box))
+            {
+                offset = box.offset.y;
+            }
+            AddBeacon(BeaconPlacer.position - BeaconPlacer.up * offset);
         }
     }
 
@@ -172,11 +182,21 @@ public class WaterPassingController : MonoBehaviour
                 {
                     if (hitObject.tag == "Measure" && measures.Count < maxMeasures)
                     {
-                        AddMeasure(MeasurePlacer.position);
+                        float offset = 0f;
+                        if (measure.TryGetComponent(out BoxCollider2D box))
+                        {
+                            offset = box.offset.y;
+                        }
+                        AddMeasure(MeasurePlacer.position - MeasurePlacer.up * offset);
                     }
                     else if (hitObject.tag == "Beacon" && beacons.Count < maxBeacons)
                     {
-                        AddBeacon(BeaconPlacer.position);
+                        float offset = 0f;
+                        if (beacon.TryGetComponent(out BoxCollider2D box))
+                        {
+                            offset = box.offset.y;
+                        }
+                        AddBeacon(BeaconPlacer.position - BeaconPlacer.up * offset);
                     }
                 }
                 else
@@ -205,15 +225,15 @@ public class WaterPassingController : MonoBehaviour
         spriteShapeController.spline.Clear();
         spriteShapeController.spline.InsertPointAt(0, new Vector3(-2,-3));
         spriteShapeController.spline.InsertPointAt(0, new Vector3(18, -3));
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(18, -0.5f));
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, -0.5f));
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(18, -spriteShapeController.colliderOffset));
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, -spriteShapeController.colliderOffset));
         
         for (int i = nrOfPoints; i > 0 ; i--)
         {
-            spriteShapeController.spline.InsertPointAt(0, groundPoints[i-1].transform.position + 0.5f * Vector3.down);
+            spriteShapeController.spline.InsertPointAt(0, groundPoints[i-1].transform.position + spriteShapeController.colliderOffset * Vector3.down);
         }
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, -0.5f));
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(-2, -0.5f));
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, -spriteShapeController.colliderOffset));
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(-2, -spriteShapeController.colliderOffset));
 
         for (int i = 0; i < spriteShapeController.spline.GetPointCount(); i++)
         {
@@ -363,6 +383,7 @@ public class WaterPassingController : MonoBehaviour
     //places a measure object
     public void AddBeacon(Vector2 location)
     {
+
         GameObject newBeacon = Instantiate(beacon, location, Quaternion.identity);
         newBeacon.GetComponent<Physics2DObject>().allowUpsideDown = placeTopPoints;
         beacons.Add(newBeacon);

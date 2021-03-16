@@ -18,9 +18,9 @@ public class MeasureController : MonoBehaviour
     [SerializeField]
     private LineRenderer laserline;
     [SerializeField]
-    private Transform behindLegL;
+    private SpriteRenderer behindLegL;
     [SerializeField]
-    private Transform behindLegR;
+    private SpriteRenderer behindLegR;
     [SerializeField]
     private LayerMask beacons;
     [SerializeField]
@@ -143,15 +143,16 @@ public class MeasureController : MonoBehaviour
     }
 
     // sets the behindlegs to the ground below
-    private void SetBehindLegs(Transform leg)
+    private void SetBehindLegs(SpriteRenderer leg)
     {
         // Cast a ray straight down.
-        RaycastHit2D hit = Physics2D.Raycast(leg.position, -leg.up, maxLegDistance, groundMask);
+        RaycastHit2D hit = Physics2D.Raycast(leg.transform.position, -leg.transform.up, maxLegDistance, groundMask);
 
         // If it hits something...
         if (hit.collider != null)
         {
-            leg.localScale = hit.distance * Vector2.one;
+            //Debug.Log(leg.name + " is " + hit.distance + "m away from the ground");
+            leg.size = new Vector2(1,hit.distance);
         }
     }
 }

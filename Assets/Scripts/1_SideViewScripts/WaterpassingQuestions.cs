@@ -51,6 +51,8 @@ public class WaterpassingQuestions : MonoBehaviour
 
         SetQuestionType(SoortVraag);
 
+        if (answerOutput) answerOutput.text = "";
+
     }
     
     

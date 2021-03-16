@@ -16,6 +16,13 @@ public class GameManager : MonoBehaviour
     [Header ("Global Parameters")]
     [Tooltip ("the errormargin for answers")]
     public float errorMargin = 0.001f;
+    [SerializeField]
+    private Text errorDisplayText;
+    [SerializeField]
+    private string maxErrorString = "max error: ";
+    [SerializeField]
+    [Tooltip("the unit of the errormargin")]
+    private string errorUnit = "m";
     public static float worldScale = 10f;
     [SerializeField]
     private List<string> adminNames;
@@ -72,11 +79,21 @@ public class GameManager : MonoBehaviour
     {
         SetPlayArea();
 
+        if(errorDisplayText) SetErrorDisplay();
         if (usernameText) ShowUsername();
 
         if (adminNames.Contains(userName) || !isLoggedIn) showDebugAnswer = true;
         else showDebugAnswer = false;
 
+    }
+
+// error display control
+    void SetErrorDisplay()
+    {
+        if (errorDisplayText)
+        {
+            errorDisplayText.text = maxErrorString + " " + errorMargin.ToString() + errorUnit;
+        }
     }
 
 

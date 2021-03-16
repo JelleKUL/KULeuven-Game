@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.85}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0.00012207031, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &98868905959171716
@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.09, y: 0.15}
   m_AnchorMax: {x: 0.91, y: 0.38}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &98868906130004709
@@ -190,7 +190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0.00012207031, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &98868906346072594
@@ -268,7 +268,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.09, y: 0.38}
   m_AnchorMax: {x: 0.91, y: 0.61}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &98868907491996636
@@ -322,8 +322,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 6705085611044194351, guid: 71b86d9b900e34550ba3ad650f02bb70,
     type: 3}
-  goodColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
-  badColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
   endMessageText: {fileID: 98868906130004708}
   campaign: 0
   completeMessage: Gefeliciteerd! je hebt alle levels voltooid!
@@ -817,21 +815,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940762, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940762, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940762, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6958299036206940763, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
       propertyPath: m_Name
@@ -841,21 +824,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.03137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.25490198
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958299036206940764, guid: 62ec06f89826440aab5bb4683f758d6b,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.36078432
       objectReference: {fileID: 0}
     - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}

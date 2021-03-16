@@ -46,7 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usernameText: {fileID: 0}
-  errorMargin: 0.002
+  errorMargin: 0.001
+  errorDisplayText: {fileID: 0}
+  maxErrorString: 'maximale fout:'
+  errorUnit: m
   adminNames:
   - admin
   - jelle
