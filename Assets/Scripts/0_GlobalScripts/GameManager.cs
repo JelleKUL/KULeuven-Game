@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private string errorUnit = "m";
     public static float worldScale = 10f;
     [SerializeField]
+    [ImageEffectAllowedInSceneView]
     private List<string> adminNames;
 
 
@@ -39,6 +40,15 @@ public class GameManager : MonoBehaviour
     public int nrOfCamp2Levels;
     [Tooltip("the amount of scenes of the 3 Campaign2 chapters, the total must be equal to nrOfCamp2Levels")]
     public int[] NrOfCamp2ChapterScenes;
+
+    [Tooltip("The scenes of the first Chapter (WaterPassing)")]
+    public Object[] WaterpassingScenes;
+    [Tooltip("The scenes of the second Chapter (map angle)")]
+    public Object[] MapAngleScenes;
+    [Tooltip("The scenes of the third Chapter (foutenpropagatie)")]
+    public Object[] FoutenPropagatieScenes;
+    [Tooltip("The scenes of the fourth Chapter (polygonatie)")]
+    public Object[] PolygonatieScenes;
 
 
 
@@ -194,6 +204,10 @@ public class GameManager : MonoBehaviour
     public void LoadSceneName(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+    public void LoadSceneObject(Object scene)
+    {
+        SceneManager.LoadScene(scene.name);
     }
 
     public void LoadCampaign1()

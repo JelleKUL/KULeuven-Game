@@ -21,7 +21,7 @@ public class WaterpassingQuestions : MonoBehaviour
     public Color falseColor, CorrectColor;
 
     
-    public enum QuestionType { Geen, Hoogteverschil2Punten, HoogteVerschilMeerPunten, Afstand2Punten, Hoekfout, KringWaterpassing, Scheefstand, OmgekeerdeBaak, ScheveWaterpassing, AfstandMeerPunten }
+    public enum QuestionType { Geen, Hoogteverschil2Punten, HoogteVerschilMeerPunten, Afstand2Punten, Hoekfout, KringWaterpassing,Zijslag, Scheefstand, OmgekeerdeBaak, ScheveWaterpassing, AfstandMeerPunten }
     [Tooltip("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
@@ -87,7 +87,7 @@ public class WaterpassingQuestions : MonoBehaviour
             case QuestionType.Afstand2Punten:
                 waterpassing.SetParameters(2, 2, 1, true, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = GameManager.RoundFloat(waterpassing.correctDistance * GameManager.worldScale,1);
-                questionHeaderText.text = "IV. Bepaal de afstand tussen A & B";
+                questionHeaderText.text = "V. Bepaal de afstand tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en gebruik het vizier om de afstand te berekenen";
                 AnswerExplanation = "De afstand kan gevonden worden door de afstand tussen de boven-en onderdraad te meten";
 
@@ -114,7 +114,16 @@ public class WaterpassingQuestions : MonoBehaviour
             case QuestionType.KringWaterpassing:
                 waterpassing.SetParameters(3, 5, 1, false, false, Vector2.zero, false, Vector2.zero, true);
                 correctPoints = waterpassing.correctHeightDifferences;
-                questionHeaderText.text = "VII/VIII. Vervolledig de waterpassingtabel";
+                questionHeaderText.text = "VII. Vervolledig de waterpassingtabel";
+                questionText.text = "Voer alle noodzakelijke metingen uit en vul de juiste waardes in in de tabel";
+                AnswerExplanation = "Het hoogteverschil kan gevonden worden door de middendraden te vergelijken";
+
+                break;
+
+            case QuestionType.Zijslag:
+                waterpassing.SetParameters(3, 5, 1, false, false, Vector2.zero, false, Vector2.zero, true);
+                correctPoints = waterpassing.correctHeightDifferences;
+                questionHeaderText.text = "VIII. Vervolledig de waterpassingtabel met zijslag";
                 questionText.text = "Voer alle noodzakelijke metingen uit en vul de juiste waardes in in de tabel";
                 AnswerExplanation = "Het hoogteverschil kan gevonden worden door de middendraden te vergelijken";
 
@@ -123,8 +132,8 @@ public class WaterpassingQuestions : MonoBehaviour
             case QuestionType.Scheefstand:
                 //waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
                 //correctAnswer = waterpassing.correctHeight; calculated in the scheefstandsmanager
-                questionHeaderText.text = "IX. Bepaal de scheefstand van het gebouw";
-                questionText.text = "Plaats de theodoliet en meet de horizontale verschuiving tussen beide punten, gemeten van onder naar boven";
+                questionHeaderText.text = "X. Bepaal de scheefstand van het gebouw";
+                questionText.text = "Plaats de theodoliet en meet de horizontale verschuiving tussen beide punten, gemeten van onder naar boven. Gebruik de 'flip' knop om een tweede meting te maken en een eventuele inclinatiefout op te heffen.";
                 AnswerExplanation = "De scheefstand kan gevonden worden door de onderste meetband te vergelijken met de laserlijn";
 
                 break;
@@ -132,7 +141,7 @@ public class WaterpassingQuestions : MonoBehaviour
             case QuestionType.OmgekeerdeBaak:
                 waterpassing.SetParameters(1, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = GameManager.RoundFloat(waterpassing.correctHeight,3);
-                questionHeaderText.text = "V. Bepaal het hoogteveschil tussen A & B";
+                questionHeaderText.text = "IV. Bepaal het hoogteveschil tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het verschil tussen beide punten" +
                     " Opgelet, één van de baken staat omgekeerd.";
                 AnswerExplanation = "Het hoogteverschil kan gevonden worden door beide middendraden te vergelijken";
@@ -141,7 +150,7 @@ public class WaterpassingQuestions : MonoBehaviour
             case QuestionType.ScheveWaterpassing:
                 waterpassing.SetParameters(2, 2, 1, false, false, Vector2.zero, false, Vector2.zero, false);
                 correctAnswer = GameManager.RoundFloat(waterpassing.correctHeight,3);
-                questionHeaderText.text = "X. Bepaal het hoogteveschil tussen A & B";
+                questionHeaderText.text = "IX. Bepaal het hoogteveschil tussen A & B";
                 questionText.text = "Plaats de meetbaken op de meetpunten en meet met de theodoliet het verschil tussen beide punten";
                 AnswerExplanation = "Het hoogteverschil kan gevonden worden door beide middendraden te vergelijken";
 
@@ -218,7 +227,7 @@ public class WaterpassingQuestions : MonoBehaviour
     //displays the correct answer
     public void ShowAnswer()
     {
-        if(SoortVraag == QuestionType.KringWaterpassing)
+        if(SoortVraag == QuestionType.KringWaterpassing || SoortVraag == QuestionType.Zijslag)
         {
             waterpassing.ShowAnswersTabel();
         }
@@ -276,6 +285,10 @@ public class WaterpassingQuestions : MonoBehaviour
 
 
             case QuestionType.KringWaterpassing:
+
+                return GameManager.RoundFloat(waterpassing.correctHeight, 3);
+
+            case QuestionType.Zijslag:
 
                 return GameManager.RoundFloat(waterpassing.correctHeight, 3);
 

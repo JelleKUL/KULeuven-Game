@@ -223,9 +223,9 @@ public class WaterPassingController : MonoBehaviour
     public void SetGroundSprite()
     {
         spriteShapeController.spline.Clear();
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(-2,-3));
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(18, -3));
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(18, -spriteShapeController.colliderOffset));
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(-10,-3));
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(20, -3));
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(20, -spriteShapeController.colliderOffset));
         spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, -spriteShapeController.colliderOffset));
         
         for (int i = nrOfPoints; i > 0 ; i--)
@@ -233,7 +233,7 @@ public class WaterPassingController : MonoBehaviour
             spriteShapeController.spline.InsertPointAt(0, groundPoints[i-1].transform.position + spriteShapeController.colliderOffset * Vector3.down);
         }
         spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, -spriteShapeController.colliderOffset));
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(-2, -spriteShapeController.colliderOffset));
+        spriteShapeController.spline.InsertPointAt(0, new Vector3(-10, -spriteShapeController.colliderOffset));
 
         for (int i = 0; i < spriteShapeController.spline.GetPointCount(); i++)
         {

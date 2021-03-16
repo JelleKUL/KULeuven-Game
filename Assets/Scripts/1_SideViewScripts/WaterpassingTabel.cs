@@ -212,7 +212,7 @@ public class WaterpassingTabel : MonoBehaviour
                 {
                     tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = falseColor;
                     correct = false;
-
+                    Debug.Log("point " + " is incorrect height");
                     
                 }
 
@@ -224,7 +224,8 @@ public class WaterpassingTabel : MonoBehaviour
                 if (Mathf.Abs(tabelParts[i].afstand - distances[i-1] * GameManager.worldScale) > (overrideErrorMargin ? lengthErrormarginOverride : gm.errorMargin))
                 {
                     tabelVereffeningParts[i].afstandText.color = falseColor;
-                    correct = false;
+                    //correct = false;
+                    Debug.Log("point " + " is incorrect distance");
                 }
 
                 else
