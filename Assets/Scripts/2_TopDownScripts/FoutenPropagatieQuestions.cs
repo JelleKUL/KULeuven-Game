@@ -56,7 +56,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
         placer = GetComponent<ObjectPlacer>();
         SetQuestionType(SoortVraag);
 
-        answerOutput.text = "";
+        if (answerOutput) answerOutput.text = "";
 
     }
 
@@ -235,7 +235,7 @@ public class FoutenPropagatieQuestions : MonoBehaviour
 
     }
 
-    public float CorrectAnswer( bool exact)//use the exact furmula *Pi/2 or rule of thumb *1.5
+    public float CorrectAnswer( bool exact)//use the exact formula *Pi/2 or rule of thumb *1.5
     {
         switch (SoortVraag)
         {

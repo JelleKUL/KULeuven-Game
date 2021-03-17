@@ -55,6 +55,9 @@ public class PolygonationQuestions : MonoBehaviour
 
         SetQuestionType(SoortVraag);
 
+        if (answerOutput) answerOutput.text = "";
+
+
     }
     public void ResetCurrentQuestion()
     {
