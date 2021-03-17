@@ -49,7 +49,12 @@ public class ScheefstandController : MonoBehaviour
         skewError = Random.Range(-maxSkewError, maxSkewError);
 
         PlaceBulding();
-        theodolietObject = Instantiate(theodoliet, MeasurePlacer.position, Quaternion.identity);
+        float offset = 0f;
+        if (theodoliet.TryGetComponent(out BoxCollider2D box))
+        {
+            offset = box.offset.y;
+        }
+        theodolietObject = Instantiate(theodoliet, MeasurePlacer.position - MeasurePlacer.up * offset, Quaternion.identity);
         theodolietObject.GetComponent<Theodoliet>().scheefstandController = this;
 
         if (GameManager.showDebugAnswer)
@@ -95,7 +100,12 @@ public class ScheefstandController : MonoBehaviour
                     
                     if (hitObject.tag == "Measure")
                     {
-                        hitObject.transform.position = MeasurePlacer.position;
+                        float offset = 0f;
+                        if (hitObject.TryGetComponent(out BoxCollider2D box))
+                        {
+                            offset = box.offset.y;
+                        }
+                        hitObject.transform.position = MeasurePlacer.position - MeasurePlacer.up * offset;
                     }
                     
                 }

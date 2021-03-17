@@ -201,13 +201,21 @@ public class WaterPassingController : MonoBehaviour
                 }
                 else
                 {
+                    //calculate the spawn offset
+                    float offset = 0f;
+                    if (hitObject.TryGetComponent(out BoxCollider2D box))
+                    {
+                        offset = box.offset.y;
+                    }
+
                     if (hitObject.tag == "Measure")
                     {
-                        hitObject.transform.position = MeasurePlacer.position;
+                        hitObject.transform.position = MeasurePlacer.position - MeasurePlacer.up * offset;
                     }
                     else if (hitObject.tag == "Beacon")
                     {
-                        hitObject.transform.position = BeaconPlacer.position;
+                        
+                        hitObject.transform.position = BeaconPlacer.position - BeaconPlacer.up * offset;
                     }
                 }
                 hitObject.GetComponent<Physics2DObject>().isHeld = false;
@@ -635,7 +643,7 @@ public class WaterPassingController : MonoBehaviour
     public void SetParameters(int nrPoints, int nrBeacons, int nrMeasures, bool ShowDistance, bool lockmeasure, Vector2 measureLocation, bool lockbeacon, Vector2 beaconLocation, bool loop)
     {
         correctErrorAngle = Random.Range(0, maxAngleError); //in degrees
-        correctScaledErrorAngle = Mathf.Atan(Mathf.Tan(correctErrorAngle * Mathf.Deg2Rad) / GameManager.worldScale) * Mathf.Rad2Deg; //in degrees
+        correctScaledErrorAngle = Mathf.Atan(Mathf.Tan(correctErrorAngle * Mathf.Deg2Rad) / (float)GameManager.worldScale) * Mathf.Rad2Deg; //in degrees
 
         nrOfPoints = nrPoints;
         maxBeacons = nrBeacons;

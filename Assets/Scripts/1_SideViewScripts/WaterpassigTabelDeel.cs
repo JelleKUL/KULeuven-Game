@@ -28,18 +28,18 @@ public class WaterpassigTabelDeel : MonoBehaviour
     void Update()
     {
         afstand = 0f;
-        if (float.TryParse(afstandAchter.text, out float result) )
+        if (float.TryParse(afstandAchter.text.Replace(",", "."), out float result) )
         {
             afstand += result;
         }
         
-        if (float.TryParse(afstandVoor.text, out float result2))
+        if (float.TryParse(afstandVoor.text.Replace(",", "."), out float result2))
         {
             afstand += result2;
         }
         
 
-        if (float.TryParse(metingAchter.text, out result) && float.TryParse(metingVoor.text, out result2))
+        if (float.TryParse(metingAchter.text.Replace(",", "."), out result) && float.TryParse(metingVoor.text.Replace(",", "."), out result2))
         {
             hoogteVerschil = result - result2;
             

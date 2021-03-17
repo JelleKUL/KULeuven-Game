@@ -24,7 +24,7 @@ public class WaterPassingTabelVereffening : MonoBehaviour
     void Update()
     {
         vereffenigsHoogte = 0f;
-        if (float.TryParse(vereffeningsHoogteText.text, out float result))
+        if (float.TryParse(vereffeningsHoogteText.text.Replace(",", "."), out float result))
         {
             vereffenigsHoogte =result;
         }

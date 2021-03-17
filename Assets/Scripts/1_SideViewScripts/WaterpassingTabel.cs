@@ -96,7 +96,7 @@ public class WaterpassingTabel : MonoBehaviour
 
             if (totaalVereffening != null)
             {
-                totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetNieuwHoogte(nieuwTotalHoogte);
+                //totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetNieuwHoogte(nieuwTotalHoogte);
                 totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
             }
         }
@@ -204,33 +204,39 @@ public class WaterpassingTabel : MonoBehaviour
         if (VereffeningsMode)
         {
             
-            for (int i = 1; i < tabelVereffeningParts.Count; i++)
+            for (int i = 0; i < tabelVereffeningParts.Count; i++)
             {
-                totalHeight += heights[i - 1];
 
-                if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - totalHeight) > (overrideErrorMargin ? errormarginOverride : gm.errorMargin))
+                if (i > 0)
                 {
-                    tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = falseColor;
-                    correct = false;
-                    Debug.Log("point " + " is incorrect height");
-                    
-                }
+                    totalHeight += heights[i - 1];
+                    if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - totalHeight) > (overrideErrorMargin ? errormarginOverride : gm.errorMargin))
+                    {
+                        tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = falseColor;
+                        correct = false;
+                        Debug.Log("point " + i + " with: " + tabelVereffeningParts[i].vereffenigsHoogte + " is incorrect height...");
 
-                else
-                {
-                    tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = correctColor;
+                    }
 
+                    else
+                    {
+                        tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = correctColor;
+                        Debug.Log("point " + i + " with: " + tabelVereffeningParts[i].vereffenigsHoogte + " is correct height");
+
+                    }
                 }
-                if (Mathf.Abs(tabelParts[i].afstand - distances[i-1] * GameManager.worldScale) > (overrideErrorMargin ? lengthErrormarginOverride : gm.errorMargin))
+                
+                if (Mathf.Abs(tabelParts[i].afstand - distances[i] * GameManager.worldScale) > (overrideErrorMargin ? lengthErrormarginOverride : gm.errorMargin))
                 {
                     tabelVereffeningParts[i].afstandText.color = falseColor;
                     //correct = false;
-                    Debug.Log("point " + " is incorrect distance");
+                    Debug.Log("point " + i + " with: " + tabelParts[i].afstand + " is incorrect distance...");
                 }
 
                 else
                 {
                     tabelVereffeningParts[i].afstandText.color = correctColor;
+                    Debug.Log("point " + i + " with: " + tabelParts[i].afstand + " is correct distance!");
 
                 }
 
