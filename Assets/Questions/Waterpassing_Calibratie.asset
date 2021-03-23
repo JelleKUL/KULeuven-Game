@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c86009ef47c44ae1b3d3b4738588f0a, type: 3}
+  m_Name: Waterpassing_Calibratie
+  m_EditorClassIdentifier: 
+  ID_questionHeader: I. Bepaal de collimatiefout van het toestel
+  ID_questionText: Bereken de collimatiefout d.m.v. een exentrieke plaatsing en de
+    afstanden tot de meetbaak
+  ID_answerText: De collimatiefout kan bepaald worden door het veschil in hoogte
+    te vergelijken in functie van de afstand
+  answerType: 2
+  nrPoints: 0
+  nrBeacons: 1
+  nrMeasures: 1
+  ShowDistance: 1
+  lockmeasure: 1
+  measureLocation: {x: 6, y: 1}
+  lockbeacon: 1
+  beaconLocation: {x: 9, y: 1}
+  loop: 0

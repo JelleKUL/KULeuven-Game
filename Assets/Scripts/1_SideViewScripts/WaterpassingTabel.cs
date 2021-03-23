@@ -18,7 +18,11 @@ public class WaterpassingTabel : MonoBehaviour
     public GameObject waterPassingTotaalVereffening;
 
     [Header("Parameters")]
-    
+
+    [SerializeField]
+    private bool showDistances = false;
+    [SerializeField]
+    private bool showHeights = false;
     public float titleHeight = 25f;
     public bool overrideErrorMargin = true;
     public float errormarginOverride = 0.002f;
@@ -41,6 +45,9 @@ public class WaterpassingTabel : MonoBehaviour
     public float totalAfstand;
     [HideInInspector]
     public float nieuwTotalHoogte;
+
+    float[] correctHeights;
+    float[] correctDistances;
 
     private int amount; 
     private bool VereffeningsMode;
@@ -264,7 +271,7 @@ public class WaterpassingTabel : MonoBehaviour
         }
         return correct;
     }
-
+    // start is to indicate weither to show the values at start or not
     public void ShowCorrectValues(float[] heights, float[] distances)
     {
         ActiveTable(false);

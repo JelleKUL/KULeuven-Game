@@ -23,7 +23,9 @@ public class WaterpassingQuestions : MonoBehaviour
     
     public enum QuestionType { Geen, Hoogteverschil2Punten, HoogteVerschilMeerPunten, Afstand2Punten, Hoekfout, KringWaterpassing,Zijslag, Scheefstand, OmgekeerdeBaak, ScheveWaterpassing, AfstandMeerPunten }
     [Tooltip("Kies het soort vraag voor de oefening")]
-    public QuestionType SoortVraag;
+    private QuestionType SoortVraag;
+    [SerializeField]
+    private WaterPassingQuestionScriptableObject waterpassingQuestion;
 
     public int scoreIncrease = 1;
 
@@ -60,6 +62,15 @@ public class WaterpassingQuestions : MonoBehaviour
     //sets the parameters for the type of question
     public void SetQuestionType(QuestionType vraag)
     {
+        if (waterpassingQuestion)
+        {
+            waterpassingQuestion.SetQuestion(waterpassing);
+            correctAnswer = waterpassingQuestion.GetCorrectAnswer(waterpassing);
+            questionHeaderText.text = waterpassingQuestion.ID_questionHeader;
+            questionText.text = waterpassingQuestion.ID_questionText;
+            AnswerExplanation = waterpassingQuestion.ID_answerText;
+        }
+        /*
         switch (vraag)
         {
             case QuestionType.Geen:
@@ -156,6 +167,7 @@ public class WaterpassingQuestions : MonoBehaviour
 
                 break;
         }
+        */
         if(GameManager.showDebugAnswer && vraag != QuestionType.Scheefstand) Debug.Log("Correct antwoord = " + correctAnswer + " m of gon");
     }
 
@@ -164,8 +176,8 @@ public class WaterpassingQuestions : MonoBehaviour
     //checks if the given anwser is correct
     public void CheckAnswer()
     {
-        
-        if (gm.CheckCorrectAnswer(answerInputH.text, CorrectAnswer()))
+
+        if (gm.CheckCorrectAnswer(answerInputH.text, waterpassingQuestion.GetCorrectAnswer(waterpassing))) //CorrectAnswer()))
         {
             gm.IncreaseScore(scoreIncrease, 1);
             Debug.Log(answerInputH.text + " is correct!");

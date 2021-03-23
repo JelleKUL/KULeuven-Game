@@ -18,6 +18,9 @@ public class WaterpassigTabelDeel : MonoBehaviour
     public Text afstandVoor;
     public Text afstandAchter;
 
+    [SerializeField]
+    private GameObject afstandPanel;
+
     [HideInInspector]
     public float hoogteVerschil;
     [HideInInspector]
@@ -50,11 +53,12 @@ public class WaterpassigTabelDeel : MonoBehaviour
 
     }
 
-    public void SetNames(int nr, string achterMeetpunt, string voorMeetpunt)
+    public void SetNames(int nr, string achterMeetpunt, string voorMeetpunt, bool showDistanceInput = true)
     {
         station.text = nr.ToString();
         meetpuntVoor.text = voorMeetpunt;
         meetpuntAchter.text = achterMeetpunt;
+        if (afstandPanel && !showDistanceInput) afstandPanel.SetActive(false);
     }
 
     public void SetColors()

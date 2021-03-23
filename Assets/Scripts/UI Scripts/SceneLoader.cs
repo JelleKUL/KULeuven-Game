@@ -7,21 +7,22 @@ public class SceneLoader : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("The reference to the SceneObject, make sure it is in the BuildSettings")]
-    private Object sceneObject;
+    [Scene]
+    private string sceneObject;
     [SerializeField]
     private Text buttonText;
 
     private void Awake()
     {
-        if(buttonText && sceneObject)
+        if(buttonText && sceneObject !="")
         {
-            buttonText.text = Regex.Replace(sceneObject.name, "(\\B[A-Z])", " $1");
+            buttonText.text = Regex.Replace(sceneObject, "(\\B[A-Z])", " $1");
         }
     }
 
 
     public void LoadScene()
     {
-        SceneManager.LoadScene(sceneObject.name);
+        SceneManager.LoadScene(sceneObject);
     }
 }

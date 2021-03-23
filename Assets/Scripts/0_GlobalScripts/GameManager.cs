@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+
     [Header("GameObjects")]
     [SerializeField]
     private Text usernameText;
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
         public static bool campaignMode;
 
 
+
     [HideInInspector]
     public Vector2 screenMin, screenMax; // calculated based on the x&y scale of the gamamanager
 
@@ -96,6 +99,7 @@ public class GameManager : MonoBehaviour
         else showDebugAnswer = false;
 
     }
+
 
 // error display control
     void SetErrorDisplay()
