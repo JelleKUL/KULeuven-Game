@@ -6,7 +6,7 @@ using UnityEngine.UI;
 //*********** The PolygonationQuestions sets the required parameters for a specific question ******************//
 
 
-public class PolygonationQuestions : MonoBehaviour
+public class PolygonationQuestions : BaseQuestions
 {
     [Header("Predefined TextFields")]
     public Text titleQuestionText;
@@ -24,41 +24,31 @@ public class PolygonationQuestions : MonoBehaviour
     [Tooltip("Kies het soort vraag voor de oefening")]
     public QuestionType SoortVraag;
 
-    public int scoreIncrease;
-    [Tooltip("het aantal keren dat je mag proberen, 0 = oneindig")]
-    public int nrOfTries = 0;
-
 
     private PolygonLineController lineController;
     private ObjectPlacer placer;
     public PolygonatieLoopTabel tabel;
-    private GameManager gm;
 
     private float[] correctAnswerArray;
     private float[] obsructedPointsArray;
     private float correctAnswerX;
     private float correctAnswerY;
     private float correctAnswerH;
-    private string correctAnswer;
+    private string correctAnswerString;
     private string AnswerExplanation;
-    private int currentTries = 0;
 
 
 
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
-        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-
+        base.Awake();
         lineController = GameObject.FindGameObjectWithTag("PolygonLine").GetComponent<PolygonLineController>();
         placer = GetComponent<ObjectPlacer>();
 
         SetQuestionType(SoortVraag);
-
-        if (answerOutput) answerOutput.text = "";
-
-
     }
+
     public void ResetCurrentQuestion()
     {
         SetQuestionType(SoortVraag);
@@ -77,7 +67,7 @@ public class PolygonationQuestions : MonoBehaviour
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale , 3);
-                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 titleQuestionText.text = "Bepaal het coördinaat van punt P";
                 questionText.text = "Met behulp van de afstand en map angle vanaf het meetpunt.";
@@ -89,7 +79,7 @@ public class PolygonationQuestions : MonoBehaviour
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
                 correctAnswerArray = placer.PlaceCalculatePoints(2);
                 correctAnswerH = GameManager.RoundFloat(GameManager.worldScale * Mathf.Sqrt(Mathf.Pow(correctAnswerArray[2] - correctAnswerArray[0], 2) + Mathf.Pow(correctAnswerArray[3] - correctAnswerArray[1], 2)), 3);
-                correctAnswer = correctAnswerH.ToString();
+                correctAnswerString = correctAnswerH.ToString();
 
                 titleQuestionText.text = "Bepaal de afstand tussen A en B";
                 questionText.text = "Met behulp van de afstand en map angle vanaf het meetpunt.";
@@ -106,7 +96,7 @@ public class PolygonationQuestions : MonoBehaviour
                 //placer.PlaceObstacles(2);
                 correctAnswerX = GameManager.RoundFloat(obsructedPointsArray[0] * GameManager.worldScale, 3);
                 correctAnswerY = GameManager.RoundFloat(obsructedPointsArray[1] * GameManager.worldScale, 3);
-                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 titleQuestionText.text = "I. Voorwaardse Insnijding bepaal P";
                 questionText.text = "\n\u2022 A = x:" + GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3) + ", y:" + GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale, 3) + 
@@ -122,7 +112,7 @@ public class PolygonationQuestions : MonoBehaviour
                 obsructedPointsArray = placer.PlaceObstructedCalculatePoints(3);
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale, 3);
-                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 //placer.PlaceObstacles(1);
                 titleQuestionText.text = "II. Achterwaardse Insnijding bepaal P";
@@ -139,7 +129,7 @@ public class PolygonationQuestions : MonoBehaviour
                 
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[10] * GameManager.worldScale, 3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[11] * GameManager.worldScale, 3);
-                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 lineController.SetPoints(correctAnswerArray);
                 //placer.PlaceObstacles(2);
@@ -169,7 +159,7 @@ public class PolygonationQuestions : MonoBehaviour
                 obsructedPointsArray = placer.PlaceObstructedCalculatePoints(2);
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale, 3);
-                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 //placer.PlaceObstacles(2);
                 titleQuestionText.text = "IV. Bilateratie bepaal P";
@@ -194,7 +184,7 @@ public class PolygonationQuestions : MonoBehaviour
     //checks if the given anwser is correct
     public void CheckAnswerH()
     {
-        if (gm.CheckCorrectAnswer(answerInputH.text, correctAnswerH))
+        if (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), correctAnswerH, errorMargin))
         {
             gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
@@ -222,7 +212,7 @@ public class PolygonationQuestions : MonoBehaviour
     // checks if a given coordinate is correct
     public void CheckAnswerXY()
     {
-        if (gm.CheckCorrectAnswer(answerInputX.text, correctAnswerX) && gm.CheckCorrectAnswer(answerInputY.text, correctAnswerY))
+        if (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.x), correctAnswerX, errorMargin) && CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.y), correctAnswerY, errorMargin))
         {
             gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");

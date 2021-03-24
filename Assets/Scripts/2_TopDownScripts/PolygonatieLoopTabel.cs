@@ -7,7 +7,8 @@ public class PolygonatieLoopTabel : MonoBehaviour
 {
 
     public Color correctColor, falseColor;
-
+    [SerializeField]
+    private float errorMargin = 0.001f;
 
     public GameObject[] tabelParts;
     public ObjectPlacer placer;
@@ -70,7 +71,7 @@ public class PolygonatieLoopTabel : MonoBehaviour
                 }
 
                 
-                if (Mathf.Abs(GetMapAngle(thisPoint, targetPoint) - tabelPart.GetMapAngleInput()) > gm.errorMargin)
+                if (Mathf.Abs(GetMapAngle(thisPoint, targetPoint) - tabelPart.GetMapAngleInput()) > errorMargin)
                 {
                     tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(falseColor, false);
                     
@@ -97,7 +98,7 @@ public class PolygonatieLoopTabel : MonoBehaviour
         {
             if(GameManager.showDebugAnswer) Debug.Log("Point " + (i+1) + ": " + Vector2.Distance(answerinputs[i], correctCoordinates[i] * GameManager.worldScale));
             tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(correctColor, true);
-            if (Vector2.Distance(answerinputs[i],correctCoordinates[i] * GameManager.worldScale) > gm.errorMargin)
+            if (Vector2.Distance(answerinputs[i],correctCoordinates[i] * GameManager.worldScale) > errorMargin)
             {
                 correct = false;
                 tabelParts[i].GetComponent<PolygonatieLoopTabelDeel>().SetColor(falseColor, true);

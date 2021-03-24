@@ -121,18 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &1659915211 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 271289531687891773, guid: a63067732c6884dd59186a198fc1d824,
-    type: 3}
-  m_PrefabInstance: {fileID: 1960371401}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b6cb5b4810b4ae1a9ef38947a1dba0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1960371401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -429,21 +417,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1659915211}
+      objectReference: {fileID: 0}
     - target: {fileID: 7034826972943384797, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CheckAnswerH
-      objectReference: {fileID: 0}
-    - target: {fileID: 7074622933114761917, guid: a63067732c6884dd59186a198fc1d824,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 7074622933114761917, guid: a63067732c6884dd59186a198fc1d824,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.02
       objectReference: {fileID: 0}
     - target: {fileID: 7128154773757791122, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}

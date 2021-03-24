@@ -159,8 +159,8 @@ public class ScheefstandController : MonoBehaviour
     //checks if the given anwser is correct
     public void CheckAnswer()
     {
-
-        if (gm.CheckCorrectAnswer(answerText.text, correctDistance) || gm.CheckCorrectAnswer(answerText.text, -correctDistance))
+        /*
+        if (gm.CheckCorrectAnswer(answerText.text, correctDistance, 0.001f) || gm.CheckCorrectAnswer(answerText.text, -correctDistance, 0.001f)) //TO-DO edit
         {
             gm.IncreaseScore(scoreIncrease, 1);
             Debug.Log(answerText.text + " is correct!");
@@ -191,6 +191,8 @@ public class ScheefstandController : MonoBehaviour
                 }
             }
         }
+
+        */
     }
 
     public void setRestart()

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 //*********** The MapAngleQuestions sets the required parameters for a specific question ******************//
 
 
-public class MapAngleQuestions : MonoBehaviour
+public class MapAngleQuestions : BaseQuestions
 {
     [Header("Predefined TextFields")]
     public Text titleQuestionText;
@@ -38,10 +38,6 @@ public class MapAngleQuestions : MonoBehaviour
     public Vector3 maxAxisTransform; // X & Y value: position offset, Z value rotation offset
 
     public int numberOfPoints;
-    public int scoreIncrease;
-
-    [Tooltip("het aantal keren dat je mag proberen, 0 = oneindig")]
-    public int nrOfTries = 3;
 
 
     // answers
@@ -49,29 +45,22 @@ public class MapAngleQuestions : MonoBehaviour
     private float correctAnswerX;
     private float correctAnswerY;
     private float correctAnswerH;
-    private string correctAnswer;
+    private string correctAnswerString;
     private string AnswerExplanation;
-    private int currentTries = 0;
+
 
 
     //initiate scripts
     private PolygonLineController lineController;
-    private GameManager gm;
     private ObjectPlacer placer;
 
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
-        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-
+        base.Awake();
         lineController = GameObject.FindGameObjectWithTag("PolygonLine").GetComponent<PolygonLineController>();
         placer = GetComponent<ObjectPlacer>();
-
-
         SetQuestionType(SoortVraag);
-
-        answerOutput.text = "";
-
     }
 
 
@@ -92,7 +81,7 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerH = lineController.GetMapAngle( Vector2.up, new Vector2(correctAnswerArray[0], correctAnswerArray[1]));
 
                 correctAnswerH = GameManager.RoundFloat(correctAnswerH,3);
-                correctAnswer = correctAnswerH.ToString();
+                correctAnswerString = correctAnswerH.ToString();
 
                 titleQuestionText.text = "I. Bepaal de kaarthoek";
                 questionText.text = "Van het punt P naar het opstelpunt";
@@ -109,7 +98,7 @@ public class MapAngleQuestions : MonoBehaviour
                 correctAnswerArray = placer.PlaceCalculatePoints(1);
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale,3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale,3);
-                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 titleQuestionText.text = "II. Bepaal de coördinaten van punt P";
                 questionText.text = "Het totaalstation staat opgesteld in (0,0)";
@@ -128,7 +117,7 @@ public class MapAngleQuestions : MonoBehaviour
 
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale,3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale,3);
-                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
                 AnswerExplanation = "De coördinaten kunnen bepaald worden via een hoekmeting en een afstand";
 
                 titleQuestionText.text = "III. Bepaal de coördinaten van punt P";
@@ -155,7 +144,7 @@ public class MapAngleQuestions : MonoBehaviour
 
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale,3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale,3);
-                correctAnswer = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
+                correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
 
                 titleQuestionText.text = "V. Bepaal de coördinaten van punt P";
                 questionText.text = "Bereken P in het rode assenstelsel. Bepaal hiervoor de verdraaing t.o.v. het blauwe assenstelsel";
@@ -173,7 +162,7 @@ public class MapAngleQuestions : MonoBehaviour
 
                 correctAnswerH = Mathf.Sqrt(Mathf.Pow(correctAnswerArray[0] - correctAnswerArray[2], 2) + Mathf.Pow(correctAnswerArray[1] - correctAnswerArray[3], 2)) * GameManager.worldScale;
                 correctAnswerH = GameManager.RoundFloat(correctAnswerH,3);
-                correctAnswer = correctAnswerH.ToString();
+                correctAnswerString = correctAnswerH.ToString();
                 AnswerExplanation = "Bepaal de Euclidische afstand door beide coördinaten te berekenen";
 
 
@@ -191,7 +180,7 @@ public class MapAngleQuestions : MonoBehaviour
     //checks if the given anwser is correct
     public void CheckAnswerH()
     {
-        if (gm.CheckCorrectAnswer(answerInputH.text, correctAnswerH))
+        if (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), correctAnswerH, errorMargin))
         {
             gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
@@ -228,7 +217,7 @@ public class MapAngleQuestions : MonoBehaviour
     // checks if a given coordinate is correct
     public void CheckAnswerXY()
     {
-        if (gm.CheckCorrectAnswer(answerInputX.text, correctAnswerX) && gm.CheckCorrectAnswer(answerInputY.text, correctAnswerY))
+        if (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.x), correctAnswerX, errorMargin) && CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.y), correctAnswerY, errorMargin))
         {
             gm.IncreaseScore(scoreIncrease, 2);
             Debug.Log("true");
@@ -270,7 +259,7 @@ public class MapAngleQuestions : MonoBehaviour
         {
             answerInputH.color = falseColor;
             InputField answerDisplay = answerInputH.transform.parent.GetComponent<InputField>();
-            answerDisplay.text = correctAnswer;
+            answerDisplay.text = correctAnswerString;
             answerDisplay.interactable = false;
         }
 

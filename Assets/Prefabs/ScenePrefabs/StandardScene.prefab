@@ -2867,19 +2867,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2266292510227832000}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ShowAnswer
+      - m_Target: {fileID: 1399983996268026437}
+        m_MethodName: ShowBaseQuestionCorrectAnswer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2888,28 +2877,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6228398407819498973}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2745803447358997387}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &2673516033560809182
 GameObject:
@@ -7532,7 +7499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5547063501667451419}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.02, y: 0.872, z: -5}
+  m_LocalPosition: {x: -3.02, y: -0.46, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2677278483090069578}
@@ -8350,8 +8317,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: CheckAnswer
+      - m_Target: {fileID: 1399983996268026437}
+        m_MethodName: SubmitAnswerInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9967,9 +9934,10 @@ GameObject:
   - component: {fileID: 7128626481618353797}
   - component: {fileID: 7128626481618353796}
   - component: {fileID: 5860407321307487140}
+  - component: {fileID: 1399983996268026437}
   m_Layer: 5
   m_Name: QuestionPanel
-  m_TagString: Untagged
+  m_TagString: QuestionUIController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10063,6 +10031,32 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1399983996268026437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128626481618353794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f382b0e25003c4b46b7406203541f17e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseQuestions: {fileID: 0}
+  questionHeaderText: {fileID: 7128626481883086562}
+  questionText: {fileID: 4446215733289814962}
+  errorDisplayText: {fileID: 6204606850871338389}
+  answerInputX: {fileID: 1207276589318602102}
+  answerInputY: {fileID: 6582430127327925829}
+  answerInputH: {fileID: 3716100387186959391}
+  answerOutput: {fileID: 698391461229908680}
+  winMenu: {fileID: 7292503052413447360}
+  winMenuFree: {fileID: 1334035556764012053}
+  submitBtn: {fileID: 6228398407819498973}
+  restartBtn: {fileID: 2745803447358997387}
+  falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
+  CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
 --- !u!1 &7128626481883086560
 GameObject:
   m_ObjectHideFlags: 0
@@ -10579,7 +10573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7128626482578238556}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.49, y: 2.5, z: -10}
+  m_LocalPosition: {x: 8.49, y: 4.08, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2677278483090069578}
@@ -12895,7 +12889,7 @@ GameObject:
   - component: {fileID: 2301933174996223524}
   - component: {fileID: 8311778853078177216}
   m_Layer: 5
-  m_Name: Prescision display
+  m_Name: MaxError display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13078,6 +13072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
   falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
+  errorMargin: 0.001
   tabelParts:
   - {fileID: 9131746864326783464}
   - {fileID: 7235712894927626375}

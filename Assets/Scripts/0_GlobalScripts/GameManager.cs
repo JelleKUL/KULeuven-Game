@@ -14,20 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Text usernameText;
 
-    [Header("PlayField")]
-    [Header ("Global Parameters")]
-    [Tooltip ("the errormargin for answers")]
-    public float errorMargin = 0.001f;
-    [SerializeField]
-    private Text errorDisplayText;
-    [SerializeField]
-    private string maxErrorString = "max error: ";
-    [SerializeField]
-    [Tooltip("the unit of the errormargin")]
-    private string errorUnit = "m";
     public static float worldScale = 10f;
     [SerializeField]
-    [ImageEffectAllowedInSceneView]
     private List<string> adminNames;
 
     [Tooltip("The scenes of the first Chapter (WaterPassing)")]
@@ -41,10 +29,8 @@ public class GameManager : MonoBehaviour
 
 
 
-    [Header("ShowAnswersInDebug")]
-    public static bool showDebugAnswer = true; 
-
     // the static variables that are used all over the place
+        public static bool showDebugAnswer = true;
         public static int loginID;
         public static string userName;
         public static int playerScore;
@@ -58,7 +44,6 @@ public class GameManager : MonoBehaviour
         public static bool[] compLevelCamp2 = new bool[13];
 
         public static int scoreFreeTotal = 0;
-        //public static int[] scoreFree = new int[13];
 
         public static int highestLevel;
         public static int currentLevel;
@@ -71,10 +56,10 @@ public class GameManager : MonoBehaviour
     public Vector2 screenMin, screenMax; // calculated based on the x&y scale of the gamamanager
 
 
-     public int firstCamp1Level;
-     public int nrOfCamp1Levels;
-     public int firstCamp2Level;
-     public int[] NrOfCamp2ChapterScenes;
+    [HideInInspector]public int firstCamp1Level;
+    [HideInInspector]public int nrOfCamp1Levels;
+    [HideInInspector]public int firstCamp2Level;
+    [HideInInspector]public int[] NrOfCamp2ChapterScenes;
 
     // a new instance for the account system
     private AS_AccountInfo accountInfo = new AS_AccountInfo();
@@ -84,23 +69,11 @@ public class GameManager : MonoBehaviour
     {
         SetSceneNrs();
         SetPlayArea();
-
-        if(errorDisplayText) SetErrorDisplay();
         if (usernameText) ShowUsername();
 
         if (adminNames.Contains(userName) || !isLoggedIn) showDebugAnswer = true;
         else showDebugAnswer = false;
 
-    }
-
-
-// error display control
-    void SetErrorDisplay()
-    {
-        if (errorDisplayText)
-        {
-            errorDisplayText.text = maxErrorString + " " + errorMargin.ToString() + errorUnit;
-        }
     }
 
     void SetSceneNrs()
@@ -374,9 +347,6 @@ public class GameManager : MonoBehaviour
         currentLevel = 0;
     }
 
-
-
-//CampaignManagement
     
 
 
@@ -393,26 +363,7 @@ public class GameManager : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, z-Camera.main.transform.position.z));
     }
 
-
-//answer Control
-    // checks if a given string equals the float value minus the error margin
-    public bool CheckCorrectAnswer(string answer, float correct)
-    {
-        answer = answer.Replace(",",".");
-
-        float answerNr;
-        if(float.TryParse(answer,out answerNr))
-        {
-            Debug.Log(correct + " = " + answerNr + " ? -> " + (Mathf.Abs(correct - answerNr) < errorMargin) + ", with errormargin: " + errorMargin);
-            if (Mathf.Abs(correct - answerNr) < errorMargin)
-            {
-                return true;
-            }
-            return false;
-        }
-        return false;
-       
-    }
+    
 
     public static float RoundFloat(float input, int digits)
     {

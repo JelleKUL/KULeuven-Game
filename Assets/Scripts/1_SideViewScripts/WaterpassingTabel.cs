@@ -217,7 +217,7 @@ public class WaterpassingTabel : MonoBehaviour
                 if (i > 0)
                 {
                     totalHeight += heights[i - 1];
-                    if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - totalHeight) > (overrideErrorMargin ? errormarginOverride : gm.errorMargin))
+                    if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - totalHeight) > errormarginOverride)
                     {
                         tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = falseColor;
                         correct = false;
@@ -233,7 +233,7 @@ public class WaterpassingTabel : MonoBehaviour
                     }
                 }
                 
-                if (Mathf.Abs(tabelParts[i].afstand - distances[i] * GameManager.worldScale) > (overrideErrorMargin ? lengthErrormarginOverride : gm.errorMargin))
+                if (Mathf.Abs(tabelParts[i].afstand - distances[i] * GameManager.worldScale) > lengthErrormarginOverride)
                 {
                     tabelVereffeningParts[i].afstandText.color = falseColor;
                     //correct = false;
@@ -257,7 +257,7 @@ public class WaterpassingTabel : MonoBehaviour
             for (int i = 0; i < tabelParts.Count; i++)
             {
 
-                if (Mathf.Abs(tabelParts[i].hoogteVerschil - heights[i]) > (overrideErrorMargin ? errormarginOverride : gm.errorMargin))
+                if (Mathf.Abs(tabelParts[i].hoogteVerschil - heights[i]) > errormarginOverride)
                 {
                     tabelParts[i].hoogteVerschilText.color = falseColor;              
                 }
