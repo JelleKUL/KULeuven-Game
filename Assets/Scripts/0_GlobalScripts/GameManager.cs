@@ -30,27 +30,14 @@ public class GameManager : MonoBehaviour
     [ImageEffectAllowedInSceneView]
     private List<string> adminNames;
 
-
-    [Header("CampaignOrder")]
-    [Tooltip("the number of the first scene of campaign 1 in the build settings")]
-    public int firstCamp1Level;
-    [Tooltip("the number of scenes/levels of campaign 1 in the build settings")]
-    public int nrOfCamp1Levels;
-    [Tooltip("the number of the first scene of campaign 2 in the build settings")]
-    public int firstCamp2Level;
-    [Tooltip("the number of scenes/levels of campaign 1 in the build settings")]
-    public int nrOfCamp2Levels;
-    [Tooltip("the amount of scenes of the 3 Campaign2 chapters, the total must be equal to nrOfCamp2Levels")]
-    public int[] NrOfCamp2ChapterScenes;
-
     [Tooltip("The scenes of the first Chapter (WaterPassing)")]
-    public Object[] WaterpassingScenes;
+    [Scene] public string[] WaterpassingScenes;
     [Tooltip("The scenes of the second Chapter (map angle)")]
-    public Object[] MapAngleScenes;
+    [Scene] public string[] MapAngleScenes;
     [Tooltip("The scenes of the third Chapter (foutenpropagatie)")]
-    public Object[] FoutenPropagatieScenes;
+    [Scene] public string[] FoutenPropagatieScenes;
     [Tooltip("The scenes of the fourth Chapter (polygonatie)")]
-    public Object[] PolygonatieScenes;
+    [Scene] public string[] PolygonatieScenes;
 
 
 
@@ -84,12 +71,18 @@ public class GameManager : MonoBehaviour
     public Vector2 screenMin, screenMax; // calculated based on the x&y scale of the gamamanager
 
 
+     public int firstCamp1Level;
+     public int nrOfCamp1Levels;
+     public int firstCamp2Level;
+     public int[] NrOfCamp2ChapterScenes;
+
     // a new instance for the account system
     private AS_AccountInfo accountInfo = new AS_AccountInfo();
 
     // activates before the start functions
     private void Awake()
     {
+        SetSceneNrs();
         SetPlayArea();
 
         if(errorDisplayText) SetErrorDisplay();
@@ -108,6 +101,20 @@ public class GameManager : MonoBehaviour
         {
             errorDisplayText.text = maxErrorString + " " + errorMargin.ToString() + errorUnit;
         }
+    }
+
+    void SetSceneNrs()
+    {
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            if (SceneManager.GetSceneByBuildIndex(i).name == WaterpassingScenes[0]) firstCamp1Level = i;
+            if (SceneManager.GetSceneByBuildIndex(i).name == MapAngleScenes[0]) firstCamp2Level = i;
+        }
+
+        //firstCamp1Level = SceneManager.GetSceneByName(WaterpassingScenes[0]).buildIndex;
+        nrOfCamp1Levels = WaterpassingScenes.Length;
+        //firstCamp2Level = SceneManager.GetSceneByName(MapAngleScenes[0]).buildIndex;
+        NrOfCamp2ChapterScenes = new int[] { MapAngleScenes.Length, FoutenPropagatieScenes.Length, PolygonatieScenes.Length };
     }
 
 

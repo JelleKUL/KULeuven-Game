@@ -9,56 +9,66 @@ using UnityEngine.U2D;
 
 public class WaterPassingController : MonoBehaviour
 {
-    [Header ("Prefabs")]
-    public GameObject beacon;
-    public GameObject measure;
-    public GameObject groundPoint;
-    public GameObject topPoint;
-    public GameObject groundPointTopDown;
-    public LayerMask pointMask;
-    public Transform BeaconPlacer;
-    public Transform MeasurePlacer;
-
-    public Text angleErrorText;
-    public Text rotationAngleText;
-
-    public SpriteShapeController spriteShapeController;
-    public SpriteShapeController topSpriteShapeController;
-
-    public Transform groundPointTopDownCenter;
-    public WaterpassingTabel waterpassingTabel;
-
-    [Header ("Changeable Parameters")]
-    [Range (2,5)]
-    public int nrOfPoints;
-    public bool placeTopPoints;
+    [Header("Changeable Parameters")]
+    [Range(0, 5)]
+    [SerializeField] private int nrOfPoints;
     [Range(0, 3)]
-    public int nrOfTopPoints;
-    public int maxBeacons;
-    public int maxMeasures;
+    [SerializeField] private int nrOfTopPoints;
+    [SerializeField] private int maxBeacons;
+    [SerializeField] private int maxMeasures;
 
-    public bool lockMeasure;
-    public Vector2 lockedMeasureLocation;
-    public bool lockBeacon;
-    public Vector2 lockedBeaconLocation;
-    public bool loopAround;
-    public bool addPointOutLoop;
-    public float topDownPointRaduis = 0.5f;
+    [SerializeField] private bool lockMeasure;
+    [SerializeField] private Vector2 lockedMeasureLocation;
+    [SerializeField] private bool lockBeacon;
+    [SerializeField] private Vector2 lockedBeaconLocation;
+    [SerializeField] private bool loopAround;
+    [SerializeField] private bool addPointOutLoop;
+    
 
     [Header("Standard Parameters")]
-    public bool showAngleError;
+    [SerializeField] private bool showAngleError;
     [Tooltip("the max deviation in 1 direction in degrees, before the scaling factor is applied")]
-    public float maxAngleError;
+    [SerializeField] private float maxAngleError;
     [Tooltip("the minimum distance the points should be apart")]
-    public float minDistance;
+    [SerializeField] private float minDistance;
     [Tooltip("the max height of the points in % of the screen height")]
     [Range(0, 0.5f)]
-    public float maxHeightGroundPoint;
-    public bool extremeHeightDiff;
+    [SerializeField] private float maxHeightGroundPoint;
+    [SerializeField] private bool extremeHeightDiff;
     [Tooltip("the offset from the edge of the playarea for the edgepoints")]
-    public float startAndEndPointOffset = 0.1f;
-  
-    
+    [SerializeField] private float startAndEndPointOffset = 0.1f;
+    [SerializeField] private float topDownPointRaduis = 0.5f;
+
+    [System.Serializable]
+    private class Prefabs
+    {
+        public GameObject beacon;
+        public GameObject measure;
+        public GameObject groundPoint;
+        public GameObject topPoint;
+        public GameObject groundPointTopDown;
+    }
+    [System.Serializable]
+    private class SceneObjects
+    {
+        public LayerMask pointMask;
+        public Transform BeaconPlacer;
+        public Transform MeasurePlacer;
+        public Text angleErrorText;
+        public Text rotationAngleText;
+        public SpriteShapeController spriteShapeController;
+        public SpriteShapeController topSpriteShapeController;
+        public Transform groundPointTopDownCenter;
+        public WaterpassingTabel waterpassingTabel;
+    }
+    [Header("Scene Objects")]
+    [SerializeField]
+    [Space(20)]
+    private Prefabs prefabs;
+    [SerializeField]
+    private SceneObjects sceneObjects;
+
+    //private Variables
     private GameManager gm;
     private List<GameObject> groundPoints = new List<GameObject>();
     private List<GameObject> topPoints = new List<GameObject>();
@@ -66,12 +76,10 @@ public class WaterPassingController : MonoBehaviour
     private List<GameObject> beacons = new List<GameObject>();
     private List<GameObject> groundPointsTopDown = new List<GameObject>();
 
-
     private bool holdingObject;
     private GameObject hitObject;
     private bool hasStarted;
     private int pointOutLoopNr = -1;
-
 
     // values used by other scripts, the correct answers
     [HideInInspector]
@@ -82,9 +90,9 @@ public class WaterPassingController : MonoBehaviour
     public float [] correctDistances;
     [HideInInspector]
     public float correctDistance;
-    //[HideInInspector]
+    [HideInInspector]
     public float correctErrorAngle;
-    //[HideInInspector]
+    [HideInInspector]
     public float correctScaledErrorAngle;
 
     // Start is called before the first frame update
@@ -94,11 +102,14 @@ public class WaterPassingController : MonoBehaviour
     }
 
     // the startscript, can be called by the setparametersfunction to get the correct answers before the start function is called in this script
-    void StartSetup()
+    public void StartSetup()
     {
         hasStarted = true; 
 
-        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();        
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
+        correctErrorAngle = Random.Range(0, maxAngleError); //in degrees
+        correctScaledErrorAngle = Mathf.Atan(Mathf.Tan(correctErrorAngle * Mathf.Deg2Rad) / (float)GameManager.worldScale) * Mathf.Rad2Deg; //in degrees
 
         if (nrOfPoints > 0)
         {
@@ -109,7 +120,7 @@ public class WaterPassingController : MonoBehaviour
         {
             AddStartAndEndGroundPoint(); 
             SetGroundPointsTopDown();
-            waterpassingTabel.CreateTable(nrOfPoints + 1, pointOutLoopNr);
+            sceneObjects.waterpassingTabel.CreateTable(nrOfPoints + 1, pointOutLoopNr);
         }
 
         SetGroundSprite();
@@ -122,11 +133,11 @@ public class WaterPassingController : MonoBehaviour
         else
         {
             float offset = 0f;
-            if(measure.TryGetComponent(out BoxCollider2D box))
+            if(prefabs.measure.TryGetComponent(out BoxCollider2D box))
             {
                 offset = box.offset.y;
             }
-            AddMeasure(MeasurePlacer.position - MeasurePlacer.up * offset);
+            AddMeasure(sceneObjects.MeasurePlacer.position - sceneObjects.MeasurePlacer.up * offset);
         }
 
         if (lockBeacon)
@@ -137,11 +148,11 @@ public class WaterPassingController : MonoBehaviour
         else
         {
             float offset = 0f;
-            if (beacon.TryGetComponent(out BoxCollider2D box))
+            if (prefabs.beacon.TryGetComponent(out BoxCollider2D box))
             {
                 offset = box.offset.y;
             }
-            AddBeacon(BeaconPlacer.position - BeaconPlacer.up * offset);
+            AddBeacon(sceneObjects.BeaconPlacer.position - sceneObjects.BeaconPlacer.up * offset);
         }
     }
 
@@ -183,20 +194,20 @@ public class WaterPassingController : MonoBehaviour
                     if (hitObject.tag == "Measure" && measures.Count < maxMeasures)
                     {
                         float offset = 0f;
-                        if (measure.TryGetComponent(out BoxCollider2D box))
+                        if (prefabs.measure.TryGetComponent(out BoxCollider2D box))
                         {
                             offset = box.offset.y;
                         }
-                        AddMeasure(MeasurePlacer.position - MeasurePlacer.up * offset);
+                        AddMeasure(sceneObjects.MeasurePlacer.position - sceneObjects.MeasurePlacer.up * offset);
                     }
                     else if (hitObject.tag == "Beacon" && beacons.Count < maxBeacons)
                     {
                         float offset = 0f;
-                        if (beacon.TryGetComponent(out BoxCollider2D box))
+                        if (prefabs.beacon.TryGetComponent(out BoxCollider2D box))
                         {
                             offset = box.offset.y;
                         }
-                        AddBeacon(BeaconPlacer.position - BeaconPlacer.up * offset);
+                        AddBeacon(sceneObjects.BeaconPlacer.position - sceneObjects.BeaconPlacer.up * offset);
                     }
                 }
                 else
@@ -210,12 +221,12 @@ public class WaterPassingController : MonoBehaviour
 
                     if (hitObject.tag == "Measure")
                     {
-                        hitObject.transform.position = MeasurePlacer.position - MeasurePlacer.up * offset;
+                        hitObject.transform.position = sceneObjects.MeasurePlacer.position - sceneObjects.MeasurePlacer.up * offset;
                     }
                     else if (hitObject.tag == "Beacon")
                     {
                         
-                        hitObject.transform.position = BeaconPlacer.position - BeaconPlacer.up * offset;
+                        hitObject.transform.position = sceneObjects.BeaconPlacer.position - sceneObjects.BeaconPlacer.up * offset;
                     }
                 }
                 hitObject.GetComponent<Physics2DObject>().isHeld = false;
@@ -230,72 +241,60 @@ public class WaterPassingController : MonoBehaviour
 
     public void SetGroundSprite()
     {
-        spriteShapeController.spline.Clear();
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(-10,-3));
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(20, -3));
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(20, -spriteShapeController.colliderOffset));
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, -spriteShapeController.colliderOffset));
+        sceneObjects.spriteShapeController.spline.Clear();
+        sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(-10,-3));
+        sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(20, -3));
+        sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(20, -sceneObjects.spriteShapeController.colliderOffset));
+        sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, -sceneObjects.spriteShapeController.colliderOffset));
         
         for (int i = nrOfPoints; i > 0 ; i--)
         {
-            spriteShapeController.spline.InsertPointAt(0, groundPoints[i-1].transform.position + spriteShapeController.colliderOffset * Vector3.down);
+            sceneObjects.spriteShapeController.spline.InsertPointAt(0, groundPoints[i-1].transform.position + sceneObjects.spriteShapeController.colliderOffset * Vector3.down);
         }
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, -spriteShapeController.colliderOffset));
-        spriteShapeController.spline.InsertPointAt(0, new Vector3(-10, -spriteShapeController.colliderOffset));
+        sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, -sceneObjects.spriteShapeController.colliderOffset));
+        sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(-10, -sceneObjects.spriteShapeController.colliderOffset));
 
-        for (int i = 0; i < spriteShapeController.spline.GetPointCount(); i++)
+        for (int i = 0; i < sceneObjects.spriteShapeController.spline.GetPointCount(); i++)
         {
-            spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
+            sceneObjects.spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
             //spriteShapeController.spline.SetHeight(i, 1);
-            spriteShapeController.spline.SetLeftTangent(i, Vector3.left);
-            spriteShapeController.spline.SetRightTangent(i, Vector3.right);
+            sceneObjects.spriteShapeController.spline.SetLeftTangent(i, Vector3.left);
+            sceneObjects.spriteShapeController.spline.SetRightTangent(i, Vector3.right);
         }
 
     }
     public void SetTopSprite()
     {
-        topSpriteShapeController.spline.Clear();
+        sceneObjects.topSpriteShapeController.spline.Clear();
 
-        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(-2, gm.screenMax.y - 0.5f));
-        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, gm.screenMax.y - 0.5f));
+        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(-2, gm.screenMax.y - 0.5f));
+        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, gm.screenMax.y - 0.5f));
 
         for (int i = 0; i < nrOfTopPoints; i++)
         {
-            topSpriteShapeController.spline.InsertPointAt(0, topPoints[i].transform.position + 0.5f * Vector3.up);
+            sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, topPoints[i].transform.position + 0.5f * Vector3.up);
             
         }
 
-        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, gm.screenMax.y - 0.5f));
-        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(18, gm.screenMax.y - 0.5f));
-        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(18, 10));
-        topSpriteShapeController.spline.InsertPointAt(0, new Vector3(-2, 10));
+        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, gm.screenMax.y - 0.5f));
+        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(18, gm.screenMax.y - 0.5f));
+        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(18, 10));
+        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(-2, 10));
 
-        for (int i = 0; i < topSpriteShapeController.spline.GetPointCount(); i++)
+        for (int i = 0; i < sceneObjects.topSpriteShapeController.spline.GetPointCount(); i++)
         {
-            topSpriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
+            sceneObjects.topSpriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
             //topSpriteShapeController.spline.SetHeight(i, 0.1f);
-            topSpriteShapeController.spline.SetLeftTangent(i, Vector3.right);
-            topSpriteShapeController.spline.SetRightTangent(i, Vector3.left);
+            sceneObjects.topSpriteShapeController.spline.SetLeftTangent(i, Vector3.right);
+            sceneObjects.topSpriteShapeController.spline.SetRightTangent(i, Vector3.left);
         }
 
     }
 
-    public bool MouseOverBeacon()
-    {
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), 20);
-        if (rayHit.collider != null)
-        {
-            if (rayHit.collider.tag == "Beacon")
-            {
-                return true;
-            }
-        }
-        return false;
-    }
     //returns the gamobject the mouse has hit
     public GameObject CastMouseRay()
     {
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),20, pointMask);
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),20, sceneObjects.pointMask);
 
         if (rayHit.collider != null)
         {
@@ -323,7 +322,7 @@ public class WaterPassingController : MonoBehaviour
     //places a measure object
     public void AddMeasure(Vector2 location)
     {
-        GameObject newMeasure = Instantiate(measure, location, Quaternion.identity);
+        GameObject newMeasure = Instantiate(prefabs.measure, location, Quaternion.identity);
         MeasureController measureController = newMeasure.GetComponent<MeasureController>();
         measureController.errorAngle = correctErrorAngle;
 
@@ -374,9 +373,9 @@ public class WaterPassingController : MonoBehaviour
 
     public void RotateMeasure(float angleInput)
     {
-        if (rotationAngleText)
+        if (sceneObjects.rotationAngleText)
         {
-            rotationAngleText.text = GameManager.RoundFloat(angleInput,3).ToString() + " gon";
+            sceneObjects.rotationAngleText.text = GameManager.RoundFloat(angleInput,3).ToString() + " gon";
         }
         for (int i = 0; i < measures.Count; i++)
         {
@@ -392,8 +391,8 @@ public class WaterPassingController : MonoBehaviour
     public void AddBeacon(Vector2 location)
     {
 
-        GameObject newBeacon = Instantiate(beacon, location, Quaternion.identity);
-        newBeacon.GetComponent<Physics2DObject>().allowUpsideDown = placeTopPoints;
+        GameObject newBeacon = Instantiate(prefabs.beacon, location, Quaternion.identity);
+        newBeacon.GetComponent<Physics2DObject>().allowUpsideDown = nrOfTopPoints > 0;
         beacons.Add(newBeacon);
         
     }
@@ -413,7 +412,7 @@ public class WaterPassingController : MonoBehaviour
     // randomizes the playfield
     public void ChangePoints()
     {
-        AddGroundPoints( placeTopPoints);
+        AddGroundPoints(nrOfTopPoints > 0);
         
 
         for (int i = 0; i < measures.Count; i++)
@@ -440,10 +439,10 @@ public class WaterPassingController : MonoBehaviour
 
     public void AddStartAndEndGroundPoint()
     {
-        GameObject newPoint = Instantiate(groundPoint, new Vector2(gm.screenMin.x+ startAndEndPointOffset, 0), Quaternion.identity);
+        GameObject newPoint = Instantiate(prefabs.groundPoint, new Vector2(gm.screenMin.x+ startAndEndPointOffset, 0), Quaternion.identity);
         newPoint.GetComponent<PolygonPointController>().SetNameNrText(0);
 
-        newPoint = Instantiate(groundPoint, new Vector2(gm.screenMax.x - startAndEndPointOffset, 0), Quaternion.identity);
+        newPoint = Instantiate(prefabs.groundPoint, new Vector2(gm.screenMax.x - startAndEndPointOffset, 0), Quaternion.identity);
         newPoint.GetComponent<PolygonPointController>().SetNameNrText(0);
     }
 
@@ -461,7 +460,7 @@ public class WaterPassingController : MonoBehaviour
             pointSkipper = 0;
             for (int i = groundPoints.Count; i < nrOfPoints; i++)
             {
-                GameObject newPoint = Instantiate(groundPoint, Vector2.zero, Quaternion.identity);
+                GameObject newPoint = Instantiate(prefabs.groundPoint, Vector2.zero, Quaternion.identity);
                 
                 newPoint.GetComponent<PolygonPointController>().SetNameText(i + 1 + pointSkipper);
                 pointSkipper += (nrOfTopPoints > i) ? 1 : 0;
@@ -487,13 +486,13 @@ public class WaterPassingController : MonoBehaviour
         
 
         // creating the toppoints
-        if (topPoints.Count < nrOfTopPoints && placeTopPoints)
+        if (topPoints.Count < nrOfTopPoints && placeTop)
         {
             //Debug.Log(topPoints.Count + " " + nrOfTopPoints);
             pointSkipper = 1;
             for (int i = topPoints.Count; i < nrOfTopPoints; i++)
             {
-                GameObject newPoint = Instantiate(topPoint, Vector2.zero, Quaternion.identity);
+                GameObject newPoint = Instantiate(prefabs.topPoint, Vector2.zero, Quaternion.identity);
                 newPoint.GetComponent<PolygonPointController>().SetNameText(i + 1 + pointSkipper);
                 pointSkipper += (nrOfPoints > i) ? 1 : 0;
                 topPoints.Add(newPoint);
@@ -511,7 +510,7 @@ public class WaterPassingController : MonoBehaviour
             }
         }
 
-        if (!placeTopPoints)
+        if (!placeTop)
         {
             correctHeight = groundPoints[groundPoints.Count - 1].transform.position.y - groundPoints[0].transform.position.y;
             correctDistance = groundPoints[groundPoints.Count - 1].transform.position.x - groundPoints[0].transform.position.x;
@@ -580,22 +579,22 @@ public class WaterPassingController : MonoBehaviour
         for (int i = 0; i < nrOfPoints + 1; i++)
         {
             // instantiates a point and moves a point out of the loop further away
-            GameObject newpoint = Instantiate(groundPointTopDown, groundPointTopDownCenter.position + Vector3.right * topDownPointRaduis * ((addPointOutLoop && i == pointOutLoopNr) ? 1.5f : 1), Quaternion.identity);
+            GameObject newpoint = Instantiate(prefabs.groundPointTopDown, sceneObjects.groundPointTopDownCenter.position + Vector3.right * topDownPointRaduis * ((addPointOutLoop && i == pointOutLoopNr) ? 1.5f : 1), Quaternion.identity);
             newpoint.GetComponent<PolygonPointController>().SetNameText(i==0? -1:i);
             groundPointsTopDown.Add(newpoint);
         }
 
         cummAngle += (groundPoints[0].transform.position.x - gm.screenMin.x) / radius;
-        groundPointsTopDown[1].transform.RotateAround(groundPointTopDownCenter.position, Vector3.back, cummAngle * Mathf.Rad2Deg);
+        groundPointsTopDown[1].transform.RotateAround(sceneObjects.groundPointTopDownCenter.position, Vector3.back, cummAngle * Mathf.Rad2Deg);
 
         for (int i = 2; i < groundPointsTopDown.Count; i++)
         {
 
             cummAngle += (groundPoints[i-1].transform.position.x - groundPoints[i-2].transform.position.x) / radius;
-            groundPointsTopDown[i].transform.RotateAround(groundPointTopDownCenter.position, Vector3.back, cummAngle * Mathf.Rad2Deg);
+            groundPointsTopDown[i].transform.RotateAround(sceneObjects.groundPointTopDownCenter.position, Vector3.back, cummAngle * Mathf.Rad2Deg);
               
         }
-        LineRenderer line = groundPointTopDownCenter.gameObject.GetComponent<LineRenderer>();
+        LineRenderer line = sceneObjects.groundPointTopDownCenter.gameObject.GetComponent<LineRenderer>();
         line.positionCount = ((addPointOutLoop) ? -1 : 0) + groundPointsTopDown.Count;
 
         for (int i = 0; i < line.positionCount; i++)
@@ -615,9 +614,9 @@ public class WaterPassingController : MonoBehaviour
     {
         if (showAngleError)
         {
-            angleErrorText.text = "Collimatiefout: \n " + GameManager.RoundFloat(correctScaledErrorAngle * (4 / 3.6f), 3).ToString() + " gon";
+            sceneObjects.angleErrorText.text = "Collimatiefout: \n " + GameManager.RoundFloat(correctScaledErrorAngle * (4 / 3.6f), 3).ToString() + " gon";
         }
-        else angleErrorText.text = "Collimatiefout: \n " + "? gon";
+        else sceneObjects.angleErrorText.text = "Collimatiefout: \n " + "? gon";
 
 
     }
@@ -640,15 +639,11 @@ public class WaterPassingController : MonoBehaviour
     }
 
     //sets the parameters so they match the given question
-    public void SetParameters(int nrPoints, int nrBeacons, int nrMeasures, bool ShowDistance, bool lockmeasure, Vector2 measureLocation, bool lockbeacon, Vector2 beaconLocation, bool loop)
+    public void SetParameters(int nrPoints, int nrBeacons, int nrMeasures, bool lockmeasure, Vector2 measureLocation, bool lockbeacon, Vector2 beaconLocation, bool loop)
     {
-        correctErrorAngle = Random.Range(0, maxAngleError); //in degrees
-        correctScaledErrorAngle = Mathf.Atan(Mathf.Tan(correctErrorAngle * Mathf.Deg2Rad) / (float)GameManager.worldScale) * Mathf.Rad2Deg; //in degrees
-
         nrOfPoints = nrPoints;
         maxBeacons = nrBeacons;
         maxMeasures = nrMeasures;
-        //showDistanceLaser = ShowDistance;
         lockMeasure = lockmeasure;
         lockedMeasureLocation = measureLocation;
         lockBeacon = lockbeacon;
@@ -659,12 +654,12 @@ public class WaterPassingController : MonoBehaviour
     }
     public bool CheckTabelAnswer()
     {
-        return waterpassingTabel.CheckAnswers(correctHeightDifferences, correctDistances);
+        return sceneObjects.waterpassingTabel.CheckAnswers(correctHeightDifferences, correctDistances);
     }
 
     public void ShowAnswersTabel()
     {
-        waterpassingTabel.ShowCorrectValues(correctHeightDifferences, correctDistances);
+        sceneObjects.waterpassingTabel.ShowCorrectValues(correctHeightDifferences, correctDistances);
     }
 
     float maxDistanceBetweenPoints(int nrBtwn)

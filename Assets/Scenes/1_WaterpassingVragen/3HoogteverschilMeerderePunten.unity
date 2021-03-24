@@ -348,6 +348,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: nrOfPoints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: maxBeacons
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1360637732618493871, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -482,6 +492,28 @@ PrefabInstance:
         type: 3}
       propertyPath: minDistance
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_questionHeader
+      value: III. Bepaal het hoogteveschil tussen A & D
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_questionText
+      value: Plaats de meetbaken op de meetpunten en meet met het waterpastoestel
+        het hoogteverschil tussen de punten A en D
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_answerText
+      value: Het hoogteverschil kan gevonden worden door de middendraden te vergelijken
+        van elk punt, hou rekening met het teken van de verschillen
       objectReference: {fileID: 0}
     - target: {fileID: 7480143048107927873, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}

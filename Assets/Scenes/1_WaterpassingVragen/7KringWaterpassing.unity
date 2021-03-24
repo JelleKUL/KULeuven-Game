@@ -126,37 +126,37 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 4367659512763961223}
     m_Modifications:
     - target: {fileID: 3344254240160255065, guid: c2abb2c9f86664dd9ab44c38f668e3e7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.9
+      value: -0.5880716
       objectReference: {fileID: 0}
     - target: {fileID: 3344254240160255065, guid: c2abb2c9f86664dd9ab44c38f668e3e7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.81
+      value: 0.41676164
       objectReference: {fileID: 0}
     - target: {fileID: 3344254240160255065, guid: c2abb2c9f86664dd9ab44c38f668e3e7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 977.8418
       objectReference: {fileID: 0}
     - target: {fileID: 3344254240160255065, guid: c2abb2c9f86664dd9ab44c38f668e3e7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3344254240160255065, guid: c2abb2c9f86664dd9ab44c38f668e3e7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3344254240160255065, guid: c2abb2c9f86664dd9ab44c38f668e3e7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3344254240160255065, guid: c2abb2c9f86664dd9ab44c38f668e3e7,
         type: 3}
@@ -166,7 +166,7 @@ PrefabInstance:
     - target: {fileID: 3344254240160255065, guid: c2abb2c9f86664dd9ab44c38f668e3e7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3344254240160255065, guid: c2abb2c9f86664dd9ab44c38f668e3e7,
         type: 3}
@@ -271,6 +271,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 4.999756
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966111743750695317, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.14
       objectReference: {fileID: 0}
     - target: {fileID: 3210985553833222505, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
@@ -402,6 +407,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: ID_questionHeader
+      value: VII. Vervolledig de waterpassingtabel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: ID_questionText
+      value: Voer alle noodzakelijke metingen uit en vul de juiste waardes in in
+        de tabel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: ID_answerText
+      value: Het hoogteverschil kan gevonden worden door de middendraden te vergelijken
+      objectReference: {fileID: 0}
     - target: {fileID: 7323459967731352427, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -411,6 +432,11 @@ PrefabInstance:
         type: 3}
       propertyPath: index
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575634107541396137, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.14
       objectReference: {fileID: 0}
     - target: {fileID: 7723304667681023593, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
@@ -459,3 +485,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3f16918dd96e42e0baf32203e1602c6, type: 3}
+--- !u!4 &4367659512763961223 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8299664385773971384, guid: f3f16918dd96e42e0baf32203e1602c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 4367659512763961222}
+  m_PrefabAsset: {fileID: 0}

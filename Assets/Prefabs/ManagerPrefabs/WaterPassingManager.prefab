@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3738483635345428785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5625269964166234253}
+  - component: {fileID: 8780718977967694094}
+  - component: {fileID: 1443950649014578541}
+  m_Layer: 0
+  m_Name: WaterPassingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5625269964166234253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3738483635345428785}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8780718977967694094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3738483635345428785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841c3b104d8ce4599add20122817e1b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  answerType: 0
+  scoreIncrease: 1
+  nrOfTries: 3
+  ID_questionHeader: 
+  ID_questionText: 
+  ID_answerText: 
+  sceneObjects:
+    ID_TooManyTriesText: too many tries, try again
+    questionHeaderText: {fileID: 0}
+    questionText: {fileID: 0}
+    answerInputH: {fileID: 0}
+    answerOutput: {fileID: 0}
+    winMenu: {fileID: 0}
+    winMenuFree: {fileID: 0}
+    submitBtn: {fileID: 0}
+    restartBtn: {fileID: 0}
+    falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
+    CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
+--- !u!114 &1443950649014578541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3738483635345428785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f630302d4ffe84e45a77e3ed009233fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nrOfPoints: 2
+  nrOfTopPoints: 0
+  maxBeacons: 2
+  maxMeasures: 1
+  lockMeasure: 0
+  lockedMeasureLocation: {x: 0, y: 0}
+  lockBeacon: 0
+  lockedBeaconLocation: {x: 0, y: 0}
+  loopAround: 0
+  addPointOutLoop: 0
+  showAngleError: 0
+  maxAngleError: 0
+  minDistance: 2.5
+  maxHeightGroundPoint: 0.15
+  extremeHeightDiff: 0
+  startAndEndPointOffset: 0.15
+  topDownPointRaduis: 0.5
+  prefabs:
+    beacon: {fileID: 3884719204972097174, guid: 4cc65cdc6658d4c21a8b8e9713bbf830,
+      type: 3}
+    measure: {fileID: 1354509410431150012, guid: 998ae4e66d110474789197b610c330cc,
+      type: 3}
+    groundPoint: {fileID: 2186970088697500766, guid: e4caef811465f42cdb1c59c0ba3796ae,
+      type: 3}
+    topPoint: {fileID: 3409875418630073975, guid: 4d39e31028984460cb588b744ac1e644,
+      type: 3}
+    groundPointTopDown: {fileID: 4010883207403545137, guid: 37375dc84afda45f4bbcfc37dc1596eb,
+      type: 3}
+  sceneObjects:
+    pointMask:
+      serializedVersion: 2
+      m_Bits: 9472
+    BeaconPlacer: {fileID: 0}
+    MeasurePlacer: {fileID: 0}
+    angleErrorText: {fileID: 0}
+    rotationAngleText: {fileID: 0}
+    spriteShapeController: {fileID: 0}
+    topSpriteShapeController: {fileID: 0}
+    groundPointTopDownCenter: {fileID: 0}
+    waterpassingTabel: {fileID: 0}
+  correctHeight: 0
+  correctHeightDifferences: []
+  correctDistances: []
+  correctDistance: 0
+  correctErrorAngle: 0
+  correctScaledErrorAngle: 0

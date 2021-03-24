@@ -133,18 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &438774115 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1864724783906478679, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
-    type: 3}
-  m_PrefabInstance: {fileID: 1880690856}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2827be7ef67ba4b4daf2017b4fb740d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1695596193 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 554227613668425901, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
@@ -165,7 +153,7 @@ PrefabInstance:
     - target: {fileID: 1380859682, guid: 4d233a20e80c34bc4bdc4f5e8e446f79, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 438774115}
+      objectReference: {fileID: 0}
     - target: {fileID: 1380859682, guid: 4d233a20e80c34bc4bdc4f5e8e446f79, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: FlipTheodoliet
@@ -173,7 +161,7 @@ PrefabInstance:
     - target: {fileID: 1888073280, guid: 4d233a20e80c34bc4bdc4f5e8e446f79, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 438774115}
+      objectReference: {fileID: 0}
     - target: {fileID: 1888073280, guid: 4d233a20e80c34bc4bdc4f5e8e446f79, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleMagnify
@@ -252,7 +240,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 438774115}
+      objectReference: {fileID: 0}
     - target: {fileID: 64816552633057813, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -508,6 +496,11 @@ PrefabInstance:
       propertyPath: m_Spline.m_ControlPoints.Array.data[0].position.x
       value: -1.2512765
       objectReference: {fileID: 0}
+    - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1125072332485944020, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -587,7 +580,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 438774115}
+      objectReference: {fileID: 0}
     - target: {fileID: 1449523746637542889, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -920,6 +913,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6266948699370214544, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7093937433697466476, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: loopAround
@@ -959,6 +957,34 @@ PrefabInstance:
         type: 3}
       propertyPath: extremeHeightDiff
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: controlController
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_questionHeader
+      value: X. Bepaal de scheefstand van het gebouw
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_questionText
+      value: Plaats de theodoliet en meet de horizontale verschuiving tussen beide
+        punten, gemeten van onder naar boven. Gebruik de 'flip' knop om een tweede
+        meting te maken en een eventuele inclinatiefout op te heffen.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_answerText
+      value: De scheefstand kan gevonden worden door de onderste meetband te vergelijken
+        met de laserlijn
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7323075020994301804, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
@@ -1080,6 +1106,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9000749891888227682, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9048913617645147364, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_Name
@@ -1089,6 +1120,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144443686523823629, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: skewBuildingLocation.x
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9215505822004600114, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}

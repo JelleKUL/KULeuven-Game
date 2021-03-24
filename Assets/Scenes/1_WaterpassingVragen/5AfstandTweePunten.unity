@@ -583,6 +583,33 @@ PrefabInstance:
       propertyPath: distanceMeasureAngle
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: answerType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_questionHeader
+      value: V. Bepaal de afstand tussen A & B
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_questionText
+      value: Plaats de meetbaken op de meetpunten en gebruik het vizier om de afstand
+        te berekenen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_answerText
+      value: De afstand kan gevonden worden door de afstand tussen de boven-en onderdraad
+        te meten
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7480143048107927873, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_AnchorMin.y

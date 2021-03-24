@@ -28,6 +28,7 @@ public class ScheefstandController : MonoBehaviour
     [Tooltip("het aantal keren dat je mag proberen, 0 = oneindig")]
     public int nrOfTries = 3;
 
+
     [HideInInspector]
     public float correctDistance;
 

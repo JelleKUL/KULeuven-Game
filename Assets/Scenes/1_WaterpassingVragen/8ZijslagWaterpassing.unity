@@ -198,6 +198,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3713896911597385839, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: addPointOutLoop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4392659849410026565, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -207,6 +212,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaterPassingStandardScene Tabel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: ID_questionHeader
+      value: VIII. Vervolledig de waterpassingtabel met zijslag
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: ID_questionText
+      value: Voer alle noodzakelijke metingen uit en vul de juiste waardes in in
+        de tabel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: ID_answerText
+      value: Het hoogteverschil kan gevonden worden door de middendraden te vergelijken
       objectReference: {fileID: 0}
     - target: {fileID: 6840881715961567466, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}

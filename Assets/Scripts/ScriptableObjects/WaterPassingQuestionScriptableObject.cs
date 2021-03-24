@@ -21,8 +21,6 @@ public class WaterPassingQuestionScriptableObject : ScriptableObject
     [SerializeField]
     private int nrMeasures;
     [SerializeField]
-    private bool ShowDistance;
-    [SerializeField]
     private bool lockmeasure;
     [SerializeField]
     private Vector2 measureLocation;
@@ -35,7 +33,7 @@ public class WaterPassingQuestionScriptableObject : ScriptableObject
 
     public void SetQuestion(WaterPassingController waterPassingController)
     {
-        waterPassingController.SetParameters(nrPoints, nrBeacons, nrMeasures, ShowDistance, lockmeasure, measureLocation, lockbeacon, beaconLocation, loop);
+        waterPassingController.SetParameters(nrPoints, nrBeacons, nrMeasures, lockmeasure, measureLocation, lockbeacon, beaconLocation, loop);
     }
 
 

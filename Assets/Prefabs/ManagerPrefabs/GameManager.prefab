@@ -53,40 +53,39 @@ MonoBehaviour:
   adminNames:
   - admin
   - jelle
+  WaterpassingScenes:
+  - 1CalibratieWaterpastoestel
+  - 2HoogteverschilTweePunten
+  - 3HoogteverschilMeerderePunten
+  - 4OmgekeerdeBaak
+  - 5AfstandTweePunten
+  - 6AfstandMeerderePunten
+  - 7KringWaterpassing
+  - 8ZijslagWaterpassing
+  - 9TrigoniomeytrisheWaterpassing
+  - 10ScheefstandGebouw
+  MapAngleScenes:
+  - 1BepaalKaarthoek
+  - 2BepaalCoordinaten
+  - 3BepaalCoordinatenViaAnderPunt
+  - 4BepaalAfstandTussenTweePunten
+  - 5BepaalCoordinatenInGedraaidAssenstelsel
+  FoutenPropagatieScenes:
+  - 1Standaardafwijking
+  - 2SigmaAOverEenPunt
+  - 3MinimaleFoutenpropagatie
+  - 4SigmaAOverMeerderePunten
+  PolygonatieScenes:
+  - 1VoorwaardseInsnijding
+  - 2AchterwaardseInsnijding
+  - 3Polygonatietabel
+  - 4Bilateratie
+  screenMin: {x: 0, y: 0}
+  screenMax: {x: 0, y: 0}
   firstCamp1Level: 2
   nrOfCamp1Levels: 10
   firstCamp2Level: 13
-  nrOfCamp2Levels: 13
   NrOfCamp2ChapterScenes: 050000000400000004000000
-  WaterpassingScenes:
-  - {fileID: 102900000, guid: cef981af7ce4f4f59a1adc0e4947cb50, type: 3}
-  - {fileID: 102900000, guid: 5227a20c12b854b1e9f4c1b7385df44e, type: 3}
-  - {fileID: 102900000, guid: e19be1f5185af49eea4f9c656b5977a9, type: 3}
-  - {fileID: 102900000, guid: 01f5444c365b94ee7a4cc7ddfd5e3183, type: 3}
-  - {fileID: 102900000, guid: 41a58d10540ed434f82719dca9daf4d3, type: 3}
-  - {fileID: 102900000, guid: 26625eaa39ff54910aa8b6341faf4e66, type: 3}
-  - {fileID: 102900000, guid: 794f4ba2d1e164df8a57c52d11144863, type: 3}
-  - {fileID: 102900000, guid: 0e20e2c0ac3cd4ff582c90248e2c0a0f, type: 3}
-  - {fileID: 102900000, guid: 63eee682b2ee74f21ab3b130292a38f3, type: 3}
-  - {fileID: 102900000, guid: 7ea084eed504a4365a9bead8ef5fd42e, type: 3}
-  MapAngleScenes:
-  - {fileID: 102900000, guid: c6628bc6af4b14aa9bc828ad499c49e8, type: 3}
-  - {fileID: 102900000, guid: 844f7934994cc4ff4a4a0c8b07e280ac, type: 3}
-  - {fileID: 102900000, guid: a9d3669f1129247f38e6b3e321ef8d64, type: 3}
-  - {fileID: 102900000, guid: 8fda94cb4a33942f6a900dc6de03f320, type: 3}
-  - {fileID: 102900000, guid: 87ffbc9c3c60d443db7b1ffe49a68b8c, type: 3}
-  FoutenPropagatieScenes:
-  - {fileID: 102900000, guid: 97fbb9c051e9540b9a667a37d6cf1057, type: 3}
-  - {fileID: 102900000, guid: 645537f990100b84dbdff504c7fe9864, type: 3}
-  - {fileID: 102900000, guid: 9fedd04343adf45dd98e66e0d5051c60, type: 3}
-  - {fileID: 102900000, guid: 0b17e36b5f75e430f8f5a919838cb5cf, type: 3}
-  PolygonatieScenes:
-  - {fileID: 102900000, guid: 1cb165e04386f4618a8c1aa9245d4ff9, type: 3}
-  - {fileID: 102900000, guid: 6de65cbec5ff84ee2a7752a295068d03, type: 3}
-  - {fileID: 102900000, guid: 645b211b589714613a03a7a0e0539389, type: 3}
-  - {fileID: 102900000, guid: 632597c38753340a694ffb5971286f58, type: 3}
-  screenMin: {x: 0, y: 0}
-  screenMax: {x: 0, y: 0}
 --- !u!23 &2003768799235770477
 MeshRenderer:
   m_ObjectHideFlags: 0

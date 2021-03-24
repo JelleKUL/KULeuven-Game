@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2702871088291241658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5122717992600252506}
+  - component: {fileID: 6775490386573026387}
+  - component: {fileID: 3115345108524718911}
+  m_Layer: 0
+  m_Name: PolygonationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5122717992600252506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702871088291241658}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6775490386573026387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702871088291241658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac2a5404dfa64506b976b6ded717858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleQuestionText: {fileID: 0}
+  questionText: {fileID: 0}
+  answerInputX: {fileID: 0}
+  answerInputY: {fileID: 0}
+  answerInputH: {fileID: 0}
+  answerOutput: {fileID: 0}
+  winMenu: {fileID: 0}
+  winMenuFree: {fileID: 0}
+  submitBtn: {fileID: 0}
+  restartBtn: {fileID: 0}
+  falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
+  CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
+  SoortVraag: 0
+  scoreIncrease: 50
+  nrOfTries: 3
+  tabel: {fileID: 0}
+--- !u!114 &3115345108524718911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702871088291241658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782e9c71fb27b4a87930416471fd47ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calculatePoint: {fileID: 4010883207403545137, guid: 37375dc84afda45f4bbcfc37dc1596eb,
+    type: 3}
+  obstructedCalculatePoint: {fileID: 2670915819586446859, guid: 89e2885d90d16406b8cd7a306807e0a2,
+    type: 3}
+  obstaclePrefabs:
+  - {fileID: 4023926246308375095, guid: 29a30f260d24b4ffea411af6c4a568ee, type: 3}
+  mobileObstaclePrefabs: []
+  gm: {fileID: 0}
+  minDistanceBtwPoints: 2
+  minDistanceToObstacles: 0
+  minDistanceFromOrigin: 0
+  minOffset: {x: 1, y: 1}
+  maxOffset: {x: 1, y: 1}
+  maxRandomAngle: 30
+  loopedStartPos: {x: 0, y: 0}
+  maxDistanceError: 0.001
+  calculatePoints: []
+  obstructedCalculatePoints: []

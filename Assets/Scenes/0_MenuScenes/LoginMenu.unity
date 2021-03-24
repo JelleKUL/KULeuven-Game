@@ -685,6 +685,10 @@ PrefabInstance:
       propertyPath: m_Navigation.m_Mode
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11471556, guid: 5ca92fc35a011ad41bb83574197b5fe8, type: 3}
+      propertyPath: recoveryField
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 11495154, guid: 5ca92fc35a011ad41bb83574197b5fe8, type: 3}
       propertyPath: m_Navigation.m_Mode
       value: 2
@@ -4107,6 +4111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fc77bc818bc483aa7f1beaa23588a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UpdateAtStart: 1
 --- !u!1 &1141296016
 GameObject:
   m_ObjectHideFlags: 0
