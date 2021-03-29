@@ -169,13 +169,39 @@ MonoBehaviour:
   ObstructionPoints:
     serializedVersion: 2
     m_Bits: 0
-  distanceErrorSlider: {fileID: 0}
+  distanceError1Slider: {fileID: 0}
+  distanceError2Slider: {fileID: 0}
   angleErrorSlider: {fileID: 0}
+  errorEllipsDisplay: {fileID: 0}
   fullLine: {fileID: 0}
   dottedLine: {fileID: 0}
-  lockDistanceError: 0
+  prefabs:
+    linePoint: {fileID: 6925030597558219202, guid: 0b53bcca134834af5bd46cc96bd3be77,
+      type: 3}
+    firstPoint: {fileID: 2991790824968530903, guid: 2476312b10ae34e34b029f5b3bd085d1,
+      type: 3}
+    pointMask:
+      serializedVersion: 2
+      m_Bits: 256
+    Obstacles:
+      serializedVersion: 2
+      m_Bits: 512
+    ObstructionPoints:
+      serializedVersion: 2
+      m_Bits: 65536
+    fullLine: {fileID: 2100000, guid: ad89a2623b8b042a29ffbb1d82338d12, type: 2}
+    dottedLine: {fileID: 2100000, guid: beb7aaf34b0ce4765aa8314af78dd305, type: 2}
+  sceneObjects:
+    distanceError1Slider: {fileID: 0}
+    distanceError2Slider: {fileID: 0}
+    angleErrorSlider: {fileID: 0}
+    errorEllipsDisplay: {fileID: 0}
+  nrOfPoints: 0
+  lockDistanceError1: 0
+  lockDistanceError2: 0
   lockAngleError: 0
-  distanceError: 0
+  distanceError1: 0
+  distanceError2: 0
   angleError: 0
   lockFirstPoint: 0
   firstPointPosition: {x: 0, y: 0}
@@ -184,5 +210,10 @@ MonoBehaviour:
   showLengths: 0
   showStartAngle: 0
   showStartLength: 0
+  showEndLength: 1
+  showSmallErrors: 0
   maxPoints: 2
   startCenterPoint: 0
+  loopLine: 0
+  loopOffset: 1
+  correctAnswerArray: []

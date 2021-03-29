@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8380507103479253294}
   m_Layer: 0
-  m_Name: StandardAxis
+  m_Name: Extra Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_Children:
   - {fileID: 1655895856986470373}
   m_Father: {fileID: 2266882096445925657}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8989287511517511818
 GameObject:
@@ -58,9 +58,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8380507103479253294}
-  - {fileID: 6918131387003841040}
   - {fileID: 9069288770151683069}
+  - {fileID: 6918131387003841040}
+  - {fileID: 8380507103479253294}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -74,7 +74,7 @@ PrefabInstance:
     - target: {fileID: 6872219743729214901, guid: 37ffaead3d2644740ad6b17785ebe591,
         type: 3}
       propertyPath: m_Name
-      value: Extra Axis
+      value: Base Axis
       objectReference: {fileID: 0}
     - target: {fileID: 6872219743729214903, guid: 37ffaead3d2644740ad6b17785ebe591,
         type: 3}
@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 4222805036568096263, guid: e5504b34600944f4ba5765c6209affd6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4222805036568096263, guid: e5504b34600944f4ba5765c6209affd6,
         type: 3}
@@ -209,7 +209,7 @@ PrefabInstance:
     - target: {fileID: 4222805036568096264, guid: e5504b34600944f4ba5765c6209affd6,
         type: 3}
       propertyPath: m_Name
-      value: PolygonLine
+      value: PolygonLineManager
       objectReference: {fileID: 0}
     - target: {fileID: 4222805036568096265, guid: e5504b34600944f4ba5765c6209affd6,
         type: 3}

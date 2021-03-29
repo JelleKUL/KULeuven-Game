@@ -74,7 +74,7 @@ public class FoutenPropagatieQuestions : BaseQuestions
         if (lineController.CheckPoints() && lineController.CheckPointsVisibility())
         {
 
-            if (Mathf.Abs(lineController.GetSigmaA() - CorrectAnswer(false)) <=0.6* lineController.GetDistanceError1() )
+            if (Mathf.Abs(lineController.GetSigmaA() - CorrectAnswer(false)) <=0.6* lineController.GetBaseDistanceError())
             {
                 gm.IncreaseScore(scoreIncrease, 2);
                 Debug.Log("true");

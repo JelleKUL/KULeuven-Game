@@ -66,6 +66,11 @@ public class BaseQuestions : MonoBehaviour
         }
     }
 
+    protected virtual void SetQuestionType()
+    {
+
+    }
+
     // checks if a given string equals the float value minus the error margin
     protected bool CheckCorrectAnswer(float inputAnswer, float correctAnswer, float errorMargin)
     {
@@ -102,6 +107,10 @@ public class BaseQuestions : MonoBehaviour
 
     }
 
-   
+    //returns all the correct answers
+    public virtual List <float> GetCorrectAnswer()
+    {
+        return new List<float>();
+    }
 
 }

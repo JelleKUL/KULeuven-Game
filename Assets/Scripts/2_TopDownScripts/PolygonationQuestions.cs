@@ -64,7 +64,7 @@ public class PolygonationQuestions : BaseQuestions
             case QuestionType.Coordinaat1Punt:
                 //start oefening Coordinate1Point
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
-                correctAnswerArray = placer.PlaceCalculatePoints(1);
+                //correctAnswerArray = placer.PlacePoints(1);
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale , 3);
                 correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
@@ -77,7 +77,7 @@ public class PolygonationQuestions : BaseQuestions
             case QuestionType.Afstand2PuntenPolygoon:
                 //start oefening DragEnDropEllips
                 lineController.SetVisibles(true, false, false, false, true, true, 2);
-                correctAnswerArray = placer.PlaceCalculatePoints(2);
+                //correctAnswerArray = placer.PlacePoints(2);
                 correctAnswerH = GameManager.RoundFloat(GameManager.worldScale * Mathf.Sqrt(Mathf.Pow(correctAnswerArray[2] - correctAnswerArray[0], 2) + Mathf.Pow(correctAnswerArray[3] - correctAnswerArray[1], 2)), 3);
                 correctAnswerString = correctAnswerH.ToString();
 
@@ -90,8 +90,8 @@ public class PolygonationQuestions : BaseQuestions
             case QuestionType.VoorwaardseInsnijding:
                 //start oefening voorwaardse insnijding
                 lineController.SetVisibles(false, false, true, false, false, false, 3);
-                obsructedPointsArray = placer.PlaceObstructedCalculatePoints(1);
-                correctAnswerArray = placer.PlaceCalculatePoints(2);
+                //obsructedPointsArray = placer.PlacePoints(1, true);
+                //correctAnswerArray = placer.PlacePoints(2);
                 
                 //placer.PlaceObstacles(2);
                 correctAnswerX = GameManager.RoundFloat(obsructedPointsArray[0] * GameManager.worldScale, 3);
@@ -108,8 +108,8 @@ public class PolygonationQuestions : BaseQuestions
             case QuestionType.AchterwaardseInsnijding:
                 //start oefening achterwaardse insnijding
                 lineController.SetVisibles(false, false, true, false, false, false, 3);
-                correctAnswerArray = placer.PlaceCalculatePoints(1);
-                obsructedPointsArray = placer.PlaceObstructedCalculatePoints(3);
+                //correctAnswerArray = placer.PlacePoints(1);
+                //obsructedPointsArray = placer.PlacePoints(3, true);
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale, 3);
                 correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;
@@ -125,7 +125,7 @@ public class PolygonationQuestions : BaseQuestions
             case QuestionType.Tabel:
                 //start oefening tabel
                 lineController.SetVisibles(false, false, true, true, true, false, 8);
-                correctAnswerArray = placer.placeLoopedPoints(3);
+                //correctAnswerArray = placer.PlaceLoopedPoints(3);
                 
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[10] * GameManager.worldScale, 3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[11] * GameManager.worldScale, 3);
@@ -155,8 +155,8 @@ public class PolygonationQuestions : BaseQuestions
             case QuestionType.Bilateratie:
                 //start oefening Bilateratie
                 lineController.SetVisibles(false, false, true, true, false, false, 3);
-                correctAnswerArray = placer.PlaceCalculatePoints(1);
-                obsructedPointsArray = placer.PlaceObstructedCalculatePoints(2);
+                //correctAnswerArray = placer.PlacePoints(1);
+                //obsructedPointsArray = placer.PlacePoints(2, true);
                 correctAnswerX = GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3);
                 correctAnswerY = GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale, 3);
                 correctAnswerString = "X: " + correctAnswerX + ", Y: " + correctAnswerY;

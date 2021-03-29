@@ -8,117 +8,114 @@ using UnityEngine.UI;
 
 public class ObjectPlacer : MonoBehaviour
 {
-    [Header("Prefabs")]
-    public GameObject calculatePoint;
-    public GameObject obstructedCalculatePoint;
-    public GameObject[] obstaclePrefabs;
-    public GameObject[] mobileObstaclePrefabs;
-    public GameManager gm;
+    [Header("Point Parameters")]
+    [Range(0,10)]
+    [SerializeField] private int nrOfCalculatePoints = 0;
+    [Range(0, 10)]
+    [SerializeField] private int nrOfObstructionPoints = 0;
+    [Tooltip("Should the points be spawned in a loop? if yes, the above sliders are ignored")]
+    [SerializeField] private bool placeLoopedPoints = false;
+    [SerializeField] private float loopedPointsEdgeLength = 1f;
+    [SerializeField] private Vector2 loopedStartPos = Vector2.zero;
+    [SerializeField] private float loopedMaxDistanceError = 0.001f;
+
+    [Header("Obstacle Parameters")]
+    [SerializeField] private bool PlaceObstacleBtwnPoints = false;
+    [Range(0,10)]
+    [SerializeField] private int nrOfObstacles = 0;
+    [Range(0, 10)]
+    [SerializeField] private int nrOfMobileObstacles = 0;
+    [Tooltip("The max amount of rotation an obstacle can have")]
+    [Range(0,180)]
+    [SerializeField]private float maxRandomAngle = 0;
 
     [Header("Randomized Constrains")]
-    //public bool placeBtwnPoints;
-    public float minDistanceBtwPoints;
-    public float minDistanceToObstacles;
-    public float minDistanceFromOrigin;
-    public Vector2 minOffset;
-    public Vector2 maxOffset;
-    public float maxRandomAngle;
-    public Vector2 loopedStartPos;
-    public float maxDistanceError = 0.001f;
-    
+    [SerializeField] private float minDistanceBtwPoints = 1;
+    [SerializeField] private float minDistanceToObstacles = 1;
+    [Tooltip("The minimum distance each object should have from the origin")]
+    [SerializeField] private float minDistanceFromOrigin = 1;
+    [Tooltip("The minimum offset each point should be away from the edge of the playfield")]
+    [SerializeField] private Vector2 minOffsetFromEdge = Vector2.one;
+    [Tooltip("The maximum offset each point should be away from the edge of the playfield")]
+    [SerializeField] private Vector2 maxOffsetFromEdge = Vector2.one;
+    [SerializeField] private int maxItterations = 1000;
 
 
+    [System.Serializable]
+    private class Prefabs
+    {
+        public GameObject calculatePointPrefab;
+        public GameObject obstructedCalculatePointPrefab;
+        public GameObject[] obstaclePrefabs;
+        public GameObject[] mobileObstaclePrefabs;
+    }
+    [Header("Prefabs")]
+    [SerializeField]
+    private Prefabs prefabs;
+
+    //public variables for other scripts
+    [HideInInspector]
+    public float[] calculatePointsPositions;
     [HideInInspector]
     public List <GameObject> calculatePoints = new List <GameObject>();
+    [HideInInspector]
     public List<GameObject> obstructedCalculatePoints = new List<GameObject>();
+
+    //private objects
     private List<GameObject> obstacles = new List<GameObject>();
     private int nrofPointsPlaced = 0;
+    private GameManager gm;
+    private bool hasStarted = false;
 
-    
+
+    // Start is called before the first frame update
+    private void Start()
+    {
+        if (!hasStarted) StartSetup(); //only calls when Start() hasn't gone yet
+    }
+
+    //starts the setup proces where points and obstacles are placed according to the parameters
+    public void StartSetup()
+    {
+        hasStarted = true;
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        if (!placeLoopedPoints)
+        {
+            if(nrOfCalculatePoints > 0) calculatePointsPositions = PlacePoints(nrOfCalculatePoints, false);
+            if(nrOfObstructionPoints>0) PlacePoints(nrOfObstructionPoints, true);
+        }
+        else
+        {
+            calculatePointsPositions = PlaceLoopedPoints(loopedPointsEdgeLength);
+        }
+        if (PlaceObstacleBtwnPoints) PlaceObstacleBtwn();
+        if (nrOfObstacles > 0) PlaceObstacles(nrOfObstacles);
+        if (nrOfMobileObstacles > 0) PlaceObstacles(nrOfMobileObstacles, true);
+    }
+
     // generates a set amount of random points, making sure there is no overlap between any point or obstacle
     // and returns all the coordinates in an array so it can be evaluated by the questions
-    public float[] PlaceCalculatePoints(int amount)
+    private float[] PlacePoints(int amount, bool obstructed = false)
     {
-        if(calculatePoints.Count > 0)
-        {
-            return (ChangeCalculatePoints());
-        }
         float[] positions = new float[amount * 2];
         for (int i = 0; i < amount; i++)
         {
-            GameObject newPoint = Instantiate(calculatePoint, FarEnoughRandomPoint(), Quaternion.identity);
-            calculatePoints.Add(newPoint);
+            GameObject newPoint = Instantiate(obstructed? prefabs.obstructedCalculatePointPrefab:prefabs.calculatePointPrefab, FarEnoughRandomPoint(), Quaternion.identity);
+            if (!obstructed) calculatePoints.Add(newPoint);
+            else obstructedCalculatePoints.Add(newPoint);
+
             newPoint.GetComponent<PolygonPointController>().SetNameText(nrofPointsPlaced);
             nrofPointsPlaced++;
 
             positions[i * 2] = newPoint.transform.position.x;
             positions[(i * 2) + 1] = newPoint.transform.position.y;
-        }
-
-        return positions;
-    }
-
-    // changes the position of the points and returns the updated value
-    public float[] ChangeCalculatePoints()
-    {
-        float[] positions = new float[calculatePoints.Count * 2];
-        for (int i = 0; i < calculatePoints.Count; i++)
-        {
-            calculatePoints[i].transform.position = Vector2.zero;
-        }
-
-        for (int i = 0; i < calculatePoints.Count; i++)
-        {
-            calculatePoints[i].transform.position = FarEnoughRandomPoint();
-            positions[i * 2] = calculatePoints[i].transform.position.x;
-            positions[(i * 2) + 1] = calculatePoints[i].transform.position.y;
-        }
-
-        return positions;
-    }
-    // places obstructed points
-    public float[] PlaceObstructedCalculatePoints(int amount)
-    {
-        if (obstructedCalculatePoints.Count > 0)
-        {
-            return (ChangeCalculatePoints());
-        }
-        float[] positions = new float[amount * 2];
-        for (int i = 0; i < amount; i++)
-        {
-            GameObject newPoint = Instantiate(obstructedCalculatePoint, FarEnoughRandomPoint(), Quaternion.identity);
-            obstructedCalculatePoints.Add(newPoint);
-            newPoint.GetComponent<PolygonPointController>().SetNameText(nrofPointsPlaced);
-            nrofPointsPlaced++;
-
-            positions[i * 2] = newPoint.transform.position.x;
-            positions[(i * 2) + 1] = newPoint.transform.position.y;
-        }
-
-        return positions;
-    }
-
-    // changes the position of the points and returns the updated value
-    public float[] ChangeObstructedCalculatePoints()
-    {
-        float[] positions = new float[obstructedCalculatePoints.Count * 2];
-        for (int i = 0; i < obstructedCalculatePoints.Count; i++)
-        {
-            obstructedCalculatePoints[i].transform.position = Vector2.zero;
-        }
-
-        for (int i = 0; i < obstructedCalculatePoints.Count; i++)
-        {
-            obstructedCalculatePoints[i].transform.position = FarEnoughRandomPoint();
-            positions[i * 2] = obstructedCalculatePoints[i].transform.position.x;
-            positions[(i * 2) + 1] = obstructedCalculatePoints[i].transform.position.y;
         }
 
         return positions;
     }
 
     //places the calculate points in a looped position
-    public float[] placeLoopedPoints(float edgeLength)
+    private float[] PlaceLoopedPoints(float edgeLength)
     {
         int[,] angleArray = new int[,] {    { 90, 90, 180, 90, 90,180 }, { 90, 90, 225, 45, 135, 135 }, { 45, 135, 180, 45, 135, 180 }, { 90, 90, 135, 135,45, 225 },
                                             { 135, 135, 90, 135, 135, 90 }, { 90, 135, 135, 90, 135, 135 }, { 135, 90, 135, 135, 90, 135 } }; //{ 135,45, 180, 135,45, 180 },
@@ -141,11 +138,9 @@ public class ObjectPlacer : MonoBehaviour
             else if(i == 1) //place the first point 45 deg away to start the loop
             {
                 position = loopedStartPos;
-                //position = loopedStartPos + Vector2.right * edgeLength;
             }
             else if (i == 2) //place the first point 45 deg away to start the loop
             {
-                //position = loopedStartPos + Vector2.one.normalized * edgeLength;
                 position = calculatePoints[i - 1].transform.position + Vector3.right * edgeLength;
             }
             else if(i > 2 && i < 7)
@@ -157,13 +152,13 @@ public class ObjectPlacer : MonoBehaviour
                 position = calculatePoints[i-1].transform.position;
             }
 
-            GameObject newPoint = Instantiate(calculatePoint, position, Quaternion.identity);
+            GameObject newPoint = Instantiate(prefabs.calculatePointPrefab, position, Quaternion.identity);
             if(i> 2)
             {
                 newPoint.transform.RotateAround(calculatePoints[i - 1].transform.position, Vector3.back, angleArray[shape, i-1]);
             }
 
-            if(i >1) newPoint.transform.position += new Vector3(Random.Range(-1f,1f) * maxDistanceError , Random.Range(-1f, 1f) * maxDistanceError, 0);
+            if(i >1) newPoint.transform.position += new Vector3(Random.Range(-1f,1f) * loopedMaxDistanceError, Random.Range(-1f, 1f) * loopedMaxDistanceError, 0);
             calculatePoints.Add(newPoint);
             newPoint.GetComponent<PolygonPointController>().SetNameText( i==0? 0 : nrofPointsPlaced);
             nrofPointsPlaced++;
@@ -175,56 +170,34 @@ public class ObjectPlacer : MonoBehaviour
         return positions;
     }
 
-    public Vector2[] GetCoordinates()
+    // Place a set amount of random obstacles, mobile= wether to place te mobile obstacles 
+    private void PlaceObstacles(int amount, bool mobile = false)
     {
-        Vector2[] coordinates = new Vector2[calculatePoints.Count];
-
-        for (int i = 0; i < calculatePoints.Count; i++)
+        for (int i = 0; i < amount; i++)
         {
-            coordinates[i] = calculatePoints[i].transform.position;
-        }
-
-        return coordinates;
-    }
-
-
-    //places a set amount of obstacles keeping in mind the minimum distance
-    public void PlaceObstacles (int amount)
-    {
-        if(obstacles.Count > 0)
-        {
-            ChangeObstacles();
-            
-        }
-        else
-        {
-            for (int i = 0; i < amount; i++)
-            {
-                GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0,obstaclePrefabs.Length)], FarEnoughRandomPoint(), RandomAngle());
-                obstacles.Add(newObstacle);
-                
-            }
-        }
-        
-    }
-
-    //changes the location of the random obstacles
-    public void ChangeObstacles()
-    {
-        for (int i = 0; i < obstacles.Count; i++)
-        {
-            obstacles[i].transform.position = Vector2.zero;
-        }
-
-        for (int i = 0; i < obstacles.Count; i++)
-        {
-            obstacles[i].transform.SetPositionAndRotation(FarEnoughRandomPoint(), RandomAngle());
+            GameObject newObstacle = Instantiate(
+                mobile? prefabs.mobileObstaclePrefabs[Random.Range(0, prefabs.mobileObstaclePrefabs.Length)]: prefabs.obstaclePrefabs[Random.Range(0, prefabs.obstaclePrefabs.Length)],
+                FarEnoughRandomPoint(),
+                RandomAngle()
+            );
+            obstacles.Add(newObstacle);
         }
     }
 
+    // place an obstacle in between the calculate points
+    private void PlaceObstacleBtwn()
+    {
+        for (int i = 1; i < calculatePoints.Count; i++)
+        {
+            Vector3 obsPosition;
+            obsPosition = (calculatePoints[i - 1].transform.position + calculatePoints[i].transform.position) / 2f;
+            GameObject newObstacle = Instantiate(prefabs.obstaclePrefabs[Random.Range(0, prefabs.obstaclePrefabs.Length)], obsPosition, RandomAngle());
+            obstacles.Add(newObstacle);
+        }
+    }
 
     //returns a random position that is far enough from all the other obstacles and points
-    public Vector2 FarEnoughRandomPoint()
+    private Vector2 FarEnoughRandomPoint()
     {
         float minDistPoints = Mathf.Infinity;
         float minDistObstacles = Mathf.Infinity;
@@ -232,15 +205,15 @@ public class ObjectPlacer : MonoBehaviour
         bool repeat = true;
 
         Vector2 randPos;
-        int a = 0;
+        int maxRepeat = 0;
         do
         {
-            randPos = new Vector2(Random.Range(gm.screenMin.x + minOffset.x, gm.screenMax.x - maxOffset.x) , Random.Range(gm.screenMin.y + minOffset.y, gm.screenMax.y - maxOffset.y));
+            randPos = new Vector2(Random.Range(gm.screenMin.x + minOffsetFromEdge.x, gm.screenMax.x - maxOffsetFromEdge.x) , Random.Range(gm.screenMin.y + minOffsetFromEdge.y, gm.screenMax.y - maxOffsetFromEdge.y));
             minDistPoints = Mathf.Infinity;
             minDistObstacles = Mathf.Infinity;
             minDistObstructed = Mathf.Infinity;
- 
-            a++;
+
+            maxRepeat++;
 
             if (Vector2.Distance(randPos, Vector2.zero) < minDistanceFromOrigin)
             {
@@ -281,122 +254,42 @@ public class ObjectPlacer : MonoBehaviour
             }
 
             if ((minDistPoints >= minDistanceBtwPoints) && (minDistObstructed >= minDistanceBtwPoints) && (minDistObstacles >= minDistanceToObstacles))
-                {
-                repeat = false;
-                }
-
-        } while (repeat && a < 1000);
-        //Debug.Log(randPos + " = pos, " + gm.screenMin + ", " + gm.screenMax);
-        return randPos;
-    }
-    public Vector2 FarEnoughObstacle()    //returns a random position that is far enough from all the other obstacles and points
-    {
-        float minDistPoints = Mathf.Infinity;
-        float minDistObstacles = Mathf.Infinity;
-        float minDistObstructed = Mathf.Infinity;
-        bool repeat = true;
-
-        Vector2 randPos;
-        int a = 0;
-        do
-        {
-            randPos = new Vector2(Random.Range(gm.screenMin.x + minOffset.x, gm.screenMax.x - maxOffset.x), Random.Range(gm.screenMin.y + minOffset.y, gm.screenMax.y - maxOffset.y));
-            minDistPoints = Mathf.Infinity;
-            minDistObstacles = Mathf.Infinity;
-            minDistObstructed = Mathf.Infinity;
-
-            a = a + 1;
-
-            for (int i = 0; i < calculatePoints.Count; i++)
-            {
-                if (Vector2.Distance(randPos, calculatePoints[i].transform.position) < minDistPoints)
-                {
-                    minDistPoints = Vector2.Distance(randPos, calculatePoints[i].transform.position);
-
-                }
-            }
-            if (obstructedCalculatePoints.Count > 0)
-            {
-                for (int i = 0; i < obstructedCalculatePoints.Count; i++)
-                {
-                    if (Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position) < minDistObstructed)
-                    {
-                        minDistObstructed = Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position);
-                    }
-                }
-            }
-
-            if (obstacles.Count > 0)
-            {
-                for (int i = 0; i < obstacles.Count; i++)
-                {
-                    if (Vector2.Distance(randPos, obstacles[i].transform.position) < minDistObstacles)
-                    {
-                        minDistObstacles = Vector2.Distance(randPos, obstacles[i].transform.position);
-                    }
-                }
-            }
-
-            if ((minDistPoints >= minDistanceToObstacles) && (minDistObstructed >= minDistanceToObstacles) && (minDistObstacles >= minDistanceToObstacles))
             {
                 repeat = false;
             }
 
-        } while (repeat && a < 1000);
+        } while (repeat && maxRepeat < maxItterations);
 
         return randPos;
     }
 
-    public Quaternion RandomAngle()    //returns a random rotationvalue
+    //returns a random rotationvalue
+    private Quaternion RandomAngle()    
     {
         return Quaternion.Euler(0, 0, Random.Range(-maxRandomAngle, maxRandomAngle));
     }
 
-    //public void PlaceObstacleBtwn(int amount)
-    //{
-    //    for (int i = 0; i < amount; i++)
-    //    {
-    //        Vector3 obsPosition;
-    //        if (i == 0) obsPosition = calculatePoints[0].transform.position / 2f;
-    //        else obsPosition = (calculatePoints[i-1].transform.position + calculatePoints[i].transform.position) / 2f;
-    //        GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], obsPosition, RandomAngle());
-    //        obstacles.Add(newObstacle);
-    //    }
-        
-    //}
-
-    public void PlaceObstacleBtwn() // compute location in between points
+    //returns a Vector2 array of the calculate points
+    public Vector2[] GetCoordinates()
     {
-        for (int i = 1; i < calculatePoints.Count; i++)
-        {
-            Vector3 obsPosition;
-            obsPosition = (calculatePoints[i - 1].transform.position + calculatePoints[i].transform.position) / 2f;
-            GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], obsPosition, RandomAngle());
-            newObstacle.transform.localScale = new Vector3(Random.Range(10, 15), Random.Range(10, 15), Random.Range(10, 15));
+        Vector2[] coordinates = new Vector2[calculatePoints.Count];
 
-            obstacles.Add(newObstacle);
+        for (int i = 0; i < calculatePoints.Count; i++)
+        {
+            coordinates[i] = calculatePoints[i].transform.position;
         }
 
+        return coordinates;
     }
 
-    public void PlaceRandomObstacles(int amount) // compute random location obstacle
+    //set the desired points and obstacles for the placer
+    public void SetParameters(int nrPoints, int nrObsPoints, bool loop, int nrObs, int nrmobileObs)
     {
-        for (int i = 0; i < amount ; i++)
-        {
-            GameObject newObstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], FarEnoughObstacle(), RandomAngle());
-            newObstacle.transform.localScale = new Vector3(Random.Range(10,15),Random.Range(10,15), Random.Range(10,15));
-            obstacles.Add(newObstacle);
-        }
-
-    }
-
-    public void PlaceRandomMobileObstacles(int amount) // compute random location obstacle
-    {
-        for (int i = 0; i < amount; i++)
-        {
-            GameObject newObstacle = Instantiate(mobileObstaclePrefabs[Random.Range(0, mobileObstaclePrefabs.Length)], FarEnoughObstacle(), RandomAngle());
-            obstacles.Add(newObstacle);
-        }
-
+        nrOfCalculatePoints = nrPoints;
+        nrOfObstructionPoints = nrObsPoints;
+        placeLoopedPoints = loop;
+        nrOfObstacles = nrObs;
+        nrOfMobileObstacles = nrmobileObs;
+        StartSetup();
     }
 }

@@ -1458,6 +1458,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7882142649180327795}
     m_Modifications:
+    - target: {fileID: 760579771142992738, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: assenkruis
+      value: 
+      objectReference: {fileID: 5192863266714098273}
     - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
         type: 3}
       propertyPath: obstaclePrefabs.Array.size
@@ -1500,6 +1505,36 @@ PrefabInstance:
         type: 3}
       propertyPath: maxOffset.x
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: minOffsetFromEdge.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: maxOffsetFromEdge.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: minOffsetFromEdge.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: maxOffsetFromEdge.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: minDistanceFromOrigin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963890913328120984, guid: 2338229750975421abe8cad584921f17,
+        type: 3}
+      propertyPath: minDistanceToObstacles
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5963890913328120985, guid: 2338229750975421abe8cad584921f17,
         type: 3}
@@ -1917,10 +1952,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3481148181457255272, guid: dbdd4d9549106460b948b99be44dbab3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6918131387003841042, guid: dbdd4d9549106460b948b99be44dbab3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6918131387003841042, guid: dbdd4d9549106460b948b99be44dbab3,
+        type: 3}
+      propertyPath: m_Name
+      value: Base Axis
+      objectReference: {fileID: 0}
     - target: {fileID: 8989287511517511818, guid: dbdd4d9549106460b948b99be44dbab3,
         type: 3}
       propertyPath: m_Name
       value: TopDown Objects
       objectReference: {fileID: 0}
+    - target: {fileID: 9069288770151683058, guid: dbdd4d9549106460b948b99be44dbab3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbdd4d9549106460b948b99be44dbab3, type: 3}
+--- !u!1 &5192863266714098273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3481148181457255272, guid: dbdd4d9549106460b948b99be44dbab3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8673726670029103369}
+  m_PrefabAsset: {fileID: 0}

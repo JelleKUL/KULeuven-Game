@@ -7,15 +7,15 @@ using UnityEngine.UI;
 
 //*********** The WaterpassingQuestions sets the required parameters for a specific question ******************//
 
-
+[RequireComponent(typeof(WaterPassingController))]
 public class WaterpassingQuestions : BaseQuestions
 {
     public enum AnswerType { Height, Distance, ErrorAngle, Table, none }
-
     [Tooltip("the type of answer a player has to enter")]
     [SerializeField]
     private AnswerType answerType;
 
+    //initiate scripts
     private WaterPassingController waterpassing;
 
     // awake is called before start
@@ -27,12 +27,12 @@ public class WaterpassingQuestions : BaseQuestions
     }
     
     //sets the parameters for the type of question
-    public void SetQuestionType()//QuestionType vraag)
+    protected override void SetQuestionType()//QuestionType vraag)
     {
         if (controlController)
         {
             waterpassing.StartSetup();
-            correctAnswer = CorrectAnswer();
+            correctAnswer = GetCorrectAnswer()[0];
             if (GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + correctAnswer + " m of gon");
         }
         
@@ -62,7 +62,7 @@ public class WaterpassingQuestions : BaseQuestions
 
         else if(answerType != AnswerType.none)
         {
-            if (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), CorrectAnswer(), errorMargin)) //CorrectAnswer()))
+            if (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), GetCorrectAnswer()[0], errorMargin)) //CorrectAnswer()))
             {
                 Debug.Log("Correct answer!");
                 gm.IncreaseScore(scoreIncrease, 1);
@@ -73,7 +73,7 @@ public class WaterpassingQuestions : BaseQuestions
                 questionUI.SetFalseAnswer("Incorrect answer...");
                 if (!AddTry())
                 {
-                    questionUI.ShowCorrectAnswer(InputType.h, CorrectAnswer(), "Too many tries...");
+                    questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], "Too many tries...");
                 }
             }
         }
@@ -85,7 +85,7 @@ public class WaterpassingQuestions : BaseQuestions
         base.ShowCorrectAnswer();
 
         Debug.Log("showing answer");
-        questionUI.ShowCorrectAnswer(InputType.h, CorrectAnswer(), ID_answerText);
+        questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], ID_answerText);
 
         if (answerType == AnswerType.Table) //SoortVraag == QuestionType.KringWaterpassing || SoortVraag == QuestionType.Zijslag)
         {
@@ -93,21 +93,21 @@ public class WaterpassingQuestions : BaseQuestions
         }
     }
 
-    public float CorrectAnswer()
+    public override List <float> GetCorrectAnswer()
     {
         switch (answerType)
         {
             case AnswerType.Height:
-                return GameManager.RoundFloat(waterpassing.correctHeight, 3);
+                return new List<float>() { GameManager.RoundFloat(waterpassing.correctHeight, 3) };
 
             case AnswerType.Distance:
-                return GameManager.RoundFloat(waterpassing.correctDistance * GameManager.worldScale, 1);
+                return new List<float>() { GameManager.RoundFloat(waterpassing.correctDistance * GameManager.worldScale, 1) };
 
             case AnswerType.ErrorAngle:
-                return GameManager.RoundFloat(waterpassing.correctScaledErrorAngle * 4 / 3.6f, 3);
+                return new List<float>() { GameManager.RoundFloat(waterpassing.correctScaledErrorAngle * 4 / 3.6f, 3) };
 
             default:
-                return 0f;
+                return new List<float> { 0f };
         }
     }
 }
