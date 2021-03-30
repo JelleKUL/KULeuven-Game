@@ -93,7 +93,8 @@ public class GameManager : MonoBehaviour
 
     //score Control
 
-    // increases the score by a set amount
+    // increases the score by a set amount todo update
+    [System.Obsolete]
     public void IncreaseScore(int amount, int campaignNr)
     {
         int sceneNr = SceneManager.GetActiveScene().buildIndex;

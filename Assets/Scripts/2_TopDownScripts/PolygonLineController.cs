@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //*********** The PolygonLineController manages the Top down lines and displays all the measuring information ******************//
+public enum ErrorType { Base, Ppm, Angle}
 
 [RequireComponent(typeof(LineRenderer))]
 public class PolygonLineController : MonoBehaviour
@@ -18,19 +19,10 @@ public class PolygonLineController : MonoBehaviour
     [SerializeField] private bool showSmallErrors;
 
     [Header("Error Parameters")]
-    [SerializeField] private bool lockBaseDistanceError;
-    [Tooltip("the base measure error of distance")]
-    [Range(0, 5)]
-    [SerializeField] private float baseDistanceError = 0f;
-    [SerializeField] private bool lockPpmDistanceError;
-    [Tooltip("the ppm measure error of distance")]
-    [Range(0, 5)]
-    [SerializeField] private float ppmDistanceError = 0f;
-    [SerializeField] private bool lockAngleError;
-    [Tooltip("the measure error of the angle")]
-    [Range(0, 5)]
-    [SerializeField] private float angleError = 0f;
-    
+    [SerializeField] private ErrorClass baseError;
+    [SerializeField] private ErrorClass ppmError;
+    [SerializeField] private ErrorClass angleError;
+
     [Header("Visual Parameters")]
     [Range(0, 100)]
     [Tooltip("The visual size modifier of the error ellipses")]
@@ -42,17 +34,34 @@ public class PolygonLineController : MonoBehaviour
     [SerializeField] private bool showStartLength;
     [SerializeField] private bool showEndLength = true;
 
+    [System.Serializable]
+    private class ErrorClass
+    {
+        [Tooltip("Can the error be changed at runtime by an other script?")]
+        public bool lockError;
+        [Tooltip("the base measure error of distance")]
+        [Range(0, 5)]
+        public float error = 0f;
+        [Tooltip("Should the error be randomized, if so, it ignores the above value")]
+        public bool randomizeError = true;
+        [Tooltip("the min and max value of the random error range")]
+        public Vector2 randomErrorRange = Vector2.one;
+    }
 
     [System.Serializable]
     private class Prefabs
     {
         public GameObject linePoint;
         public GameObject firstPoint;
+        public Material fullLine;
+        public Material dottedLine;
+    }
+    [System.Serializable]
+    private class LayerMasks
+    {
         public LayerMask pointMask;
         public LayerMask Obstacles;
         public LayerMask ObstructionPoints;
-        public Material fullLine;
-        public Material dottedLine;
     }
     [System.Serializable]
     private class SceneObjects
@@ -67,6 +76,8 @@ public class PolygonLineController : MonoBehaviour
     [SerializeField]
     [Space(20)]
     private Prefabs prefabs;
+    [SerializeField]
+    private LayerMasks layerMasks;
     [SerializeField]
     private SceneObjects sceneObjects;
 
@@ -99,6 +110,11 @@ public class PolygonLineController : MonoBehaviour
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         line = GetComponent<LineRenderer>();
 
+        // set random distance (fixed + ppm) and angle error
+        if (baseError.randomizeError)  baseError.error  = Random.Range(baseError.randomErrorRange.x, baseError.randomErrorRange.y);
+        if (ppmError.randomizeError)   ppmError.error   = Random.Range(ppmError.randomErrorRange.x, ppmError.randomErrorRange.y);
+        if (angleError.randomizeError) angleError.error = Random.Range(angleError.randomErrorRange.x, angleError.randomErrorRange.y);
+
         // sets the type of line renderer
         if (showLengths || showStartLength)
         {
@@ -121,32 +137,31 @@ public class PolygonLineController : MonoBehaviour
     {
         if (sceneObjects.baseDistanceErrorSlider)
         {
-            sceneObjects.baseDistanceErrorSlider.value = baseDistanceError;
-            sceneObjects.baseDistanceErrorSlider.interactable = !lockBaseDistanceError;
+            sceneObjects.baseDistanceErrorSlider.value = baseError.error;
+            sceneObjects.baseDistanceErrorSlider.interactable = !baseError.lockError;
         }
         if (sceneObjects.ppmDistanceErrorSlider)
         {
-            sceneObjects.ppmDistanceErrorSlider.value = ppmDistanceError;
-            sceneObjects.ppmDistanceErrorSlider.interactable = !lockPpmDistanceError;
+            sceneObjects.ppmDistanceErrorSlider.value = ppmError.error;
+            sceneObjects.ppmDistanceErrorSlider.interactable = !ppmError.lockError;
         }
         if (sceneObjects.angleErrorSlider)
         {
-            sceneObjects.angleErrorSlider.value = angleError;
-            sceneObjects.angleErrorSlider.interactable = !lockAngleError;
+            sceneObjects.angleErrorSlider.value = angleError.error;
+            sceneObjects.angleErrorSlider.interactable = !angleError.lockError;
         }
     }
 
     // Update is called once per frame
     private void Update()
     {
-        // checks is mousebutton is clicked and sets the point to that position or adds a new point
+        // checks if mousebutton is clicked and sets the point to that position or adds a new point
         SetPointsToMouse();
 
         //draws the line and sets the values of the points.
         //also stops when it encounters an object.
         DrawLineAndValues();
     }
-
 
     //sets the point to the mouse position
     private void SetPointsToMouse()
@@ -164,35 +179,29 @@ public class PolygonLineController : MonoBehaviour
                     AddPoint(gm.SetObjectToMouse(Input.mousePosition, 0));
                     UpdateErrors();
                 }
-
             }
             else
             {
                 hitObject.transform.position = gm.SetObjectToMouse(Input.mousePosition, 0);
                 UpdateErrors();
             }
-
         }
         else holdingObject = false;
 
         if (Input.GetMouseButtonDown(1)){
             RemovePoint();
         }
-
-
     }
 
     //returns the gamobject the mouse has hit
     private GameObject CastMouseRay()
     {
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), 100, prefabs.pointMask);
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), 100, layerMasks.pointMask);
 
         if (rayHit.collider != null)
         {
             holdingObject = true;
-            //Debug.Log(rayHit.transform.gameObject.name);
             return rayHit.transform.gameObject;
-
         }
         holdingObject = false;
         return null;
@@ -219,7 +228,7 @@ public class PolygonLineController : MonoBehaviour
         {
             line.SetPosition(i, linePoints[i].transform.position);
 
-            //sets the lengthvalues of the points
+            //sets the lengthvalues of the points taking into account potential overlap of multiple points
             if (showLengths && i != 0)
             {
                 bool overlap = false;
@@ -235,36 +244,25 @@ public class PolygonLineController : MonoBehaviour
                         {
                             if (linePoints[j + 1].transform.position == linePoints[i - 1].transform.position) overlap = true;
                         }
-
-                        
-
-                        
                     }
-
                 }
                 if (!overlap)
                 {
-                    if((i == linePoints.Count - 1 || i == 1) && (!showEndLength))
-                    {
-                        
-                    }
-                    else
+                    if((i != linePoints.Count - 1 && i != 1) || showEndLength)
                     {
                         linePoints[i].SetDistanceText(linePoints[i - 1].transform.position);
                     }
                 }
-
             }
+
             //sets the errorEllipses
             if (showEllipses && i != 0)
             {
                 Vector3 prevEllipse = linePoints[i - 1].GetEllipseInfo();
-                linePoints[i].SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, baseDistanceError * visualEllipseSizeModifier, angleError * visualEllipseSizeModifier); // multiplied by 50 to increase visual size
+                linePoints[i].SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, baseError.error * visualEllipseSizeModifier, angleError.error * visualEllipseSizeModifier);
 
-                if (i == linePoints.Count - 1) //&& !CheckVisible(linePoints[i - 1], linePoints[i], Obstacles)
+                if (i == linePoints.Count - 1)
                 {
-                    //Vector3 ellips = thisPoint.GetEllipseInfo(); // the ellips will be 50 times to large !
-                    //biggestEllips = ellips.x * ellips.y * Mathf.PI / 4f;
                     if (sceneObjects.errorEllipsDisplay)
                     {
                         sceneObjects.errorEllipsDisplay.text = GetSigmaA().ToString();
@@ -273,19 +271,17 @@ public class PolygonLineController : MonoBehaviour
             }
 
             //checks if the line intersects with an obstacle
-            if (i != linePoints.Count - 1 && !CheckVisible(linePoints[i], linePoints[i + 1], prefabs.Obstacles))
+            if (i != linePoints.Count - 1 && !CheckVisible(linePoints[i], linePoints[i + 1], layerMasks.Obstacles))
             {
-
                 line.positionCount = i + 2;
                 line.SetPosition(i + 1, obstacleHitPoint);
 
-                break;
-
+                break; //breaks the current loop to skip the next points
             }
             //sets the anglevalues of the points
             if (showAngles && i != 0 && i != linePoints.Count - 1)
             {
-                if (CheckVisible(linePoints[1], linePoints[1], prefabs.ObstructionPoints))
+                if (CheckVisible(linePoints[1], linePoints[1], layerMasks.ObstructionPoints))
                 {
                     bool overlap = false;
                     for (int j = 0; j < i; j++)
@@ -294,18 +290,14 @@ public class PolygonLineController : MonoBehaviour
                         {
                             overlap = true;
                         }
-
                     }
                     if (overlap) linePoints[i].displayRadiusModifier = 1.3f;
                     else linePoints[i].displayRadiusModifier = 1;
 
                     linePoints[i].SetAngleText(linePoints[i - 1].transform.position, linePoints[i + 1].transform.position);
                 }
-                
             }
-
             line.positionCount = linePoints.Count;
-
         }
     }
 
@@ -324,9 +316,9 @@ public class PolygonLineController : MonoBehaviour
             {
                 float dist = Vector2.Distance(linePoints[i+1].transform.position, linePoints[i].transform.position) * GameManager.worldScale;
 
-                sigmaD      += baseDistanceError + (dist * ppmDistanceError / 1000f); // correctie m->mm
-                sigmaH      += dist * angleError / 100f * 1.5f;
-                sigmaHExact += dist * angleError / 100f * (Mathf.PI / 2f);
+                sigmaD      += baseError.error + (dist * ppmError.error / 1000f); // correctie m->mm
+                sigmaH      += dist * angleError.error / 100f * 1.5f;
+                sigmaHExact += dist * angleError.error / 100f * (Mathf.PI / 2f);
             }
             sigmaA      = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaH, 2));
             sigmaAExact = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaHExact, 2));
@@ -338,9 +330,9 @@ public class PolygonLineController : MonoBehaviour
 
             float dist = Vector2.Distance(pointP, startPoint) * GameManager.worldScale;
 
-            sigmaD      = baseDistanceError + (dist * ppmDistanceError / 1000f);    // correctie m->mm
-            sigmaH      = dist * angleError / 100f * 1.5f;                          // correctie m->mm
-            sigmaHExact = dist * angleError / 100f * (Mathf.PI / 2f);               // correctie m->mm
+            sigmaD      = baseError.error + (dist * ppmError.error / 1000f);    // correctie m->mm
+            sigmaH      = dist * angleError.error / 100f * 1.5f;                // correctie m->mm
+            sigmaHExact = dist * angleError.error / 100f * (Mathf.PI / 2f);     // correctie m->mm
 
             sigmaA      = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaH, 2));
             sigmaAExact = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaHExact, 2));
@@ -351,7 +343,8 @@ public class PolygonLineController : MonoBehaviour
     // checks if next point is visible
     private bool CheckVisible(PolygonPointController point, PolygonPointController nextPoint, LayerMask layerMask)
     {
-        RaycastHit2D hit = Physics2D.Raycast(point.transform.position, nextPoint.transform.position - point.transform.position, (nextPoint.transform.position - point.transform.position).magnitude, layerMask);
+        Vector3 direction = nextPoint.transform.position - point.transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(point.transform.position, direction.normalized, direction.magnitude, layerMask);
 
         if (hit.collider != null)
         {
@@ -361,14 +354,9 @@ public class PolygonLineController : MonoBehaviour
         return true;
     }
 
-    //sets the parameters to a specific value so it matches the question
+    //sets the parameters to a specific value so it matches the question and starts the setup
     public void SetVisibles(bool lock1stPoint, bool ellipses, bool angles, bool lengths, bool startAngle, bool startLength, int nrPoints)
     {
-        // set random distance (fixed + ppm) and angle error
-        baseDistanceError = Random.Range(1, 5); 
-        ppmDistanceError  = Random.Range(1, 5);
-        angleError        = Random.Range(1, 5);
-
         lockFirstPoint = lock1stPoint;
         showEllipses = ellipses;
         showLengths = lengths;
@@ -376,10 +364,9 @@ public class PolygonLineController : MonoBehaviour
         showStartAngle = startAngle;
         showStartLength = startLength;
         maxPoints = nrPoints;
+
+        StartSetup();
     }
-
- 
-
 
     //adds a new point
     private void AddPoint(Vector2 pos)
@@ -391,20 +378,20 @@ public class PolygonLineController : MonoBehaviour
         if (linePoints.Count == 0)
         {
             newPoint = Instantiate(prefabs.firstPoint, pos, Quaternion.identity).GetComponent<PolygonPointController>();
-            newPoint.SetNameNrText(line.positionCount);
+            newPoint.SetNrText(line.positionCount);
             linePoints.Add(newPoint);
         }
 
         else if (startCenterPoint && line.positionCount == 2)
         {
             newPoint = Instantiate(prefabs.linePoint, pos, Quaternion.identity).GetComponent<PolygonPointController>();
-            newPoint.SetNameNrText(line.positionCount);
+            newPoint.SetNrText(line.positionCount);
             linePoints.Insert(0, newPoint);
         }
         else
         {
             newPoint = Instantiate(prefabs.linePoint, pos, Quaternion.identity).GetComponent<PolygonPointController>();
-            newPoint.SetNameNrText(line.positionCount);
+            newPoint.SetNrText(line.positionCount);
             linePoints.Add(newPoint);
         }
 
@@ -431,10 +418,9 @@ public class PolygonLineController : MonoBehaviour
 
             Destroy(removed.gameObject);
         }
-        
-
     }
 
+    //set all the line points to a specific value, useful for predetermined points
     public void SetPoints(float[] positions)
     {
         if(!line) line = GetComponent<LineRenderer>();
@@ -446,8 +432,6 @@ public class PolygonLineController : MonoBehaviour
         }
         AddPoint(new Vector2(positions[2], positions[3]));
         AddPoint(new Vector2(positions[0], positions[1]));
-        //AddPoint(new Vector2(positions[(maxPoints - 1) * 2], positions[(maxPoints - 1) * 2 + 1]));
-
     }
 
     //returs the mapangle between two points
@@ -458,50 +442,68 @@ public class PolygonLineController : MonoBehaviour
         return angle;
     }
 
-    public (float,float,float) GetErrorDH() // compute distance, angle, and sigmaA error for P to A
+    // compute distance, angle, and sigmaA error for P to A
+    public (float,float,float) GetErrorDH() 
     {
         Vector2 startPoint = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
         Vector2 pointP = new Vector2(correctAnswerArray[2], correctAnswerArray[3]);
 
         float d = Vector2.Distance(pointP, startPoint) * GameManager.worldScale;
-        float sigmaD = baseDistanceError + (0.001f * d * ppmDistanceError); // correctie m->mm
-        float sigmaH = 1.5f * d * angleError / 100f;// correctie m->mm
+        float sigmaD = baseError.error + (0.001f * d * ppmError.error); // correctie m->mm
+        float sigmaH = 1.5f * d * angleError.error / 100f;// correctie m->mm
         float errorA = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaD, 2));
 
         return (GameManager.RoundFloat(sigmaD, 1),GameManager.RoundFloat(sigmaH, 1), GameManager.RoundFloat(errorA, 1));
 
     }
 
-    public float GetAngleError()
+    //returns on of the errors
+    public float GetError(ErrorType errorType)
     {
-        return angleError;
+        switch (errorType)
+        {
+            case ErrorType.Base: return baseError.error;
+            case ErrorType.Ppm: return ppmError.error;
+            case ErrorType.Angle: return angleError.error;
+            default: return 0;  
+        }
+    }
+
+    // sets one of the errors
+    public void SetError(ErrorType errorType ,float value)
+    {
+        ErrorClass error;
+        switch (errorType)
+        {
+            case ErrorType.Base: error = baseError;
+                break;
+            case ErrorType.Ppm: error = baseError;
+                break;
+            case ErrorType.Angle: error = baseError;
+                break;
+            default: error = new ErrorClass();
+                break;
+        }
+        if (!error.lockError) error.error = value;
+        else Debug.Log("Angle Error is locked");
     }
     public void SetAngleError(float value)
     {
-        if (!lockAngleError) angleError = value;
+        if (!angleError.lockError) angleError.error = value;
         else Debug.Log("Angle Error is locked");
-    }
-
-    public float GetBaseDistanceError()
-    {
-        return baseDistanceError;
     }
     public void SetBaseDistanceError(float value)
     {
-        if(!lockBaseDistanceError) baseDistanceError = value;
+        if(!baseError.lockError) baseError.error = value;
         else Debug.Log("base Distance error is locked");
-    }
-
-    public float GetPpmDistanceError()
-    {
-        return ppmDistanceError;
     }
     public void SetPpmDistanceError(float value)
     {
-        if(!lockPpmDistanceError) ppmDistanceError = value;
+        if(!ppmError.lockError) ppmError.error = value;
         else Debug.Log("ppm distance error is locked");
     }
-   
+
+    //get specific errors
     public float GetSigmaD() // compute distance error of last linePoint
     {
         return GameManager.RoundFloat(sigmaD, 1);
@@ -532,7 +534,8 @@ public class PolygonLineController : MonoBehaviour
         correctAnswerArray = array;
     }
 
-    public bool CheckPoints() // check whether first and last linepoint are equal to the start (P) and endpoint(A)
+    // check whether first and last linepoint are equal to the start (P) and endpoint(A)
+    public bool CheckPoints() 
     {
         if (correctAnswerArray.Length < 4) return true;
 
@@ -557,7 +560,7 @@ public class PolygonLineController : MonoBehaviour
     {
         for (int i = 0; i < linePoints.Count-1; i++)
         {
-            if (!CheckVisible(linePoints[i], linePoints[i + 1], prefabs.Obstacles))
+            if (!CheckVisible(linePoints[i], linePoints[i + 1], layerMasks.Obstacles))
             {
                 return false;
             }

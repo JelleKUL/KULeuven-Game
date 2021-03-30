@@ -23,26 +23,24 @@ public class WaterpassingQuestions : BaseQuestions
     {
         base.Awake();
         waterpassing = GetComponent<WaterPassingController>();
-        SetQuestionType();//SoortVraag);
+        SetQuestionType();
     }
     
     //sets the parameters for the type of question
-    protected override void SetQuestionType()//QuestionType vraag)
+    protected override void SetQuestionType()
     {
         if (controlController)
         {
             waterpassing.StartSetup();
-            correctAnswer = GetCorrectAnswer()[0];
-            if (GameManager.showDebugAnswer) Debug.Log("Correct antwoord = " + correctAnswer + " m of gon");
+            
         }
-        
+        base.SetQuestionType(); //does the base question stuff like logging
     }
 
     //checks if the given anwser is correct
     public override void CheckAnswerInput()
     {
-        base.CheckAnswerInput();
-
+        //special case: table other type of answer checking
         if(answerType == AnswerType.Table)
         {
             if (waterpassing.CheckTabelAnswer())
@@ -59,37 +57,22 @@ public class WaterpassingQuestions : BaseQuestions
                 Debug.Log("false");
             }
         }
-
-        else if(answerType != AnswerType.none)
+        else
         {
-            if (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), GetCorrectAnswer()[0], errorMargin)) //CorrectAnswer()))
-            {
-                Debug.Log("Correct answer!");
-                gm.IncreaseScore(scoreIncrease, 1);
-                questionUI.ActivateWinMenu();
-            }
-            else
-            {
-                questionUI.SetFalseAnswer("Incorrect answer...");
-                if (!AddTry())
-                {
-                    questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], "Too many tries...");
-                }
-            }
+            base.CheckAnswerInput();
         }
     }
 
     //displays the correct answer
     public override void ShowCorrectAnswer()
     {
-        base.ShowCorrectAnswer();
-
-        Debug.Log("showing answer");
-        questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], ID_answerText);
-
         if (answerType == AnswerType.Table) //SoortVraag == QuestionType.KringWaterpassing || SoortVraag == QuestionType.Zijslag)
         {
             waterpassing.ShowAnswersTabel();
+        }
+        else
+        {
+            base.ShowCorrectAnswer();
         }
     }
 

@@ -13,6 +13,7 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] private int nrOfCalculatePoints = 0;
     [Range(0, 10)]
     [SerializeField] private int nrOfObstructionPoints = 0;
+    [Space(10)]
     [Tooltip("Should the points be spawned in a loop? if yes, the above sliders are ignored")]
     [SerializeField] private bool placeLoopedPoints = false;
     [SerializeField] private float loopedPointsEdgeLength = 1f;
@@ -55,7 +56,7 @@ public class ObjectPlacer : MonoBehaviour
 
     //public variables for other scripts
     [HideInInspector]
-    public float[] calculatePointsPositions;
+    public List <float> calculatePointsPositions;
     [HideInInspector]
     public List <GameObject> calculatePoints = new List <GameObject>();
     [HideInInspector]
@@ -95,9 +96,9 @@ public class ObjectPlacer : MonoBehaviour
 
     // generates a set amount of random points, making sure there is no overlap between any point or obstacle
     // and returns all the coordinates in an array so it can be evaluated by the questions
-    private float[] PlacePoints(int amount, bool obstructed = false)
+    private List <float> PlacePoints(int amount, bool obstructed = false)
     {
-        float[] positions = new float[amount * 2];
+        List <float> positions = new List <float>();
         for (int i = 0; i < amount; i++)
         {
             GameObject newPoint = Instantiate(obstructed? prefabs.obstructedCalculatePointPrefab:prefabs.calculatePointPrefab, FarEnoughRandomPoint(), Quaternion.identity);
@@ -107,15 +108,15 @@ public class ObjectPlacer : MonoBehaviour
             newPoint.GetComponent<PolygonPointController>().SetNameText(nrofPointsPlaced);
             nrofPointsPlaced++;
 
-            positions[i * 2] = newPoint.transform.position.x;
-            positions[(i * 2) + 1] = newPoint.transform.position.y;
+            positions.Add(newPoint.transform.position.x);
+            positions.Add(newPoint.transform.position.y);
         }
 
         return positions;
     }
 
     //places the calculate points in a looped position
-    private float[] PlaceLoopedPoints(float edgeLength)
+    private List <float> PlaceLoopedPoints(float edgeLength)
     {
         int[,] angleArray = new int[,] {    { 90, 90, 180, 90, 90,180 }, { 90, 90, 225, 45, 135, 135 }, { 45, 135, 180, 45, 135, 180 }, { 90, 90, 135, 135,45, 225 },
                                             { 135, 135, 90, 135, 135, 90 }, { 90, 135, 135, 90, 135, 135 }, { 135, 90, 135, 135, 90, 135 } }; //{ 135,45, 180, 135,45, 180 },
@@ -127,7 +128,7 @@ public class ObjectPlacer : MonoBehaviour
         int shape = Random.Range(0, angleArray.GetLength(1));
         Debug.Log("ShapeNr: " + shape);
 
-        float[] positions = new float[7 * 2];
+        List <float> positions = new List <float>();
         for (int i = 0; i < 7; i++)
         {
             Vector2 position = Vector2.zero;
@@ -163,8 +164,10 @@ public class ObjectPlacer : MonoBehaviour
             newPoint.GetComponent<PolygonPointController>().SetNameText( i==0? 0 : nrofPointsPlaced);
             nrofPointsPlaced++;
 
-            positions[i * 2] = newPoint.transform.position.x;
-            positions[(i * 2) + 1] = newPoint.transform.position.y;
+            //positions[i * 2] = newPoint.transform.position.x;
+            //positions[(i * 2) + 1] = newPoint.transform.position.y;
+            positions.Add(newPoint.transform.position.x);
+            positions.Add(newPoint.transform.position.y);
         }
 
         return positions;

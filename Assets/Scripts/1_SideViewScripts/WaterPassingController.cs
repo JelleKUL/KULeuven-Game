@@ -440,10 +440,10 @@ public class WaterPassingController : MonoBehaviour
     public void AddStartAndEndGroundPoint()
     {
         GameObject newPoint = Instantiate(prefabs.groundPoint, new Vector2(gm.screenMin.x+ startAndEndPointOffset, 0), Quaternion.identity);
-        newPoint.GetComponent<PolygonPointController>().SetNameNrText(0);
+        newPoint.GetComponent<PolygonPointController>().SetNrText(0);
 
         newPoint = Instantiate(prefabs.groundPoint, new Vector2(gm.screenMax.x - startAndEndPointOffset, 0), Quaternion.identity);
-        newPoint.GetComponent<PolygonPointController>().SetNameNrText(0);
+        newPoint.GetComponent<PolygonPointController>().SetNrText(0);
     }
 
     //place new groundpoints

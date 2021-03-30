@@ -5,61 +5,80 @@ using UnityEngine.UI;
 
 //*********** The FoutenPropagatieQuestions sets the required parameters for a specific question ******************//
 
-
+[RequireComponent(typeof(ObjectPlacer), typeof(PolygonLineController))]
 public class FoutenPropagatieQuestions : BaseQuestions
 {
 
-    public enum QuestionType { geen, Errorellips_sigmaDH, Errorellips_sigmaA, MinimaleGrootte, WerkingMeerderePunten, DragEnDropEllips }
+    public enum AnswerType { geen, sigmaDH, sigmaA, MinimaleGrootte }
+    [Space(10)]
     [Tooltip ("Kies het soort vraag voor de oefening")]
-    public QuestionType SoortVraag;
+    public AnswerType answerType;
 
-    public int maxPoints;
 
     //initiate scripts
     private PolygonLineController lineController;
-    private PolygonPointController thisPoint;
     private ObjectPlacer placer;
 
     // awake is called before start functions
     protected override void Awake()
     {
         base.Awake();
-        lineController = GameObject.FindGameObjectWithTag("PolygonLine").GetComponent<PolygonLineController>();
+        lineController = GetComponent<PolygonLineController>();
         placer = GetComponent<ObjectPlacer>();
-        SetQuestionType(SoortVraag);
+        SetQuestionType();
     }
 
     //sets the type of question, can be altered by another script
-    public void SetQuestionType(QuestionType vraag)
+    protected override void SetQuestionType()
     {
-        
-
+        if (controlController)
+        {
+            lineController.StartSetup();
+            placer.StartSetup();
+        }
+        base.SetQuestionType(); //does the base question stuff like logging
     }
   
     //checks if the given anwser is correct
-    public void CheckAnswer()
+    public override void CheckAnswerInput()
     {
         if (lineController.CheckPoints() && lineController.CheckPointsVisibility())
         {
-            if (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), CorrectAnswer(true), errorMargin) || CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), CorrectAnswer(false), errorMargin))
+            if (answerType == AnswerType.MinimaleGrootte)
             {
-                gm.IncreaseScore(scoreIncrease, 2);
-                questionUI.ActivateWinMenu();
-                questionUI.SetAnswerOutput("De waarden die zijn ingevoerd zijn correct");
+                if (Mathf.Abs(lineController.GetSigmaA() - GetCorrectAnswer()[0]) <= 0.6 * lineController.GetError(ErrorType.Base))
+                {
+                    Debug.Log("Correct answer!");
+                    gm.IncreaseScore(scoreIncrease, 2);
+                    questionUI.ActivateWinMenu();
+                }
+                else
+                {
+                    questionUI.SetFalseAnswer("Incorrect answer...");
+                    if (!AddTry())
+                    {
+                        questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], "Too many tries...");
+                    }
+                }
             }
             else
             {
 
-                Debug.Log("false");
-
-
-                if (nrOfTries > 0)
+                if (GetCorrectAnswer().Count == 1 ?
+                    (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), GetCorrectAnswer()[0], errorMargin)):
+                    (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), GetCorrectAnswer()[0], errorMargin)|| CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), GetCorrectAnswer()[1], errorMargin))
+                   )
                 {
-                    currentTries++;
-                    if (currentTries >= nrOfTries)
+                    Debug.Log("Correct answer!");
+                    gm.IncreaseScore(scoreIncrease, 2);
+                    questionUI.ActivateWinMenu();
+                }
+                else
+                {
+                    questionUI.SetFalseAnswer("Incorrect answer...");
+                    if (!AddTry())
                     {
-                        //setRestart();
-                        return;
+                        questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], "Too many tries...");
                     }
                 }
             }
@@ -68,67 +87,35 @@ public class FoutenPropagatieQuestions : BaseQuestions
         else questionUI.SetFalseAnswer( "Setup in P and measure to A before submitting");
     }
 
-    //checks if the given anwser is correct
-    public void CheckAnswerMinimaal()
-    {
-        if (lineController.CheckPoints() && lineController.CheckPointsVisibility())
-        {
-
-            if (Mathf.Abs(lineController.GetSigmaA() - CorrectAnswer(false)) <=0.6* lineController.GetBaseDistanceError())
-            {
-                gm.IncreaseScore(scoreIncrease, 2);
-                Debug.Log("true");
-                questionUI.ActivateWinMenu();
-
-        }
-            else
-            {
-                questionUI.SetFalseAnswer("Incorrect");
-
-                if (AddTry())
-                {
-                    questionUI.ShowCorrectAnswer(InputType.h, CorrectAnswer(true), ID_answerText);
-                }
-            }
-
-        }
-        else questionUI.SetFalseAnswer("Setup in P and measure to A before submitting");
-    }
-
     //displays the correct answer
-    public void ShowAnswer()
+    public override void ShowCorrectAnswer()
     {
+        //todo add show shortest path
 
+        questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], ID_answerText);
     }
 
-    public float CorrectAnswer( bool exact)//use the exact formula *Pi/2 or rule of thumb *1.5
+    public override List<float> GetCorrectAnswer()//use the exact formula *Pi/2 or rule of thumb *1.5
     {
-        switch (SoortVraag)
+        switch (answerType)
         {
-            case QuestionType.Errorellips_sigmaDH:
+            case AnswerType.sigmaDH:
 
                 (float d, float h, float a) = lineController.GetErrorDH();
 
-                return Mathf.Max(d, h);
+                return new List<float>() { Mathf.Max(d, h) };
 
-            case QuestionType.Errorellips_sigmaA:
+            case AnswerType.sigmaA:
 
-                if(exact) return lineController.GetSigmaAExact();
-                else return lineController.GetSigmaA();
+                return new List<float>() { lineController.GetSigmaAExact(), lineController.GetSigmaA() };
 
-            case QuestionType.MinimaleGrootte:
+            case AnswerType.MinimaleGrootte:
 
                 (float dd, float hh, float aa) = lineController.GetErrorDH();
-                return aa;
-
-            case QuestionType.WerkingMeerderePunten:
-
-                if(exact) return lineController.GetSigmaAExact();
-                else return lineController.GetSigmaA();
-
+                return new List<float>() { aa };
 
         }
-        return 0;
+        return new List<float>() { 0 };
     }
 
 

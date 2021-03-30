@@ -5,7 +5,6 @@ using UnityEngine;
 public class AxisTransformer : MonoBehaviour
 {
     [Header("Axis transform controls")]
-    [SerializeField] private bool rotateAxis;
     [Tooltip("the max number of quadrants the axis can rotate to")]
     [Range(1, 4)]
     [SerializeField] private int maxQuadrants = 1;
@@ -18,11 +17,11 @@ public class AxisTransformer : MonoBehaviour
     [SerializeField] private GameObject assenkruis;
 
 
-    public void RotatePoint(PolygonPointController point)
+    public void RotatePoint(GameObject point)
     {
         if(!assenkruis)
         {
-            Debug.Log("No assenkruis set");
+            Debug.LogWarning(gameObject.name + ": No assenkruis set");
             return;
         }
         point.transform.SetParent(assenkruis.transform);

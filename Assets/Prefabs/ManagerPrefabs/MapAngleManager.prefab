@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5963890913328120986}
   - component: {fileID: 196904477167037869}
   - component: {fileID: 5963890913328120987}
-  - component: {fileID: 5963890913328120984}
   - component: {fileID: 760579771142992738}
+  - component: {fileID: 5963890913328120984}
   - component: {fileID: 3502574545296704285}
   m_Layer: 0
   m_Name: MapAngleManager
@@ -172,33 +172,7 @@ MonoBehaviour:
   ID_maxError: 'max error: '
   ID_TooManyTriesText: too many tries, try again
   answerType: 0
---- !u!114 &5963890913328120984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5963890913328120985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 782e9c71fb27b4a87930416471fd47ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minDistanceBtwPoints: 2
-  minDistanceToObstacles: 0
-  minDistanceFromOrigin: 0
-  minOffset: {x: 1, y: 1}
-  maxOffset: {x: 1, y: 1}
-  maxRandomAngle: 30
-  loopedStartPos: {x: 0, y: 0}
-  maxDistanceError: 0.001
-  prefabs:
-    calculatePointPrefab: {fileID: 0}
-    obstructedCalculatePointPrefab: {fileID: 0}
-    obstaclePrefabs: []
-    mobileObstaclePrefabs: []
-  calculatePoints: []
-  obstructedCalculatePoints: []
+  transformAxis: 0
 --- !u!114 &760579771142992738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,11 +185,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897e6767ccb904829b62b51eb815c570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assenkruis: {fileID: 0}
-  rotateAxis: 0
   maxQuadrants: 1
   minAxisTransform: {x: 0, y: 0, z: 10}
   maxAxisTransform: {x: 0, y: 0, z: 45}
+  assenkruis: {fileID: 0}
+--- !u!114 &5963890913328120984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5963890913328120985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782e9c71fb27b4a87930416471fd47ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nrOfCalculatePoints: 1
+  nrOfObstructionPoints: 0
+  placeLoopedPoints: 0
+  loopedPointsEdgeLength: 1
+  loopedStartPos: {x: 0, y: 0}
+  loopedMaxDistanceError: 0.001
+  PlaceObstacleBtwnPoints: 0
+  nrOfObstacles: 0
+  nrOfMobileObstacles: 0
+  maxRandomAngle: 30
+  minDistanceBtwPoints: 2
+  minDistanceToObstacles: 1
+  minDistanceFromOrigin: 2
+  minOffsetFromEdge: {x: 1, y: 1}
+  maxOffsetFromEdge: {x: 1, y: 1}
+  maxItterations: 1000
+  prefabs:
+    calculatePointPrefab: {fileID: 0}
+    obstructedCalculatePointPrefab: {fileID: 0}
+    obstaclePrefabs: []
+    mobileObstaclePrefabs: []
+  calculatePointsPositions: []
+  calculatePoints: []
+  obstructedCalculatePoints: []
 --- !u!114 &3502574545296704285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,43 +237,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798b05e67b78744beae4f7009f0acf24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linePoint: {fileID: 6925030597558219202, guid: 0b53bcca134834af5bd46cc96bd3be77,
-    type: 3}
-  firstPoint: {fileID: 2991790824968530903, guid: 2476312b10ae34e34b029f5b3bd085d1,
-    type: 3}
-  pointMask:
-    serializedVersion: 2
-    m_Bits: 1280
-  Obstacles:
-    serializedVersion: 2
-    m_Bits: 512
-  ObstructionPoints:
-    serializedVersion: 2
-    m_Bits: 66048
-  distanceError1Slider: {fileID: 0}
-  distanceError2Slider: {fileID: 0}
-  angleErrorSlider: {fileID: 0}
-  errorEllipsDisplay: {fileID: 0}
-  fullLine: {fileID: 2100000, guid: ad89a2623b8b042a29ffbb1d82338d12, type: 2}
-  dottedLine: {fileID: 2100000, guid: beb7aaf34b0ce4765aa8314af78dd305, type: 2}
-  nrOfPoints: 0
-  lockDistanceError1: 0
-  lockDistanceError2: 0
-  lockAngleError: 1
-  distanceError1: 0
-  distanceError2: 0
-  angleError: 3
-  lockFirstPoint: 0
+  lockFirstPoint: 1
   firstPointPosition: {x: 0, y: 0}
-  showEllipses: 0
-  showAngles: 0
-  showLengths: 0
-  showStartAngle: 0
-  showStartLength: 0
-  showEndLength: 1
-  showSmallErrors: 0
   maxPoints: 2
   startCenterPoint: 0
-  loopLine: 0
-  loopOffset: 1
-  correctAnswerArray: []
+  showSmallErrors: 0
+  baseError:
+    lockError: 0
+    error: 0
+    randomizeError: 1
+    randomErrorRange: {x: 1, y: 1}
+  ppmError:
+    lockError: 0
+    error: 0
+    randomizeError: 1
+    randomErrorRange: {x: 1, y: 1}
+  angleError:
+    lockError: 0
+    error: 0
+    randomizeError: 1
+    randomErrorRange: {x: 1, y: 1}
+  visualEllipseSizeModifier: 1
+  showEllipses: 0
+  showAngles: 1
+  showLengths: 0
+  showStartAngle: 1
+  showStartLength: 0
+  showEndLength: 0
+  prefabs:
+    linePoint: {fileID: 0}
+    firstPoint: {fileID: 0}
+    fullLine: {fileID: 0}
+    dottedLine: {fileID: 0}
+  layerMasks:
+    pointMask:
+      serializedVersion: 2
+      m_Bits: 0
+    Obstacles:
+      serializedVersion: 2
+      m_Bits: 0
+    ObstructionPoints:
+      serializedVersion: 2
+      m_Bits: 0
+  sceneObjects:
+    baseDistanceErrorSlider: {fileID: 0}
+    ppmDistanceErrorSlider: {fileID: 0}
+    angleErrorSlider: {fileID: 0}
+    errorEllipsDisplay: {fileID: 0}
