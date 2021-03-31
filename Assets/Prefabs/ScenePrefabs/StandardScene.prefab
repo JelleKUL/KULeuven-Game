@@ -453,7 +453,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7320656095557494914}
         m_MethodName: LoadRandomCamp
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1551,7 +1551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.2}
   m_AnchorMax: {x: 0.3, y: 0.8}
-  m_AnchoredPosition: {x: 4.999756, y: 0}
+  m_AnchoredPosition: {x: 4.999771, y: 0}
   m_SizeDelta: {x: -9.999985, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5961507492358917460
@@ -6418,7 +6418,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.2}
   m_AnchorMax: {x: 0.3, y: 0.8}
-  m_AnchoredPosition: {x: 4.999756, y: 0}
+  m_AnchoredPosition: {x: 4.999771, y: 0}
   m_SizeDelta: {x: -9.999985, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8396442810344499290
@@ -10043,7 +10043,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f382b0e25003c4b46b7406203541f17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseQuestions: {fileID: 0}
   questionHeaderText: {fileID: 7128626481883086562}
   questionText: {fileID: 4446215733289814962}
   errorDisplayText: {fileID: 6204606850871338389}
@@ -10057,6 +10056,7 @@ MonoBehaviour:
   restartBtn: {fileID: 2745803447358997387}
   falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
   CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
+  baseQuestions: {fileID: 0}
 --- !u!1 &7128626481883086560
 GameObject:
   m_ObjectHideFlags: 0

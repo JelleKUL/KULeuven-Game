@@ -46,13 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usernameText: {fileID: 0}
-  errorMargin: 0.001
-  errorDisplayText: {fileID: 0}
-  maxErrorString: 'maximale fout:'
-  errorUnit: m
   adminNames:
   - admin
   - jelle
+  chapterList: {fileID: 11400000, guid: 6faad92823683454cb7e0b4d311bae77, type: 2}
   WaterpassingScenes:
   - 1CalibratieWaterpastoestel
   - 2HoogteverschilTweePunten

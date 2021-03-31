@@ -49,7 +49,7 @@ public class FoutenPropagatieQuestions : BaseQuestions
                 if (Mathf.Abs(lineController.GetSigmaA() - GetCorrectAnswer()[0]) <= 0.6 * lineController.GetError(ErrorType.Base))
                 {
                     Debug.Log("Correct answer!");
-                    gm.IncreaseScore(scoreIncrease, 2);
+                    gm.IncreaseScore(scoreIncrease);
                     questionUI.ActivateWinMenu();
                 }
                 else
@@ -70,7 +70,7 @@ public class FoutenPropagatieQuestions : BaseQuestions
                    )
                 {
                     Debug.Log("Correct answer!");
-                    gm.IncreaseScore(scoreIncrease, 2);
+                    gm.IncreaseScore(scoreIncrease);
                     questionUI.ActivateWinMenu();
                 }
                 else

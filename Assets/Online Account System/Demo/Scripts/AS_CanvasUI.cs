@@ -62,6 +62,8 @@ public class AS_CanvasUI : MonoBehaviour
 
 			GameManager.scoreFreeTotal = accountInfo.customInfo.scoreFreeTotal;
 
+			GameManager.chaptersInfos = accountInfo.customInfo.chapters;
+
 			SceneManager.LoadScene("MainMenu");
 		}
 

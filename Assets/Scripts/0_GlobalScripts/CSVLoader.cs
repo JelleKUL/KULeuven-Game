@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Linq;
 
-public class CSVLoader : MonoBehaviour
+public class CSVLoader
 {
     private TextAsset csvFile;
     private char lineSeperator = '\n';

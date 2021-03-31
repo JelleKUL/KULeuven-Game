@@ -122,7 +122,7 @@ public class BaseQuestions : MonoBehaviour
             if (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), GetCorrectAnswer()[0], errorMargin)) //CorrectAnswer()))
             {
                 Debug.Log("Correct answer!");
-                gm.IncreaseScore(scoreIncrease, 2);
+                gm.IncreaseScore(scoreIncrease);
                 questionUI.ActivateWinMenu();
             }
             else
@@ -139,7 +139,7 @@ public class BaseQuestions : MonoBehaviour
             if (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.x), GetCorrectAnswer()[0], errorMargin) && CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.y), GetCorrectAnswer()[1], errorMargin)) //CorrectAnswer()))
             {
                 Debug.Log("Correct answer!");
-                gm.IncreaseScore(scoreIncrease, 2);
+                gm.IncreaseScore(scoreIncrease);
                 questionUI.ActivateWinMenu();
             }
             else

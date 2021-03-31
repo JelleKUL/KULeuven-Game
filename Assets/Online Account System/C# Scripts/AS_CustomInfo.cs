@@ -36,8 +36,10 @@ public class AS_CustomInfo
     // !! MAKE SURE THEY ARE [Serializable] !!
     // !! IF THEY ARE NOT, Add the [XmlIgnore] property on them
     // !! NOTE THAT ANY VARIABLE WHICH HAS A TRANSFORM PROPERTY CAN NOT BE SERIALIZED!
+    
     public int totalScore = 0;
 
+    //old data
     public int levelCamp1 = 0;
     public int [] scoreCamp1 = new int[10];
     public bool[] compLevelCamp1 = new bool[10];
@@ -48,8 +50,33 @@ public class AS_CustomInfo
 
     public int scoreFreeTotal = 0;
     public int[] scoreFree = new int[24];
+    
+
+    //new DataStorageSystem
+    public List<ChapterInfo> chapters = new List<ChapterInfo>();
 
 
+
+}
+
+[Serializable]
+public class ChapterInfo
+{
+    // Required to be serializable
+    public ChapterInfo() { }
+
+    public ChapterInfo(ChapterScriptableObject chapter)
+    {
+        UID = chapter.UID;
+        for (int j = 0; j < chapter.levels.Count; j++)
+        {
+            scores.Add(0);
+        }
+    }
+    // the unique ID to link the scores to the correct chapter, even if the order changes
+    public string UID = "";
+    // the scores for each level in the chapter
+    public List<int> scores = new List<int>();
 
 
 }

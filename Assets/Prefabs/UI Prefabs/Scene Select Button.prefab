@@ -144,7 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4bb8a674f6f46148dd7509b04fa704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneObject: {fileID: 0}
+  setUpAtStart: 0
+  sceneObject: 
   buttonText: {fileID: 5804419579151577594}
 --- !u!114 &427411448085811761
 MonoBehaviour:

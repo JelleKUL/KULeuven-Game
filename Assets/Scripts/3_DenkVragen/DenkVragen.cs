@@ -82,7 +82,7 @@ public class DenkVragen : MonoBehaviour
         {
             uitlegText.text = "Correct!";
             Debug.Log(denkVraag.vraagText + " is " + denkVraag.isWaar + " -> Correct!");
-            gm.IncreaseScore(1, 0);
+            gm.IncreaseScore(1);
             Invoke("SetNextCorrectQuestion", waitingTime);
         }
         else

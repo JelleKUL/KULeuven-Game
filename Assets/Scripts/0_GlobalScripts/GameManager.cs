@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<string> adminNames;
 
+    [SerializeField]
+    private ChapterListScriptableObject chapterList;
+
     [Tooltip("The scenes of the first Chapter (WaterPassing)")]
     [Scene] public string[] WaterpassingScenes;
     [Tooltip("The scenes of the second Chapter (map angle)")]
@@ -34,7 +37,7 @@ public class GameManager : MonoBehaviour
         public static int loginID;
         public static string userName;
         public static int playerScore;
-
+    
         public static int levelCamp1;
         public static int[] scoreCamp1 = new int[10];
         public static bool[] compLevelCamp1 = new bool[10];
@@ -44,16 +47,16 @@ public class GameManager : MonoBehaviour
         public static bool[] compLevelCamp2 = new bool[13];
 
         public static int scoreFreeTotal = 0;
-
+    
         public static int highestLevel;
         public static int currentLevel;
         public static bool isLoggedIn;
         public static bool campaignMode;
 
-
+    public static List<ChapterInfo> chaptersInfos = new List<ChapterInfo>();
 
     [HideInInspector]
-    public Vector2 screenMin, screenMax; // calculated based on the x&y scale of the gamamanager
+    public Vector2 screenMin, screenMax; // calculated based on the x&y scale of the gamemanager
 
 
     [HideInInspector]public int firstCamp1Level;
@@ -67,6 +70,8 @@ public class GameManager : MonoBehaviour
     // activates before the start functions
     private void Awake()
     {
+        if (chaptersInfos.Count == 0) ResetChapterInfos();
+
         SetSceneNrs();
         SetPlayArea();
         if (usernameText) ShowUsername();
@@ -93,15 +98,22 @@ public class GameManager : MonoBehaviour
 
     //score Control
 
-    // increases the score by a set amount todo update
-    [System.Obsolete]
-    public void IncreaseScore(int amount, int campaignNr)
+    // increases the score by a set amount
+    public void IncreaseScore(int amount)
     {
-        int sceneNr = SceneManager.GetActiveScene().buildIndex;
+        string sceneName = SceneManager.GetActiveScene().name;
 
         playerScore += amount;
+        if (campaignMode)
+        {
+            Vector2Int levelIndex = GetCurrentLevel();
 
-        
+            if(levelIndex.x <= 0)
+            {
+                if (chaptersInfos[levelIndex.x].scores[levelIndex.y] < amount) chaptersInfos[levelIndex.x].scores[levelIndex.y] = amount; //only update if score is higher
+            }
+        }
+        /*
         if (campaignNr == 1 && campaignMode)
         {
             
@@ -129,10 +141,12 @@ public class GameManager : MonoBehaviour
                 scoreCamp2[sceneNr - firstCamp2Level] = amount;
             }
         }
+        
         else
         {
             scoreFreeTotal += amount;
         }
+        */
 
         if (isLoggedIn)
         {
@@ -147,6 +161,7 @@ public class GameManager : MonoBehaviour
         */
     }
 
+    
     // sets the latest level the player has reached in the account system
     public void SetMaxLevel(int campaignNr)
     {
@@ -193,6 +208,11 @@ public class GameManager : MonoBehaviour
     public void LoadSceneObject(Object scene)
     {
         SceneManager.LoadScene(scene.name);
+    }
+
+    public void LoadChapter(int nr)
+    {
+
     }
 
     public void LoadCampaign1()
@@ -249,7 +269,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            LoadRandomCamp(chapter);
+            LoadRandomCamp();
         }
     }
 
@@ -264,8 +284,32 @@ public class GameManager : MonoBehaviour
 
     // loading random available scenes
 
-    public void LoadRandomCamp(int chapter) // load a random level that is unlocked if logged in, or all if not
+    public void LoadRandomCamp() // load a random level that is unlocked if logged in, or all if not
     {
+
+        campaignMode = false;
+
+        int currentChapter = GetCurrentLevel().x;
+
+        if (currentChapter >= 0)
+        {
+            List<string> availableScenes = new List<string>();
+            availableScenes.Add(chapterList.chapters[currentChapter].levels[0]);
+
+            for (int i = 1; i < chapterList.chapters[currentChapter].levels.Count; i++)
+            {
+                if (!isLoggedIn || chaptersInfos[currentChapter].scores[i] != 0)
+                {
+                    availableScenes.Add(chapterList.chapters[currentChapter].levels[i]);
+                }
+            }
+
+            SceneManager.LoadScene(availableScenes[Random.Range(0, availableScenes.Count)]);
+        }
+
+        
+
+        /*
         int firstLevel = firstCamp1Level;
 
         if (chapter == 0)
@@ -320,6 +364,7 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(firstLevel + Random.Range(0, NrOfCamp2ChapterScenes[chapter - 1]));
             }
         }
+        */
 
     }
 
@@ -333,6 +378,10 @@ public class GameManager : MonoBehaviour
         userName = "";
         playerScore = 0;
 
+        //resets the chapter info list
+        ResetChapterInfos();
+
+        /*
         levelCamp1 = 0;
         scoreCamp1 = new int[10];
         compLevelCamp1 = new bool[10];
@@ -343,15 +392,34 @@ public class GameManager : MonoBehaviour
 
         scoreFreeTotal = 0;
         //scoreFree = new int[13];
-
+        */
         highestLevel = 0;
         currentLevel = 0;
     }
 
-    
+    /// <summary>
+    /// get the current idexes of the level
+    /// </summary>
+    /// <returns>x: the current chapter, y: the current level</returns>
+    public Vector2Int GetCurrentLevel()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        for (int i = 0; i < chapterList.chapters.Count; i++) //go over every chapter
+        {
+            if (chapterList.chapters[i].levels.Contains(sceneName))
+            {
+                int index = chapterList.chapters[i].levels.IndexOf(sceneName);
+                return new Vector2Int(i, index);
+            }
+        }
+        return new Vector2Int(-1, -1);
+
+    }
 
 
-//mouse Navigation
+
+    //mouse Navigation
     // checks if position is in the boundary
     public bool IsBetweenValues(Vector2 check)
     {
@@ -383,19 +451,45 @@ public class GameManager : MonoBehaviour
 
 // accountSystemControl
 
+    // create a new info list to store all the player data in the database
+    void ResetChapterInfos()
+    {
+        chaptersInfos = new List<ChapterInfo>();
+
+        for (int i = 0; i < chapterList.chapters.Count; i++)
+        {
+            chaptersInfos.Add(new ChapterInfo(chapterList.chapters[i]));
+        }
+    }
+
+    // updates the info list to match the games new chapters if there are any
+    void UpdateChapterInfos()
+    {
+        for (int i = 0; i < chapterList.chapters.Count; i++)
+        {
+            bool chapterInData = false;
+            for (int j = 0; j < chaptersInfos.Count; j++)
+            {
+                if (chapterList.chapters[i].UID == chaptersInfos[j].UID)
+                {
+                    chapterInData = true;
+                    break;
+                }
+            }
+            if(chapterInData == false) chaptersInfos.Add(new ChapterInfo(chapterList.chapters[i]));
+        }
+    }
+
     void ShowUsername()
     {
         if (isLoggedIn) usernameText.text = userName;
         else usernameText.text = "Gast";
-
     }
 
     // This is called when the upload has finished
     void OnUpload(string message)
     {
-
         this.Log(LogType.Log, "Uploaded Successfully the following account info:\n" + accountInfo.ToReadableString());
-
     }
 
     void UploadScore(string message)
@@ -403,7 +497,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("gamemanager: id= " + accountInfo.GetFieldValue("id") + " name= " + accountInfo.GetFieldValue("username") + " score: " + accountInfo.customInfo.totalScore);
 
         accountInfo.customInfo.totalScore = playerScore;
+        accountInfo.customInfo.chapters = chaptersInfos;
 
+        /*
         accountInfo.customInfo.levelCamp1 = levelCamp1;
         accountInfo.customInfo.scoreCamp1 = scoreCamp1;
         accountInfo.customInfo.compLevelCamp1 = compLevelCamp1;
@@ -413,10 +509,11 @@ public class GameManager : MonoBehaviour
         accountInfo.customInfo.compLevelCamp2 = compLevelCamp2;
 
         accountInfo.customInfo.scoreFreeTotal = scoreFreeTotal;
+        */
 
         accountInfo.TryToUpload(loginID, OnUpload);
     }
-
+    /*
     private void UpdateArrayLengths()
     {
         Debug.Log("gamemanager: id= " + accountInfo.GetFieldValue("id") + " name= " + accountInfo.GetFieldValue("username") + " score: " + accountInfo.customInfo.totalScore);
@@ -435,7 +532,7 @@ public class GameManager : MonoBehaviour
 
         accountInfo.TryToUpload(loginID, OnUpload);
     }
-
+     */
     public int CountBoolTrue(bool[] boolArray)
     {
         int counter = 0;
@@ -447,4 +544,5 @@ public class GameManager : MonoBehaviour
 
         return counter;
     }
+   
 }

@@ -47,7 +47,7 @@ public class PolygonationQuestions : BaseQuestions
         {
             if (tabel.checkAnswers(GetCorrectAnswer().ToArray()))
             {
-                gm.IncreaseScore(scoreIncrease, 2);
+                gm.IncreaseScore(scoreIncrease);
                 Debug.Log("true");
 
                 questionUI.ActivateWinMenu();

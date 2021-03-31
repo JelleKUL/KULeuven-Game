@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1169042849372670474}
   - component: {fileID: 1169042849372670476}
-  - component: {fileID: 1169042849372670477}
+  - component: {fileID: 4642673753410529420}
   m_Layer: 5
   m_Name: HeaderTitle
   m_TagString: Untagged
@@ -144,8 +144,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05, y: 0.3}
   m_AnchorMax: {x: 0.95, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -2.5}
-  m_SizeDelta: {x: 0, y: -15}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1169042849372670476
 CanvasRenderer:
@@ -155,7 +155,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1169042849372670475}
   m_CullTransparentMesh: 0
---- !u!114 &1169042849372670477
+--- !u!114 &4642673753410529420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.93333334, g: 0.8980392, b: 0.9137255, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -176,18 +176,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6d5d4d5eee8644d12b60cbdb9abb4a04, type: 3}
-    m_FontSize: 26
-    m_FontStyle: 1
-    m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 41
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: WATERPASSING
+  m_Text: Waterpassing
 --- !u!1 &1169042849516795185
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 1169042849625164716}
   - component: {fileID: 1169042849625164717}
   - component: {fileID: 1674964049599035691}
+  - component: {fileID: 8721641126277180835}
   m_Layer: 5
   m_Name: QuestionPanel
   m_TagString: Untagged
@@ -386,6 +387,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &8721641126277180835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169042849625164715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6bd9cd5e1394bab85ce1fadd5fba82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelSelectButtonPrefab: {fileID: 5804419578568808997, guid: f4e60b83d6ebb412e89449c94b25c185,
+    type: 3}
+  buttonParent: {fileID: 1169042851166332672}
+  chapterNameText: {fileID: 0}
+  chapterExplainationText: {fileID: 0}
+  coverImage: {fileID: 2257489746981469944}
 --- !u!1 &1169042849666190285
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +856,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1169042850482165574}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.78679997
+  m_Size: 0.47599998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

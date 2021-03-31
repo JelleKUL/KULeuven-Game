@@ -45,7 +45,7 @@ public class WaterpassingQuestions : BaseQuestions
         {
             if (waterpassing.CheckTabelAnswer())
             {
-                gm.IncreaseScore(scoreIncrease, 1);
+                gm.IncreaseScore(scoreIncrease);
                 Debug.Log("true");
 
                 questionUI.ActivateWinMenu();
