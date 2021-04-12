@@ -23,7 +23,7 @@ public class TextLocaliser : MonoBehaviour
     /// Set the text component to a localised value
     /// </summary>
     /// <param name="key">the localisation key to search for the correct value</param>
-    public void UpdateText(string key)
+    public void UpdateText(string key, int nr = -1)
     {
         if (!textObject)
         {
@@ -32,7 +32,7 @@ public class TextLocaliser : MonoBehaviour
                 textObject = text;
             }
         }
-        if (textObject) textObject.text = LocalisationManager.GetLocalisedValue(key);
+        if (textObject) textObject.text = (nr==-1?"":nr.ToString() + ": ") + LocalisationManager.GetLocalisedValue(key);
         else Debug.LogWarning(gameObject.name + ": no text component attached to this gameobject to localise.");
     }
 }

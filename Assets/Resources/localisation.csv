@@ -3,17 +3,29 @@
 "ID_login_title","Inloggen","Login"
 "ID_login_username","Gebruikersnaam","Username"
 "ID_login_password","Wachtwoord","Password"
-"ID_login_button","Inloggen","Login"
+"ID_login_button","Inloggen","Distance 2 points"
 "ID_login_register_button","Account maken","Create account"
 "ID_login_no_login_button","Speel zonder inloggen","Play without login"
 "ID_main_menu","HOOFD MENU","MAIN MENU"
+"ID_menu","MENU","MENU"
+"ID_reset","RESET","RESET"
+"ID_resume","HERVAT","RESUME"
+"ID_next_level","VOLGEND LEVEL","NEXT LEVEL"
+"ID_random_level","WILLEKEURIG LEVEL","RANDOM LEVEL"
+"ID_show_answer","TOON ANTWOORD","SHOW ANSWER"
+"ID_correct","JUIST","CORRECT"
 "ID_logout","UITLOGGEN","LOGOUT"
-"ID_leaderboards","LEADER BOARDS","LEADER BOARDS"
+"ID_leaderboards","LEADER BOARDS","Distance more points"
 "ID_play","SPEEL","PLAY"
 "ID_welcome","Welkom,","Welcome,"
 "ID_select_level","KIES LEVEL","SELECT LEVEL"
 "ID_random_level","RANDOM LEVEL","RANDOM LEVEL"
 "ID_back","TERUG","BACK"
+"ID_max_error","max fout:","max error:"
+"ID_too_many_tries","Te veel pogingen, probeer opnieuw.","Too many tries, try again."
+"ID_incorrect_answer","Fout antwoord...","Incorrect answer"
+"ID_correct_answer","juiste waarden!","correct value!"
+"ID_submit","SUBMIT","SUBMIT"
 "ID_waterpassing","Waterpassing","Resection"
 "ID_waterpassing_explanation","Oefeningen over het bepalen van hoogteverschillen door middel van een waterpassing toestel.","Exercises about measuring height differences and distances with a resection device."
 "ID_polygonatie","Polygonatie","Polygonation"
@@ -23,6 +35,33 @@
 "ID_scheefstand","Scheefstand","Skew building"
 "ID_scheefstand_explanation","Oefeningen ivm de scheefstand van een gebouw","Exercises about skew buildings"
 "ID_foutenpropagatie","Foutenpropagatie","Error propagation"
-"ID_foutenpropagatie_explanation","Oefeningen over de meetfout die zal veranderen naarmate de afstand/hoek verandert.","Exercises about the errors that come from measuring angles and distances."
-,,
-,,
+"ID_foutenpropagatie_explanation","Calibratie waterpastoestel","Calibration resection device"
+"ID_waterpassing_scene_heightdiff_2_points","Hoogteverschil 2 punten","Height difference 2 points"
+"ID_waterpassing_scene_heightdiff_more_points","Hoogteverschil meerdere punten","Height difference more points"
+"ID_waterpassing_scene_inverse_beacon","Hoogteverschil omgekeerde baak","Height difference inverse beacon"
+"ID_waterpassing_scene_distance_2_points","Afstand 2 punten","Distance 2 points"
+"ID_waterpassing_scene_distance_more_points","Afstand meerdere punten","Distance more points"
+"ID_waterpassing_scene_calibration","Calibratie waterpastoestel","Calibration resection device"
+"ID_waterpassing_scene_circle_resection","Kringwaterpassing","Circle resection"
+"ID_waterpassing_scene_circle_resection_side","Zijslag kringwaterpassing","Side circle resection"
+"ID_scheeftand_scene_skew_resection","Trigoniometrische waterpassing","Triginiometric resection"
+"ID_scheeftand_scene_skew_building","Scheefstand gebouw","Skew building"
+"ID_mapangle_scene_mapangle","Bepaal kaarthoek",
+"ID_mapangle_scene_coordinate","Bepaal coördinaat",
+"ID_mapangle_scene_coordinate_other_point","Bepaal coördinaat via ander punt",
+"ID_mapangle_scene_distance_2_points","Bepaal afstand 2 punten",
+"ID_mapangle_scene_coordinate_rotated_axis","Bepaal coördinaat gedraaid assenstelsel",
+"ID_foutenpropagatie_scene_standard_deviation","Standaardafwijking",
+"ID_foutenpropagatie_scene_sigma_a_1_point","Sigma A over 1 punt",
+"ID_foutenpropagatie_scene_min_error","Minimale afwijking",
+"ID_foutenpropagatie_scene_sigma_a_more_points","Sigma A meerdere punten",
+"ID_polygonatie_scene_forward_cut","Voorwaardse insnijding",
+"ID_polygonatie_scene_backward_cut","Achterwaardse insnijding",
+"ID_polygonatie_scene_polygonation_table","Polygonatie tabel",
+"ID_polygonatie_scene_bilateration","Bilateratie",
+"ID_waterpassing_question_6_title","VI. Bepaal de collimatiefout van het toestel","VI. Calculate the error of the device"
+"ID_waterpassing_question_6_explanation","Bereken de collimatiefout d.m.v. een exentrieke plaatsing en de afstanden tot de meetbaak","use the distance and height measurements to calculate the error"
+"ID_waterpassing_question_6_answer","De collimatiefout kan bepaald worden door het veschil in hoogte te vergelijken in functie van de afstand","The error can be found by checking the height diff over the distance."
+"ID_waterpassing_question_1_title","I. Bepaal het hoogteveschil tussen A & B",
+"ID_waterpassing_question_1_explanation","Plaats de meetbaken op de meetpunten en meet met het waterpastoestel het verschil tussen beide punten",
+"ID_waterpassing_question_1_answer","Het hoogteverschil kan gevonden worden door beide middendraden te vergelijken",

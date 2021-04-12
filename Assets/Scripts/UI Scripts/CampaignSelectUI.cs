@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //**************** The UI manager for the campaign select menu ******************//
-
+[System.Obsolete]
 public class CampaignSelectUI : MonoBehaviour
 {
     [SerializeField]
@@ -14,9 +14,9 @@ public class CampaignSelectUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetValues();
+        //SetValues();
     }
-
+    /*
     // sets the text fields to the correct values from the gamemanager's static variables from the login
     void SetValues()
     {
@@ -48,4 +48,5 @@ public class CampaignSelectUI : MonoBehaviour
             scoreFreeTotal.text = GameManager.scoreFreeTotal.ToString();
         }
     }
+    */
 }

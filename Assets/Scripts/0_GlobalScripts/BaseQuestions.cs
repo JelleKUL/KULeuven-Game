@@ -40,10 +40,8 @@ public class BaseQuestions : MonoBehaviour
     [SerializeField]
     [TextArea(2, 3)]
     protected string ID_answerText = "";
-    [SerializeField]
-    protected string ID_maxError = "max error: ";
-    [SerializeField]
-    protected string ID_TooManyTriesText = "too many tries, try again";
+    protected string ID_maxError = "ID_max_error";
+    protected string ID_TooManyTriesText = "ID_too_many_tries";
 
 
     protected GameManager gm;
@@ -64,7 +62,7 @@ public class BaseQuestions : MonoBehaviour
             questionUI.baseQuestions = this;
             questionUI.SetErrorDisplay(ID_maxError, errorMargin, errorUnit);
             if (controlText) questionUI.SetQuestionText(ID_questionHeader, ID_questionText);
-            questionUI.SetAnswerOutput();
+            questionUI.SetAnswerOutput("");
         }
     }
     /// <summary>
@@ -127,10 +125,10 @@ public class BaseQuestions : MonoBehaviour
             }
             else
             {
-                questionUI.SetFalseAnswer("Incorrect answer...");
+                questionUI.SetFalseAnswer("ID_incorrect_answer");
                 if (!AddTry())
                 {
-                    questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], "Too many tries...");
+                    questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], "ID_too_many_tries");
                 }
             }
         }
@@ -144,11 +142,11 @@ public class BaseQuestions : MonoBehaviour
             }
             else
             {
-                questionUI.SetFalseAnswer("Incorrect answer...");
+                questionUI.SetFalseAnswer("ID_incorrect_answer");
                 if (!AddTry())
                 {
-                    questionUI.ShowCorrectAnswer(InputType.x, GetCorrectAnswer()[0], "Too many tries...");
-                    questionUI.ShowCorrectAnswer(InputType.y, GetCorrectAnswer()[1], "Too many tries...");
+                    questionUI.ShowCorrectAnswer(InputType.x, GetCorrectAnswer()[0], "ID_too_many_tries");
+                    questionUI.ShowCorrectAnswer(InputType.y, GetCorrectAnswer()[1], "ID_too_many_tries");
                 }
             }
         }

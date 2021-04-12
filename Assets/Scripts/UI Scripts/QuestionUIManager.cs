@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class QuestionUIManager : MonoBehaviour
 {
-    [SerializeField] private Text questionHeaderText;
-    [SerializeField] private Text questionText;
+    [SerializeField] private TextLocaliser questionHeaderText;
+    [SerializeField] private TextLocaliser questionText;
     [SerializeField] private Text errorDisplayText;
 
     [SerializeField] private InputField answerInputX;
     [SerializeField] private InputField answerInputY;
     [SerializeField] private InputField answerInputH;
-    [SerializeField] private Text answerOutput;
+    [SerializeField] private TextLocaliser answerOutput;
 
     [SerializeField] private GameObject winMenu;
     [SerializeField] private GameObject winMenuFree;
@@ -23,21 +23,21 @@ public class QuestionUIManager : MonoBehaviour
 
     [HideInInspector] public BaseQuestions baseQuestions;
 
-    public void SetQuestionText(string ID_questionHeader = "", string ID_questionText = "")
+    public void SetQuestionText(string ID_questionHeader, string ID_questionText)
     {
-        if (questionHeaderText) questionHeaderText.text = ID_questionHeader;
-        if (questionText) questionText.text = ID_questionText;
+        if (questionHeaderText) questionHeaderText.UpdateText(ID_questionHeader);
+        if (questionText) questionText.UpdateText(ID_questionText);
     }
 
-    public void SetAnswerOutput(string ID_answerText = "")
+    public void SetAnswerOutput(string ID_answerText)
     {
-        if (answerOutput) answerOutput.text = ID_answerText;
+        if (answerOutput) answerOutput.UpdateText(ID_answerText);
     }
 
     // error display control
     public void SetErrorDisplay(string ID_maxError, float errorMargin, string errorUnit)
     {
-        if (errorDisplayText) errorDisplayText.text = ID_maxError + " " + errorMargin.ToString() + errorUnit;
+        if (errorDisplayText) errorDisplayText.text = LocalisationManager.GetLocalisedValue(ID_maxError) + " " + errorMargin.ToString() + errorUnit;
     }
 
     public void ActivateWinMenu()

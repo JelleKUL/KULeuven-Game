@@ -17,8 +17,8 @@ MonoBehaviour:
   chapterExplanation: ID_mapangle_explanation
   coverImage: {fileID: 21300000, guid: a09a411ba896841c08d4757b348bf548, type: 3}
   levels:
-  - 1BepaalKaarthoek
-  - 2BepaalCoordinaten
-  - 3BepaalCoordinatenViaAnderPunt
-  - 4BepaalAfstandTussenTweePunten
-  - 5BepaalCoordinatenInGedraaidAssenstelsel
+  - ID_mapangle_scene_mapangle
+  - ID_mapangle_scene_coordinate
+  - ID_mapangle_scene_coordinate_other_point
+  - ID_mapangle_scene_distance_2_points
+  - ID_mapangle_scene_coordinate_rotated_axis

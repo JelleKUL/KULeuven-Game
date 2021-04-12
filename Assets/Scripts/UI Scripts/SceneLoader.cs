@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private bool setUpAtStart = true;
     [SerializeField][Scene] private string sceneObject;
     [SerializeField]
-    private Text buttonText;
+    private TextLocaliser buttonText;
 
     private Button button;
 
@@ -25,7 +25,7 @@ public class SceneLoader : MonoBehaviour
 
         if (buttonText && sceneObject != "")
         {
-            buttonText.text =  (nr>=0? nr + ": ":"") + Regex.Replace(sceneObject, "(\\B[A-Z])", " $1");
+            buttonText.UpdateText(sceneObject, nr); //+ Regex.Replace(sceneObject, "(\\B[A-Z])", " $1"));
         }
         if(!button) button = GetComponent<Button>();
         button.interactable = active;

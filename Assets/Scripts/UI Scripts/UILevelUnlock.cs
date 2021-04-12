@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Obsolete]
 public class UILevelUnlock : MonoBehaviour
 {
     [SerializeField]
@@ -13,7 +14,7 @@ public class UILevelUnlock : MonoBehaviour
     private Button[] randomButtons;
 
     private GameManager gm;
-
+    /*
     // Start is called before the first frame update
     void Start()
     {
@@ -77,4 +78,5 @@ public class UILevelUnlock : MonoBehaviour
             Camp2Buttons[i].interactable = GameManager.compLevelCamp2[i];
         }
     }
+    */
 }

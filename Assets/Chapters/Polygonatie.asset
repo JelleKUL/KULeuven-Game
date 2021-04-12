@@ -17,7 +17,7 @@ MonoBehaviour:
   chapterExplanation: ID_polygonatie_explanation
   coverImage: {fileID: 21300000, guid: 343aa0474c67c403e80999b16174dd69, type: 3}
   levels:
-  - 1VoorwaardseInsnijding
-  - 2AchterwaardseInsnijding
-  - 3Polygonatietabel
-  - 4Bilateratie
+  - ID_polygonatie_scene_forward_cut
+  - ID_polygonatie_scene_backward_cut
+  - ID_polygonatie_scene_polygonation_table
+  - ID_polygonatie_scene_bilateration

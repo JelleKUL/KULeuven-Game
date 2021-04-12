@@ -35,9 +35,16 @@ public class LocalisationManager : MonoBehaviour
         localisedEN = csvLoader.GetDictionaryValues("en");
     }
 
+    /// <summary>
+    /// returns a localised value of a given key, throws warning if not found
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns>the correct value of the current language, returns empty if key is empty</returns>
     public static string GetLocalisedValue(string key)
     {
         if (!isInit) Init();
+
+        if (key == "") return key;
 
         string value = key;
 
@@ -50,6 +57,11 @@ public class LocalisationManager : MonoBehaviour
                 localisedEN.TryGetValue(key, out value);
                 break;
 
+        }
+        if (value == null || value == "")
+        {
+            value = "NO VAL IN: " + language;
+            Debug.LogWarning("The key: <color=white><i>" + key + "</i></color>, has no corresponding value in " + language + ". Please add a value or dubblecheck the key");
         }
         return value;
     }

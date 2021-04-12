@@ -17,7 +17,7 @@ MonoBehaviour:
   chapterExplanation: ID_foutenpropagatie_explanation
   coverImage: {fileID: 21300000, guid: 6c0f674fc67174b39ad4dfaca6ed5797, type: 3}
   levels:
-  - 1Standaardafwijking
-  - 2SigmaAOverEenPunt
-  - 3MinimaleFoutenpropagatie
-  - 4SigmaAOverMeerderePunten
+  - ID_foutenpropagatie_scene_standard_deviation
+  - ID_foutenpropagatie_scene_sigma_a_1_point
+  - ID_foutenpropagatie_scene_min_error
+  - ID_foutenpropagatie_scene_sigma_a_more_points

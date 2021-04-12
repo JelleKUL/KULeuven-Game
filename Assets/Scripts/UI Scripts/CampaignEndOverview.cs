@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[System.Obsolete]
 public class CampaignEndOverview : MonoBehaviour
 {
     [Header("Prefabs")]
@@ -28,9 +29,9 @@ public class CampaignEndOverview : MonoBehaviour
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
-        SetUI();
+        //SetUI();
     }
-
+    /*
     void SetUI()
     {
         bool complete = true;
@@ -88,4 +89,5 @@ public class CampaignEndOverview : MonoBehaviour
 
         endMessageText.text = complete ? completeMessage : incompleteMessage;
     }
+    */
 }

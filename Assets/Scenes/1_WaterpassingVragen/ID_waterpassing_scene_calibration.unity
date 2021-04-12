@@ -397,6 +397,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 943984465560654046, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943984465560654046, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943984465560654046, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943984465560654046, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943984465560654046, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943984465560654046, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1082151115126026049, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -616,6 +646,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.26
       objectReference: {fileID: 0}
+    - target: {fileID: 3070384754677162911, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 4.999756
+      objectReference: {fileID: 0}
     - target: {fileID: 3557230087340680715, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -726,6 +761,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.46
       objectReference: {fileID: 0}
+    - target: {fileID: 6430897437469271021, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 4.999756
+      objectReference: {fileID: 0}
     - target: {fileID: 7031147943417270131, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -784,19 +824,17 @@ PrefabInstance:
     - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: ID_questionHeader
-      value: I. Bepaal de collimatiefout van het toestel
+      value: ID_waterpassing_question_6_title
       objectReference: {fileID: 0}
     - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: ID_questionText
-      value: Bereken de collimatiefout d.m.v. een exentrieke plaatsing en de afstanden
-        tot de meetbaak
+      value: ID_waterpassing_question_6_explanation
       objectReference: {fileID: 0}
     - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: ID_answerText
-      value: De collimatiefout kan bepaald worden door het veschil in hoogte te vergelijken
-        in functie van de afstand
+      value: ID_waterpassing_question_6_answer
       objectReference: {fileID: 0}
     - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
@@ -807,6 +845,16 @@ PrefabInstance:
         type: 3}
       propertyPath: answerType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_maxError
+      value: ID_max_error
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: ID_TooManyTriesText
+      value: ID_too_many_tries
       objectReference: {fileID: 0}
     - target: {fileID: 7480143048107927873, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
