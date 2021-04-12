@@ -46,20 +46,28 @@ public class SceneDrawer : PropertyDrawer
                 return AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
             }
         }
-        var sceneObj = AssetDatabase.FindAssets(sceneObjectName);
-        if (sceneObj != null)
+        
+        //if the scene is not in the build settings, add it
+        string[] sceneObj = AssetDatabase.FindAssets(sceneObjectName);
+        if (sceneObj.Length != 0)
         {
-            if(sceneObj[0].GetType() == typeof(SceneAsset)) //todo
+            string assetPath = AssetDatabase.GUIDToAssetPath(sceneObj[0]);
+            object obj = AssetDatabase.LoadAssetAtPath(assetPath, typeof(object));
+
+            if (obj.GetType() == typeof(SceneAsset))
             {
                 var original = EditorBuildSettings.scenes;
                 var newSettings = new EditorBuildSettingsScene[original.Length + 1];
                 System.Array.Copy(original, newSettings, original.Length);
-                var sceneToAdd = new EditorBuildSettingsScene(AssetDatabase.GUIDToAssetPath(sceneObj[0]), true);
+                var sceneToAdd = new EditorBuildSettingsScene(assetPath, true);
                 newSettings[newSettings.Length - 1] = sceneToAdd;
                 EditorBuildSettings.scenes = newSettings;
+                Debug.Log("Scene [" + sceneObjectName + "] was not in the build settings, it is added at te end of the list.");
+                return (SceneAsset)obj;
             }
+            Debug.Log("Scene [" + sceneObjectName + "] has naming conflicts, please remane to an unique string.");
         }
-        Debug.LogWarning("Scene [" + sceneObjectName + "] cannot be used. Add this scene to the 'Scenes in the Build' in build settings.");
+        Debug.LogWarning("Scene [" + sceneObjectName + "] cannot be found.");
         return null;
     }
 }
