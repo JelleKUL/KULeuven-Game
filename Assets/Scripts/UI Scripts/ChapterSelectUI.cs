@@ -13,9 +13,9 @@ public class ChapterSelectUI : MonoBehaviour
     [Header("SceneObjects")]
     [SerializeField] private Transform buttonParent;
     [SerializeField]
-    private Text chapterNameText;
+    private TextLocaliser chapterNameText;
     [SerializeField]
-    private Text chapterExplanationText;
+    private TextLocaliser chapterExplanationText;
     [SerializeField]
     private Image coverImage;
     [SerializeField]
@@ -31,8 +31,8 @@ public class ChapterSelectUI : MonoBehaviour
         hasData = true;
         chapterObject = chapter;
 
-        if (chapterNameText) chapterNameText.text = chapter.chapterName;
-        if (chapterExplanationText) chapterExplanationText.text = chapter.chapterExplanation;
+        if (chapterNameText) chapterNameText.UpdateText(chapter.chapterName);
+        if (chapterExplanationText) chapterExplanationText.UpdateText(chapter.chapterExplanation);
         if (coverImage) coverImage.sprite = chapter.coverImage;
 
         GetChapterInfo(chapter);

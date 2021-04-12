@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9588a500f1c304f4a985ace05604640c, type: 3}
-  m_Name: MapAngle
+  m_Name: Kaarthoek
   m_EditorClassIdentifier: 
   UID: 2b3119c18d390441fa0451e8e9d54921
-  chapterName: Map Angle
-  chapterExplanation: Oefeningen over het bepalen van de kaarthoek
+  chapterName: ID_mapangle
+  chapterExplanation: ID_mapangle_explanation
   coverImage: {fileID: 21300000, guid: a09a411ba896841c08d4757b348bf548, type: 3}
   levels:
   - 1BepaalKaarthoek
