@@ -191,10 +191,12 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < chapterList.chapters.Count; i++) //go over every chapter
         {
-            if (chapterList.chapters[i].levels.Contains(sceneName))
+            for (int j = 0; j < chapterList.chapters[i].levels.Count; j++)
             {
-                int index = chapterList.chapters[i].levels.IndexOf(sceneName);
-                return new Vector2Int(i, index);
+                if(chapterList.chapters[i].levels[j] == sceneName)
+                {
+                    return new Vector2Int(i, j);
+                }
             }
         }
         return new Vector2Int(-1, -1);

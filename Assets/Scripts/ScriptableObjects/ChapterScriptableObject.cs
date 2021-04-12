@@ -11,7 +11,7 @@ public class ChapterScriptableObject : ScriptableObject
     public string chapterName;
     public string chapterExplanation;
     public Sprite coverImage;
-    [Scene]public List <string> levels;
+    [Scene] public List <string> levels;
 
     private void OnValidate()
     {

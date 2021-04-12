@@ -46,6 +46,19 @@ public class SceneDrawer : PropertyDrawer
                 return AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
             }
         }
+        var sceneObj = AssetDatabase.FindAssets(sceneObjectName);
+        if (sceneObj != null)
+        {
+            if(sceneObj[0].GetType() == typeof(SceneAsset)) //todo
+            {
+                var original = EditorBuildSettings.scenes;
+                var newSettings = new EditorBuildSettingsScene[original.Length + 1];
+                System.Array.Copy(original, newSettings, original.Length);
+                var sceneToAdd = new EditorBuildSettingsScene(AssetDatabase.GUIDToAssetPath(sceneObj[0]), true);
+                newSettings[newSettings.Length - 1] = sceneToAdd;
+                EditorBuildSettings.scenes = newSettings;
+            }
+        }
         Debug.LogWarning("Scene [" + sceneObjectName + "] cannot be used. Add this scene to the 'Scenes in the Build' in build settings.");
         return null;
     }
