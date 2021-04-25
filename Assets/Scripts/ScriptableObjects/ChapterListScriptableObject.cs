@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class ChapterListScriptableObject : ScriptableObject
 {
     [Scene] public List<string> menuScenes = new List<string>();
+    [Scene] public string chapterEndScene;
     public List<ChapterScriptableObject> chapters;
 
 #if UNITY_EDITOR

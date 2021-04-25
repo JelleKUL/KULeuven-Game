@@ -18,14 +18,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<string> adminNames;
 
-    [SerializeField]
-    private ChapterListScriptableObject chapterList;
+    public ChapterListScriptableObject chapterList;
 
     // the static variables that are used all over the place
         public static bool showDebugAnswer = true;
         public static int loginID;
         public static string userName;
         public static int playerScore;
+        public static int currentChapter = 0;
     
         public static int highestLevel;
         public static int currentLevel;
@@ -128,10 +128,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadNextScene()
+    public void LoadNextScene() 
     {
+        //go to the campaign end scene if the chapter is complete
+        Vector2Int currentLevel = GetCurrentLevel();
+        currentChapter = currentLevel.x;
+
+        if (currentLevel.x >= 0)
+        {
+            if(chapterList.chapters[currentLevel.x].levels.Count-1 == currentLevel.y)
+            {
+                SceneManager.LoadScene(chapterList.chapterEndScene);
+                return;
+            }
+        }
+        //if not last scene go to the next scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

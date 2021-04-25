@@ -10,6 +10,8 @@ public class SceneLoader : MonoBehaviour
     [SerializeField][Scene] private string sceneObject;
     [SerializeField]
     private TextLocaliser buttonText;
+    [SerializeField]
+    private GameObject completeCheckMark;
 
     private Button button;
 
@@ -19,7 +21,7 @@ public class SceneLoader : MonoBehaviour
         if (setUpAtStart) SetButton(sceneObject, true, -1);
     }
 
-    public void SetButton(string sceneString, bool active, int nr)
+    public void SetButton(string sceneString, bool active, int nr, bool complete = false)
     {
         sceneObject = sceneString;
 
@@ -29,6 +31,8 @@ public class SceneLoader : MonoBehaviour
         }
         if(!button) button = GetComponent<Button>();
         button.interactable = active;
+
+        if (completeCheckMark) completeCheckMark.SetActive(complete);
        
     }
 

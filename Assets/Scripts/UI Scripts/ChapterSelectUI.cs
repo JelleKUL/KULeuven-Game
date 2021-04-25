@@ -41,15 +41,18 @@ public class ChapterSelectUI : MonoBehaviour
         for (int i = 0; i < chapter.levels.Count; i++)
         {
             bool active = false;
-            if (!GameManager.isLoggedIn)
+            bool complete = false;
+            if (!GameManager.isLoggedIn || i == 0)
             {
                 active = true;
+                if (i <= GameManager.chaptersInfos[chapterinfoNr].scores.Count) complete = GameManager.chaptersInfos[chapterinfoNr].scores[i] > 0;
             }
             else if(i <= GameManager.chaptersInfos[chapterinfoNr].scores.Count)
             {
-                active = GameManager.chaptersInfos[chapterinfoNr].scores[i] > 0;
+                active = (GameManager.chaptersInfos[chapterinfoNr].scores[i] > 0) || (GameManager.chaptersInfos[chapterinfoNr].scores[i-1] > 0);
+                complete = GameManager.chaptersInfos[chapterinfoNr].scores[i] > 0;
             }
-            SetButton(chapter.levels[i], active, i+1);
+            SetButton(chapter.levels[i], active, i+1, complete);
         }
         
 
@@ -69,10 +72,10 @@ public class ChapterSelectUI : MonoBehaviour
     }
 
     //set a button to a chapter scene including if it should be unlocked or not
-    void SetButton(string scene, bool active, int nr)
+    void SetButton(string scene, bool active, int nr, bool complete)
     {
         GameObject button =  Instantiate(levelSelectButtonPrefab, buttonParent);
-        button.GetComponent<SceneLoader>().SetButton(scene, active, nr);
+        button.GetComponent<SceneLoader>().SetButton(scene, active, nr, complete);
     }
 
     // sets the text fields to the correct values from the gamemanager's static variables from the login
