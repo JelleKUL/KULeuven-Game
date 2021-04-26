@@ -14,8 +14,53 @@ The game is made in **Unity 3D v2019.4 LTS**.
 
 ## Project structure
 The project is structured like a Unity project. All the relevant files are in the [/assets](../master/Assets) folder. 
+
+### Online account system
 The project uses Online Account system to use accounts linked to a database to store player records.
 
+### Localisation
+The project is localised and can handle multiple languages.
+every textfield in the game has a **key** as a string, which is connected to a **value** in a CSV.
+Currently the game supports the following languages:
+- *Dutch* (NL)
+- *English* (EN)
+
+New Languages can be added in the [LocalisationManager](../master/Assets/Scripts/Localisation/LocalisationManager.cs)
+```C#
+public class LocalisationManager : MonoBehaviour
+{
+    public enum Language { NL, EN } // add new languages here
+    public static Language language = Language.NL;
+
+    private static Dictionary<string, string> localisedNL;
+    private static Dictionary<string, string> localisedEN;
+    //add new languages here
+    ...
+    public static string GetLocalisedValue(string key)
+    {
+        ...
+        switch (language)
+        {
+            case Language.NL:
+                localisedNL.TryGetValue(key, out value);
+                break;
+            case Language.EN:
+                localisedEN.TryGetValue(key, out value);
+                break;
+            // add new languages here
+        }
+        ...
+        return value;
+    }
+    ...
+}
+```
+Then add new values to [localisation.csv](../master/Assets/Resources/localisation.csv) to add the new language to the game.
+
+key | nl | en | ... 
+--- | --- | --- | --- 
+*ID_unique* | De waarde in het Nederlands | The value in English | ...
+... |...|...|...
 
 
 ## Game structure
@@ -70,7 +115,29 @@ public class AS_CustomInfo
     public List<ChapterInfo> chapters; // a list of all the chapters in the game
     {
         public string UID = ""; // a unique UID to identify the chapter in the game
-        public List<int> scores = new List<int>(); //
+        public List<int> scores = new List<int>(); // a list of the score of each level. this also tracks if the player has competed the level when the score is higher then zero
     }
 }
-````
+```
+
+## How to add content
+This game can be easily expanded either with new chapters or new levels.
+
+### Adding a new Level
+
+1. Create a new Scene in */Assets/Scenes/(Chapter)*.
+2. Empty out the scene and add a ``ScenePrefab``from *Assets/Prefabs/ScenePrefabs* of the desired Chapter. [You can also create a new Chapter](##Adding-a-new-Chapter).
+3. Navigate to the ``(Chapter)Manager`` (eg. ``WaterPassingManager``).
+4. Create a new **key** and **values** in the [localisation.csv](../master/Assets/Resources/localisation.csv) and add them to the ``(Chapter)Questions``. 
+5. You can also change the Error Margin & Unit, NrOfTries and Score Increase.
+6. Choose the AnswerType to fit your excersice.
+7. Change the parameters in the ``(Chapter)Controller`` to fit your excercise.
+
+### Adding a new Chapter
+
+1. Create a new ``ChapterScriptableObject`` in */Assets/Chapters* from the project + dropdown menu under *ScriptableObjects/chapter*.
+2. Fill in the relevant information like the title and explanation (the UID is automatically generated)
+3. Add a cover image in */Assets/Images/Banners and link it to the Chapter
+4. Create a new folder in */Assets/Scenes/* to house you new levels.
+5. if your new chapter doesn't fit the existing controllers do the following extra steps:
+    - Create a new Question script from the [QuestionTemplate]()
