@@ -216,18 +216,17 @@ PrefabInstance:
     - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: ID_questionHeader
-      value: VIII. Vervolledig de waterpassingtabel met zijslag
+      value: ID_waterpassing_question_8_title
       objectReference: {fileID: 0}
     - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: ID_questionText
-      value: Voer alle noodzakelijke metingen uit en vul de juiste waardes in in
-        de tabel
+      value: ID_waterpassing_question_8_explanation
       objectReference: {fileID: 0}
     - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: ID_answerText
-      value: Het hoogteverschil kan gevonden worden door de middendraden te vergelijken
+      value: ID_waterpassing_question_8_answer
       objectReference: {fileID: 0}
     - target: {fileID: 6840881715961567466, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}

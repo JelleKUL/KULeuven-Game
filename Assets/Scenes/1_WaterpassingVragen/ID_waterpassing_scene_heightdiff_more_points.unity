@@ -501,19 +501,17 @@ PrefabInstance:
     - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: ID_questionHeader
-      value: III. Bepaal het hoogteveschil tussen A & D
+      value: ID_waterpassing_question_2_title
       objectReference: {fileID: 0}
     - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: ID_questionText
-      value: Plaats de meetbaken op de meetpunten en meet met het waterpastoestel
-        het hoogteverschil tussen de punten A en D
+      value: ID_waterpassing_question_2_explanation
       objectReference: {fileID: 0}
     - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: ID_answerText
-      value: Het hoogteverschil kan gevonden worden door de middendraden te vergelijken
-        van elk punt, hou rekening met het teken van de verschillen
+      value: ID_waterpassing_question_2_answer
       objectReference: {fileID: 0}
     - target: {fileID: 7480143048107927873, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}

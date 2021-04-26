@@ -491,19 +491,22 @@ PrefabInstance:
     - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: ID_questionHeader
-      value: VI. Bepaal de afstand tussen A & D
+      value: ID_waterpassing_question_5_title
       objectReference: {fileID: 0}
     - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: ID_questionText
-      value: Plaats de meetbaken op de meetpunten en gebruik het vizier om de afstand
-        te berekenen
+      value: ID_waterpassing_question_5_explanation
       objectReference: {fileID: 0}
     - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: ID_answerText
-      value: De afstand kan gevonden worden door de afstand tussen de boven-en onderdraad
-        te meten
+      value: ID_waterpassing_question_5_answer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7480143048107927873, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}

@@ -33,8 +33,9 @@ public class FoutenPropagatieQuestions : BaseQuestions
     {
         if (controlController)
         {
-            lineController.StartSetup();
             placer.StartSetup();
+            lineController.SetAnswerArray(placer.calculatePointsPositions.ToArray());
+            lineController.StartSetup();
         }
         base.SetQuestionType(); //does the base question stuff like logging
     }
