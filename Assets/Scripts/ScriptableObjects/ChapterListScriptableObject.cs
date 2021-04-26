@@ -22,7 +22,7 @@ public class ChapterListScriptableObject : ScriptableObject
         {
             sceneSettings.Add(SetScene(GetSceneObject(menuScene)));
         }
-        
+
         foreach (var chapter in chapters)
         {
             foreach (var level in chapter.levels)
@@ -30,7 +30,8 @@ public class ChapterListScriptableObject : ScriptableObject
                 sceneSettings.Add(SetScene(GetSceneObject(level)));
             }
         }
-        
+        sceneSettings.Add(SetScene(GetSceneObject(chapterEndScene)));
+
 
         EditorBuildSettings.scenes = sceneSettings.ToArray();
 

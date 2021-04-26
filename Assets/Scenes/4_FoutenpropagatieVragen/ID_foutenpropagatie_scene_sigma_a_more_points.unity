@@ -877,6 +877,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6281261398748704218, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: PlaceObstacleBtwnPoints
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281261398748704218, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: nrOfObstacles
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6604812346832429273, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchoredPosition.x
