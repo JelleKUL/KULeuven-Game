@@ -10,7 +10,7 @@ The game is made in **Unity 3D v2019.4 LTS**.
 * How to add levels
 
 ### Project structure
-The project is structured like a Unity project. All the relevant files are in the [/assets](../blob/master/Assets) folder. 
+The project is structured like a Unity project. All the relevant files are in the [/assets](../master/Assets) folder. 
 The project uses Online Account system to use accounts linked to a database to store player records.
 
 
@@ -32,7 +32,7 @@ public class ChapterScriptableObject : ScriptableObject
 
 
 ### Database Structure
-The database files can be found at [/Server-Side Scripts](../blob/master/Assets/Online%20Account%20System/Server-Side%20Scripts). these files are uploaded to a PHP & Mysql compatible server.
+The database files can be found at [/Server-Side Scripts](../master/Assets/Online%20Account%20System/Server-Side%20Scripts). these files are uploaded to a PHP & Mysql compatible server.
 
 #### accounts
 All the accounts are stored in a database with the following structure.
