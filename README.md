@@ -4,6 +4,8 @@ The game is made in **Unity 3D v2019.4 LTS**.
 
 ## Table of contents
 - [Project structure](#Project-structure)
+    - [Online account system](#Online-account-system)
+    - [Localisation](#Localisation)
 - [Game structure](#Game-structure)
     - [Game](#Game)
     - [Chapter](#Chapter)
@@ -11,6 +13,9 @@ The game is made in **Unity 3D v2019.4 LTS**.
 - [Database Structure](#Database-Structure)
     - [accounts](#accounts)
     - [custom info](#custom-info)
+- [How to add content](#How-to-add-content)
+    - [Adding a new Level](#Adding-a-new-Level)
+    - [Adding a new Chapter](#Adding-a-new-Chapter)
 
 ## Project structure
 The project is structured like a Unity project. All the relevant files are in the [/assets](../master/Assets) folder.
