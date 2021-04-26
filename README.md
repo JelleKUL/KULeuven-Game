@@ -73,7 +73,7 @@ key | nl | en | ...
 
 
 ## Game structure
-The most important parts of the game structure is strored in **scriptable objects**.
+The most important parts of the game structure is strored in **scriptable objects** in [/Chapters](../master/Assets/Chapters). These scriptable object allow for prersystent data storage without needing scene representation.
 
 ### Game
 The game is set up around menu scenes which let the user log in, check leaderboards and play the game.
