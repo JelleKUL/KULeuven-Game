@@ -13,10 +13,14 @@ The game is made in **Unity 3D v2019.4 LTS**.
     - [custom info](#custom-info)
 
 ## Project structure
-The project is structured like a Unity project. All the relevant files are in the [/assets](../master/Assets) folder. 
+The project is structured like a Unity project. All the relevant files are in the [/assets](../master/Assets) folder.
+You can clone this repo on your system. Be sure to have **Github LFS** installed to also get all the assets.
+The projects is using version control through [GitHub for Unity](https://assetstore.unity.com/packages/tools/version-control/github-for-unity-118069).
 
 ### Online account system
 The project uses Online Account system to use accounts linked to a database to store player records.
+It uses an Asset from the AssetStore named: [Online Account System](https://assetstore.unity.com/packages/tools/network/online-account-system-18487).
+Go to [Database Structure](#Database-Structure) for more info about the structure of the database.
 
 ### Localisation
 The project is localised and can handle multiple languages.
@@ -132,12 +136,16 @@ This game can be easily expanded either with new chapters or new levels.
 5. You can also change the Error Margin & Unit, NrOfTries and Score Increase.
 6. Choose the AnswerType to fit your excersice.
 7. Change the parameters in the ``(Chapter)Controller`` to fit your excercise.
+8. Add your **Level** to the relevant **Chapter** and press the **Update Build Settings** button in the [ChapterList](../master/Assets/Chapters) to add the scene to the build settings at their correct place.
 
 ### Adding a new Chapter
 
-1. Create a new ``ChapterScriptableObject`` in */Assets/Chapters* from the project + dropdown menu under *ScriptableObjects/chapter*.
+1. Create a new ``ChapterScriptableObject`` **Chapter** in */Assets/Chapters* from the Project **+** dropdown menu under *ScriptableObjects/chapter*.
 2. Fill in the relevant information like the title and explanation (the UID is automatically generated)
-3. Add a cover image in */Assets/Images/Banners and link it to the Chapter
+3. Add a cover image in */Assets/Images/Banners* and link it to the **Chapter**
 4. Create a new folder in */Assets/Scenes/* to house you new levels.
-5. if your new chapter doesn't fit the existing controllers do the following extra steps:
-    - Create a new Question script from the [QuestionTemplate]()
+5. if your new **Chapter** doesn't fit the existing controllers do the following extra steps:
+    - Create a new ``(Chapter)Questions`` script from the [QuestionTemplate](../master/Assets/Scripts/Templates)
+    - Create a new ``(Chapter)Controller`` script to match the new gameplay (use other controllers as reference)
+6. Create some new **Levels** in the new folder and add them to the list in the ``ChapterScriptableObject``.
+7. Add your new **Chapter** to the [ChapterList](../master/Assets/Chapters) and press the **Update Build Settings** button to add the chapter and scenes to the build settings at their correct place.
