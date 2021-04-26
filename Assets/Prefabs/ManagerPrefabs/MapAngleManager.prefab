@@ -169,8 +169,6 @@ MonoBehaviour:
   ID_questionHeader: 
   ID_questionText: 
   ID_answerText: 
-  ID_maxError: 'max error: '
-  ID_TooManyTriesText: too many tries, try again
   answerType: 0
   transformAxis: 0
 --- !u!114 &760579771142992738
@@ -218,9 +216,13 @@ MonoBehaviour:
   maxOffsetFromEdge: {x: 1, y: 1}
   maxItterations: 1000
   prefabs:
-    calculatePointPrefab: {fileID: 0}
-    obstructedCalculatePointPrefab: {fileID: 0}
-    obstaclePrefabs: []
+    calculatePointPrefab: {fileID: 4010883207403545137, guid: 37375dc84afda45f4bbcfc37dc1596eb,
+      type: 3}
+    obstructedCalculatePointPrefab: {fileID: 2670915819586446859, guid: 89e2885d90d16406b8cd7a306807e0a2,
+      type: 3}
+    obstaclePrefabs:
+    - {fileID: 4023926246308375095, guid: 29a30f260d24b4ffea411af6c4a568ee, type: 3}
+    - {fileID: 7982059319238469490, guid: 4f69c5454d7f847a78041d7a5dc4e307, type: 3}
     mobileObstaclePrefabs: []
   calculatePointsPositions: []
   calculatePoints: []
@@ -243,42 +245,44 @@ MonoBehaviour:
   startCenterPoint: 0
   showSmallErrors: 0
   baseError:
-    lockError: 0
-    error: 0
+    lockError: 1
+    error: 1
     randomizeError: 1
-    randomErrorRange: {x: 1, y: 1}
+    randomErrorRange: {x: 1, y: 5}
   ppmError:
-    lockError: 0
-    error: 0
+    lockError: 1
+    error: 1
     randomizeError: 1
-    randomErrorRange: {x: 1, y: 1}
+    randomErrorRange: {x: 1, y: 5}
   angleError:
-    lockError: 0
-    error: 0
+    lockError: 1
+    error: 1
     randomizeError: 1
-    randomErrorRange: {x: 1, y: 1}
+    randomErrorRange: {x: 1, y: 5}
   visualEllipseSizeModifier: 1
   showEllipses: 0
-  showAngles: 1
+  showAngles: 0
   showLengths: 0
   showStartAngle: 1
-  showStartLength: 0
+  showStartLength: 1
   showEndLength: 0
   prefabs:
-    linePoint: {fileID: 0}
-    firstPoint: {fileID: 0}
-    fullLine: {fileID: 0}
-    dottedLine: {fileID: 0}
+    linePoint: {fileID: 6925030597558219202, guid: 0b53bcca134834af5bd46cc96bd3be77,
+      type: 3}
+    firstPoint: {fileID: 2991790824968530903, guid: 2476312b10ae34e34b029f5b3bd085d1,
+      type: 3}
+    fullLine: {fileID: 2100000, guid: ad89a2623b8b042a29ffbb1d82338d12, type: 2}
+    dottedLine: {fileID: 2100000, guid: beb7aaf34b0ce4765aa8314af78dd305, type: 2}
   layerMasks:
     pointMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 256
     Obstacles:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 512
     ObstructionPoints:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 65536
   sceneObjects:
     baseDistanceErrorSlider: {fileID: 0}
     ppmDistanceErrorSlider: {fileID: 0}

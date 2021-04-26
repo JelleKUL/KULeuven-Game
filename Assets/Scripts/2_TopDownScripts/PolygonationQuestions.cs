@@ -23,7 +23,7 @@ public class PolygonationQuestions : BaseQuestions
     protected override void Awake()
     {
         base.Awake();
-        lineController = GameObject.FindGameObjectWithTag("PolygonLine").GetComponent<PolygonLineController>();
+        lineController = GetComponent<PolygonLineController>();
         placer = GetComponent<ObjectPlacer>();
 
         SetQuestionType();

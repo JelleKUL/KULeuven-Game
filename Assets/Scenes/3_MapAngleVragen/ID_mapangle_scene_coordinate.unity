@@ -128,6 +128,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 201695834653016604, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: ID_questionHeader
+      value: ID_kaarthoek_question_2_title
+      objectReference: {fileID: 0}
+    - target: {fileID: 201695834653016604, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: ID_questionText
+      value: ID_kaarthoek_question_2_explanation
+      objectReference: {fileID: 0}
+    - target: {fileID: 201695834653016604, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: ID_answerText
+      value: ID_kaarthoek_question_2_answer
+      objectReference: {fileID: 0}
+    - target: {fileID: 201695834653016604, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: answerType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 271289531687891773, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: SoortVraag
@@ -472,7 +492,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 973655044}
+      objectReference: {fileID: 0}
     - target: {fileID: 7034826972943384797, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -695,15 +715,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a63067732c6884dd59186a198fc1d824, type: 3}
---- !u!114 &973655044 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 271289531687891773, guid: a63067732c6884dd59186a198fc1d824,
-    type: 3}
-  m_PrefabInstance: {fileID: 490187743}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b6cb5b4810b4ae1a9ef38947a1dba0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

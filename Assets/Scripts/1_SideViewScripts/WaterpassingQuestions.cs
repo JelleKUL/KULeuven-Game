@@ -33,8 +33,13 @@ public class WaterpassingQuestions : BaseQuestions
         {
             waterpassing.StartSetup();
             
+            
         }
         base.SetQuestionType(); //does the base question stuff like logging
+        if (questionUI)
+        {
+            questionUI.SetInputs(true); //set the input to one
+        }
     }
 
     //checks if the given anwser is correct

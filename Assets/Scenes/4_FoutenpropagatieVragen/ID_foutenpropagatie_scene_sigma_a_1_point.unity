@@ -1159,7 +1159,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 873607631}
+      - m_Target: {fileID: 0}
         m_MethodName: CheckAnswerXY
         m_Mode: 1
         m_Arguments:
@@ -1501,6 +1501,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 893542376780256592, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 908611121461786901, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
@@ -1912,6 +1917,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5358112950398508405, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: ID_questionHeader
+      value: ID_foutenpropagatie_question_2_title
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358112950398508405, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: ID_questionText
+      value: ID_foutenpropagatie_question_2_explanation
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358112950398508405, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: ID_answerText
+      value: ID_foutenpropagatie_question_2_answer
+      objectReference: {fileID: 0}
     - target: {fileID: 6033192034388923138, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2060,18 +2080,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 873607629}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &873607631 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8705791247899038999, guid: 91116a3ecaf7848d8bae380f2695dd18,
-    type: 3}
-  m_PrefabInstance: {fileID: 873607629}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4bb45b2299544073ae4bff92aed2366, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &873607632 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5005284199311738599, guid: 91116a3ecaf7848d8bae380f2695dd18,

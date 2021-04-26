@@ -133,6 +133,31 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -5
       objectReference: {fileID: 0}
+    - target: {fileID: 201695834653016604, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: ID_questionHeader
+      value: ID_kaarthoek_question_1_title
+      objectReference: {fileID: 0}
+    - target: {fileID: 201695834653016604, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: ID_questionText
+      value: ID_kaarthoek_question_1_explanation
+      objectReference: {fileID: 0}
+    - target: {fileID: 201695834653016604, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: ID_answerText
+      value: ID_kaarthoek_question_1_answer
+      objectReference: {fileID: 0}
+    - target: {fileID: 201695834653016604, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: answerType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 201695834653016604, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: errorUnit
+      value: gon
+      objectReference: {fileID: 0}
     - target: {fileID: 271289531687891773, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: SoortVraag

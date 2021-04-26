@@ -99,6 +99,9 @@ public class ObjectPlacer : MonoBehaviour
     private List <float> PlacePoints(int amount, bool obstructed = false)
     {
         List <float> positions = new List <float>();
+
+
+
         for (int i = 0; i < amount; i++)
         {
             GameObject newPoint = Instantiate(obstructed? prefabs.obstructedCalculatePointPrefab:prefabs.calculatePointPrefab, FarEnoughRandomPoint(), Quaternion.identity);

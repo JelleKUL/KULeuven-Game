@@ -1787,6 +1787,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7413729167986069370, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: maxPoints
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7413729167986069370, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: startCenterPoint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7413729167986069370, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: showStartAngle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7451982725685034853, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1861,6 +1876,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840328794128031052, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: answerType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840328794128031052, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: ID_questionHeader
+      value: ID_polygonatie_question_3_title
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840328794128031052, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: ID_questionText
+      value: ID_polygonatie_question_3_explanation
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840328794128031052, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: ID_answerText
+      value: ID_polygonatie_question_3_answer
       objectReference: {fileID: 0}
     - target: {fileID: 7922699878558517461, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}

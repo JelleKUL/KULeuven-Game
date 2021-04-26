@@ -196,7 +196,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6872219743077172740}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -223,7 +223,7 @@ MonoBehaviour:
   maxAngleError: 0
   angleDisplayMargin: 5
   angleDisplayRaduis: 0.7
-  displayRadiusModifier: 1
+  distanceTextSwitchTreshold: 1.5
   nameText: {fileID: 0}
   distanceText: {fileID: 0}
   angleText: {fileID: 0}
@@ -231,9 +231,9 @@ MonoBehaviour:
   errorEllipse: {fileID: 0}
   angleDisplay: {fileID: 0}
   errorEllipsSize: 0
-  errorEllips: 0
   IsSnapped: 0
   displayError: 0
+  displayRadiusModifier: 1
 --- !u!1 &6872219743729214901
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,7 +456,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6872219743945147928}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -483,7 +483,7 @@ MonoBehaviour:
   maxAngleError: 0
   angleDisplayMargin: 5
   angleDisplayRaduis: 0.7
-  displayRadiusModifier: 1
+  distanceTextSwitchTreshold: 1.5
   nameText: {fileID: 0}
   distanceText: {fileID: 0}
   angleText: {fileID: 0}
@@ -491,6 +491,6 @@ MonoBehaviour:
   errorEllipse: {fileID: 0}
   angleDisplay: {fileID: 0}
   errorEllipsSize: 0
-  errorEllips: 0
   IsSnapped: 0
   displayError: 0
+  displayRadiusModifier: 1

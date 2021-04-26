@@ -12,6 +12,7 @@ public class QuestionUIManager : MonoBehaviour
     [SerializeField] private InputField answerInputX;
     [SerializeField] private InputField answerInputY;
     [SerializeField] private InputField answerInputH;
+    [SerializeField] private GameObject xInput, yInput, hInput;
     [SerializeField] private TextLocaliser answerOutput;
 
     [SerializeField] private GameObject winMenu;
@@ -38,6 +39,15 @@ public class QuestionUIManager : MonoBehaviour
     public void SetErrorDisplay(string ID_maxError, float errorMargin, string errorUnit)
     {
         if (errorDisplayText) errorDisplayText.text = LocalisationManager.GetLocalisedValue(ID_maxError) + " " + errorMargin.ToString() + errorUnit;
+    }
+
+    //set the correct input
+
+    public void SetInputs(bool one)
+    {
+        if (xInput) xInput.SetActive(!one);
+        if (yInput) yInput.SetActive(!one);
+        if (hInput) hInput.SetActive(one);
     }
 
     public void ActivateWinMenu()

@@ -243,11 +243,11 @@ MonoBehaviour:
     randomErrorRange: {x: 1, y: 5}
   visualEllipseSizeModifier: 50
   showEllipses: 1
-  showAngles: 0
-  showLengths: 0
+  showAngles: 1
+  showLengths: 1
   showStartAngle: 0
   showStartLength: 0
-  showEndLength: 0
+  showEndLength: 1
   prefabs:
     linePoint: {fileID: 6925030597558219202, guid: 0b53bcca134834af5bd46cc96bd3be77,
       type: 3}
