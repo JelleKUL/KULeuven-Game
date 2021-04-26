@@ -3,14 +3,14 @@ A game made to help the students.
 The game is made in **Unity 3D v2019.4 LTS**.
 
 ## Table of contents
-- [Project structure](##Project-structure)
-- [Game structure](##Game-structure)
-    - [Game](###Game)
-    - [Chapter](###Chapter)
-    - [Level](###Level)
-- [Database Structure](##Database-Structure)
-    - [accounts](###accounts)
-    - [custom info](###custom-info)
+- [Project structure](#Project-structure)
+- [Game structure](#Game-structure)
+    - [Game](#Game)
+    - [Chapter](#Chapter)
+    - [Level](#Level)
+- [Database Structure](#Database-Structure)
+    - [accounts](#accounts)
+    - [custom info](#custom-info)
 
 ## Project structure
 The project is structured like a Unity project. All the relevant files are in the [/assets](../master/Assets) folder. 
