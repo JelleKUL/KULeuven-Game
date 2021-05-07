@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/0_MenuScenes/AccountManagement.unity
     guid: 7ccc04fa9db104dc699df4a0298f3934
   - enabled: 1
-    path: Assets/Scenes/0_MenuScenes/ChapterEndScene.unity
-    guid: 23b0c4546731f4909889b8ef3a27177a
-  - enabled: 1
     path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_heightdiff_2_points.unity
     guid: 5227a20c12b854b1e9f4c1b7385df44e
   - enabled: 1
@@ -87,11 +84,8 @@ EditorBuildSettings:
     path: Assets/Scenes/5_PolygonatieVragen/ID_polygonatie_scene_bilateration.unity
     guid: 632597c38753340a694ffb5971286f58
   - enabled: 1
-    path: Assets/Scenes/0_MenuScenes/OldMainMenu.unity
-    guid: 183987df52cbf4da7acaf893d40ce26d
-  - enabled: 1
-    path: Assets/Scenes/1_WaterpassingVragen/default Waterpassing Scene.unity
-    guid: 123af82644b6f4d15bfb6e8eaa0f7b48
+    path: Assets/Scenes/0_MenuScenes/ChapterEndScene.unity
+    guid: 23b0c4546731f4909889b8ef3a27177a
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 22010c0de46484691b80f71a1a93ec5c,
       type: 2}

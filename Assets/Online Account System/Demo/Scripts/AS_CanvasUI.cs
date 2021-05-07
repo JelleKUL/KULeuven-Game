@@ -488,7 +488,13 @@ public class AS_CanvasUI : MonoBehaviour
 			// and custom info is not specified during registration
 			if (field.name.ToLower() == "id" | field.name.ToLower() == "custominfo" | field.name.ToLower() == "isactive")
 				continue;
-			
+
+			//creationdate is auto set in the server
+			if (field.name.ToLower() == "creationdate")
+			{
+				continue;
+			}
+
 			// For any other field, create an InputField prefab
 
 			// Initialize it
@@ -533,6 +539,12 @@ public class AS_CanvasUI : MonoBehaviour
 			// and custom info is not specified during registration
 			if (field.name.ToLower() == "id" | field.name.ToLower() == "custominfo" | field.name.ToLower() == "isactive" | field.name.ToLower() == "studentnr")
 				continue;
+
+			//creationdate is auto set in the server
+			if (field.name.ToLower() == "creationdate")
+			{
+				continue;
+			}
 
 			// For any other field, create an InputField prefab
 

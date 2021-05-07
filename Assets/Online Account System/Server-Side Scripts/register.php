@@ -46,13 +46,23 @@ foreach ($fields as $field) {
 		if ($fieldName == "email")
 		$email = $fieldValue;
 	}
-	
-	// Store it
-	$fieldNames  .= "`$fieldName`,";
-	if ($fieldValue == "")
-	$fieldValues .= "NULL,";
+
+	if ($fieldName == "creationdate")
+	{
+		$fieldNames  .= "`$fieldName`,";
+		$fieldValues .=  'CURRENT_TIMESTAMP';//date("Y-m-d H:i:s");
+	}
 	else
-		$fieldValues .= "'$fieldValue',";
+	{
+			// Store it
+		$fieldNames  .= "`$fieldName`,";
+		if ($fieldValue == "")
+			$fieldValues .= "NULL,";
+		else
+			$fieldValues .= "'$fieldValue',";
+	}
+	
+
 	
 }
 $fieldNames = rtrim( $fieldNames, ",");

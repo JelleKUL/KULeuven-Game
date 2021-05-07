@@ -434,6 +434,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
+      propertyPath: lockedBeaconLocations.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
       propertyPath: nrOfPoints
       value: 0
       objectReference: {fileID: 0}
@@ -484,13 +489,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
-      propertyPath: loopAround
-      value: 0
+      propertyPath: maxAngleError
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
-      propertyPath: maxAngleError
+      propertyPath: lockedBeaconLocations.Array.data[0].x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: lockedBeaconLocations.Array.data[0].y
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: lockedBeaconLocations.Array.data[1].x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: lockedBeaconLocations.Array.data[1].y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087446410868431081, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: showLockedHeightDiff
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1197783643201084043, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}

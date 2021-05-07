@@ -20,10 +20,12 @@ public class WaterPassingController : MonoBehaviour
     [SerializeField] private bool lockMeasure;
     [SerializeField] private Vector2 lockedMeasureLocation;
     [SerializeField] private bool lockBeacon;
-    [SerializeField] private Vector2 lockedBeaconLocation;
+    [SerializeField] private List<Vector2> lockedBeaconLocations = new List<Vector2>();
+    [Tooltip("create a height difference on the locked measures locations, only relevant if beacons are locked")]
+    [SerializeField] private bool showLockedHeightDiff = false;
     [SerializeField] private bool loopAround;
     [SerializeField] private bool addPointOutLoop;
-    
+
 
     [Header("Standard Parameters")]
     [SerializeField] private bool showAngleError;
@@ -142,8 +144,10 @@ public class WaterPassingController : MonoBehaviour
 
         if (lockBeacon)
         {
-            AddBeacon(lockedBeaconLocation);
-            AddBeacon(new Vector2(lockedMeasureLocation.x * 2 - lockedBeaconLocation.x, lockedBeaconLocation.y));
+            foreach (var location in lockedBeaconLocations)
+            {
+                AddBeacon(location);
+            }
         }
         else
         {
@@ -241,23 +245,37 @@ public class WaterPassingController : MonoBehaviour
 
     public void SetGroundSprite()
     {
+        //add the anchorpoints at the under and right side
         sceneObjects.spriteShapeController.spline.Clear();
         sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(-10,-3));
         sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(20, -3));
         sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(20, -sceneObjects.spriteShapeController.colliderOffset));
         sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, -sceneObjects.spriteShapeController.colliderOffset));
-        
-        for (int i = nrOfPoints; i > 0 ; i--)
+
+        // add locked beacon positions
+        if(lockBeacon && showLockedHeightDiff)
         {
-            sceneObjects.spriteShapeController.spline.InsertPointAt(0, groundPoints[i-1].transform.position + sceneObjects.spriteShapeController.colliderOffset * Vector3.down);
+            for (int i = lockedBeaconLocations.Count; i > 0; i--)
+            {
+                sceneObjects.spriteShapeController.spline.InsertPointAt(0, (Vector3)lockedBeaconLocations[i-1] + sceneObjects.spriteShapeController.colliderOffset * Vector3.down);
+            }
         }
+        //or add the points positions
+        else
+        {
+            for (int i = nrOfPoints; i > 0; i--)
+            {
+                sceneObjects.spriteShapeController.spline.InsertPointAt(0, groundPoints[i - 1].transform.position + sceneObjects.spriteShapeController.colliderOffset * Vector3.down);
+            }
+        }
+        // add the left points
         sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, -sceneObjects.spriteShapeController.colliderOffset));
         sceneObjects.spriteShapeController.spline.InsertPointAt(0, new Vector3(-10, -sceneObjects.spriteShapeController.colliderOffset));
 
+        // set the tangents for a smooth shape
         for (int i = 0; i < sceneObjects.spriteShapeController.spline.GetPointCount(); i++)
         {
             sceneObjects.spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
-            //spriteShapeController.spline.SetHeight(i, 1);
             sceneObjects.spriteShapeController.spline.SetLeftTangent(i, Vector3.left);
             sceneObjects.spriteShapeController.spline.SetRightTangent(i, Vector3.right);
         }
@@ -432,7 +450,12 @@ public class WaterPassingController : MonoBehaviour
         }
         if (lockBeacon)
         {
-            AddBeacon(lockedBeaconLocation);
+            foreach (var location in lockedBeaconLocations)
+            {
+                AddBeacon(location);
+            }
+
+            
         }
 
     }
@@ -639,7 +662,7 @@ public class WaterPassingController : MonoBehaviour
     }
 
     //sets the parameters so they match the given question
-    public void SetParameters(int nrPoints, int nrBeacons, int nrMeasures, bool lockmeasure, Vector2 measureLocation, bool lockbeacon, Vector2 beaconLocation, bool loop)
+    public void SetParameters(int nrPoints, int nrBeacons, int nrMeasures, bool lockmeasure, Vector2 measureLocation, bool lockbeacon, List <Vector2> beaconLocation, bool loop)
     {
         nrOfPoints = nrPoints;
         maxBeacons = nrBeacons;
@@ -647,7 +670,7 @@ public class WaterPassingController : MonoBehaviour
         lockMeasure = lockmeasure;
         lockedMeasureLocation = measureLocation;
         lockBeacon = lockbeacon;
-        lockedBeaconLocation = beaconLocation;
+        lockedBeaconLocations = beaconLocation;
         loopAround = loop;
 
         StartSetup();

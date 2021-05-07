@@ -374,8 +374,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showName: 1
+  resetRotation: 1
   maxLengthError: 0
   maxAngleError: 0
+  angleDisplayMargin: 5
+  angleDisplayRaduis: 0.7
+  distanceTextSwitchTreshold: 1.5
   nameText: {fileID: 3921552776200299759}
   distanceText: {fileID: 0}
   angleText: {fileID: 0}
@@ -384,6 +388,8 @@ MonoBehaviour:
   angleDisplay: {fileID: 0}
   errorEllipsSize: 0
   IsSnapped: 0
+  displayError: 0
+  displayRadiusModifier: 1
 --- !u!58 &8665197482629893217
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -451,7 +457,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 58081a99473714f059dec1212fd3d081, type: 3}
+  - {fileID: 2100000, guid: 94dfa25e9777d493c8ea684c4dbeb22e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
