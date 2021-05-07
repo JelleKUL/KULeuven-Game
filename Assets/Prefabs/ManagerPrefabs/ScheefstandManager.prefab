@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7005877066931207479}
+  - component: {fileID: 7195595358037245368}
   - component: {fileID: 7440671033004402837}
   m_Layer: 0
   m_Name: ScheefstandManager
@@ -31,6 +32,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7195595358037245368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718913296658733576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88b7c74dfb784d3faf7b1e41a133774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlText: 1
+  controlController: 1
+  scoreIncrease: 100
+  nrOfTries: 3
+  errorMargin: 0.001
+  errorUnit: m
+  ID_questionHeader: 
+  ID_questionText: 
+  ID_answerText: 
+  answerType: 0
 --- !u!114 &7440671033004402837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,28 +66,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2827be7ef67ba4b4daf2017b4fb740d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theodoliet: {fileID: 6238657256937632608, guid: 7d73b830926d64bcbada3dd3bf4718e7,
-    type: 3}
-  skewBuilding: {fileID: 3331951028963185800, guid: fb8b10bbf74c44475800ed4259aeefd8,
-    type: 3}
-  winMenu: {fileID: 0}
-  winMenuFree: {fileID: 0}
-  submitBtn: {fileID: 0}
-  restartBtn: {fileID: 0}
-  MeasurePlacer: {fileID: 0}
-  magnifyButton: {fileID: 0}
-  pointMask:
-    serializedVersion: 2
-    m_Bits: 9472
-  answerText: {fileID: 0}
-  answerOutput: {fileID: 0}
-  falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
-  CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
   maxSkewAngle: 3
   maxSkewError: 0
   skewBuildingLocation: {x: 5, y: 0}
-  scoreIncrease: 50
-  nrOfTries: 3
+  prefabs:
+    theodoliet: {fileID: 6238657256937632608, guid: 7d73b830926d64bcbada3dd3bf4718e7,
+      type: 3}
+    skewBuilding: {fileID: 3331951028963185800, guid: fb8b10bbf74c44475800ed4259aeefd8,
+      type: 3}
+  sceneObjects:
+    pointMask:
+      serializedVersion: 2
+      m_Bits: 9472
+    MeasurePlacer: {fileID: 0}
   correctDistance: 0
   points:
   - {fileID: 0}

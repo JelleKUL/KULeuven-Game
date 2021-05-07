@@ -7,7 +7,7 @@ using UnityEngine.U2D;
 //*********** The WaterPassingController controls most aspects of the waterpassing type exercise ******************//
 
 
-public class WaterPassingController : MonoBehaviour
+public class WaterPassingController : BaseController
 {
     [Header("Changeable Parameters")]
     [Range(0, 5)]
@@ -17,6 +17,7 @@ public class WaterPassingController : MonoBehaviour
     [SerializeField] private int maxBeacons;
     [SerializeField] private int maxMeasures;
 
+    [SerializeField] private bool largeMeasure = false;
     [SerializeField] private bool lockMeasure;
     [SerializeField] private Vector2 lockedMeasureLocation;
     [SerializeField] private bool lockBeacon;
@@ -46,6 +47,7 @@ public class WaterPassingController : MonoBehaviour
     {
         public GameObject beacon;
         public GameObject measure;
+        public GameObject largeMeasure;
         public GameObject groundPoint;
         public GameObject topPoint;
         public GameObject groundPointTopDown;
@@ -78,9 +80,7 @@ public class WaterPassingController : MonoBehaviour
     private List<GameObject> beacons = new List<GameObject>();
     private List<GameObject> groundPointsTopDown = new List<GameObject>();
 
-    private bool holdingObject;
     private GameObject hitObject;
-    private bool hasStarted;
     private int pointOutLoopNr = -1;
 
     // values used by other scripts, the correct answers
@@ -98,13 +98,13 @@ public class WaterPassingController : MonoBehaviour
     public float correctScaledErrorAngle;
 
     // Start is called before the first frame update
-    private void Start()
+    protected override void Start()
     {
-        if (!hasStarted) StartSetup(); //only calls when Start() hasn't gone yet
+        base.Start();
     }
 
     // the startscript, can be called by the setparametersfunction to get the correct answers before the start function is called in this script
-    public void StartSetup()
+    public override void StartSetup()
     {
         hasStarted = true; 
 
@@ -135,9 +135,13 @@ public class WaterPassingController : MonoBehaviour
         else
         {
             float offset = 0f;
-            if(prefabs.measure.TryGetComponent(out BoxCollider2D box))
+            if(prefabs.measure.TryGetComponent(out BoxCollider2D box) && !largeMeasure)
             {
                 offset = box.offset.y;
+            }
+            else if (prefabs.largeMeasure.TryGetComponent(out BoxCollider2D largeBox))
+            {
+                offset = largeBox.offset.y;
             }
             AddMeasure(sceneObjects.MeasurePlacer.position - sceneObjects.MeasurePlacer.up * offset);
         }
@@ -166,7 +170,7 @@ public class WaterPassingController : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
-            hitObject = CastMouseRay();
+            hitObject = CastMouseRay(sceneObjects.pointMask);
 
             if (hitObject != null && hitObject.tag == "MagnifyGlass")
             {
@@ -179,7 +183,7 @@ public class WaterPassingController : MonoBehaviour
         {
             if (!holdingObject)
             {
-                hitObject = CastMouseRay();
+                hitObject = CastMouseRay(sceneObjects.pointMask);
             }
             if (hitObject!= null && hitObject.tag != "MagnifyGlass")
             {
@@ -285,44 +289,26 @@ public class WaterPassingController : MonoBehaviour
     {
         sceneObjects.topSpriteShapeController.spline.Clear();
 
-        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(-2, gm.screenMax.y - 0.5f));
-        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, gm.screenMax.y - 0.5f));
-
+        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(18, gm.screenMax.y+0.5f));
+        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, gm.screenMax.y + 0.5f));
+        
         for (int i = 0; i < nrOfTopPoints; i++)
         {
-            sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, topPoints[i].transform.position + 0.5f * Vector3.up);
+            sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, topPoints[i].transform.position + 1f * Vector3.up);
             
         }
 
-        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMax.x, gm.screenMax.y - 0.5f));
-        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(18, gm.screenMax.y - 0.5f));
-        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(18, 10));
-        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(-2, 10));
+        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(gm.screenMin.x, gm.screenMax.y + 0.5f));
+        sceneObjects.topSpriteShapeController.spline.InsertPointAt(0, new Vector3(-2, gm.screenMax.y + 0.5f));
 
         for (int i = 0; i < sceneObjects.topSpriteShapeController.spline.GetPointCount(); i++)
         {
             sceneObjects.topSpriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
             //topSpriteShapeController.spline.SetHeight(i, 0.1f);
-            sceneObjects.topSpriteShapeController.spline.SetLeftTangent(i, Vector3.right);
-            sceneObjects.topSpriteShapeController.spline.SetRightTangent(i, Vector3.left);
+            sceneObjects.topSpriteShapeController.spline.SetLeftTangent(i, Vector3.left);
+            sceneObjects.topSpriteShapeController.spline.SetRightTangent(i, Vector3.right);
         }
 
-    }
-
-    //returns the gamobject the mouse has hit
-    public GameObject CastMouseRay()
-    {
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),20, sceneObjects.pointMask);
-
-        if (rayHit.collider != null)
-        {
-            holdingObject = true;
-            //Debug.Log(rayHit.transform.gameObject.name);
-            return rayHit.transform.gameObject;
-            
-        }
-        holdingObject = false;
-        return null;
     }
 
 
@@ -333,14 +319,12 @@ public class WaterPassingController : MonoBehaviour
         {
             measureObject.GetComponent<MeasureController>().ToggleMagnify();
         }
-        
-
     }
     
     //places a measure object
     public void AddMeasure(Vector2 location)
     {
-        GameObject newMeasure = Instantiate(prefabs.measure, location, Quaternion.identity);
+        GameObject newMeasure = Instantiate(largeMeasure?prefabs.largeMeasure : prefabs.measure, location, Quaternion.identity);
         MeasureController measureController = newMeasure.GetComponent<MeasureController>();
         measureController.errorAngle = correctErrorAngle;
 
@@ -644,23 +628,6 @@ public class WaterPassingController : MonoBehaviour
 
     }
  
-    //shows the correct answer (replaced in the questionscript)
-    public string ShowAnswer()
-    {
-        string answer =  "Height Diff: " + correctHeight.ToString();
-
-        for (int i = 0; i < measures.Count; i++)
-        {
-            float errorAngleEach = measures[i].transform.GetChild(0).transform.eulerAngles.z;
-            answer += " & errorAngle " + (i + 1) + ": " + errorAngleEach.ToString();
-            measures[i].transform.GetChild(1).gameObject.SetActive(true);
-            measures[i].transform.GetChild(0).gameObject.SetActive(false);
-        }
-
-        return answer;
-
-    }
-
     //sets the parameters so they match the given question
     public void SetParameters(int nrPoints, int nrBeacons, int nrMeasures, bool lockmeasure, Vector2 measureLocation, bool lockbeacon, List <Vector2> beaconLocation, bool loop)
     {

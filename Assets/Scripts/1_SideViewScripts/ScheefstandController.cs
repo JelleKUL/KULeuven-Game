@@ -5,63 +5,60 @@ using UnityEngine.UI;
 
 //*************** Manages the scheefstand oefening ****************//
 
-public class ScheefstandController : MonoBehaviour
+public class ScheefstandController : BaseController
 {
-    [Header("Prefabs")]
-    
-    public GameObject theodoliet;
-    public GameObject skewBuilding;
-    public GameObject winMenu, winMenuFree, submitBtn, restartBtn;
-    public Transform MeasurePlacer;
-    public Button magnifyButton;
-    public LayerMask pointMask;
-    public Text answerText;
-    public Text answerOutput;
-
-    public Color falseColor, CorrectColor;
-
     [Header("Variables")]
     public float maxSkewAngle;
     public float maxSkewError;
     public Vector2 skewBuildingLocation;
-    public int scoreIncrease;
-    [Tooltip("het aantal keren dat je mag proberen, 0 = oneindig")]
-    public int nrOfTries = 3;
 
+    [System.Serializable]
+    private class Prefabs
+    {
+        public GameObject theodoliet;
+        public GameObject skewBuilding;
+    }
+    [System.Serializable]
+    private class SceneObjects
+    {
+        public LayerMask pointMask;
+        public Transform MeasurePlacer;
+    }
+    [Header("Scene Objects")]
+    [SerializeField]
+    [Space(20)]
+    private Prefabs prefabs;
+    [SerializeField]
+    private SceneObjects sceneObjects;
 
     [HideInInspector]
     public float correctDistance;
-
-    private GameObject building;
     [HideInInspector]
     public Transform[] points = new Transform[2];
+
+    private GameObject building;
     private GameManager gm;
     private GameObject hitObject;
     private GameObject theodolietObject;
-    private bool holdingObject;
     private float skewError;
     private bool isFlipped;
-    private int currentTries = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    // the startscript, can be called by the setparametersfunction to get the correct answers before the start function is called in this script
+    public override void StartSetup()
     {
+        base.StartSetup();
+
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         skewError = Random.Range(-maxSkewError, maxSkewError);
 
         PlaceBulding();
         float offset = 0f;
-        if (theodoliet.TryGetComponent(out BoxCollider2D box))
+        if (prefabs.theodoliet.TryGetComponent(out BoxCollider2D box))
         {
             offset = box.offset.y;
         }
-        theodolietObject = Instantiate(theodoliet, MeasurePlacer.position - MeasurePlacer.up * offset, Quaternion.identity);
+        theodolietObject = Instantiate(prefabs.theodoliet, sceneObjects.MeasurePlacer.position - sceneObjects.MeasurePlacer.up * offset, Quaternion.identity);
         theodolietObject.GetComponent<Theodoliet>().scheefstandController = this;
-
-        if (GameManager.showDebugAnswer)
-        {
-            Debug.Log("Correct distance = " + GameManager.RoundFloat(Mathf.Abs(correctDistance),3));
-        }
     }
 
     // Update is called once per frame
@@ -69,7 +66,7 @@ public class ScheefstandController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && gm.IsBetweenValues(gm.SetObjectToMouse(Input.mousePosition, 0)))
         {
-            hitObject = CastMouseRay();
+            hitObject = CastMouseRay(sceneObjects.pointMask);
 
             if (hitObject != null && hitObject.tag == "MagnifyGlass")
             {
@@ -82,7 +79,7 @@ public class ScheefstandController : MonoBehaviour
         {
             if (!holdingObject)
             {
-                hitObject = CastMouseRay();
+                hitObject = CastMouseRay(sceneObjects.pointMask);
             }
             if (hitObject != null && hitObject.tag != "MagnifyGlass")
             {
@@ -106,7 +103,7 @@ public class ScheefstandController : MonoBehaviour
                         {
                             offset = box.offset.y;
                         }
-                        hitObject.transform.position = MeasurePlacer.position - MeasurePlacer.up * offset;
+                        hitObject.transform.position = sceneObjects.MeasurePlacer.position - sceneObjects.MeasurePlacer.up * offset;
                     }
                     
                 }
@@ -120,28 +117,12 @@ public class ScheefstandController : MonoBehaviour
 
     void PlaceBulding()
     {
-        building = Instantiate(skewBuilding, skewBuildingLocation, Quaternion.Euler(0, 0, Random.Range(-maxSkewAngle, maxSkewAngle)));
+        building = Instantiate(prefabs.skewBuilding, skewBuildingLocation, Quaternion.Euler(0, 0, Random.Range(-maxSkewAngle, maxSkewAngle)));
         SkewBuildingController skewBuildingController = building.GetComponent<SkewBuildingController>();
         
         correctDistance = skewBuildingController.getDistance();
         points = skewBuildingController.beaconPoints;
         skewBuildingController.SetLine(skewError);
-    }
-
-    //returns the gamobject the mouse has hit
-    public GameObject CastMouseRay()
-    {
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), 20, pointMask);
-
-        if (rayHit.collider != null)
-        {
-            holdingObject = true;
-            //Debug.Log(rayHit.transform.gameObject.name);
-            return rayHit.transform.gameObject;
-
-        }
-        holdingObject = false;
-        return null;
     }
 
     public void ToggleMagnify()
@@ -155,73 +136,4 @@ public class ScheefstandController : MonoBehaviour
 
         building.GetComponent<SkewBuildingController>().SetLine(skewError * (isFlipped? -1: 1));
     }
-
-    //checks if the given anwser is correct
-    public void CheckAnswer()
-    {
-        /*
-        if (gm.CheckCorrectAnswer(answerText.text, correctDistance, 0.001f) || gm.CheckCorrectAnswer(answerText.text, -correctDistance, 0.001f)) //TO-DO edit
-        {
-            gm.IncreaseScore(scoreIncrease, 1);
-            Debug.Log(answerText.text + " is correct!");
-
-            if (GameManager.campaignMode)
-            {
-                winMenu.SetActive(true);
-            }
-            else
-            {
-                winMenuFree.SetActive(true);
-            }
-            //gm.ReloadScene();
-        }
-        else
-        {
-            answerText.color = falseColor;
-            Debug.Log(answerText.text + " is False...");
-            answerOutput.text = "Hou rekening met de collimatiefout.";
-
-            if (nrOfTries > 0)
-            {
-                currentTries++;
-                if (currentTries >= nrOfTries)
-                {
-                    setRestart();
-                    return;
-                }
-            }
-        }
-
-        */
-    }
-
-    public void setRestart()
-    {
-        ShowAnswer();
-        submitBtn.SetActive(false);
-        restartBtn.SetActive(true);
-        answerOutput.text = "Te veel pogingen, probeer opnieuw.";
-    }
-
-    //displays the correct answer
-    public void ShowAnswer()
-    {
-        
-        if (answerText.transform.parent.GetComponent<InputField>())
-        {
-            answerText.color = falseColor;
-            InputField answerDisplay = answerText.transform.parent.GetComponent<InputField>();
-            answerDisplay.text = GameManager.RoundFloat(Mathf.Abs(correctDistance),3).ToString();
-            answerDisplay.interactable = false;
-        }
-
-        answerOutput.text = "Hou rekening met de collimatiefout.";
-
-
-
-        Debug.Log("showing answer");
-
-    }
-
-
 }

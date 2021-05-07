@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public enum InputType { x, y, h}
 
+[RequireComponent(typeof(BaseController))]
 public class BaseQuestions : MonoBehaviour
 {
     [Header("Basic Question Parameters")]
@@ -43,6 +44,7 @@ public class BaseQuestions : MonoBehaviour
     protected string ID_maxError = "ID_max_error";
     protected string ID_TooManyTriesText = "ID_too_many_tries";
 
+    protected BaseController controller;
 
     protected GameManager gm;
     protected QuestionUIManager questionUI;
@@ -56,6 +58,7 @@ public class BaseQuestions : MonoBehaviour
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         questionUI = GameObject.FindGameObjectWithTag("QuestionUIController").GetComponent<QuestionUIManager>();
+        controller = GetComponent<BaseController>();
 
         if (questionUI)
         {

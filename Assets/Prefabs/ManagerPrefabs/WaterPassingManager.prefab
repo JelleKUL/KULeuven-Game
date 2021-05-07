@@ -44,24 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841c3b104d8ce4599add20122817e1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  answerType: 0
+  controlText: 1
+  controlController: 1
   scoreIncrease: 1
   nrOfTries: 3
+  errorMargin: 0.001
+  errorUnit: m
   ID_questionHeader: 
   ID_questionText: 
   ID_answerText: 
-  sceneObjects:
-    ID_TooManyTriesText: too many tries, try again
-    questionHeaderText: {fileID: 0}
-    questionText: {fileID: 0}
-    answerInputH: {fileID: 0}
-    answerOutput: {fileID: 0}
-    winMenu: {fileID: 0}
-    winMenuFree: {fileID: 0}
-    submitBtn: {fileID: 0}
-    restartBtn: {fileID: 0}
-    falseColor: {r: 0.8745098, g: 0.33493727, b: 0.37051356, a: 1}
-    CorrectColor: {r: 0.5118588, g: 0.894, b: 0.53289413, a: 1}
+  answerType: 0
 --- !u!114 &1443950649014578541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,10 +70,12 @@ MonoBehaviour:
   nrOfTopPoints: 0
   maxBeacons: 2
   maxMeasures: 1
+  largeMeasure: 0
   lockMeasure: 0
   lockedMeasureLocation: {x: 0, y: 0}
   lockBeacon: 0
-  lockedBeaconLocation: {x: 0, y: 0}
+  lockedBeaconLocations: []
+  showLockedHeightDiff: 0
   loopAround: 0
   addPointOutLoop: 0
   showAngleError: 0
@@ -95,6 +89,8 @@ MonoBehaviour:
     beacon: {fileID: 3884719204972097174, guid: 4cc65cdc6658d4c21a8b8e9713bbf830,
       type: 3}
     measure: {fileID: 1354509410431150012, guid: 998ae4e66d110474789197b610c330cc,
+      type: 3}
+    largeMeasure: {fileID: 8136651727324024340, guid: 416dde727514c4eb78b90bc1267bb01b,
       type: 3}
     groundPoint: {fileID: 2186970088697500766, guid: e4caef811465f42cdb1c59c0ba3796ae,
       type: 3}
