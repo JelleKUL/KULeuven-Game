@@ -138,6 +138,7 @@ This game can be easily expanded either with new chapters or new levels.
 2. Empty out the scene and add a ``ScenePrefab``from *Assets/Prefabs/ScenePrefabs* of the desired Chapter. [You can also create a new Chapter](##Adding-a-new-Chapter).
 3. Navigate to the ``(Chapter)Manager`` (eg. ``WaterPassingManager``).
 4. Create a new **key** and **values** in the [localisation.csv](../master/Assets/Resources/localisation.csv) and add them to the ``(Chapter)Questions``. 
+5. You can add values from public variables in the respective ``(Chapter)Controller`` to the question title and explanation by inserting ``{VARIABLE_NAME}`` in the localised values. e.g. "Plaats de meetbaken op de {nrOfPoints} meetpunten."
 5. You can also change the Error Margin & Unit, NrOfTries and Score Increase.
 6. Choose the AnswerType to fit your excersice.
 7. Change the parameters in the ``(Chapter)Controller`` to fit your excercise.
