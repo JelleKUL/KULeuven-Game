@@ -64,7 +64,7 @@ public class BaseQuestions : MonoBehaviour
         {
             questionUI.baseQuestions = this;
             questionUI.SetErrorDisplay(ID_maxError, errorMargin, errorUnit);
-            if (controlText) questionUI.SetQuestionText(ID_questionHeader, ID_questionText);
+            if (controlText) questionUI.SetQuestionText(ID_questionHeader, ID_questionText, controller);
             questionUI.SetAnswerOutput("");
         }
     }

@@ -6,12 +6,11 @@ using UnityEngine.U2D;
 
 //*********** The WaterPassingController controls most aspects of the waterpassing type exercise ******************//
 
-
 public class WaterPassingController : BaseController
 {
     [Header("Changeable Parameters")]
     [Range(0, 5)]
-    [SerializeField] private int nrOfPoints;
+    [SerializeField] public int nrOfPoints;
     [Range(0, 3)]
     [SerializeField] private int nrOfTopPoints;
     [SerializeField] private int maxBeacons;

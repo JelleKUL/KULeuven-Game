@@ -32,8 +32,6 @@ public class WaterpassingQuestions : BaseQuestions
         if (controlController)
         {
             waterpassing.StartSetup();
-            
-            
         }
         base.SetQuestionType(); //does the base question stuff like logging
         if (questionUI)

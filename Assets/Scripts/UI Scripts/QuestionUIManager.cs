@@ -24,10 +24,10 @@ public class QuestionUIManager : MonoBehaviour
 
     [HideInInspector] public BaseQuestions baseQuestions;
 
-    public void SetQuestionText(string ID_questionHeader, string ID_questionText)
+    public void SetQuestionText(string ID_questionHeader, string ID_questionText, object parseObject = null)
     {
-        if (questionHeaderText) questionHeaderText.UpdateText(ID_questionHeader);
-        if (questionText) questionText.UpdateText(ID_questionText);
+        if (questionHeaderText) questionHeaderText.UpdateText(ID_questionHeader,-1, parseObject);
+        if (questionText) questionText.UpdateText(ID_questionText,-1, parseObject);
     }
 
     public void SetAnswerOutput(string ID_answerText)
