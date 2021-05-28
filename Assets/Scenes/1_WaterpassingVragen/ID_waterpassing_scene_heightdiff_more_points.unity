@@ -513,6 +513,11 @@ PrefabInstance:
       propertyPath: ID_answerText
       value: ID_waterpassing_question_2_answer
       objectReference: {fileID: 0}
+    - target: {fileID: 7117361605232874634, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.002
+      objectReference: {fileID: 0}
     - target: {fileID: 7480143048107927873, guid: 4d233a20e80c34bc4bdc4f5e8e446f79,
         type: 3}
       propertyPath: m_AnchorMin.y

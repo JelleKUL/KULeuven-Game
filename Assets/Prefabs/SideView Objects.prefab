@@ -706,7 +706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9175179377119934026
 Transform:
   m_ObjectHideFlags: 0
@@ -728,7 +728,7 @@ SpriteShapeRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3720420080726022543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 0
@@ -767,8 +767,8 @@ SpriteShapeRenderer:
   m_Sprites:
   - {fileID: 21300000, guid: 31ff289c8749643fa9af2e2b1e058b57, type: 3}
   m_LocalAABB:
-    m_Center: {x: 10.032876, y: 2.888915, z: -0.00005}
-    m_Extent: {x: 12.13192, y: 2.888915, z: 0.00005}
+    m_Center: {x: 10.032876, y: 3.0000002, z: -0.00005}
+    m_Extent: {x: 12.13192, y: 3.0000002, z: 0.00005}
 --- !u!114 &7130096279694626120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,9 +833,9 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -2.0990438, y: 3.7778292}
-  - {x: 21.855658, y: 3.7778292}
-  - {x: 22.164797, y: 3.7778292}
+  - {x: -2.0990438, y: 4}
+  - {x: 21.855658, y: 4}
+  - {x: 22.164797, y: 4}
 --- !u!1 &4398130720550368105
 GameObject:
   m_ObjectHideFlags: 0

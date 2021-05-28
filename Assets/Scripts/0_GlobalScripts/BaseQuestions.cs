@@ -183,9 +183,9 @@ public class BaseQuestions : MonoBehaviour
             string answerText = "Correct antwoord = ";
             foreach (var answer in GetCorrectAnswer())
             {
-                answerText += answer.ToString() + ", ";
+                answerText += answer.ToString() + errorUnit + ", ";
             }
-            Debug.Log(answerText + errorUnit);
+            Debug.Log(answerText);
         }
     }
 
