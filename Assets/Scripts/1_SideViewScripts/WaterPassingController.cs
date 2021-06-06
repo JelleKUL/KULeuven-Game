@@ -31,6 +31,8 @@ public class WaterPassingController : BaseController
     [SerializeField] private bool showAngleError;
     [Tooltip("the max deviation in 1 direction in degrees, before the scaling factor is applied")]
     [SerializeField] private float maxAngleError;
+    [Tooltip("The standard deviations of the measure over 1km of a back and forth resection (mm/km)")]
+    public float sigma1kmHT = 0.7f;
     [Tooltip("the minimum distance the points should be apart")]
     [SerializeField] private float minDistance;
     [Tooltip("the max height of the points in % of the screen height")]
@@ -73,8 +75,6 @@ public class WaterPassingController : BaseController
 
     //private Variables
     private GameManager gm;
-    private List<GameObject> groundPoints = new List<GameObject>();
-    private List<GameObject> topPoints = new List<GameObject>();
     private List<GameObject> measures = new List<GameObject>();
     private List<GameObject> beacons = new List<GameObject>();
     private List<GameObject> groundPointsTopDown = new List<GameObject>();
@@ -84,9 +84,15 @@ public class WaterPassingController : BaseController
 
     // values used by other scripts, the correct answers
     [HideInInspector]
+    public List<GameObject> groundPoints = new List<GameObject>();
+    [HideInInspector]
+    public List<GameObject> topPoints = new List<GameObject>();
+    [HideInInspector]
     public float correctHeight;
     [HideInInspector]
     public float[] correctHeightDifferences;
+    [HideInInspector]
+    public float[] correctHeights;
     [HideInInspector]
     public float [] correctDistances;
     [HideInInspector]
@@ -121,7 +127,7 @@ public class WaterPassingController : BaseController
         {
             AddStartAndEndGroundPoint(); 
             SetGroundPointsTopDown();
-            sceneObjects.waterpassingTabel.CreateTable(nrOfPoints + 1, pointOutLoopNr);
+            sceneObjects.waterpassingTabel.CreateTable(nrOfPoints + 1, pointOutLoopNr, this);
         }
 
         SetGroundSprite();
@@ -443,7 +449,7 @@ public class WaterPassingController : BaseController
 
     }
 
-    public void AddStartAndEndGroundPoint()
+    public void AddStartAndEndGroundPoint() //todo add random start and end height
     {
         GameObject newPoint = Instantiate(prefabs.groundPoint, new Vector2(gm.screenMin.x+ startAndEndPointOffset, 0), Quaternion.identity);
         newPoint.GetComponent<PolygonPointController>().SetNrText(0);
@@ -534,16 +540,19 @@ public class WaterPassingController : BaseController
         if (loopAround)
         {
             correctHeightDifferences = new float[nrOfPoints + 1];
+            correctHeights = new float[nrOfPoints + 1];
             correctDistances = new float[nrOfPoints + 1];
 
             // correct heights
             correctHeightDifferences[0] = groundPoints[0].transform.position.y;
+            correctHeights[0] = groundPoints[0].transform.position.y;
             for (int i = 1; i < nrOfPoints; i++)
             {
                 correctHeightDifferences[i] = groundPoints[i].transform.position.y - groundPoints[i - 1].transform.position.y;
-                
+                correctHeights[i] = groundPoints[i].transform.position.y;
             }
             correctHeightDifferences[nrOfPoints] = -groundPoints[nrOfPoints-1].transform.position.y;
+            correctHeights[nrOfPoints] = 0; //todo add random height
 
             //correct distances
             correctDistances[0] = groundPoints[0].transform.position.x - (gm.screenMin.x + startAndEndPointOffset);
@@ -552,6 +561,12 @@ public class WaterPassingController : BaseController
                 correctDistances[i] = groundPoints[i].transform.position.x - groundPoints[i-1].transform.position.x;
             }
             correctDistances[nrOfPoints] = (gm.screenMax.x - startAndEndPointOffset) - groundPoints[nrOfPoints-1].transform.position.x;
+
+            correctDistance = 0f;
+            foreach (var distance in correctDistances)
+            {
+                correctDistance += distance;
+            }
 
             if (GameManager.showDebugAnswer)
             {
@@ -643,12 +658,12 @@ public class WaterPassingController : BaseController
     }
     public bool CheckTabelAnswer()
     {
-        return sceneObjects.waterpassingTabel.CheckAnswers(correctHeightDifferences, correctDistances);
+        return sceneObjects.waterpassingTabel.CheckAnswers();
     }
 
     public void ShowAnswersTabel()
     {
-        sceneObjects.waterpassingTabel.ShowCorrectValues(correctHeightDifferences, correctDistances);
+        sceneObjects.waterpassingTabel.ShowCorrectValues();
     }
 
     float maxDistanceBetweenPoints(int nrBtwn)

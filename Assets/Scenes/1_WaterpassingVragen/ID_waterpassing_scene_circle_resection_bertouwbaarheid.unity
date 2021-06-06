@@ -482,6 +482,11 @@ PrefabInstance:
       propertyPath: scoreIncrease
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 3437245608530575433, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3510848682365021501, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -961,6 +966,21 @@ PrefabInstance:
         type: 3}
       propertyPath: ID_answerText
       value: ID_waterpassing_question_7_answer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144953311529935956, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: answerType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144953311529935956, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: showVertrouwensgrensInput
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144953311529935956, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: showDistanceOutput
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7323459967731352427, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}

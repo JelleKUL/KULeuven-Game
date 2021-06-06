@@ -3,26 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//************* This manages everything about the waterpassings tabel, there are child scripts for the seperate parts**********//
+//************* This manages everything about the waterpassings tabel, there are child scripts for the seperate parts **********//
+
 
 public class WaterpassingTabel : MonoBehaviour
 {
-    
+    public enum AnswerType { Peil, VereffendPeil, Sluitfout, Vertrouwensgrens, Afstanden, HoogteVerschillen }
     [Header ("Objets")]
-    public GameObject waterPassingHeader;
-    public GameObject waterPassingHeaderVereffening;
-
+    public WaterpassingTabelTitel waterPassingTitle;
+    [SerializeField]
     public GameObject waterPassingTabelPart;
-    public GameObject waterPassingTabelVereffening;
     public GameObject waterPassingTotaal;
-    public GameObject waterPassingTotaalVereffening;
+    [SerializeField]
+    private GameObject sluitFoutInput;
 
     [Header("Parameters")]
+    [SerializeField] private AnswerType answerType;
+    [SerializeField] private bool showHeightInput;
+    [SerializeField] private bool showHeightOutput;
+    [SerializeField] private bool showDistanceInput;
+    [SerializeField] private bool showDistanceOutput;
+    [SerializeField] private bool showPeilInput;
+    [SerializeField] private bool showPeilOutput;
+    [Tooltip("The max error the normal peil output can have, which the students will have to correct (m)")]
+    [SerializeField] private float maxPeilOutputError = 0.1f;
+    [SerializeField] private bool showVereffeningsPeilInput;
+    [SerializeField] private bool showVereffeningsPeilOutput;
+    [SerializeField] private bool showVertrouwensgrensInput;
+    [Space(10)]
 
-    [SerializeField]
-    private bool showDistances = false;
-    [SerializeField]
-    private bool showHeights = false;
     public float titleHeight = 25f;
     public bool overrideErrorMargin = true;
     public float errormarginOverride = 0.002f;
@@ -30,10 +39,8 @@ public class WaterpassingTabel : MonoBehaviour
     public Color correctColor, falseColor;
 
     private GameObject totaal;
-    private GameObject totaalVereffening;
 
     private List<WaterpassigTabelDeel> tabelParts = new List<WaterpassigTabelDeel>();
-    private List<WaterPassingTabelVereffening> tabelVereffeningParts = new List<WaterPassingTabelVereffening>();
 
     [HideInInspector]
     public float[] inputHoogteverschillen;
@@ -51,12 +58,16 @@ public class WaterpassingTabel : MonoBehaviour
 
     private int amount; 
     private bool VereffeningsMode;
+    private float peilOutputError;
 
     private WaterPassingTabelTotaal waterPassingTabelTotaal;
+    private WaterPassingController waterPassingController;
     private GameManager gm;
 
     private bool playing = true;
     private int pointOutLoop = -10;
+
+    private float inputSluitFout;
     
 
     // Start is called before the first frame update
@@ -64,7 +75,7 @@ public class WaterpassingTabel : MonoBehaviour
     {
         //CreateTable(4);
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        
+        sluitFoutInput.SetActive(answerType == AnswerType.Sluitfout);
     }
 
     // Update is called once per frame
@@ -81,88 +92,86 @@ public class WaterpassingTabel : MonoBehaviour
             // add the values to totaal-hoogte and -afstand
             for (int i = 0; i < tabelParts.Count; i++)
             {
-                totalHoogte += tabelParts[i].hoogteVerschil;
-                inputHoogteverschillen[i] = tabelParts[i].hoogteVerschil;
-                totalAfstand += tabelParts[i].afstand;
+                totalHoogte += tabelParts[i].inputHoogteVerschil;
+                inputHoogteverschillen[i] = tabelParts[i].inputHoogteVerschil;
+                totalAfstand += tabelParts[i].inputAfstand;
             }
 
             if (totaal != null)
             {
                 waterPassingTabelTotaal.SetValues(totalHoogte, totalAfstand);
             }
-
-
-            for (int i = 0; i < tabelVereffeningParts.Count; i++)
-            {
-                nieuwTotalHoogte += tabelVereffeningParts[i].vereffenigsHoogte;
-                inputHoogteverschillenVereffening[i] = tabelVereffeningParts[i].vereffenigsHoogte;
-                tabelVereffeningParts[i].GetComponent<WaterPassingTabelVereffening>().SetValues(tabelParts[i].hoogteVerschilText.text, tabelParts[i].afstand.ToString());
-
-            }
-
-
-            if (totaalVereffening != null)
-            {
-                //totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetNieuwHoogte(nieuwTotalHoogte);
-                totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
-            }
         }
-        
-            
+  
     }
 
-    public void CreateTable(int nrOfPoints, int pointOutLoopNr)
+    /// <summary>
+    /// this function creates the table accordingto the selected fields
+    /// </summary>
+    /// <param name="nrOfPoints"></param>
+    /// <param name="pointOutLoopNr"></param>
+    /// <param name="controller"></param>
+    public void CreateTable(int nrOfPoints, int pointOutLoopNr, WaterPassingController controller)
     {
+        waterPassingController = controller;
+        peilOutputError = Random.Range(-maxPeilOutputError, maxPeilOutputError);
+
+        waterPassingTitle.SetTitle(true, showHeightInput, showHeightOutput, showDistanceInput, showDistanceOutput, showPeilInput || showPeilOutput, showVereffeningsPeilInput || showVereffeningsPeilOutput, showVertrouwensgrensInput || showVereffeningsPeilOutput);
+
         amount = nrOfPoints;
         pointOutLoop = pointOutLoopNr;
         float size = waterPassingTabelPart.GetComponent<RectTransform>().rect.height;
        
-        for (int i = 0; i < nrOfPoints; i++)
+        for (int i = 0; i < nrOfPoints; i++) //create a new part for every point
         {
+            //spawn a new part and set the transform under the parent and at the correct position
             GameObject newPart = Instantiate(waterPassingTabelPart, transform, false);
             WaterpassigTabelDeel deel = newPart.GetComponent<WaterpassigTabelDeel>();
             newPart.GetComponent<RectTransform>().localPosition = new Vector2(0,-titleHeight - i * size);
             tabelParts.Add(deel);
 
-
+            //set the names and inputfields
             if(i+1 == nrOfPoints)
             {
-                deel.SetNames(i + 1, SetNameText(i - 1), SetNameText(-1));
+                deel.SetNames(i + 1, SetNameText(i - 1), SetNameText(-1), showHeightInput, showDistanceInput, showPeilInput, showVereffeningsPeilInput, showVertrouwensgrensInput);
             }
             else if(i == pointOutLoopNr)
             {
-                deel.SetNames(i + 1, SetNameText(i - 2), SetNameText(i));
+                deel.SetNames(i + 1, SetNameText(i - 2), SetNameText(i), showHeightInput, showDistanceInput, showPeilInput, showVereffeningsPeilInput, showVertrouwensgrensInput);
             }
             else 
-                deel.SetNames(i + 1, SetNameText(i-1), SetNameText(i));
+                deel.SetNames(i + 1, SetNameText(i-1), SetNameText(i), showHeightInput, showDistanceInput, showPeilInput, showVereffeningsPeilInput, showVertrouwensgrensInput);
+
+            //if the first one show the startPeil
+            if(i == 0)
+            {
+                deel.SetNullPeil(0);
+            }
+
+            //set what outputs to show
+            if (showHeightOutput)
+            {
+                deel.SetHeight(controller.correctHeightDifferences[i]);
+            }
+            if (showDistanceOutput)
+            {
+                deel.SetDistance(controller.correctDistances[i] * GameManager.worldScale);
+            }
+            if (showPeilOutput)
+            {
+                float errorOffset = peilOutputError * controller.correctDistances[i] / controller.correctDistance;
+                deel.SetPeil(controller.correctHeights[i] + errorOffset);
+            }
+            if (showVereffeningsPeilOutput)
+            {
+                deel.SetVereffendPeil(controller.correctHeights[i]);
+            }
         }
 
         totaal = Instantiate(waterPassingTotaal, transform, false);
         waterPassingTabelTotaal = totaal.GetComponent<WaterPassingTabelTotaal>();
         totaal.GetComponent<RectTransform>().localPosition = new Vector2(0, -titleHeight - (nrOfPoints) * size);
-
-
-        //creating the VereffeningsTable and setting it False
-        
-        size = waterPassingTabelVereffening.GetComponent<RectTransform>().rect.height;
-
-        for (int i = 0; i < amount; i++)
-        {
-            GameObject newPart = Instantiate(waterPassingTabelVereffening, transform, false);
-            WaterPassingTabelVereffening deel = newPart.GetComponent<WaterPassingTabelVereffening>();
-            newPart.GetComponent<RectTransform>().localPosition = new Vector2(0, -titleHeight - i * size);
-            tabelVereffeningParts.Add(deel);
-
-            deel.SetName(i + 1);
-            deel.gameObject.SetActive(false);
-
-            if (i == 0) deel.ActiveInput(false); // set the first rowinput to not interactable
-
-        }
-        totaalVereffening = Instantiate(waterPassingTotaalVereffening, transform, false);
-        totaalVereffening.GetComponent<RectTransform>().localPosition = new Vector2(0, -titleHeight - (amount) * size);
-        totaalVereffening.GetComponent<WaterPassingTabelTotaal>().SetValues(totalHoogte, totalAfstand);
-        totaalVereffening.SetActive(false);
+        waterPassingTabelTotaal.SetTitle(true, showHeightInput, showHeightOutput, showDistanceInput, showDistanceOutput, showPeilInput || showPeilOutput, showVereffeningsPeilInput || showVereffeningsPeilOutput, showVertrouwensgrensInput || showVereffeningsPeilOutput);
     }
 
     public string SetNameText(int nr)
@@ -181,121 +190,129 @@ public class WaterpassingTabel : MonoBehaviour
     }
 
 
-
-    // set the tables active according to the input
-    public void ActiveTable(bool input)
+    public bool CheckAnswers() //todo add color feedback
     {
-        VereffeningsMode = !input;
-        foreach (var tabelPart in tabelParts)
-        {
-            tabelPart.gameObject.SetActive(input);    
-        }
-        waterPassingHeader.SetActive(input);
-        totaal.SetActive(input);
-
-        foreach (var tabelPart in tabelVereffeningParts)
-        {
-
-            tabelPart.gameObject.SetActive(!input);
-        }
-        waterPassingHeaderVereffening.SetActive(!input);
-        totaalVereffening.SetActive(!input);
-    }
-
-
-    public bool CheckAnswers(float[] heights, float[] distances)
-    {
-        float totalHeight = 0;
 
         bool correct = true;
-        if (VereffeningsMode)
+
+        switch (answerType)
         {
-            
-            for (int i = 0; i < tabelVereffeningParts.Count; i++)
-            {
-
-                if (i > 0)
+            case AnswerType.Peil:
+                //check the peil
+                for (int i = 0; i < tabelParts.Count; i++)
                 {
-                    totalHeight += heights[i - 1];
-                    if (Mathf.Abs(tabelVereffeningParts[i].vereffenigsHoogte - totalHeight) > errormarginOverride)
+                    if(Mathf.Abs(tabelParts[i].inputPeil - waterPassingController.correctHeights[i]) > errormarginOverride)
                     {
-                        tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = falseColor;
                         correct = false;
-                        Debug.Log("point " + i + " with: " + tabelVereffeningParts[i].vereffenigsHoogte + " is incorrect height...");
-
                     }
+                }
 
-                    else
+                break;
+            // check the heights
+            case AnswerType.VereffendPeil:
+                //
+                for (int i = 0; i < tabelParts.Count; i++)
+                {
+                    if (Mathf.Abs(tabelParts[i].inputVereffendPeil - waterPassingController.correctHeightDifferences[i]) > errormarginOverride)
                     {
-                        tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = correctColor;
-                        Debug.Log("point " + i + " with: " + tabelVereffeningParts[i].vereffenigsHoogte + " is correct height");
-
+                        correct = false;
                     }
                 }
-                
-                if (Mathf.Abs(tabelParts[i].afstand - distances[i] * GameManager.worldScale) > lengthErrormarginOverride)
+
+                break;
+            // check the heights
+            case AnswerType.HoogteVerschillen:
+                //
+                for (int i = 0; i < tabelParts.Count; i++)
                 {
-                    tabelVereffeningParts[i].afstandText.color = falseColor;
-                    //correct = false;
-                    Debug.Log("point " + i + " with: " + tabelParts[i].afstand + " is incorrect distance...");
+                    if (Mathf.Abs(tabelParts[i].inputHoogteVerschil - waterPassingController.correctHeightDifferences[i]) > errormarginOverride)
+                    {
+                        correct = false;
+                    }
                 }
 
-                else
+                break;
+            // check the heights
+            case AnswerType.Afstanden:
+                //
+                for (int i = 0; i < tabelParts.Count; i++)
                 {
-                    tabelVereffeningParts[i].afstandText.color = correctColor;
-                    Debug.Log("point " + i + " with: " + tabelParts[i].afstand + " is correct distance!");
-
+                    if (Mathf.Abs(tabelParts[i].inputAfstand - waterPassingController.correctDistances[i]) > lengthErrormarginOverride)
+                    {
+                        correct = false;
+                    }
                 }
 
-            }
-
-        }
-
-        else
-        { 
-                
-            for (int i = 0; i < tabelParts.Count; i++)
-            {
-
-                if (Mathf.Abs(tabelParts[i].hoogteVerschil - heights[i]) > errormarginOverride)
+                break;
+            // check the heights
+            case AnswerType.Vertrouwensgrens:
+                //
+                for (int i = 0; i < tabelParts.Count; i++)
                 {
-                    tabelParts[i].hoogteVerschilText.color = falseColor;              
+                    //answered in mm
+                    if (Mathf.Abs(tabelParts[i].inputVertrouwensgrens - GetVertrouwensGrens(waterPassingController.correctDistances[i])) > errormarginOverride)
+                    {
+                        correct = false;
+                    }
                 }
-                else
+                break;
+            // check the heights
+            case AnswerType.Sluitfout:
+                //
+                for (int i = 0; i < tabelParts.Count; i++)
                 {
-                    tabelParts[i].hoogteVerschilText.color = correctColor;
+                    //answered in mm
+                    if (Mathf.Abs(inputSluitFout - GetVertrouwensGrens(waterPassingController.correctDistance)) > errormarginOverride)
+                    {
+                        correct = false;
+                    }
                 }
-                
-            }
-            correct = false;
+
+                break;
+
+            default:
+                break;
         }
         return correct;
+        
     }
     // start is to indicate weither to show the values at start or not
-    public void ShowCorrectValues(float[] heights, float[] distances)
+    public void ShowCorrectValues()
     {
-        ActiveTable(false);
         playing = false;
 
-        float totalHeight = 0;
-
-        for (int i = 1; i < tabelVereffeningParts.Count; i++)
+        for (int i = 0; i < tabelParts.Count; i++)
         {
-
-            totalHeight += heights[i - 1];
-            tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInChildren<Text>().color = correctColor;
-            tabelVereffeningParts[i].vereffeningsHoogteText.text = GameManager.RoundFloat(totalHeight, 3).ToString() + "m";
-            tabelVereffeningParts[i].vereffeningsHoogteText.GetComponentInParent<InputField>().interactable = false;
-
-            tabelVereffeningParts[i].afstandText.color = correctColor;
-            tabelVereffeningParts[i].afstandText.text = GameManager.RoundFloat((distances[i-1] + (i==pointOutLoop+1? distances[i-2]:0) )* GameManager.worldScale, 3).ToString() + "m";
-
-            tabelVereffeningParts[i].hoogteVerschilText.GetComponentInChildren<Text>().color = correctColor;
-            tabelVereffeningParts[i].hoogteVerschilText.text = GameManager.RoundFloat(heights[i - 1] + (i == pointOutLoop + 1 ? heights[i - 2] : 0), 3).ToString() + "m";
-
-
-
+            tabelParts[i].ShowCorrectHeight(waterPassingController.correctHeightDifferences[i]);
+            tabelParts[i].ShowCorrectDistance(waterPassingController.correctDistances[i]);
+            tabelParts[i].ShowCorrectPeil(waterPassingController.correctHeights[i]);
+            tabelParts[i].ShowCorrectVereffenPeil(waterPassingController.correctHeights[i]);
+            tabelParts[i].ShowCorrectVertrouwenGrens(GetVertrouwensGrens(waterPassingController.correctDistances[i]));
         }
+    }
+
+    public void SetSluitFout(string input)
+    {
+        if(float.TryParse(input, out float output))
+        {
+            inputSluitFout = output;
+        }
+    }
+
+    float GetVertrouwensGrens(float distance)
+    {
+        return 2.56f * Mathf.Sqrt(2) * waterPassingController.sigma1kmHT * Mathf.Sqrt(distance);
+    }
+
+    void ShowHeightDifferences()
+    {
 
     }
+
+    void ShowDistances()
+    {
+
+    }
+
+
 }

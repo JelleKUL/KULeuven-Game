@@ -131,5 +131,6 @@ public class QuestionUIManager : MonoBehaviour
     public void ShowBaseQuestionCorrectAnswer()
     {
         if (baseQuestions) baseQuestions.ShowCorrectAnswer();
+        setRestartButtons();
     }
 }

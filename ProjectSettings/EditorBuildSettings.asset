@@ -36,7 +36,7 @@ EditorBuildSettings:
     path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_circle_resection.unity
     guid: 794f4ba2d1e164df8a57c52d11144863
   - enabled: 1
-    path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_circle_resection_side.unity
+    path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_circle_resection_peil_vereffenen_side.unity
     guid: 0e20e2c0ac3cd4ff582c90248e2c0a0f
   - enabled: 1
     path: Assets/Scenes/2_TheodolietVragen/ID_scheeftand_scene_skew_resection.unity
@@ -86,6 +86,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/0_MenuScenes/ChapterEndScene.unity
     guid: 23b0c4546731f4909889b8ef3a27177a
+  - enabled: 1
+    path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_circle_resection_sluitfout.unity
+    guid: 88be386cefcc24c9c90022424457d349
+  - enabled: 1
+    path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_circle_resection_bertouwbaarheid.unity
+    guid: dde40a45b7b5844209a2c0a309644771
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 22010c0de46484691b80f71a1a93ec5c,
       type: 2}

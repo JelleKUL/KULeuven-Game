@@ -69,7 +69,7 @@ public class BaseQuestions : MonoBehaviour
         }
     }
     /// <summary>
-    /// sets the current question, build upon this to do chapter specific stuff, call base at the end to add logging
+    /// sets the current question, build upon this to do chapter specific stuff, call base at the end to add logging of the correct answer
     /// </summary>
     protected virtual void SetQuestionType()
     {
