@@ -190,7 +190,7 @@ public class WaterpassingTabel : MonoBehaviour
     }
 
 
-    public bool CheckAnswers() //todo add color feedback
+    public bool CheckAnswers() //todo add color feedback && zijslag
     {
 
         bool correct = true;

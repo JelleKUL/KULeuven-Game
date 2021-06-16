@@ -52,6 +52,12 @@ foreach ($fields as $field) {
 		$fieldNames  .= "`$fieldName`,";
 		$fieldValues .=  'CURRENT_TIMESTAMP';//date("Y-m-d H:i:s");
 	}
+
+	if ($fieldName == "shibboleth")
+	{
+		$fieldNames  .= "`$fieldName`,";
+		$fieldValues .=  $fieldValue;//date("Y-m-d H:i:s");
+	}
 	else
 	{
 			// Store it

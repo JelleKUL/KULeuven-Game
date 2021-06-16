@@ -8,6 +8,7 @@ public static class AS_Login
 
 
     const string loginPhp = "/checklogin.php?";
+    const string getidPhp = "/getid.php?";
     const string getRegFormPhP = "/getregistrationform.php?";
     const string registerPhp = "/register.php?";
     const string passResetPhp = "/requestpasswordreset.php?";
@@ -334,6 +335,11 @@ public static class AS_Login
             Log(LogType.Warning, "Failed Login Attempt (Invalid Username / Password)\n" + www.text);
             resultCallback("Error: Invalid Username / Password");
         }
+        else if (www.text == "-3")
+        {
+            Log(LogType.Warning, "Account is extrnal\n" + www.text);
+            resultCallback("Please use Shibboleth to login");
+        }
         else
         {
 			int id = -1;
@@ -349,6 +355,79 @@ public static class AS_Login
         }
 
     }
+
+    /// <summary>
+    /// Attempt to login to our database. When we are done with that attempt, return something meaningful or an error message.
+    /// </summary>
+    public static IEnumerator TryGetId(string username, Action<string> resultCallback, string hostUrl = null)
+    {
+        if (hostUrl == null)
+            hostUrl = AS_Credentials.phpScriptsLocation;
+
+        if (hostUrl == "")
+        {
+            Log(LogType.Error, "Host URL not set..! Please load the Account System Setup window.");
+            yield break;
+        }
+
+        // Location of our login script
+        string url = hostUrl + getidPhp;
+
+        url += "&requiredForMobile=" + UnityEngine.Random.Range(0, int.MaxValue).ToString();
+
+        // Create a new form
+        WWWForm form = new WWWForm();
+
+        // Add The required fields
+        form.AddField("username", username);
+
+        // Connect to the script
+        WWW www = new WWW(url, form);
+
+        // Wait for it to respond
+        yield return www;
+
+        if (www.error != null && www.error != "")
+        {
+            Log(LogType.Error, "WWW Error:\n" + www.error);
+            resultCallback("Error: Could not connect. Please try again later!");
+            yield break;
+        }
+        if (www.text.ToLower().Contains("error"))
+        {
+            Log(LogType.Error, "PHP/MySQL Error:\n" + www.text);
+            resultCallback(www.text.HandleError());
+            yield break;
+        }
+
+        if (www.text == "-1")
+        {
+            Log(LogType.Warning, "Failed Login Attempt (Account Inactive)\n" + www.text);
+            resultCallback("Error: Account is Inactive - Please check your emails.");
+        }
+        else if (www.text == "-2")
+        {
+            Log(LogType.Warning, "Failed Login Attempt (Invalid Username / Password)\n" + www.text);
+            resultCallback("Error: Invalid Username / Password");
+        }
+
+        else
+        {
+            int id = -1;
+            if (!int.TryParse(www.text, out id))
+            {
+                resultCallback("Error: Could not connect. Please try again later!");
+                Log(LogType.Error, "Failed Login Attempt (Unknown Error / Warning)\n" + www.text);
+                yield break;
+            }
+            Log(LogType.Log, "Successful Login for user with ID: " + www.text);
+            resultCallback(www.text);
+
+        }
+
+    }
+
+
 
     static void Log(LogType logType, string msg) { AS_Methods.Log(MethodBase.GetCurrentMethod().DeclaringType.Name, logType, msg); }
 }

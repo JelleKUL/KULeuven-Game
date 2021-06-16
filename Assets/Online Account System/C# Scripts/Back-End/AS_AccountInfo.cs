@@ -170,6 +170,29 @@ public static class AS_MySQLFieldMethods
          },
         phpScriptsLocation));
     }
+
+    /// <summary>
+    /// Tries to login.
+    /// </summary>
+    /// <param name="username">Username.</param>
+    /// <param name="password">Password.</param>
+    /// <param name="callback">What to call when we are done.</param>
+    /// <param name="phpScriptsLocation">Where the PHP scripts are located.</param>
+    public static void TryGetId(this string username, Action<string> callback, string phpScriptsLocation = null)
+    {
+
+        AS_CoroutineCaller caller = AS_CoroutineCaller.Create();
+        caller.StartCoroutine(AS_Login.TryGetId
+                               (username,
+         value =>
+         {
+             caller.Destroy();
+             callback(value);
+         },
+        phpScriptsLocation));
+    }
+
+
     /// <summary>
     /// Tries to download the registration form.
     /// </summary>

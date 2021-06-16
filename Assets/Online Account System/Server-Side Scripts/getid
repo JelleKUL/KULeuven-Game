@@ -22,43 +22,60 @@ $requireEmailActivation=$_POST['requireEmailActivation'];
 
 // username and password sent from form
 $username=$_POST['username'];
-$password=$_POST['password'];
 
 
 // To protect MySQL injection (more detail about MySQL injection)
 $username = stripslashes($username);
-$password = stripslashes($password);
 $username = mysqli_real_escape_string($link, $username);
-$password = mysqli_real_escape_string($link, $password);
 
-$query="SELECT * FROM accounts WHERE username= '$username' and password='$password'";
+$query="SELECT * FROM accounts WHERE username= '$username' and shibboleth = 1";
 $result=try_mysql_query($link, $query);
 
 // Mysql_num_row is counting table row
 $count=mysqli_num_rows($result);
 
 // If result matched $username and $password, table row must be 1 row
-if($count==1){
+if($count==0){
 	
-	$temp = mysqli_fetch_array($result);  
-
-	if($temp['shibboleth'] == 1){
-		die("-3");
-	}
-
-	// If the account is not activated and it should be
-	if (isset($temp['isactive']) &  !$temp['isactive'])  {    
-		die ("-1");
-	}    
-	// If it is, send back the id
-	else {        
-		echo $temp['id'];  
-		exit();        
-	}
+	
 }
 // If we didn't match
-else 
-	die ("-2");
-        
+else {
+    //die ("-2");
+    $fieldNames = "username";
+    $fieldValues = $username;
+
+    $fieldNames = "password";
+    $fieldValues = "";
+
+    $fieldNames = "strudentnr";
+    $fieldValues = $username;
+
+    $fieldNames .= "creationdate";
+    $fieldValues .=  'CURRENT_TIMESTAMP';//date("Y-m-d H:i:s");
+    
+    $fieldNames .= "creationdate";
+    $fieldValues .=  'CURRENT_TIMESTAMP';//date("Y-m-d H:i:s");
+    
+
+    $fieldNames .= "shibboleth";
+    $fieldValues .=  1;
+
+    $fieldNames = rtrim( $fieldNames, ",");
+    $fieldValues = rtrim( $fieldValues, ",");
+
+    $query = "INSERT INTO accounts 
+    (" . $fieldNames .")
+    VALUES ( " . $fieldValues . " )";
+
+    try_mysql_query($link, $query);
+
+    $query="SELECT * FROM accounts WHERE username= '$username' and shibboleth = 1";
+    $result=try_mysql_query($link, $query);
+    $temp = mysqli_fetch_array($result);  
+       
+    echo $temp['id'];  
+    exit();
+}
 
 ?>

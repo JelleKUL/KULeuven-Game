@@ -124,6 +124,8 @@ public class AS_CanvasUI : MonoBehaviour
 		Debug.Log("Canvas UI: " + message);
     }
 
+	public SAML_Connect saml_Connect;
+
 	// Messages to the user
 	/// <summary>
 	/// Make sure there's a child with that name in every canvas group
@@ -236,6 +238,25 @@ public class AS_CanvasUI : MonoBehaviour
 			guiMessage = "";
 			_loginState = value;
 		}
+	}
+
+	public void LoginWithSaml()
+    {
+		//send a request to the Saml server to get the key of the user
+		if (saml_Connect)
+		{
+			saml_Connect.TryAuthenticate(SamlAttempted);
+		}
+        else
+        {
+			Debug.LogWarning("no SAML_Connect added, please add one");
+        }
+
+    }
+
+	void SamlAttempted(string key)
+    {
+		key.TryGetId(LoginAttempted);
 	}
 
 
@@ -486,7 +507,7 @@ public class AS_CanvasUI : MonoBehaviour
 			
 			// Id is an auto-increment unique identifier
 			// and custom info is not specified during registration
-			if (field.name.ToLower() == "id" | field.name.ToLower() == "custominfo" | field.name.ToLower() == "isactive")
+			if (field.name.ToLower() == "id" | field.name.ToLower() == "custominfo" | field.name.ToLower() == "isactive" | field.name.ToLower() == "shibboleth")
 				continue;
 
 			//creationdate is auto set in the server
@@ -537,7 +558,7 @@ public class AS_CanvasUI : MonoBehaviour
 
 			// Id is an auto-increment unique identifier
 			// and custom info is not specified during registration
-			if (field.name.ToLower() == "id" | field.name.ToLower() == "custominfo" | field.name.ToLower() == "isactive" | field.name.ToLower() == "studentnr")
+			if (field.name.ToLower() == "id" | field.name.ToLower() == "custominfo" | field.name.ToLower() == "isactive" | field.name.ToLower() == "studentnr" | field.name.ToLower() == "shibboleth")
 				continue;
 
 			//creationdate is auto set in the server

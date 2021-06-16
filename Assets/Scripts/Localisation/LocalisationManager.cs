@@ -65,7 +65,7 @@ public class LocalisationManager : MonoBehaviour
         }
         return value;
     }
-
+#if UNITY_EDITOR
     public static void Add(string key, string valueNL, string valueEN)
     {
         if (valueNL.Contains("\""))
@@ -115,6 +115,6 @@ public class LocalisationManager : MonoBehaviour
 
         UpdateDictionaries();
     }
-
+#endif
 
 }
