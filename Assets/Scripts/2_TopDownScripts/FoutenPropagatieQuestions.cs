@@ -38,6 +38,21 @@ public class FoutenPropagatieQuestions : BaseQuestions
             lineController.StartSetup();
         }
         base.SetQuestionType(); //does the base question stuff like logging
+
+        if (questionUI) //set the answer input field according to the selected answertype
+        {
+            switch (answerType)
+            {
+                case AnswerType.sigmaDH:
+                    questionUI.SetInputs(true, errorUnit); //set the input to one
+                    break;
+                case AnswerType.sigmaA:
+                    questionUI.SetInputs(true, errorUnit); //set the input to one
+                    break;
+                default:
+                    break;
+            }
+        }
     }
   
     //checks if the given anwser is correct
@@ -47,18 +62,18 @@ public class FoutenPropagatieQuestions : BaseQuestions
         {
             if (answerType == AnswerType.MinimaleGrootte)
             {
-                if (Mathf.Abs(lineController.GetSigmaA() - GetCorrectAnswer()[0]) <= 0.6 * lineController.GetError(ErrorType.Base))
+                if (Mathf.Abs(lineController.GetSigmaA() - GetCorrectAnswer()[0]) <= 0.6 * GetCorrectAnswer()[0])
                 {
-                    Debug.Log("Correct answer!");
+                    Debug.Log("ID_correct_answer");
                     gm.IncreaseScore(scoreIncrease);
                     questionUI.ActivateWinMenu();
                 }
                 else
                 {
-                    questionUI.SetFalseAnswer("Incorrect answer...");
+                    questionUI.SetFalseAnswer("ID_incorrect_answer");
                     if (!AddTry())
                     {
-                        questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], "Too many tries...");
+                        questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], "ID_too_many_tries");
                     }
                 }
             }
@@ -70,16 +85,16 @@ public class FoutenPropagatieQuestions : BaseQuestions
                     (CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), GetCorrectAnswer()[0], errorMargin)|| CheckCorrectAnswer(questionUI.GetAnswerInput(InputType.h), GetCorrectAnswer()[1], errorMargin))
                    )
                 {
-                    Debug.Log("Correct answer!");
+                    Debug.Log("ID_correct_answer");
                     gm.IncreaseScore(scoreIncrease);
                     questionUI.ActivateWinMenu();
                 }
                 else
                 {
-                    questionUI.SetFalseAnswer("Incorrect answer...");
+                    questionUI.SetFalseAnswer("ID_incorrect_answer");
                     if (!AddTry())
                     {
-                        questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], "Too many tries...");
+                        questionUI.ShowCorrectAnswer(InputType.h, GetCorrectAnswer()[0], "ID_too_many_tries");
                     }
                 }
             }
@@ -98,22 +113,24 @@ public class FoutenPropagatieQuestions : BaseQuestions
 
     public override List<float> GetCorrectAnswer()//use the exact formula *Pi/2 or rule of thumb *1.5
     {
+        float[] newArray;
+
         switch (answerType)
         {
             case AnswerType.sigmaDH:
 
-                (float d, float h, float a) = lineController.GetErrorDH();
-
-                return new List<float>() { Mathf.Max(d, h) };
+                newArray = lineController.GetErrorDH();
+                return new List<float>() { Mathf.Max(newArray[0], newArray[1]) };
 
             case AnswerType.sigmaA:
 
-                return new List<float>() { lineController.GetSigmaAExact(), lineController.GetSigmaA() };
+                newArray = lineController.GetErrorDH();
+                return new List<float>() { newArray[2], newArray[3] };
 
             case AnswerType.MinimaleGrootte:
 
-                (float dd, float hh, float aa) = lineController.GetErrorDH();
-                return new List<float>() { aa };
+                newArray = lineController.GetErrorDH();
+                return new List<float>() {newArray[3]};
 
         }
         return new List<float>() { 0 };

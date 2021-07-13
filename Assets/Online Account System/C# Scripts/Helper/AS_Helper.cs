@@ -290,7 +290,7 @@ public class AS_Credentials
             PlayerPrefs.SetString("AS_EmailAccount", value);
         }
     }
-	const string _phpScriptsLocation = "https://game.jens.app/AccountSystem/";
+	const string _phpScriptsLocation = "https://iiw.kuleuven.be/serious-game-topografie/accountsystem/";
     public static string phpScriptsLocation
     {
         get

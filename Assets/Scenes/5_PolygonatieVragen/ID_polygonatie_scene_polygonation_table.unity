@@ -692,6 +692,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1869834123713651232, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: placeLoopedPoints
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869834123713651232, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: loopedPointsEdgeLength
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1876443835899026051, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_Enabled

@@ -6,13 +6,19 @@ using UnityEngine.UI;
 //*********** The ObjectPlacer manages the placement of random objects such as the to-be-calculated points and the obstacles ******************//
 
 
-public class ObjectPlacer : MonoBehaviour
+public class ObjectPlacer : BaseController
 {
     [Header("Point Parameters")]
+    [SerializeField]
+    [Tooltip("Is the target point an obstructed point?")]
+    private bool targetPointsAreObstructed = false;
     [Range(0,10)]
     [SerializeField] private int nrOfCalculatePoints = 0;
+    [SerializeField]
+    [Tooltip("are the other points obstructed?")]
+    private bool otherPointsAreObstructed = true;
     [Range(0, 10)]
-    [SerializeField] private int nrOfObstructionPoints = 0;
+    [SerializeField] private int nrOfOtherPoints = 0;
     [Space(10)]
     [Tooltip("Should the points be spawned in a loop? if yes, the above sliders are ignored")]
     [SerializeField] private bool placeLoopedPoints = false;
@@ -60,30 +66,27 @@ public class ObjectPlacer : MonoBehaviour
     [HideInInspector]
     public List <GameObject> calculatePoints = new List <GameObject>();
     [HideInInspector]
-    public List<GameObject> obstructedCalculatePoints = new List<GameObject>();
+    public List<GameObject> otherPoints = new List<GameObject>();
+    [HideInInspector]
+    public List<float> otherPointsPositions = new List<float>();
 
     //private objects
     private List<GameObject> obstacles = new List<GameObject>();
     private int nrofPointsPlaced = 0;
     private GameManager gm;
-    private bool hasStarted = false;
 
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-        if (!hasStarted) StartSetup(); //only calls when Start() hasn't gone yet
-    }
 
     //starts the setup proces where points and obstacles are placed according to the parameters
-    public void StartSetup()
+    public override void StartSetup()
     {
-        hasStarted = true;
+        base.StartSetup();
+
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         if (!placeLoopedPoints)
         {
-            if(nrOfCalculatePoints > 0) calculatePointsPositions = PlacePoints(nrOfCalculatePoints, false);
-            if(nrOfObstructionPoints>0) PlacePoints(nrOfObstructionPoints, true);
+            if(nrOfCalculatePoints > 0) calculatePointsPositions = PlacePoints(nrOfCalculatePoints, targetPointsAreObstructed? true : false, true);
+            if(nrOfOtherPoints > 0) otherPointsPositions = PlacePoints(nrOfOtherPoints, otherPointsAreObstructed? true : false, false);
         }
         else
         {
@@ -94,9 +97,16 @@ public class ObjectPlacer : MonoBehaviour
         if (nrOfMobileObstacles > 0) PlaceObstacles(nrOfMobileObstacles, true);
     }
 
+
+    /// <summary>
     // generates a set amount of random points, making sure there is no overlap between any point or obstacle
     // and returns all the coordinates in an array so it can be evaluated by the questions
-    private List <float> PlacePoints(int amount, bool obstructed = false)
+    /// </summary>
+    /// <param name="amount">the amount of points to place</param>
+    /// <param name="obstructed">are the points that need to be placed reachable by the measurestation</param>
+    /// <param name="calculate">are the points asked or, extra info</param>
+    /// <returns> a list of floats in {x,y,x,y,...}</returns>
+    private List <float> PlacePoints(int amount, bool obstructed = false, bool calculate = true)
     {
         List <float> positions = new List <float>();
 
@@ -105,8 +115,8 @@ public class ObjectPlacer : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             GameObject newPoint = Instantiate(obstructed? prefabs.obstructedCalculatePointPrefab:prefabs.calculatePointPrefab, FarEnoughRandomPoint(), Quaternion.identity);
-            if (!obstructed) calculatePoints.Add(newPoint);
-            else obstructedCalculatePoints.Add(newPoint);
+            if (calculate) calculatePoints.Add(newPoint);
+            else otherPoints.Add(newPoint);
 
             newPoint.GetComponent<PolygonPointController>().SetNameText(nrofPointsPlaced);
             nrofPointsPlaced++;
@@ -237,13 +247,13 @@ public class ObjectPlacer : MonoBehaviour
                 }
             }
 
-            if (obstructedCalculatePoints.Count > 0)
+            if (otherPoints.Count > 0)
             {
-                for (int i = 0; i < obstructedCalculatePoints.Count; i++)
+                for (int i = 0; i < otherPoints.Count; i++)
                 {
-                    if (Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position) < minDistObstructed)
+                    if (Vector2.Distance(randPos, otherPoints[i].transform.position) < minDistObstructed)
                     {
-                        minDistObstructed = Vector2.Distance(randPos, obstructedCalculatePoints[i].transform.position);
+                        minDistObstructed = Vector2.Distance(randPos, otherPoints[i].transform.position);
                     }
                 }
             }
@@ -289,10 +299,10 @@ public class ObjectPlacer : MonoBehaviour
     }
 
     //set the desired points and obstacles for the placer
-    public void SetParameters(int nrPoints, int nrObsPoints, bool loop, int nrObs, int nrmobileObs)
+    public void SetParameters(int nrPoints, int nrOtherPoints, bool loop, int nrObs, int nrmobileObs)
     {
         nrOfCalculatePoints = nrPoints;
-        nrOfObstructionPoints = nrObsPoints;
+        nrOfOtherPoints = nrOtherPoints;
         placeLoopedPoints = loop;
         nrOfObstacles = nrObs;
         nrOfMobileObstacles = nrmobileObs;

@@ -4,6 +4,7 @@
 "ID_login_username","Gebruikersnaam","Username"
 "ID_login_password","Wachtwoord","Password"
 "ID_login_button","Inloggen","Log in"
+"ID_shibboleth_button","log in met Shibboleth","Log in with Shibboleth"
 "ID_login_register_button","Account maken","Create account"
 "ID_login_no_login_button","Speel zonder inloggen","Play without login"
 "ID_main_menu","HOOFD MENU","MAIN MENU"
@@ -127,7 +128,7 @@
 "ID_kaarthoek_question_2_explanation","Het totaalstation staat opgesteld in (0,0)",
 "ID_kaarthoek_question_2_answer","De coördinaten kunnen bepaald worden via een hoekmeting en een afstand",
 "ID_kaarthoek_question_3_title","III. Bepaal de coördinaten van punt P",
-"ID_kaarthoek_question_3_explanation","Gegeven de coördinaten van A \n\u2022 x: "" + xx + ""m \n\u2022 y: "" + yy + ""m""",
+"ID_kaarthoek_question_3_explanation","A = x: {otherPointsPositions[0]*} m, y: {otherPointsPositions[1]*} m.",
 "ID_kaarthoek_question_3_answer","De coördinaten kunnen bepaald worden via een hoekmeting en een afstand",
 "ID_kaarthoek_question_4_title","IV. Bepaal de afstand tussen de punten P & A",
 "ID_kaarthoek_question_4_explanation","Bereken de Euclidische afstand ||AP||",
@@ -136,14 +137,14 @@
 "ID_kaarthoek_question_5_explanation","Bereken P in het rode assenstelsel. Bepaal hiervoor de verdraaing t.o.v. het blauwe assenstelsel",
 "ID_kaarthoek_question_5_answer","Gebruik de assen van het verdraaide assenstelsel om de kaarthoek te berekenen",
 "ID_polygonatie_question_1_title","I. Voorwaardse Insnijding bepaal P",
-"ID_polygonatie_question_1_explanation","n\u2022 A = x:"" + GameManager.RoundFloat(correctAnswerArray[0] * GameManager.worldScale, 3) + "", y:"" + GameManager.RoundFloat(correctAnswerArray[1] * GameManager.worldScale, 3)",
+"ID_polygonatie_question_1_explanation","A = x: {otherPointsPositions[0]*} m, y: {otherPointsPositions[1]*} m. \nB = x: {otherPointsPositions[2]*} m, y: {otherPointsPositions[3]*} m.",
 "ID_polygonatie_question_1_answer","meet de hoeken en bereken het coordinaat via de sinusregel en Pythagoras",
 "ID_polygonatie_question_2_title","II. Achterwaardse Insnijding bepaal P",
-"ID_polygonatie_question_2_explanation","\n\u2022 A = x: "" + GameManager.RoundFloat(obsructedPointsArray[0] * GameManager.worldScale, 3) + "", y: "" + GameManager.RoundFloat(obsructedPointsArray[1] * GameManager.worldScale, 3)",
+"ID_polygonatie_question_2_explanation","A = x: {otherPointsPositions[0]*} m, y: {otherPointsPositions[1]*} m. \nB = x: {otherPointsPositions[2]*} m, y: {otherPointsPositions[3]*} m. \nC = x: {otherPointsPositions[4]*} m, y: {otherPointsPositions[5]*} m.",
 "ID_polygonatie_question_2_answer","meet de hoeken en bereken het coordinaat via de sinusregel en Pythagoras",
 "ID_polygonatie_question_3_title","III. Vervolledig onderstaande tabel",
 "ID_polygonatie_question_3_explanation","De punten P en A zijn gegeven:",
 "ID_polygonatie_question_3_answer","Vind alle punten",
 "ID_polygonatie_question_4_title","IV. Bilateratie bepaal P",
-"ID_polygonatie_question_4_explanation","De punten A en B zijn gegeven:",
+"ID_polygonatie_question_4_explanation","A = x: {otherPointsPositions[0]*} m, y: {otherPointsPositions[1]*} m. \nB = x: {otherPointsPositions[2]*} m, y: {otherPointsPositions[3]*} m.",
 "ID_polygonatie_question_4_answer","Je hebt een gegeven te veel, gebruik dat om te vereffenen",

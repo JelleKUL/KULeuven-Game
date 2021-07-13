@@ -43,11 +43,23 @@ public class QuestionUIManager : MonoBehaviour
 
     //set the correct input
 
-    public void SetInputs(bool one)
+    public void SetInputs(bool one, string unit = "m")
     {
-        if (xInput) xInput.SetActive(!one);
-        if (yInput) yInput.SetActive(!one);
-        if (hInput) hInput.SetActive(one);
+        if (xInput)
+        {
+            xInput.SetActive(!one);
+            xInput.transform.GetChild(1).GetComponent<Text>().text = unit;
+        }
+        if (yInput)
+        {
+            yInput.SetActive(!one);
+            yInput.transform.GetChild(1).GetComponent<Text>().text = unit;
+        }
+        if (hInput)
+        {
+            hInput.SetActive(one);
+            hInput.transform.GetChild(1).GetComponent<Text>().text = unit;
+        }
     }
 
     public void ActivateWinMenu()

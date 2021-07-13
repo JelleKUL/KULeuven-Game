@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ChapterList
   m_EditorClassIdentifier: 
   menuScenes:
-  - MainMenu
   - LoginMenu
+  - MainMenu
   - AccountManagement
   chapterEndScene: ChapterEndScene
   chapters:

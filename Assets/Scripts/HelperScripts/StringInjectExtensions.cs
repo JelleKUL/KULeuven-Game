@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.ComponentModel;
 using UnityEngine;
+using System.Linq;
 
 
 public static class StringInjectExtension
@@ -17,7 +19,10 @@ public static class StringInjectExtension
 
 			string substring = str.Substring(str.IndexOf("{") + 1, str.IndexOf("}") - str.IndexOf("{") - 1);
 			str = str.Replace("{" + substring + "}", ParseVariablesValues(substring, obj));
+
+			//Debug.Log("New string: " + str);
 		}
+
 		return str;
 	}
 
@@ -25,10 +30,63 @@ public static class StringInjectExtension
 	{
 
 		string val = "<b> ERROR: Invalid Variable: '" + subStr + "' </b>";
+		int index = -1;
+		bool scaleUp = false;
 
-		if(obj.GetType().GetField(subStr) != null)
+        if (subStr.Contains("*"))
         {
-			val = obj.GetType().GetField(subStr).GetValue(obj).ToString();
+			//Debug.Log("Element contains a * scaling the output by the worldScaleFactor");
+			subStr = subStr.Remove(subStr.IndexOf("*"), 1);
+			scaleUp = true;
+        }
+
+		if (subStr.Contains("[") && subStr.Contains("]"))
+		{
+			string substring = subStr.Substring(0, subStr.IndexOf("["));
+			int.TryParse(subStr.Substring(subStr.IndexOf("[") + 1, subStr.IndexOf("]") - subStr.IndexOf("[") - 1), out index);
+			subStr = substring;
+		}
+
+		if (obj.GetType().GetField(subStr) != null)
+        {
+			if (index >= 0)
+			{
+				IEnumerable collection = (IEnumerable)obj.GetType().GetField(subStr).GetValue(obj);
+
+				if (collection != null)
+				{
+					int count = 0;
+					foreach (var thing in collection)
+					{
+						if (count == index)
+						{
+							if (scaleUp) val = (GameManager.RoundFloat((float)thing * GameManager.worldScale, 3)).ToString();
+							else val = (GameManager.RoundFloat((float)thing, 3)).ToString();
+							break;
+						}
+						count++;
+					}
+				}
+				else
+				{
+					val = "<b> ERROR: Invalid Collection: '" + subStr + "' </b>";
+				}
+			}
+			else
+			{
+				object thing = obj.GetType().GetField(subStr).GetValue(obj);
+
+				if(float.TryParse(thing.ToString(), out float outPut))
+                {
+					if (scaleUp) val = (GameManager.RoundFloat(outPut * GameManager.worldScale, 3)).ToString();
+					else val = (GameManager.RoundFloat(outPut, 3)).ToString();
+				}
+                else
+                {
+					val = thing.ToString();
+                }
+				
+			}
 		}
         else
         {

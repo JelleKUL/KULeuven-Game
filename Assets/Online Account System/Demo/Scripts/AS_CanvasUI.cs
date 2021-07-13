@@ -43,7 +43,7 @@ public class AS_CanvasUI : MonoBehaviour
 			this.Log(LogType.Log, "Account System: " + message + " - Add any custom Logic here!");
 			guiMessage = "Your info was successfully downloaded!";
 
-			Debug.Log("canvasUI: id= " + accountInfo.GetFieldValue("id") + " name= " + accountInfo.GetFieldValue("username") + " score: " + accountInfo.customInfo.totalScore + " custominfo: " + accountInfo.customInfo.compLevelCamp1[0]);
+			Debug.Log("canvasUI: id= " + accountInfo.GetFieldValue("id") + " name= " + accountInfo.GetFieldValue("username") + " score: " + accountInfo.customInfo.totalScore);
 
 			int.TryParse(accountInfo.GetFieldValue("id"),out GameManager.loginID);
 

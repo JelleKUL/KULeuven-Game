@@ -36,7 +36,7 @@ public class WaterpassingQuestions : BaseQuestions
         base.SetQuestionType(); //does the base question stuff like logging
         if (questionUI)
         {
-            questionUI.SetInputs(true); //set the input to one
+            questionUI.SetInputs(true, errorUnit); //set the input to one
         }
     }
 

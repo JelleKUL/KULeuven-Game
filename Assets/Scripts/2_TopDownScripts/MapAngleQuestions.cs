@@ -23,11 +23,12 @@ public class MapAngleQuestions : BaseQuestions
     // Start is called before the first frame update
     protected override void Awake()
     {
-        base.Awake();
         lineController = GetComponent<PolygonLineController>();
         placer = GetComponent<ObjectPlacer>();
         axisTransformer = GetComponent<AxisTransformer>();
         SetQuestionType();
+
+        base.Awake();
     }
 
 
@@ -43,6 +44,24 @@ public class MapAngleQuestions : BaseQuestions
             if (transformAxis && axisTransformer && (placer.calculatePoints.Count > 0)) axisTransformer.RotatePoint(placer.calculatePoints[0]);
         }
         base.SetQuestionType(); //does the base question stuff like logging
+
+        if (questionUI) //set the answer input field according to the selected answertype
+        {
+            switch (answerType)
+            {
+                case AnswerType.MapAngle:
+                    questionUI.SetInputs(true, "gon"); //set the input to one
+                    break;
+                case AnswerType.Coordinate:
+                    questionUI.SetInputs(false, "m"); //set the input to one
+                    break;
+                case AnswerType.Distance:
+                    questionUI.SetInputs(true, "m"); //set the input to one
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     //checks if the given anwser is correct

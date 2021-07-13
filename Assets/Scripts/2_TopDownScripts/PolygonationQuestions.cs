@@ -22,11 +22,11 @@ public class PolygonationQuestions : BaseQuestions
     // Start is called before the first frame update
     protected override void Awake()
     {
-        base.Awake();
         lineController = GetComponent<PolygonLineController>();
         placer = GetComponent<ObjectPlacer>();
-
         SetQuestionType();
+
+        base.Awake();
     }
 
     //sets the type of question, can be altered by another script
@@ -34,10 +34,28 @@ public class PolygonationQuestions : BaseQuestions
     {
         if (controlController)
         {
-            lineController.StartSetup();
             placer.StartSetup();
+            lineController.SetAnswerArray(placer.calculatePointsPositions.ToArray());
+            lineController.StartSetup();
+
+            if (answerType == AnswerType.Table) lineController.SetPoints(placer.calculatePointsPositions.ToArray());
         }
         base.SetQuestionType(); //does the base question stuff like logging
+
+        if (questionUI) //set the answer input field according to the selected answertype
+        {
+            switch (answerType)
+            {
+                case AnswerType.Coordinate:
+                    questionUI.SetInputs(false, "m"); //set the input to one
+                    break;
+                case AnswerType.Distance:
+                    questionUI.SetInputs(true, "m"); //set the input to one
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     //checks if the given anwser is correct

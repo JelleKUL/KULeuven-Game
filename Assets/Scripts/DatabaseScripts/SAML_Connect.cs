@@ -18,9 +18,9 @@ public class SAML_Connect : MonoBehaviour
     private Text debugText;
 
     [SerializeField]
-    private string phpFilesLocation = "https://pilipilidatabase.herokuapp.com";
+    private string phpFilesLocation = "https://iiw.kuleuven.be/serious-game-topografie/accountsystem/";
     [SerializeField]
-    private string authenticationFile = "";
+    private string authenticationFile = "simplesamlconnect.php";
 
     private string errorCode = "MySQL_ERROR";
     const string fieldsSeparator = "$#@(_fields_separator_*&%^";

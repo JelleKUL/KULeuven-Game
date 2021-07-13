@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 //*********** The WaterpassingQuestions sets the required parameters for a specific question ******************//
 
-
 public class QuestionTemplate : BaseQuestions
 {
     public enum AnswerType {  } // add the available answerTypes here
@@ -35,6 +34,18 @@ public class QuestionTemplate : BaseQuestions
 
         }
         base.SetQuestionType(); //does the base question stuff like logging
+
+        if (questionUI) //set the answer input field according to the selected answertype
+        {
+            switch (answerType)
+            {
+                // add the different cases here.
+
+                default:
+                    questionUI.SetInputs(true, errorUnit);
+                    break;
+            }
+        }
     }
 
     //checks if the given anwser is correct

@@ -388,6 +388,11 @@ PrefabInstance:
       propertyPath: nrOfCalculatePoints
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1869834123713651232, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: nrOfOtherPoints
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2181071662647540455, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -572,6 +577,11 @@ PrefabInstance:
         type: 3}
       propertyPath: showSmallErrors
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7413729167986069370, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: showSmallErrors
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7454300982554646772, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}

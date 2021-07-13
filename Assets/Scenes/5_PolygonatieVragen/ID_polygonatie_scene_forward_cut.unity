@@ -396,12 +396,32 @@ PrefabInstance:
     - target: {fileID: 1869834123713651232, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: nrOfCalculatePoints
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1869834123713651232, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: nrOfObstructionPoints
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869834123713651232, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: targetPointIsObstructed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869834123713651232, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: nrOfOtherPoints
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869834123713651232, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: targetPointsAreObstructed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869834123713651232, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: otherPointsAreObstructed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2181071662647540455, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
@@ -437,11 +457,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2940224520712303269, guid: f05c672adc144438fb40021d23ed2520,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 8.199921
       objectReference: {fileID: 0}
     - target: {fileID: 3147415815047047670, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
@@ -608,6 +623,16 @@ PrefabInstance:
       propertyPath: showLengths
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7413729167986069370, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: showStartLength
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7413729167986069370, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: showEndLength
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7454300982554646772, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -657,6 +682,11 @@ PrefabInstance:
         type: 3}
       propertyPath: answerType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840328794128031052, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: 8172902061510426622, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}

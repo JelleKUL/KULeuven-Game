@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class TextLocaliser : MonoBehaviour
 {
@@ -33,10 +34,16 @@ public class TextLocaliser : MonoBehaviour
                 textObject = text;
             }
         }
-        if (textObject) textObject.text = (nr==-1?"":nr.ToString() + ": ") + LocalisationManager.GetLocalisedValue(key);
+        if (textObject)
+        {
+            string localVal = (nr == -1 ? "" : nr.ToString() + ": ") + LocalisationManager.GetLocalisedValue(key);
+            if (parseObject != null) localVal = localVal.ParseVariables(parseObject);
+            localVal = Regex.Unescape(localVal); // replaces the escaped character back
+            textObject.text = localVal;
+        }
         else Debug.LogWarning(gameObject.name + ": no text component attached to this gameobject to localise.");
 
-        if (parseObject != null) textObject.text = textObject.text.ParseVariables(parseObject);
+        
     }
 
     public void SetLocalisedText(string value)

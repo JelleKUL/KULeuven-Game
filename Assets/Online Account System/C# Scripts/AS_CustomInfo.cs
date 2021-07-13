@@ -38,20 +38,7 @@ public class AS_CustomInfo
     // !! NOTE THAT ANY VARIABLE WHICH HAS A TRANSFORM PROPERTY CAN NOT BE SERIALIZED!
     
     public int totalScore = 0;
-
-    //old data
-    public int levelCamp1 = 0;
-    public int [] scoreCamp1 = new int[10];
-    public bool[] compLevelCamp1 = new bool[10];
-
-    public int levelCamp2 = 0;
-    public int[] scoreCamp2 = new int[14];
-    public bool[] compLevelCamp2 = new bool[14];
-
-    public int scoreFreeTotal = 0;
-    public int[] scoreFree = new int[24];
     
-
     //new DataStorageSystem
     public List<ChapterInfo> chapters = new List<ChapterInfo>();
 

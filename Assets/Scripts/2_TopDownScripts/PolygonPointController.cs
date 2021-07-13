@@ -162,8 +162,7 @@ public class PolygonPointController : MonoBehaviour
     }
 
     //scales the error ellips taking into account the previous one
-    //todo add ppm distanceerror
-    public void SetErrorEllips(Vector2 prevPoint,float prevX, float prevY, float prevAngle ,  float baseDistanceError, float angleError)
+    public void SetErrorEllips(Vector2 prevPoint,float prevX, float prevY, float prevAngle ,  float baseDistanceError, float ppmDistanceError, float angleError)
     {
         errorEllipse.SetActive(true);
         errorEllipse.transform.right = prevPoint - new Vector2(errorEllipse.transform.position.x, errorEllipse.transform.position.y);
@@ -172,7 +171,7 @@ public class PolygonPointController : MonoBehaviour
         float newx = Mathf.Sqrt(Mathf.Pow(prevX * Mathf.Cos(angleDif), 2) + Mathf.Pow(prevY * Mathf.Sin(angleDif), 2));
         float newy = Mathf.Sqrt(Mathf.Pow(prevX * Mathf.Sin(angleDif), 2) + Mathf.Pow(prevY * Mathf.Cos(angleDif), 2));
 
-        errorEllipse.transform.localScale = new Vector3((Vector2.Distance(errorEllipse.transform.position, prevPoint) * baseDistanceError / 100f) + newx, (Vector2.Distance(errorEllipse.transform.position, prevPoint) * angleError / 100f) + newy, 1);
+        errorEllipse.transform.localScale = new Vector3( baseDistanceError/100f + (Vector2.Distance(errorEllipse.transform.position, prevPoint) * ppmDistanceError / 100f) + newx, (Vector2.Distance(errorEllipse.transform.position, prevPoint) * angleError / 100f) + newy, 1);
     }
 
     // returns the ellipse info so it can be used by the next point

@@ -110,9 +110,9 @@ The database files can be found at [/Server-Side Scripts](../master/Assets/Onlin
 ### accounts
 All the accounts are stored in a database with the following structure.
 
-id | username | password | studentnr | custominfo | creationdate
---- | --- | --- | --- | --- | ---
-auto generated identifier | a unique username | the user password | the student nr for reference | all the game related information | the date when the account was created
+id | username | password | studentnr | custominfo | creationdate | shibboleth
+--- | --- | --- | --- | --- | --- | ---
+auto generated identifier | a unique username | the user password | the student nr for reference | all the game related information | the date when the account was created | was this account created with shibboleth
 
 ### custom info
 the custominfo contains an XML-serialized string which holds all the relevant game info (can be changed in the game).
@@ -129,6 +129,11 @@ public class AS_CustomInfo
 }
 ```
 
+## Shibboleth
+This project uses shibboleth as another way to authenticate.
+Using SimplSamlPHP for the back end: [SimpleSamlPHP Documentation](https://simplesamlphp.org/docs/stable/)
+Integrated with KULeuven Identity provider: [KULeuven integration Documentation](https://admin.kuleuven.be/icts/services/aai/documentation/sp/install-simplesamlphp-sp.html).
+
 ## How to add content
 This game can be easily expanded either with new chapters or new levels.
 
@@ -138,7 +143,7 @@ This game can be easily expanded either with new chapters or new levels.
 2. Empty out the scene and add a ``ScenePrefab``from *Assets/Prefabs/ScenePrefabs* of the desired Chapter. [You can also create a new Chapter](##Adding-a-new-Chapter).
 3. Navigate to the ``(Chapter)Manager`` (eg. ``WaterPassingManager``).
 4. Create a new **key** and **values** in the [localisation.csv](../master/Assets/Resources/localisation.csv) and add them to the ``(Chapter)Questions``. 
-5. You can add values from public variables in the respective ``(Chapter)Controller`` to the question title and explanation by inserting ``{VARIABLE_NAME}`` in the localised values. e.g. "Plaats de meetbaken op de {nrOfPoints} meetpunten."
+5. You can add values from public variables in the respective ``(Chapter)Controller`` to the question title and explanation by inserting ``{VARIABLE_NAME}`` or ``{VARIABLE_NAME[i]}`` in the localised values. adding a ``*`` in between the ``{}`` will multiply the value by the ``worldScale`` e.g. "Plaats de meetbaken op de ``{nrOfPoints}`` meetpunten, met Coördinaten: ``{meetpunten[0]*}``,``{meetpunten[1]*}``."
 5. You can also change the Error Margin & Unit, NrOfTries and Score Increase.
 6. Choose the AnswerType to fit your excersice.
 7. Change the parameters in the ``(Chapter)Controller`` to fit your excercise.

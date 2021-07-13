@@ -66,9 +66,9 @@ public class PolygonLineController : MonoBehaviour
     [System.Serializable]
     private class SceneObjects
     {
-        public Slider baseDistanceErrorSlider;
-        public Slider ppmDistanceErrorSlider;
-        public Slider angleErrorSlider;
+        public ValueSlider baseDistanceErrorSlider;
+        public ValueSlider ppmDistanceErrorSlider;
+        public ValueSlider angleErrorSlider;
         [Space(10)]
         public Text errorEllipsDisplay;
     }
@@ -137,18 +137,15 @@ public class PolygonLineController : MonoBehaviour
     {
         if (sceneObjects.baseDistanceErrorSlider)
         {
-            sceneObjects.baseDistanceErrorSlider.value = baseError.error;
-            sceneObjects.baseDistanceErrorSlider.interactable = !baseError.lockError;
+            sceneObjects.baseDistanceErrorSlider.SetSlider(baseError.error, baseError.lockError);
         }
         if (sceneObjects.ppmDistanceErrorSlider)
         {
-            sceneObjects.ppmDistanceErrorSlider.value = ppmError.error;
-            sceneObjects.ppmDistanceErrorSlider.interactable = !ppmError.lockError;
+            sceneObjects.ppmDistanceErrorSlider.SetSlider(ppmError.error, ppmError.lockError);
         }
         if (sceneObjects.angleErrorSlider)
         {
-            sceneObjects.angleErrorSlider.value = angleError.error;
-            sceneObjects.angleErrorSlider.interactable = !angleError.lockError;
+            sceneObjects.angleErrorSlider.SetSlider(angleError.error, angleError.lockError);
         }
     }
 
@@ -259,7 +256,7 @@ public class PolygonLineController : MonoBehaviour
             if (showEllipses && i != 0)
             {
                 Vector3 prevEllipse = linePoints[i - 1].GetEllipseInfo();
-                linePoints[i].SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, baseError.error * visualEllipseSizeModifier, angleError.error * visualEllipseSizeModifier);
+                linePoints[i].SetErrorEllips(linePoints[i - 1].transform.position, prevEllipse.x, prevEllipse.y, prevEllipse.z, baseError.error * visualEllipseSizeModifier, ppmError.error * visualEllipseSizeModifier, angleError.error * visualEllipseSizeModifier);
 
                 if (i == linePoints.Count - 1)
                 {
@@ -323,6 +320,7 @@ public class PolygonLineController : MonoBehaviour
             sigmaA      = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaH, 2));
             sigmaAExact = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaHExact, 2));
         }
+        /*
         else if(!startCenterPoint)
         {
             Vector2 startPoint = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
@@ -337,6 +335,7 @@ public class PolygonLineController : MonoBehaviour
             sigmaA      = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaH, 2));
             sigmaAExact = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaHExact, 2));
         }
+        */
 
     }
 
@@ -442,18 +441,23 @@ public class PolygonLineController : MonoBehaviour
         return angle;
     }
 
-    // compute distance, angle, and sigmaA error for P to A
-    public (float,float,float) GetErrorDH() 
+    /// <summary>
+    /// return the distance, angle, sigmaA and sigmaA exact error for P to A
+    /// </summary>
+    /// <returns></returns>
+    public float[] GetErrorDH() 
     {
         Vector2 startPoint = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
         Vector2 pointP = new Vector2(correctAnswerArray[2], correctAnswerArray[3]);
 
         float d = Vector2.Distance(pointP, startPoint) * GameManager.worldScale;
         float sigmaD = baseError.error + (0.001f * d * ppmError.error); // correctie m->mm
-        float sigmaH = 1.5f * d * angleError.error / 100f;// correctie m->mm
-        float errorA = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaD, 2));
+        float sigmaH      = 1.5f *        d * angleError.error / 100f;// correctie m->mm
+        float sigmaHExact = Mathf.PI/2f * d * angleError.error / 100f;// correctie m->mm
+        float errorA = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaH, 2));
+        float errorAExact = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaHExact, 2));
 
-        return (GameManager.RoundFloat(sigmaD, 1),GameManager.RoundFloat(sigmaH, 1), GameManager.RoundFloat(errorA, 1));
+        return new float[] { GameManager.RoundFloat(sigmaD, 1), GameManager.RoundFloat(sigmaH, 1), GameManager.RoundFloat(errorA, 1), GameManager.RoundFloat(errorAExact, 1) };
 
     }
 
