@@ -33,6 +33,7 @@ public class SAML_Connect : MonoBehaviour
     {
         LogMessage("Starting authenticationRequest @ " + phpFilesLocation);
         StartCoroutine(SendAuthenticationRequest(resultCallback));
+        
     }
 
     IEnumerator SendAuthenticationRequest(Action<string> resultCallback)

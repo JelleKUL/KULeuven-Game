@@ -387,6 +387,8 @@ public static class AS_Login
         // Wait for it to respond
         yield return www;
 
+        Debug.Log("Got message: " + www.text);
+
         if (www.error != null && www.error != "")
         {
             Log(LogType.Error, "WWW Error:\n" + www.error);
@@ -416,7 +418,7 @@ public static class AS_Login
             int id = -1;
             if (!int.TryParse(www.text, out id))
             {
-                resultCallback("Error: Could not connect. Please try again later!");
+                resultCallback("Couldn't parse the recieved message:" + www.text);
                 Log(LogType.Error, "Failed Login Attempt (Unknown Error / Warning)\n" + www.text);
                 yield break;
             }

@@ -49,34 +49,8 @@ MonoBehaviour:
   adminNames:
   - admin
   - jelle
+  - u0146408
   chapterList: {fileID: 11400000, guid: 6faad92823683454cb7e0b4d311bae77, type: 2}
-  WaterpassingScenes:
-  - 1CalibratieWaterpastoestel
-  - 2HoogteverschilTweePunten
-  - 3HoogteverschilMeerderePunten
-  - 4OmgekeerdeBaak
-  - 5AfstandTweePunten
-  - 6AfstandMeerderePunten
-  - 7KringWaterpassing
-  - 8ZijslagWaterpassing
-  - 9TrigoniomeytrisheWaterpassing
-  - 10ScheefstandGebouw
-  MapAngleScenes:
-  - 1BepaalKaarthoek
-  - 2BepaalCoordinaten
-  - 3BepaalCoordinatenViaAnderPunt
-  - 4BepaalAfstandTussenTweePunten
-  - 5BepaalCoordinatenInGedraaidAssenstelsel
-  FoutenPropagatieScenes:
-  - 1Standaardafwijking
-  - 2SigmaAOverEenPunt
-  - 3MinimaleFoutenpropagatie
-  - 4SigmaAOverMeerderePunten
-  PolygonatieScenes:
-  - 1VoorwaardseInsnijding
-  - 2AchterwaardseInsnijding
-  - 3Polygonatietabel
-  - 4Bilateratie
   screenMin: {x: 0, y: 0}
   screenMax: {x: 0, y: 0}
   firstCamp1Level: 2

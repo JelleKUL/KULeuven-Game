@@ -3,6 +3,8 @@ using System.Collections;
 using System; 
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
+
 
 public class AS_CanvasUI : MonoBehaviour
 {
@@ -240,22 +242,46 @@ public class AS_CanvasUI : MonoBehaviour
 		}
 	}
 
-	public void LoginWithSaml()
+	bool clickedWebsite = false;
+
+	[DllImport("__Internal")]
+	private static extern void openWindow(string url);
+
+    private void OnApplicationFocus(bool focus)
     {
-		//send a request to the Saml server to get the key of the user
+        if (clickedWebsite)
+        {
+			TryLoginSaml();
+		}
+    }
+
+    public void LoginWithSaml()
+    {
+		clickedWebsite = true;
+		Debug.Log("Clicked, going to website");
+		openWindow("https://iiw.kuleuven.be/serious-game-topografie/accountsystem/simplesamlredirect.php/");
+
+		TryLoginSaml();
+
+    }
+
+	void TryLoginSaml()
+    {
+		Debug.Log("sending a request to the Saml server to get the key of the user");
 		if (saml_Connect)
 		{
 			saml_Connect.TryAuthenticate(SamlAttempted);
 		}
-        else
-        {
+		else
+		{
 			Debug.LogWarning("no SAML_Connect added, please add one");
-        }
-
-    }
+		}
+	}
 
 	void SamlAttempted(string key)
     {
+		Debug.Log("Got data: " + key + " trying to get the ID now");
+
 		key.TryGetId(LoginAttempted);
 	}
 
