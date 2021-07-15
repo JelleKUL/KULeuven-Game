@@ -955,31 +955,26 @@ PrefabInstance:
     - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: ID_questionHeader
-      value: ID_waterpassing_question_7_title
+      value: ID_waterpassing_table_question_1_title
       objectReference: {fileID: 0}
     - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: ID_questionText
-      value: ID_waterpassing_question_7_explanation
+      value: ID_waterpassing_table_question_1_explanation
       objectReference: {fileID: 0}
     - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: ID_answerText
-      value: ID_waterpassing_question_7_answer
+      value: ID_waterpassing_table_question_1_answer
       objectReference: {fileID: 0}
     - target: {fileID: 7144953311529935956, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
-      propertyPath: answerType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7144953311529935956, guid: f3f16918dd96e42e0baf32203e1602c6,
-        type: 3}
-      propertyPath: showVertrouwensgrensInput
+      propertyPath: showHeightInput
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7144953311529935956, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
-      propertyPath: showDistanceOutput
+      propertyPath: showPeilInput
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7323459967731352427, guid: f3f16918dd96e42e0baf32203e1602c6,

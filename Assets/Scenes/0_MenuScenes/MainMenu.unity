@@ -1342,7 +1342,7 @@ PrefabInstance:
     - target: {fileID: 6958299036206940765, guid: 62ec06f89826440aab5bb4683f758d6b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: AccountManagement
+      value: AccountManagementScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62ec06f89826440aab5bb4683f758d6b, type: 3}
@@ -2381,7 +2381,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a6d4b3367e0a6432488487da72e6e5a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 46fc99099c79049bbb926a9536b3033a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3853,7 +3853,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a6d4b3367e0a6432488487da72e6e5a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 46fc99099c79049bbb926a9536b3033a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

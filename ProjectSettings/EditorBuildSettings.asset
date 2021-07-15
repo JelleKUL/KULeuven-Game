@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/0_MenuScenes/MainMenu.unity
     guid: 858eccb465d2d4844b5cd8e9ecdb9c4b
   - enabled: 1
-    path: Assets/Scenes/0_MenuScenes/AccountManagement.unity
+    path: Assets/Scenes/0_MenuScenes/AccountManagementScene.unity
     guid: 7ccc04fa9db104dc699df4a0298f3934
   - enabled: 1
     path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_heightdiff_2_points.unity
@@ -33,64 +33,64 @@ EditorBuildSettings:
     path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_calibration.unity
     guid: cef981af7ce4f4f59a1adc0e4947cb50
   - enabled: 1
-    path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_circle_resection_peil_vereffenen_side.unity
-    guid: 0e20e2c0ac3cd4ff582c90248e2c0a0f
+    path: Assets/Scenes/2_WaterpassingTabelVragen/ID_waterpassing_scene_circle_resection_peil.unity
+    guid: 5769aac2eeef74f71b8095d7b194f0bf
   - enabled: 1
-    path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_circle_resection_sluitfout.unity
+    path: Assets/Scenes/2_WaterpassingTabelVragen/ID_waterpassing_scene_circle_resection_sluitfout.unity
     guid: 88be386cefcc24c9c90022424457d349
   - enabled: 1
-    path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_circle_resection_peil_vereffenen_side.unity
+    path: Assets/Scenes/2_WaterpassingTabelVragen/ID_waterpassing_scene_circle_resection_peil_vereffenen.unity
+    guid: 5f78d6b1ce97847928ac024abdd2e1aa
+  - enabled: 1
+    path: Assets/Scenes/2_WaterpassingTabelVragen/ID_waterpassing_scene_circle_resection_peil_vereffenen_side.unity
     guid: 0e20e2c0ac3cd4ff582c90248e2c0a0f
   - enabled: 1
-    path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_circle_resection_peil_vereffenen_side.unity
-    guid: 0e20e2c0ac3cd4ff582c90248e2c0a0f
-  - enabled: 1
-    path: Assets/Scenes/1_WaterpassingVragen/ID_waterpassing_scene_circle_resection_betrouwbaarheid.unity
+    path: Assets/Scenes/2_WaterpassingTabelVragen/ID_waterpassing_scene_circle_resection_betrouwbaarheid.unity
     guid: dde40a45b7b5844209a2c0a309644771
   - enabled: 1
-    path: Assets/Scenes/2_TheodolietVragen/ID_scheeftand_scene_skew_resection.unity
+    path: Assets/Scenes/3_TheodolietVragen/ID_scheeftand_scene_skew_resection.unity
     guid: 63eee682b2ee74f21ab3b130292a38f3
   - enabled: 1
-    path: Assets/Scenes/2_TheodolietVragen/ID_scheeftand_scene_skew_building.unity
+    path: Assets/Scenes/3_TheodolietVragen/ID_scheeftand_scene_skew_building.unity
     guid: 7ea084eed504a4365a9bead8ef5fd42e
   - enabled: 1
-    path: Assets/Scenes/3_MapAngleVragen/ID_mapangle_scene_mapangle.unity
+    path: Assets/Scenes/4_MapAngleVragen/ID_mapangle_scene_mapangle.unity
     guid: c6628bc6af4b14aa9bc828ad499c49e8
   - enabled: 1
-    path: Assets/Scenes/3_MapAngleVragen/ID_mapangle_scene_coordinate.unity
+    path: Assets/Scenes/4_MapAngleVragen/ID_mapangle_scene_coordinate.unity
     guid: 844f7934994cc4ff4a4a0c8b07e280ac
   - enabled: 1
-    path: Assets/Scenes/3_MapAngleVragen/ID_mapangle_scene_coordinate_other_point.unity
+    path: Assets/Scenes/4_MapAngleVragen/ID_mapangle_scene_coordinate_other_point.unity
     guid: a9d3669f1129247f38e6b3e321ef8d64
   - enabled: 1
-    path: Assets/Scenes/3_MapAngleVragen/ID_mapangle_scene_distance_2_points.unity
+    path: Assets/Scenes/4_MapAngleVragen/ID_mapangle_scene_distance_2_points.unity
     guid: 8fda94cb4a33942f6a900dc6de03f320
   - enabled: 1
-    path: Assets/Scenes/3_MapAngleVragen/ID_mapangle_scene_coordinate_rotated_axis.unity
+    path: Assets/Scenes/4_MapAngleVragen/ID_mapangle_scene_coordinate_rotated_axis.unity
     guid: 87ffbc9c3c60d443db7b1ffe49a68b8c
   - enabled: 1
-    path: Assets/Scenes/4_FoutenpropagatieVragen/ID_foutenpropagatie_scene_standard_deviation.unity
+    path: Assets/Scenes/5_FoutenpropagatieVragen/ID_foutenpropagatie_scene_standard_deviation.unity
     guid: 97fbb9c051e9540b9a667a37d6cf1057
   - enabled: 1
-    path: Assets/Scenes/4_FoutenpropagatieVragen/ID_foutenpropagatie_scene_sigma_a_1_point.unity
+    path: Assets/Scenes/5_FoutenpropagatieVragen/ID_foutenpropagatie_scene_sigma_a_1_point.unity
     guid: 645537f990100b84dbdff504c7fe9864
   - enabled: 1
-    path: Assets/Scenes/4_FoutenpropagatieVragen/ID_foutenpropagatie_scene_min_error.unity
+    path: Assets/Scenes/5_FoutenpropagatieVragen/ID_foutenpropagatie_scene_min_error.unity
     guid: 9fedd04343adf45dd98e66e0d5051c60
   - enabled: 1
-    path: Assets/Scenes/4_FoutenpropagatieVragen/ID_foutenpropagatie_scene_sigma_a_more_points.unity
+    path: Assets/Scenes/5_FoutenpropagatieVragen/ID_foutenpropagatie_scene_sigma_a_more_points.unity
     guid: 0b17e36b5f75e430f8f5a919838cb5cf
   - enabled: 1
-    path: Assets/Scenes/5_PolygonatieVragen/ID_polygonatie_scene_forward_cut.unity
+    path: Assets/Scenes/6_PolygonatieVragen/ID_polygonatie_scene_forward_cut.unity
     guid: 1cb165e04386f4618a8c1aa9245d4ff9
   - enabled: 1
-    path: Assets/Scenes/5_PolygonatieVragen/ID_polygonatie_scene_backward_cut.unity
+    path: Assets/Scenes/6_PolygonatieVragen/ID_polygonatie_scene_backward_cut.unity
     guid: 6de65cbec5ff84ee2a7752a295068d03
   - enabled: 1
-    path: Assets/Scenes/5_PolygonatieVragen/ID_polygonatie_scene_polygonation_table.unity
+    path: Assets/Scenes/6_PolygonatieVragen/ID_polygonatie_scene_polygonation_table.unity
     guid: 645b211b589714613a03a7a0e0539389
   - enabled: 1
-    path: Assets/Scenes/5_PolygonatieVragen/ID_polygonatie_scene_bilateration.unity
+    path: Assets/Scenes/6_PolygonatieVragen/ID_polygonatie_scene_bilateration.unity
     guid: 632597c38753340a694ffb5971286f58
   - enabled: 1
     path: Assets/Scenes/0_MenuScenes/ChapterEndScene.unity

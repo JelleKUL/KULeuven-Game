@@ -301,7 +301,7 @@ public class WaterpassingTabel : MonoBehaviour
 
     float GetVertrouwensGrens(float distance)
     {
-        return 2.56f * Mathf.Sqrt(2) * waterPassingController.sigma1kmHT * Mathf.Sqrt(distance);
+        return 2.56f * Mathf.Sqrt(2) * waterPassingController.sigma1kmHT * Mathf.Sqrt(distance * GameManager.worldScale);
     }
 
     void ShowHeightDifferences()

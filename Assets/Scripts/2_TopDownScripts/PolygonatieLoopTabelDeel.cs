@@ -94,18 +94,18 @@ public class PolygonatieLoopTabelDeel : MonoBehaviour
             
 
             deltaXInput.text = GameManager.RoundFloat(nextPoint.x - coordinate.x, 3).ToString();
-            deltaXInput.GetComponentInParent<InputField>().interactable = false;
+            deltaXInput.interactable = false;
 
             deltaYInput.text = GameManager.RoundFloat(nextPoint.y - coordinate.y, 3).ToString();
-            deltaYInput.GetComponentInParent<InputField>().interactable = false;
+            deltaYInput.interactable = false;
 
         }
 
         xInput.text = GameManager.RoundFloat(coordinate.x, 3).ToString();
-        xInput.GetComponentInParent<InputField>().interactable = false;
+        xInput.interactable = false;
 
         yInput.text = GameManager.RoundFloat(coordinate.y, 3).ToString();
-        yInput.GetComponentInParent<InputField>().interactable = false;
+        yInput.interactable = false;
 
 
     }

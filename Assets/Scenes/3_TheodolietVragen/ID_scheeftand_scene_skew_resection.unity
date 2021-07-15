@@ -121,25 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &66820430 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4360468247667048737, guid: 09331f239fd1043b1b775b703551f0e8,
-    type: 3}
-  m_PrefabInstance: {fileID: 4360468248203839924}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &66820431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 66820430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1069e185d368549ee8f22409cad317c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  index: 0
 --- !u!114 &338546198 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4360468247869556642, guid: 09331f239fd1043b1b775b703551f0e8,
@@ -860,11 +841,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4360468247869556642, guid: 09331f239fd1043b1b775b703551f0e8,
-        type: 3}
-      propertyPath: m_Text
-      value: 0 gon
-      objectReference: {fileID: 0}
     - target: {fileID: 4360468247930501233, guid: 09331f239fd1043b1b775b703551f0e8,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -895,20 +871,5 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 584654221}
-    - target: {fileID: 4360468248006805581, guid: 09331f239fd1043b1b775b703551f0e8,
-        type: 3}
-      propertyPath: m_WholeNumbers
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360468248006805581, guid: 09331f239fd1043b1b775b703551f0e8,
-        type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RotateMeasure
-      objectReference: {fileID: 0}
-    - target: {fileID: 4360468248729936685, guid: 09331f239fd1043b1b775b703551f0e8,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09331f239fd1043b1b775b703551f0e8, type: 3}

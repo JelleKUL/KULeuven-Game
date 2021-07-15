@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QuestionUIManager : MonoBehaviour
 {
@@ -24,9 +25,11 @@ public class QuestionUIManager : MonoBehaviour
 
     [HideInInspector] public BaseQuestions baseQuestions;
 
+    [SerializeField] private ChapterListScriptableObject chapterList;
+
     public void SetQuestionText(string ID_questionHeader, string ID_questionText, object parseObject = null)
     {
-        if (questionHeaderText) questionHeaderText.UpdateText(ID_questionHeader,-1, parseObject);
+        if (questionHeaderText) questionHeaderText.UpdateText(ID_questionHeader, GetLevelIndex(), parseObject);
         if (questionText) questionText.UpdateText(ID_questionText,-1, parseObject);
     }
 
@@ -144,5 +147,24 @@ public class QuestionUIManager : MonoBehaviour
     {
         if (baseQuestions) baseQuestions.ShowCorrectAnswer();
         setRestartButtons();
+    }
+
+
+    int GetLevelIndex()
+    {
+        int levelNr = -1;
+
+        if (!chapterList) return levelNr;
+
+        foreach (var chapter in chapterList.chapters)
+        {
+            if (chapter.levels.Contains(SceneManager.GetActiveScene().name))
+            {
+                levelNr = chapter.levels.IndexOf(SceneManager.GetActiveScene().name) + 1;
+                return levelNr;
+            }
+        }
+
+        return levelNr;
     }
 }

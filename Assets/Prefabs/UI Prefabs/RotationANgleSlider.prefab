@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 4360468247667048738}
   - component: {fileID: 4360468247667048748}
   - component: {fileID: 4360468247667048739}
+  - component: {fileID: 66820431}
   m_Layer: 5
   m_Name: RotationANgleSlider
   m_TagString: Untagged
@@ -187,6 +188,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 4
+--- !u!114 &66820431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4360468247667048737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1069e185d368549ee8f22409cad317c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  Update: 0
 --- !u!1 &4360468247869556641
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +213,7 @@ GameObject:
   - component: {fileID: 4360468247869556652}
   - component: {fileID: 4360468247869556643}
   - component: {fileID: 4360468247869556642}
+  - component: {fileID: 438302426}
   m_Layer: 5
   m_Name: rotatiehoekText
   m_TagString: Untagged
@@ -264,7 +280,21 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100 gon
+  m_Text: 0 gon
+--- !u!114 &438302426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4360468247869556641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81305772db3af4c11b0559ca2d8fba3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: gon
+  roundingIndex: 0
 --- !u!1 &4360468247930501232
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,13 +527,24 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: -100
   m_MaxValue: 100
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_MethodName: RotateMeasure
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 438302426}
+        m_MethodName: FloatToText
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -583,7 +624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.48}
   m_AnchorMax: {x: 0.64, y: 1}
-  m_AnchoredPosition: {x: 5.0000076, y: 0}
+  m_AnchoredPosition: {x: 5, y: 0}
   m_SizeDelta: {x: -9.999985, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4360468248729936687

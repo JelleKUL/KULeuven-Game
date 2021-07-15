@@ -6,6 +6,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class SliderToText : MonoBehaviour
 {
+    [SerializeField] private string unit = "";
+    [SerializeField] private int roundingIndex = 3;
+
     private Text targetText;
 
     private void Awake()
@@ -15,6 +18,6 @@ public class SliderToText : MonoBehaviour
 
     public void FloatToText(float input)
     {
-        if(targetText)targetText.text = input.ToString(); //(Mathf.Round(input) / 1000f  ).ToString()
+        if(targetText)targetText.text = GameManager.RoundFloat(input, roundingIndex).ToString() +" "+ unit; //(Mathf.Round(input) / 1000f  ).ToString()
     }
 }
