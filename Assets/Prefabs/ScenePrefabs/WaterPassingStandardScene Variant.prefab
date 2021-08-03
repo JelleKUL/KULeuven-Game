@@ -350,6 +350,7 @@ GameObject:
   - component: {fileID: 2002366136}
   - component: {fileID: 2002366138}
   - component: {fileID: 2002366137}
+  - component: {fileID: 3784897951444813934}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -416,7 +417,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FLIP MEASURE
+  m_Text: ID_transit
+--- !u!114 &3784897951444813934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002366135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fc77bc818bc483aa7f1beaa23588a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpdateAtStart: 1
 --- !u!1 &425124657406496852
 GameObject:
   m_ObjectHideFlags: 0

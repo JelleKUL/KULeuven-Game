@@ -31,6 +31,7 @@ public class PolygonLineController : MonoBehaviour
     [SerializeField] private bool showAngles;
     [SerializeField] private bool showLengths;
     [SerializeField] private bool showStartAngle;
+    [Tooltip("show the length of only the first point (only relevant if showlengths is off)")]
     [SerializeField] private bool showStartLength;
     [SerializeField] private bool showEndLength = true;
 
@@ -212,7 +213,7 @@ public class PolygonLineController : MonoBehaviour
             linePoints[i].HideInfo();
         }
 
-        if (showStartLength && linePoints.Count > 1)
+        if (showStartLength && !showLengths && linePoints.Count > 1)
         {
             linePoints[0].SetDistanceText(linePoints[1].transform.position);
         }
@@ -457,7 +458,7 @@ public class PolygonLineController : MonoBehaviour
         float errorA = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaH, 2));
         float errorAExact = Mathf.Sqrt(Mathf.Pow(sigmaD, 2) + Mathf.Pow(sigmaHExact, 2));
 
-        return new float[] { GameManager.RoundFloat(sigmaD, 1), GameManager.RoundFloat(sigmaH, 1), GameManager.RoundFloat(errorA, 1), GameManager.RoundFloat(errorAExact, 1) };
+        return new float[] { GameManager.RoundFloat(sigmaD, 1), GameManager.RoundFloat(sigmaH, 1), GameManager.RoundFloat(errorA, 1), GameManager.RoundFloat(errorAExact, 1), linePoints.Count() };
 
     }
 
@@ -538,7 +539,7 @@ public class PolygonLineController : MonoBehaviour
         correctAnswerArray = array;
     }
 
-    // check whether first and last linepoint are equal to the start (P) and endpoint(A)
+    // check whether first and last linepoint are equal to the start (A) or endpoint(P)
     public bool CheckPoints() 
     {
         if (correctAnswerArray.Length < 4) return true;
@@ -550,7 +551,7 @@ public class PolygonLineController : MonoBehaviour
             Vector2 startPoint = new Vector2(correctAnswerArray[0], correctAnswerArray[1]);
             Vector2 endPoint = new Vector2(correctAnswerArray[correctAnswerArray.Length - 2], correctAnswerArray[correctAnswerArray.Length - 1]);
 
-            if ((Vector2.Distance(linePoints[0].transform.position, startPoint) > 0.001) || (Vector2.Distance(linePoints.Last().transform.position, endPoint) > 0.001))
+            if ((Vector2.Distance(linePoints[0].transform.position, endPoint) > 0.001) || (Vector2.Distance(linePoints.Last().transform.position, startPoint) > 0.001))
             {
                 match = false;
             }

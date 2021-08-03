@@ -69,12 +69,12 @@ public class PolygonationQuestions : BaseQuestions
                 Debug.Log("true");
 
                 questionUI.ActivateWinMenu();
-                questionUI.SetAnswerOutput("De waarden die zijn ingevoerd zijn correct");
+                questionUI.SetAnswerOutput("ID_correct_answer");
 
             }
             else
             {
-                questionUI.SetAnswerOutput("De waarden die zijn ingevoerd zijn niet correct");
+                questionUI.SetAnswerOutput("ID_incorrect_answer");
                 Debug.Log("false");
             }
         }

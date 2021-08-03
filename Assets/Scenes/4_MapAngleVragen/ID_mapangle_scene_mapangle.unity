@@ -158,6 +158,11 @@ PrefabInstance:
       propertyPath: errorUnit
       value: gon
       objectReference: {fileID: 0}
+    - target: {fileID: 201695834653016604, guid: a63067732c6884dd59186a198fc1d824,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 271289531687891773, guid: a63067732c6884dd59186a198fc1d824,
         type: 3}
       propertyPath: SoortVraag

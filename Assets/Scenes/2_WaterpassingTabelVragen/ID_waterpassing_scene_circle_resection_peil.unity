@@ -967,6 +967,11 @@ PrefabInstance:
       propertyPath: ID_answerText
       value: ID_waterpassing_table_question_1_answer
       objectReference: {fileID: 0}
+    - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7144953311529935956, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: showHeightInput

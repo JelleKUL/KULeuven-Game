@@ -73,6 +73,8 @@ public class MapAngleQuestions : BaseQuestions
     //displays the correct answer
     public override void ShowCorrectAnswer()
     {
+
+
         base.ShowCorrectAnswer();
     }
 
@@ -90,7 +92,9 @@ public class MapAngleQuestions : BaseQuestions
                 return new List<float>() { GameManager.RoundFloat(val, 3) };
 
             case AnswerType.Coordinate: //return the coordinates of the first point
-                return new List<float>() { GameManager.RoundFloat(placer.calculatePoints[0].transform.position.x * GameManager.worldScale, 3), GameManager.RoundFloat(placer.calculatePoints[0].transform.position.y * GameManager.worldScale, 3) };
+                //if the axis is transformed, return the local transform of the point
+                if(transformAxis) return new List<float>() { GameManager.RoundFloat(placer.calculatePoints[0].transform.localPosition.x * GameManager.worldScale, 3), GameManager.RoundFloat(placer.calculatePoints[0].transform.localPosition.y * GameManager.worldScale, 3) };
+                else return new List<float>() { GameManager.RoundFloat(placer.calculatePoints[0].transform.position.x * GameManager.worldScale, 3), GameManager.RoundFloat(placer.calculatePoints[0].transform.position.y * GameManager.worldScale, 3) };
 
             default:
                 return new List<float> { 0f };

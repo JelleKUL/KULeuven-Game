@@ -62,7 +62,7 @@ public class FoutenPropagatieQuestions : BaseQuestions
         {
             if (answerType == AnswerType.MinimaleGrootte)
             {
-                if (Mathf.Abs(lineController.GetSigmaA() - GetCorrectAnswer()[0]) <= 0.6 * GetCorrectAnswer()[0])
+                if (Mathf.Abs(lineController.GetSigmaA() - GetCorrectAnswer()[0]) <= 0.5 * GetCorrectAnswer()[0])
                 {
                     Debug.Log("ID_correct_answer");
                     gm.IncreaseScore(scoreIncrease);
@@ -100,7 +100,7 @@ public class FoutenPropagatieQuestions : BaseQuestions
             }
 
         }
-        else questionUI.SetFalseAnswer( "Setup in P and measure to A before submitting");
+        else questionUI.SetFalseAnswer("ID_wrong_setup");
     }
 
     //displays the correct answer
@@ -120,17 +120,17 @@ public class FoutenPropagatieQuestions : BaseQuestions
             case AnswerType.sigmaDH:
 
                 newArray = lineController.GetErrorDH();
-                return new List<float>() { Mathf.Max(newArray[0], newArray[1]) };
+                return new List<float>() {Mathf.Max(newArray[0], newArray[1])};
 
             case AnswerType.sigmaA:
 
                 newArray = lineController.GetErrorDH();
-                return new List<float>() { newArray[2], newArray[3] };
+                return new List<float>() { lineController.GetSigmaA(), lineController.GetSigmaAExact() };
 
             case AnswerType.MinimaleGrootte:
 
                 newArray = lineController.GetErrorDH();
-                return new List<float>() {newArray[3]};
+                return new List<float>() {newArray[3] * newArray[4]};
 
         }
         return new List<float>() { 0 };

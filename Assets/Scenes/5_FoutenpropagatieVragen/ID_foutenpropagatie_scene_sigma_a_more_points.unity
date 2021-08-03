@@ -472,6 +472,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 710957890562199617, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 893542376780256592, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -505,7 +510,7 @@ PrefabInstance:
     - target: {fileID: 893542376780256592, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 908611121461786901, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
@@ -776,11 +781,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4064010249453909087, guid: 91116a3ecaf7848d8bae380f2695dd18,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CheckAnswer
       objectReference: {fileID: 0}
     - target: {fileID: 4100758865833714886, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
@@ -1075,22 +1075,27 @@ PrefabInstance:
     - target: {fileID: 5358112950398508405, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: ID_questionHeader
-      value: ID_foutenpropagatie_question_3_title
+      value: ID_foutenpropagatie_question_4_title
       objectReference: {fileID: 0}
     - target: {fileID: 5358112950398508405, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: ID_questionText
-      value: ID_foutenpropagatie_question_3_explanation
+      value: ID_foutenpropagatie_question_4_explanation
       objectReference: {fileID: 0}
     - target: {fileID: 5358112950398508405, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: ID_answerText
-      value: ID_foutenpropagatie_question_3_answer
+      value: ID_foutenpropagatie_question_4_answer
       objectReference: {fileID: 0}
     - target: {fileID: 5358112950398508405, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: answerType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358112950398508405, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5482306486534135322, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
@@ -2090,7 +2095,7 @@ RectTransform:
   - {fileID: 273617898}
   - {fileID: 1793380369}
   m_Father: {fileID: 525025793}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.3}

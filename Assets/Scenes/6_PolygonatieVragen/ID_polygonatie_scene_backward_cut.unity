@@ -809,6 +809,16 @@ PrefabInstance:
       propertyPath: answerType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7840328794128031052, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840328794128031052, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.005
+      objectReference: {fileID: 0}
     - target: {fileID: 7965495516652516296, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_AnchoredPosition.x

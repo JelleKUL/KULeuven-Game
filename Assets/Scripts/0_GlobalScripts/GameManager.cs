@@ -69,9 +69,11 @@ public class GameManager : MonoBehaviour
         playerScore += amount;
         if (campaignMode)
         {
+            Debug.Log("User is logged in, adding updating scores...");
+
             Vector2Int levelIndex = GetCurrentLevel();
 
-            if(levelIndex.x <= 0)
+            if(levelIndex.x >= 0)
             {
                 if (chaptersInfos[levelIndex.x].scores[levelIndex.y] < amount) chaptersInfos[levelIndex.x].scores[levelIndex.y] = amount; //only update if score is higher
             }
@@ -209,6 +211,7 @@ public class GameManager : MonoBehaviour
             {
                 if(chapterList.chapters[i].levels[j] == sceneName)
                 {
+                    Debug.Log("Found correct level:" + j + ", in campaign: " + i);
                     return new Vector2Int(i, j);
                 }
             }

@@ -633,6 +633,16 @@ PrefabInstance:
       propertyPath: ID_answerText
       value: ID_polygonatie_question_4_answer
       objectReference: {fileID: 0}
+    - target: {fileID: 7840328794128031052, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840328794128031052, guid: f05c672adc144438fb40021d23ed2520,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.003
+      objectReference: {fileID: 0}
     - target: {fileID: 8172902061510426622, guid: f05c672adc144438fb40021d23ed2520,
         type: 3}
       propertyPath: m_AnchorMin.y

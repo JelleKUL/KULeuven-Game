@@ -16,6 +16,8 @@ public class WaterpassingTabel : MonoBehaviour
     public GameObject waterPassingTotaal;
     [SerializeField]
     private GameObject sluitFoutInput;
+    [SerializeField]
+    private InputField sluitfoutInputField;
 
     [Header("Parameters")]
     [SerializeField] private AnswerType answerType;
@@ -281,14 +283,26 @@ public class WaterpassingTabel : MonoBehaviour
     {
         playing = false;
 
-        for (int i = 0; i < tabelParts.Count; i++)
+        if(answerType == AnswerType.Sluitfout)
         {
-            tabelParts[i].ShowCorrectHeight(waterPassingController.correctHeightDifferences[i]);
-            tabelParts[i].ShowCorrectDistance(waterPassingController.correctDistances[i]);
-            tabelParts[i].ShowCorrectPeil(waterPassingController.correctHeights[i]);
-            tabelParts[i].ShowCorrectVereffenPeil(waterPassingController.correctHeights[i]);
-            tabelParts[i].ShowCorrectVertrouwenGrens(GetVertrouwensGrens(waterPassingController.correctDistances[i]));
+            if (!sluitfoutInputField) return;
+
+            sluitfoutInputField.interactable = false;
+            sluitfoutInputField.text = GetVertrouwensGrens(waterPassingController.correctDistance).ToString();
         }
+        else
+        {
+            for (int i = 0; i < tabelParts.Count; i++)
+            {
+                tabelParts[i].ShowCorrectHeight(waterPassingController.correctHeightDifferences[i]);
+                tabelParts[i].ShowCorrectDistance(waterPassingController.correctDistances[i]);
+                tabelParts[i].ShowCorrectPeil(waterPassingController.correctHeights[i]);
+                tabelParts[i].ShowCorrectVereffenPeil(waterPassingController.correctHeights[i]);
+                tabelParts[i].ShowCorrectVertrouwenGrens(GetVertrouwensGrens(waterPassingController.correctDistances[i]));
+            }
+        }
+
+        
     }
 
     public void SetSluitFout(string input)
@@ -301,7 +315,7 @@ public class WaterpassingTabel : MonoBehaviour
 
     float GetVertrouwensGrens(float distance)
     {
-        return 2.56f * Mathf.Sqrt(2) * waterPassingController.sigma1kmHT * Mathf.Sqrt(distance * GameManager.worldScale);
+        return 2.56f * Mathf.Sqrt(2) * waterPassingController.sigma1kmHT * Mathf.Sqrt(distance * GameManager.worldScale) * 0.001f;
     }
 
     void ShowHeightDifferences()

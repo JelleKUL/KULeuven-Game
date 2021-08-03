@@ -1153,6 +1153,11 @@ PrefabInstance:
       propertyPath: answerType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5358112950398508405, guid: 91116a3ecaf7848d8bae380f2695dd18,
+        type: 3}
+      propertyPath: scoreIncrease
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5482306486534135322, guid: 91116a3ecaf7848d8bae380f2695dd18,
         type: 3}
       propertyPath: m_AnchorMin.y
