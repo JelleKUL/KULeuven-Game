@@ -137,12 +137,14 @@ public class WaterpassigTabelDeel : MonoBehaviour
         hoogteMetingPanel.SetActive(false);
         hoogteVerschilPanel.SetActive(true);
         hoogteVerschilText.text = (Mathf.Round(hoogteVerschil * 1000) / 1000f).ToString() + " m";
+        inputHoogteVerschil = (Mathf.Round(hoogteVerschil * 1000) / 1000f);
     }
     public void SetDistance(float afstand)
     {
         afstandMetingPanel.SetActive(false);
         afstandPanel.SetActive(true);
         afstandText.text = (Mathf.Round(afstand * 10) / 10f).ToString() + " m";
+        inputAfstand = (Mathf.Round(afstand * 10) / 10f);
     }
     public void SetPeil(float peil)
     {
@@ -150,6 +152,7 @@ public class WaterpassigTabelDeel : MonoBehaviour
         peilOutputPanel.SetActive(true);
         peilInput.gameObject.SetActive(false);
         peilOutputText.text = (Mathf.Round(peil * 1000) / 1000f).ToString() + " m";
+        inputPeil = (Mathf.Round(peil * 1000) / 1000f);
     }
     public void SetVereffendPeil(float vereffendPeil)
     {
@@ -157,6 +160,7 @@ public class WaterpassigTabelDeel : MonoBehaviour
         vereffendPeilOutputPanel.SetActive(true);
         vereffendPeilInput.gameObject.SetActive(false);
         vereffendPeilOutputText.text = (Mathf.Round(vereffendPeil * 1000) / 1000f).ToString() + " m";
+        inputVereffendPeil = (Mathf.Round(vereffendPeil * 1000) / 1000f);
     }
     public void SetNullPeil(float startPeil)
     {
@@ -171,6 +175,7 @@ public class WaterpassigTabelDeel : MonoBehaviour
         vertrouwensgrensPanel.SetActive(true);
         vertrouwensgrensInput.text = (Mathf.Round(grens * 1000) / 1000f).ToString() + " m";
         vertrouwensgrensInput.interactable = false;
+        inputVertrouwensgrens = (Mathf.Round(grens * 1000) / 1000f);
     }
 
 

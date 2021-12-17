@@ -80,6 +80,7 @@ MonoBehaviour:
   addPointOutLoop: 0
   showAngleError: 0
   maxAngleError: 0
+  sigma1kmHT: 7
   minDistance: 2.5
   maxHeightGroundPoint: 0.15
   extremeHeightDiff: 0
@@ -110,8 +111,11 @@ MonoBehaviour:
     topSpriteShapeController: {fileID: 0}
     groundPointTopDownCenter: {fileID: 0}
     waterpassingTabel: {fileID: 0}
+  groundPoints: []
+  topPoints: []
   correctHeight: 0
   correctHeightDifferences: []
+  correctHeights: []
   correctDistances: []
   correctDistance: 0
   correctErrorAngle: 0

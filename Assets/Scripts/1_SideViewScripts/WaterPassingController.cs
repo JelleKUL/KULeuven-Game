@@ -575,7 +575,7 @@ public class WaterPassingController : BaseController
                     Debug.Log(i + "-> HeightDiff: " + correctHeightDifferences[i] + " m, Distance: " + correctDistances[i] * GameManager.worldScale);
                 }
 
-                Debug.Log("Correct distance = " + correctDistance + ", sluitfout:" + (2.56f * Mathf.Sqrt(2) * sigma1kmHT * Mathf.Sqrt(correctDistance * GameManager.worldScale) * 0.001f));
+                Debug.Log("Correct distance = " + correctDistance * GameManager.worldScale + ", sluitfout:" + (3f * Mathf.Sqrt(2) * sigma1kmHT * Mathf.Sqrt(correctDistance * GameManager.worldScale / 1000f)));
             }
             
         }

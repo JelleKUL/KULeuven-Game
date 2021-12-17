@@ -117,12 +117,14 @@ public class WaterpassingTabel : MonoBehaviour
     {
         waterPassingController = controller;
         peilOutputError = Random.Range(-maxPeilOutputError, maxPeilOutputError);
+        if (GameManager.showDebugAnswer) Debug.Log("Max peil error: " + peilOutputError);
 
         waterPassingTitle.SetTitle(true, showHeightInput, showHeightOutput, showDistanceInput, showDistanceOutput, showPeilInput || showPeilOutput, showVereffeningsPeilInput || showVereffeningsPeilOutput, showVertrouwensgrensInput || showVereffeningsPeilOutput);
 
         amount = nrOfPoints;
         pointOutLoop = pointOutLoopNr;
         float size = waterPassingTabelPart.GetComponent<RectTransform>().rect.height;
+        float coveredDistance = 0;
        
         for (int i = 0; i < nrOfPoints; i++) //create a new part for every point
         {
@@ -151,9 +153,13 @@ public class WaterpassingTabel : MonoBehaviour
             }
 
             //set what outputs to show
+            coveredDistance += controller.correctDistances[i];
+            
+
             if (showHeightOutput)
             {
-                deel.SetHeight(controller.correctHeightDifferences[i]);
+                float errorOffset = peilOutputError * controller.correctDistances[i] / controller.correctDistance;
+                deel.SetHeight(controller.correctHeightDifferences[i] + errorOffset);
             }
             if (showDistanceOutput)
             {
@@ -161,19 +167,22 @@ public class WaterpassingTabel : MonoBehaviour
             }
             if (showPeilOutput)
             {
-                float errorOffset = peilOutputError * controller.correctDistances[i] / controller.correctDistance;
-                deel.SetPeil(controller.correctHeights[i] + errorOffset);
+                float cummErrorOffset = peilOutputError * coveredDistance / controller.correctDistance;
+                deel.SetPeil(controller.correctHeights[i] + cummErrorOffset);
             }
             if (showVereffeningsPeilOutput)
             {
                 deel.SetVereffendPeil(controller.correctHeights[i]);
             }
+
+            
         }
 
         totaal = Instantiate(waterPassingTotaal, transform, false);
         waterPassingTabelTotaal = totaal.GetComponent<WaterPassingTabelTotaal>();
         totaal.GetComponent<RectTransform>().localPosition = new Vector2(0, -titleHeight - (nrOfPoints) * size);
         waterPassingTabelTotaal.SetTitle(true, showHeightInput, showHeightOutput, showDistanceInput, showDistanceOutput, showPeilInput || showPeilOutput, showVereffeningsPeilInput || showVereffeningsPeilOutput, showVertrouwensgrensInput || showVereffeningsPeilOutput);
+
     }
 
     public string SetNameText(int nr)
@@ -215,7 +224,7 @@ public class WaterpassingTabel : MonoBehaviour
                 //
                 for (int i = 0; i < tabelParts.Count; i++)
                 {
-                    if (Mathf.Abs(tabelParts[i].inputVereffendPeil - waterPassingController.correctHeightDifferences[i]) > errormarginOverride)
+                    if (Mathf.Abs(tabelParts[i].inputVereffendPeil - waterPassingController.correctHeights[i]) > errormarginOverride)
                     {
                         correct = false;
                     }
@@ -258,17 +267,14 @@ public class WaterpassingTabel : MonoBehaviour
                     }
                 }
                 break;
-            // check the heights
+            // check the input sluitfout
             case AnswerType.Sluitfout:
-                //
-                for (int i = 0; i < tabelParts.Count; i++)
+                //answered in mm
+                if (Mathf.Abs(inputSluitFout - GetVertrouwensGrens(waterPassingController.correctDistance)) > errormarginOverride)
                 {
-                    //answered in mm
-                    if (Mathf.Abs(inputSluitFout - GetVertrouwensGrens(waterPassingController.correctDistance)) > errormarginOverride)
-                    {
-                        correct = false;
-                    }
+                    correct = false;
                 }
+                
 
                 break;
 
@@ -295,7 +301,7 @@ public class WaterpassingTabel : MonoBehaviour
             for (int i = 0; i < tabelParts.Count; i++)
             {
                 tabelParts[i].ShowCorrectHeight(waterPassingController.correctHeightDifferences[i]);
-                tabelParts[i].ShowCorrectDistance(waterPassingController.correctDistances[i]);
+                tabelParts[i].ShowCorrectDistance(waterPassingController.correctDistances[i] * GameManager.worldScale);
                 tabelParts[i].ShowCorrectPeil(waterPassingController.correctHeights[i]);
                 tabelParts[i].ShowCorrectVereffenPeil(waterPassingController.correctHeights[i]);
                 tabelParts[i].ShowCorrectVertrouwenGrens(GetVertrouwensGrens(waterPassingController.correctDistances[i]));
@@ -315,7 +321,7 @@ public class WaterpassingTabel : MonoBehaviour
 
     float GetVertrouwensGrens(float distance)
     {
-        return 2.56f * Mathf.Sqrt(2) * waterPassingController.sigma1kmHT * Mathf.Sqrt(distance * GameManager.worldScale) * 0.001f;
+        return 3.0f * Mathf.Sqrt(2) * waterPassingController.sigma1kmHT * Mathf.Sqrt(distance * GameManager.worldScale / 1000f); // 3*sqrt(2)*sqrt(D)*Simga1kmHT
     }
 
     void ShowHeightDifferences()

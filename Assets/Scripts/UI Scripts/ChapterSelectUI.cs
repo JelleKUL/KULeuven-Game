@@ -88,7 +88,7 @@ public class ChapterSelectUI : MonoBehaviour
             {
                 if(GameManager.chaptersInfos[chapterinfoNr].scores[i] == 0)
                 {
-                    chapterLevel.text = i.ToString() + " / " + GameManager.chaptersInfos[chapterinfoNr].scores.Count;
+                    chapterLevel.text = (i+1).ToString() + " / " + GameManager.chaptersInfos[chapterinfoNr].scores.Count;
                     break;
                 }
             }

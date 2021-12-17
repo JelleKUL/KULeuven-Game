@@ -34,6 +34,9 @@ public class PolygonPointController : MonoBehaviour
 
     private float lengthError;
     private float angleError;
+    //the distance the line has traveled to reach this point
+    //[HideInInspector]
+    public float distanceFromStart = 0;
 
     private Material angleDisplayMaterial;
 
@@ -111,8 +114,15 @@ public class PolygonPointController : MonoBehaviour
         }
     }
 
+    public void SetTotalDistance(float previousDistance, Vector3 prevPoint)
+    {
+        distanceFromStart = previousDistance + Vector3.Distance(transform.position, prevPoint);
+        
+    }
+
     //displays the angle between the previous and next point
-    public void SetAngleText (Vector3 prevPoint, Vector3 nextPoint)
+    //extra error in degrees
+    public void SetAngleText (Vector3 prevPoint, Vector3 nextPoint, float extraError = 0)
     {
         angleDisplay.SetActive(true);
 
@@ -129,7 +139,7 @@ public class PolygonPointController : MonoBehaviour
         angleDisplayMaterial.SetFloat("_Arc2",360- angle + 2* angleDisplayMargin);
 
         angleText.transform.position = transform.position;
-        angleText.text = GameManager.RoundFloat((angle + angleError) /360 * 400,3).ToString() + " gon";
+        angleText.text = GameManager.RoundFloat((angle + angleError + (extraError * distanceFromStart)) /360 * 400,3).ToString() + " gon";
 
         Vector2 upVector = Vector3.Normalize(transform.position - prevPoint) + Vector3.Normalize(transform.position - nextPoint);
         float direction = Vector2.Dot(upVector, Vector2.right);
@@ -173,6 +183,7 @@ public class PolygonPointController : MonoBehaviour
 
         errorEllipse.transform.localScale = new Vector3( baseDistanceError/100f + (Vector2.Distance(errorEllipse.transform.position, prevPoint) * ppmDistanceError / 100f) + newx, (Vector2.Distance(errorEllipse.transform.position, prevPoint) * angleError / 100f) + newy, 1);
     }
+
 
     // returns the ellipse info so it can be used by the next point
     public Vector3 GetEllipseInfo()

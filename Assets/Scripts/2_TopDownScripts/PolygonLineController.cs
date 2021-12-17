@@ -17,6 +17,8 @@ public class PolygonLineController : MonoBehaviour
     [SerializeField] private int maxPoints;
     [SerializeField] private bool startCenterPoint;
     [SerializeField] private bool showSmallErrors;
+    [Tooltip("if true, uses the angleError to offset each point based on the distance")]
+    [SerializeField] private bool showVereffeningsErrors;
 
     [Header("Error Parameters")]
     [SerializeField] private ErrorClass baseError;
@@ -229,6 +231,8 @@ public class PolygonLineController : MonoBehaviour
             //sets the lengthvalues of the points taking into account potential overlap of multiple points
             if (showLengths && i != 0)
             {
+                linePoints[i].SetTotalDistance(linePoints[i - 1].distanceFromStart, linePoints[i-1].transform.position);
+
                 bool overlap = false;
                 for (int j = 0; j < i; j++)
                 {
@@ -292,7 +296,7 @@ public class PolygonLineController : MonoBehaviour
                     if (overlap) linePoints[i].displayRadiusModifier = 1.3f;
                     else linePoints[i].displayRadiusModifier = 1;
 
-                    linePoints[i].SetAngleText(linePoints[i - 1].transform.position, linePoints[i + 1].transform.position);
+                    linePoints[i].SetAngleText(linePoints[i - 1].transform.position, linePoints[i + 1].transform.position, showVereffeningsErrors? angleError.error/100f:0);
                 }
             }
             line.positionCount = linePoints.Count;

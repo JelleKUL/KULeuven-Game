@@ -1037,6 +1037,16 @@ PrefabInstance:
       propertyPath: scoreIncrease
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: errorUnit
+      value: mm
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798457982944310284, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: errorMargin
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7058272402773199236, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1081,6 +1091,11 @@ PrefabInstance:
         type: 3}
       propertyPath: showPeilOutput
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144953311529935956, guid: f3f16918dd96e42e0baf32203e1602c6,
+        type: 3}
+      propertyPath: errormarginOverride
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7323459967731352427, guid: f3f16918dd96e42e0baf32203e1602c6,
         type: 3}
