@@ -110,9 +110,9 @@ The database files can be found at [/Server-Side Scripts](../master/Assets/Onlin
 ### accounts
 All the accounts are stored in a database with the following structure.
 
-id | username | password | studentnr | custominfo | creationdate | shibboleth
---- | --- | --- | --- | --- | --- | ---
-auto generated identifier | a unique username | the user password | the student nr for reference | all the game related information | the date when the account was created | was this account created with shibboleth
+id | studentnr | custominfo | creationdate
+--- | --- | --- | --- 
+auto generated identifier | the unique student number | all the game related information | the date when the account was created
 
 ### custom info
 the custominfo contains an XML-serialized string which holds all the relevant game info (can be changed in the game).
