@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Linq;
+using System.Globalization;
 
 public class CSVLoader
 {
@@ -19,6 +20,9 @@ public class CSVLoader
 
     public Dictionary<string, string> GetDictionaryValues(string attrbuteId)
     {
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+        CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
         string[] lines = csvFile.text.Split(lineSeperator);
@@ -44,7 +48,7 @@ public class CSVLoader
             for (int j = 0; j < fields.Length; j++)
             {
                 fields[j] = fields[j].TrimStart(' ', surround);
-                fields[j] = fields[j].TrimEnd(surround);
+                fields[j] = fields[j].TrimEnd('\n','\r',surround);
             }
 
             if (fields.Length > attributeIndex)

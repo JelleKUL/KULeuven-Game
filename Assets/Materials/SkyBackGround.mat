@@ -2,14 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SkyBackGround
   m_Shader: {fileID: 4800000, guid: ab8e37f7003454344b25f1b7982a6dc3, type: 3}
-  m_ShaderKeywords: _SUNDISK_HIGH_QUALITY
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -55,6 +57,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AtmosphereThickness: 1
     - _BumpScale: 1
@@ -84,8 +87,9 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0.9150943, g: 0.65419817, b: 0.5481933, a: 1}
-    - _Color2: {r: 0.96675044, g: 0.990566, b: 0.81768423, a: 1}
+    - _Color2: {r: 0.99215686, g: 0.9164943, b: 0.81960785, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GroundColor: {r: 0.369, g: 0.349, b: 0.341, a: 1}
     - _SkyTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _UpVector: {r: 0, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []

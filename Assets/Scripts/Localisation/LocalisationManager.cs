@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class LocalisationManager : MonoBehaviour
@@ -16,6 +17,9 @@ public class LocalisationManager : MonoBehaviour
 
     public static void Init()
     {
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+        CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+
         csvLoader = new CSVLoader();
         csvLoader.LoadCSV();
         UpdateDictionaries();

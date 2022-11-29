@@ -1,0 +1,43 @@
+:root {
+    --main-bg-color: {{{ BG_COLOR }}} /* #42555E */;
+  }
+
+body {
+    margin: 0px;
+    background:  var(--main-bg-color);
+}
+
+#unity-canvas {
+    
+    width: 100vw;
+    height: 50vw;
+    /* 100/56.25 = 1.778 */
+    background:  var(--main-bg-color);
+    max-height: 100vh;
+    max-width: 200vh;
+    /* 16/9 = 1.778 */
+    margin: auto !important ; 
+    position: relative;
+    top: 0;
+    bottom: 0;
+    /* vertical center */
+    left: 0;
+    right: 0;
+    /* horizontal center */
+    
+    /*
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%;
+     16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    /*Change this to change player background color*/
+    background:  var(--main-bg-color);
+
+}

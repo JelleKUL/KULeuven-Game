@@ -131,7 +131,7 @@ public class QuestionUIManager : MonoBehaviour
         }
 
         answer = answer.Replace(",", "."); //replace all the , with . to parse
-
+        Debug.Log("andswerText=" + answer);
         float answerNr = 0f;
         float.TryParse(answer, out answerNr);
         

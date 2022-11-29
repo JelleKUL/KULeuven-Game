@@ -8,6 +8,8 @@ using System.IO;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System;
+using System.Runtime.InteropServices;
+using UnityEngine.SceneManagement;
 
 
 // connects the saml te request an authenticationCode
@@ -25,6 +27,105 @@ public class SAML_Connect : MonoBehaviour
     private string errorCode = "MySQL_ERROR";
     const string fieldsSeparator = "$#@(_fields_separator_*&%^";
     const string fieldNameValueSeparator = "$#@(_field_name_value_separator_*&%^";
+
+    AS_AccountInfo accountInfo = new AS_AccountInfo();
+    bool clickedWebsite = false;
+    // If the state changes update messages / load level
+    AS_LoginState _loginState = AS_LoginState.Idle;
+    AS_LoginState loginState
+    {
+        get { return _loginState; }
+        set
+        {
+            if (value == loginState)
+                return;
+            _loginState = value;
+        }
+    }
+
+    [DllImport("__Internal")]
+    private static extern void openWindow(string url);
+
+    void Awake()
+    {
+        loginState = AS_LoginState.Idle;
+        if (debugText) debugText.text = "";
+    }
+
+    public void LoginWithSaml()
+    {
+        clickedWebsite = true;
+        Debug.Log("Clicked, going to website");
+        openWindow("https://iiw.kuleuven.be/serious-game-topografie/accountsystem/simplesamlredirect.php/");
+
+        TryLoginSaml();
+
+    }
+
+    void TryLoginSaml()
+    {
+        Debug.Log("sending a request to the Saml server to get the key of the user");
+        TryAuthenticate(SamlAttempted);
+    }
+
+    void SamlAttempted(string key)
+    {
+        Debug.Log("Got data: " + key + " trying to get the ID now");
+        key.TryGetId(LoginAttempted);
+    }
+
+    // Called by the AttemptLogin coroutine when it's finished executing
+    public void LoginAttempted(string callbackMessage)
+    {
+
+
+        // If our log in failed,
+        if (callbackMessage.IsAnError())
+        {
+            this.Log(LogType.Error, callbackMessage);
+            return;
+        }
+
+        // Otherwise,
+        int accountId = Convert.ToInt32(callbackMessage);
+        OnSuccessfulLogin(accountId);
+
+    }
+
+    public void OnSuccessfulLogin(int id)
+    {
+        this.Log(LogType.Log, "Successfully Logged In User with id: " + id);
+        loginState = AS_LoginState.LoginSuccessful;
+
+        accountInfo.TryToDownload(id, AccountInfoDownloaded);
+
+    }
+
+    void AccountInfoDownloaded(string message)
+    {
+        if (message.ToLower().Contains("error"))
+        {
+            this.Log(LogType.Error, "Account System: " + message);
+        }
+        else
+        {
+            this.Log(LogType.Log, "Account System: " + message + " - Add any custom Logic here!");
+
+            Debug.Log("canvasUI: id= " + accountInfo.GetFieldValue("id") + " name= " + accountInfo.GetFieldValue("username") + " score: " + accountInfo.customInfo.totalScore);
+
+            int.TryParse(accountInfo.GetFieldValue("id"), out GameManager.loginID);
+
+            GameManager.playerScore = accountInfo.customInfo.totalScore;
+            GameManager.userName = accountInfo.GetFieldValue("username");
+            GameManager.isLoggedIn = true;
+
+            GameManager.chaptersInfos = accountInfo.customInfo.chapters;
+
+            SceneManager.LoadScene("MainMenu");
+        }
+
+    }
+
 
     /// <summary>
     /// Send an authentication request to the server

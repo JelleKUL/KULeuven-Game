@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DropShadow
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 3bd83de291a37e94c8b7e6ad297a1a68,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shadowColor.r
+    value: 0.44365662
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shadowColor.g
+    value: 0.19379672
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shadowColor.b
+    value: 0.6320754
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shadowColor.a
+    value: 0.4745098
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shadowDistance.x
+    value: 2.02
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shadowDistance.y
+    value: -3.29
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_UseGraphicAlpha
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: iterations
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shadowSpread.x
+    value: 1.58
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: shadowSpread.y
+    value: 9.17
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

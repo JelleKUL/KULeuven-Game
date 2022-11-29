@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -49,6 +50,9 @@ public class GameManager : MonoBehaviour
     // activates before the start functions
     private void Awake()
     {
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+        CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+
         if (chaptersInfos.Count == 0) ResetChapterInfos();
 
         SetPlayArea();
@@ -56,6 +60,8 @@ public class GameManager : MonoBehaviour
 
         if (adminNames.Contains(userName) || !isLoggedIn) showDebugAnswer = true;
         else showDebugAnswer = false;
+
+
 
     }
 

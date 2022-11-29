@@ -172,24 +172,24 @@ public class AS_CanvasUI : MonoBehaviour
 
 	// Check if we're good to go, and load up the first screen
 	void Start()
-	{ 
-		accountManagementGUI = GetComponentInChildren<AS_AccountManagementGUI> ();
-
-		if (!loginParent || !registrationParent || !recoveryParent 
-		    || !registrationFieldsContainer || !inputFieldPrefab) {
-			this.Log (LogType.Exception, "Unassigned variables - make sure you have assigned all the variables in this object");
-			return;
-		}
-		if ((!recoveryButton||!recoveryField) && AS_Preferences.enablePasswordRecovery) {
-			this.Log (LogType.Exception, "You haven't assigned the Recovery button and/or field. Either disable password recovery from Setup, or assign a button and a field.");
-			return;
-		} else if ((recoveryButton || recoveryField) && !AS_Preferences.enablePasswordRecovery) {
-			this.Log(LogType.Warning, "You have assigned a Recovery button and/or field, but haven't enabled password recovery in the setup. Disabling the button & field");
-			if (recoveryButton)
-				recoveryButton.gameObject.SetActive(false);
-			if (recoveryField)
-				recoveryField.gameObject.SetActive(false);
-		} 
+	{
+		//accountManagementGUI = GetComponentInChildren<AS_AccountManagementGUI> ();
+		//
+		//if (!loginParent || !registrationParent || !recoveryParent 
+		//    || !registrationFieldsContainer || !inputFieldPrefab) {
+		//	this.Log (LogType.Exception, "Unassigned variables - make sure you have assigned all the variables in this object");
+		//	return;
+		//}
+		//if ((!recoveryButton||!recoveryField) && AS_Preferences.enablePasswordRecovery) {
+		//	this.Log (LogType.Exception, "You haven't assigned the Recovery button and/or field. Either disable password recovery from Setup, or assign a button and a field.");
+		//	return;
+		//} else if ((recoveryButton || recoveryField) && !AS_Preferences.enablePasswordRecovery) {
+		//	this.Log(LogType.Warning, "You have assigned a Recovery button and/or field, but haven't enabled password recovery in the setup. Disabling the button & field");
+		//	if (recoveryButton)
+		//		recoveryButton.gameObject.SetActive(false);
+		//	if (recoveryField)
+		//		recoveryField.gameObject.SetActive(false);
+		//} 
 		loginState = AS_LoginState.LoginPrompt; 
 	} 
 	
