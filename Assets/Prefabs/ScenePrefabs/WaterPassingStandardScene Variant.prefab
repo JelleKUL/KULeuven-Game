@@ -639,6 +639,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SideViewObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 2899762751828399841, guid: 6de7394b147e84bbbbb844197d8edd51,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.6091671
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762751828399841, guid: 6de7394b147e84bbbbb844197d8edd51,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.0855558
+      objectReference: {fileID: 0}
     - target: {fileID: 4479020538665310976, guid: 6de7394b147e84bbbbb844197d8edd51,
         type: 3}
       propertyPath: m_Points.Array.data[0].y
@@ -653,6 +663,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Points.Array.data[2].y
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509111002725443037, guid: 6de7394b147e84bbbbb844197d8edd51,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.6091671
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509111002725443037, guid: 6de7394b147e84bbbbb844197d8edd51,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6503706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966988908530940148, guid: 6de7394b147e84bbbbb844197d8edd51,
+        type: 3}
+      propertyPath: offset.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966988908530940148, guid: 6de7394b147e84bbbbb844197d8edd51,
+        type: 3}
+      propertyPath: offset.y
+      value: 147.4
       objectReference: {fileID: 0}
     - target: {fileID: 8720088638817317844, guid: 6de7394b147e84bbbbb844197d8edd51,
         type: 3}
