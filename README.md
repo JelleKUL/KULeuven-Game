@@ -20,11 +20,9 @@ The game is made in **Unity 3D v2019.4 LTS**.
 ## Project structure
 The project is structured like a Unity project. All the relevant files are in the [/assets](../master/Assets) folder.
 You can clone this repo on your system. Be sure to have **Github LFS** installed to also get all the assets.
-The projects is using version control through [GitHub for Unity](https://assetstore.unity.com/packages/tools/version-control/github-for-unity-118069).
 
 ### Online account system
-The project uses Online Account system to use accounts linked to a database to store player records.
-It uses an Asset from the AssetStore named: [Online Account System](https://assetstore.unity.com/packages/tools/network/online-account-system-18487).
+Progress in the game is stored in a database. Student can log in using Shibboleth, so the authentication goes through KU Leuven and we don't need to store any passwords.
 Go to [Database Structure](#Database-Structure) for more info about the structure of the database.
 
 ### Localisation
@@ -108,6 +106,9 @@ this is a unique **scene** where all the relevant parameters can be changed to t
 The database files can be found at [/Server-Side Scripts](../master/Assets/Online%20Account%20System/Server-Side%20Scripts). these files are uploaded to a PHP & Mysql compatible server.
 
 ### accounts
+Using SimplSamlPHP for the back end: [SimpleSamlPHP Documentation](https://simplesamlphp.org/docs/stable/)
+Integrated with KULeuven Identity provider: [KULeuven integration Documentation](https://admin.kuleuven.be/icts/services/aai/documentation/sp/install-simplesamlphp-sp.html).
+The service returns the student ID to linkk the progress to the student.
 All the accounts are stored in a database with the following structure.
 
 id | studentnr | custominfo | creationdate
@@ -128,11 +129,6 @@ public class AS_CustomInfo
     }
 }
 ```
-
-## Shibboleth
-This project uses shibboleth as another way to authenticate.
-Using SimplSamlPHP for the back end: [SimpleSamlPHP Documentation](https://simplesamlphp.org/docs/stable/)
-Integrated with KULeuven Identity provider: [KULeuven integration Documentation](https://admin.kuleuven.be/icts/services/aai/documentation/sp/install-simplesamlphp-sp.html).
 
 ## How to add content
 This game can be easily expanded either with new chapters or new levels.
