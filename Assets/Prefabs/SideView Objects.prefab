@@ -604,6 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d64be144c9f48f4ea3b828665399b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  refResolution: {x: 1920, y: 1080}
   offset: {x: 80, y: 145, z: 1}
   startRight: 1
   startTop: 0
@@ -1139,9 +1140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d64be144c9f48f4ea3b828665399b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 50, y: 330, z: 1}
+  refResolution: {x: 1920, y: 1080}
+  offset: {x: 80, y: 180, z: 1}
   startRight: 0
-  startTop: 0
+  startTop: 1
 --- !u!1 &7785873003955099554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,9 +1247,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d64be144c9f48f4ea3b828665399b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 50, y: 175, z: 1}
+  refResolution: {x: 1920, y: 1080}
+  offset: {x: 80, y: 480, z: 1}
   startRight: 0
-  startTop: 0
+  startTop: 1
 --- !u!1 &8916625541530620356
 GameObject:
   m_ObjectHideFlags: 0

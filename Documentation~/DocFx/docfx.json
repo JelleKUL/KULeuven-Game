@@ -22,7 +22,7 @@
         "globalMetadata": {
             "_appTitle": "MeasureUp",
             "_appFooter": "A serious game from the KU Leuven",
-            "_appLogoPath": "resources/logo.svg", 
+            "_appLogoPath": "resources/MeasureUpLogo.png", 
             "_enableSearch": true
         },
         "content": [
@@ -68,7 +68,7 @@
             }
         ],
         "sitemap": {
-            "baseUrl": "https://jellekul.github.io/GeoSharpi",
+            "baseUrl": "https://jellekul.github.io/kuleuven-game",
             "changefreq": "weekly",
             "fileOptions": {
                 "api/*": {
