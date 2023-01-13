@@ -4,6 +4,7 @@ using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using AS;
 
 //*********** The GameManager manages all the global settings and methods ******************//
 

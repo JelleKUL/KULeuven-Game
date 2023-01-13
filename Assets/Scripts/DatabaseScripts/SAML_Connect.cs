@@ -10,7 +10,7 @@ using UnityEngine.UI;
 using System;
 using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
-
+using AS;
 
 // connects the saml te request an authenticationCode
 
@@ -30,25 +30,13 @@ public class SAML_Connect : MonoBehaviour
 
     AS_AccountInfo accountInfo = new AS_AccountInfo();
     bool clickedWebsite = false;
-    // If the state changes update messages / load level
-    AS_LoginState _loginState = AS_LoginState.Idle;
-    AS_LoginState loginState
-    {
-        get { return _loginState; }
-        set
-        {
-            if (value == loginState)
-                return;
-            _loginState = value;
-        }
-    }
+
 
     [DllImport("__Internal")]
     private static extern void openWindow(string url);
 
     void Awake()
     {
-        loginState = AS_LoginState.Idle;
         if (debugText) debugText.text = "";
     }
 
@@ -57,9 +45,7 @@ public class SAML_Connect : MonoBehaviour
         clickedWebsite = true;
         Debug.Log("Clicked, going to website");
         openWindow("https://iiw.kuleuven.be/serious-game-topografie/accountsystem/simplesamlredirect.php/");
-
         TryLoginSaml();
-
     }
 
     void TryLoginSaml()
@@ -77,28 +63,21 @@ public class SAML_Connect : MonoBehaviour
     // Called by the AttemptLogin coroutine when it's finished executing
     public void LoginAttempted(string callbackMessage)
     {
-
-
         // If our log in failed,
         if (callbackMessage.IsAnError())
         {
             this.Log(LogType.Error, callbackMessage);
             return;
         }
-
         // Otherwise,
         int accountId = Convert.ToInt32(callbackMessage);
         OnSuccessfulLogin(accountId);
-
     }
 
     public void OnSuccessfulLogin(int id)
     {
         this.Log(LogType.Log, "Successfully Logged In User with id: " + id);
-        loginState = AS_LoginState.LoginSuccessful;
-
         accountInfo.TryToDownload(id, AccountInfoDownloaded);
-
     }
 
     void AccountInfoDownloaded(string message)
@@ -109,18 +88,12 @@ public class SAML_Connect : MonoBehaviour
         }
         else
         {
-            this.Log(LogType.Log, "Account System: " + message + " - Add any custom Logic here!");
-
-            Debug.Log("canvasUI: id= " + accountInfo.GetFieldValue("id") + " name= " + accountInfo.GetFieldValue("username") + " score: " + accountInfo.customInfo.totalScore);
-
+            this.Log(LogType.Log, "Account System: " + message);
             int.TryParse(accountInfo.GetFieldValue("id"), out GameManager.loginID);
-
             GameManager.playerScore = accountInfo.customInfo.totalScore;
             GameManager.userName = accountInfo.GetFieldValue("username");
             GameManager.isLoggedIn = true;
-
             GameManager.chaptersInfos = accountInfo.customInfo.chapters;
-
             SceneManager.LoadScene("MainMenu");
         }
 
@@ -140,20 +113,19 @@ public class SAML_Connect : MonoBehaviour
     IEnumerator SendAuthenticationRequest(Action<string> resultCallback)
     {
         UnityWebRequest webRequest = UnityWebRequest.Get(phpFilesLocation + authenticationFile);
-
         yield return webRequest.SendWebRequest();
 
-        if (webRequest.isNetworkError || webRequest.isHttpError) // check for any network errors
+        if (webRequest.result == UnityWebRequest.Result.ConnectionError) // check for any network errors
         {
-            LogMessage("<b><color=blue>DB_Connect:</color></b>: " + webRequest.error);
+            LogMessage("<b><color=red>DB_Connect:</color></b>: " + webRequest.error);
         }
         else if (webRequest.downloadHandler.text.Contains(errorCode)) // check for any database error
         {
-            LogMessage("<b><color=blue>DB_Connect:</color></b>: " + webRequest.downloadHandler.text);
+            LogMessage("<b><color=red>DB_Connect:</color></b>: " + webRequest.downloadHandler.text);
         }
         else
         {
-            LogMessage("<b><color=blue>DB_Connect:</color></b>: " + "Data Downloaded Successfully with contents: " + webRequest.downloadHandler.text);
+            LogMessage("<b><color=green>DB_Connect:</color></b>: " + "Data Downloaded Successfully with contents: " + webRequest.downloadHandler.text);
             resultCallback(webRequest.downloadHandler.text);
         }
     }
