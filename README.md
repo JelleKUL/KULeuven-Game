@@ -8,7 +8,7 @@ Clone this repo onto your machine and open it like a Unity project. Be sure to h
 
 ## Documentation
 
-You can find the full documentation here: [jellekul.github.io/KULeuven-Game]([jellekul.github.io/KULeuven-Game](https://jellekul.github.io/KULeuven-Game/))
+You can find the full documentation here: [jellekul.github.io/KULeuven-Game](https://jellekul.github.io/KULeuven-Game/)
 
 ## Licensing
 
