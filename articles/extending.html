@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MeasureUp: A serious game about Topography | MeasureUp </title>
+    <title>How to add content | MeasureUp </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="MeasureUp: A serious game about Topography | MeasureUp ">
+    <meta name="title" content="How to add content | MeasureUp ">
     <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -89,8 +89,8 @@
                 <div class="toc" id="toc">
                   
                   <ul class="nav level1">
-                    <li class="active">
-                      <a href="intro.html" title="Getting Started" class="active">Getting Started</a>
+                    <li class="">
+                      <a href="intro.html" title="Getting Started" class="">Getting Started</a>
                     </li>
                     <li class="">
                       <a href="structure.html" title="Game Structure" class="">Game Structure</a>
@@ -101,8 +101,8 @@
                     <li class="">
                       <a href="localisation.html" title="Multi Language" class="">Multi Language</a>
                     </li>
-                    <li class="">
-                      <a href="extending.html" title="Adding Content" class="">Adding Content</a>
+                    <li class="active">
+                      <a href="extending.html" title="Adding Content" class="active">Adding Content</a>
                     </li>
                   </ul>        </div>
               </div>
@@ -112,16 +112,35 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="measureup-a-serious-game-about-topography">MeasureUp: A serious game about Topography</h1>
+<h1 id="how-to-add-content">How to add content</h1>
 
-<h2 id="game-structure">Game Structure</h2>
-<p>The Game is structured in Chapters, each chapter covering a specific topic. Those Chapter each contain a number of levels.</p>
-<h2 id="database-structure">Database Structure</h2>
-<p>Progress in the game is stored in a database. Student can log in with their university account using Shibboleth, a central login system. This simplifies the data storage and only requires us to store the id.</p>
-<h2 id="multi-language">Multi Language</h2>
-<p>The Game has full support for multiple languages and can be easily extended to support even more.</p>
-<h2 id="adding-content">Adding Content</h2>
-<p>The Content of the game can be quickly expanded by using the available tools.</p>
+<p>This game can be easily expanded either with new chapters or new levels.</p>
+<h2 id="adding-a-new-level">Adding a new Level</h2>
+<ol>
+<li>Create a new Scene in <em>/Assets/Scenes/(Chapter)</em>.</li>
+<li>Empty out the scene and add a <code>ScenePrefab</code>from <em>Assets/Prefabs/ScenePrefabs</em> of the desired Chapter. <a href="##Adding-a-new-Chapter">You can also create a new Chapter</a>.</li>
+<li>Navigate to the <code>(Chapter)Manager</code> (eg. <code>WaterPassingManager</code>).</li>
+<li>Create a new <strong>key</strong> and <strong>values</strong> in the <a href="../master/Assets/Resources/localisation.csv">localisation.csv</a> and add them to the <code>(Chapter)Questions</code>. </li>
+<li>You can add values from public variables in the respective <code>(Chapter)Controller</code> to the question title and explanation by inserting <code>{VARIABLE_NAME}</code> or <code>{VARIABLE_NAME[i]}</code> in the localised values. adding a <code>*</code> in between the <code>{}</code> will multiply the value by the <code>worldScale</code> e.g. &quot;Plaats de meetbaken op de <code>{nrOfPoints}</code> meetpunten, met Coördinaten: <code>{meetpunten[0]*}</code>,<code>{meetpunten[1]*}</code>.&quot;</li>
+<li>You can also change the Error Margin &amp; Unit, NrOfTries and Score Increase.</li>
+<li>Choose the AnswerType to fit your excersice.</li>
+<li>Change the parameters in the <code>(Chapter)Controller</code> to fit your excercise.</li>
+<li>Add your <strong>Level</strong> to the relevant <strong>Chapter</strong> and press the <strong>Update Build Settings</strong> button in the <a href="../master/Assets/Chapters">ChapterList</a> to add the scene to the build settings at their correct place.</li>
+</ol>
+<h2 id="adding-a-new-chapter">Adding a new Chapter</h2>
+<ol>
+<li>Create a new <code>ChapterScriptableObject</code> <strong>Chapter</strong> in <em>/Assets/Chapters</em> from the Project <strong>+</strong> dropdown menu under <em>ScriptableObjects/chapter</em>.</li>
+<li>Fill in the relevant information like the title and explanation (the UID is automatically generated)</li>
+<li>Add a cover image in <em>/Assets/Images/Banners</em> and link it to the <strong>Chapter</strong></li>
+<li>Create a new folder in <em>/Assets/Scenes/</em> to house you new levels.</li>
+<li>if your new <strong>Chapter</strong> doesn&#39;t fit the existing controllers do the following extra steps:<ul>
+<li>Create a new <code>(Chapter)Questions</code> script from the <a href="../master/Assets/Scripts/Templates">QuestionTemplate</a></li>
+<li>Create a new <code>(Chapter)Controller</code> script to match the new gameplay (use other controllers as reference)</li>
+</ul>
+</li>
+<li>Create some new <strong>Levels</strong> in the new folder and add them to the list in the <code>ChapterScriptableObject</code>.</li>
+<li>Add your new <strong>Chapter</strong> to the <a href="../master/Assets/Chapters">ChapterList</a> and press the <strong>Update Build Settings</strong> button to add the chapter and scenes to the build settings at their correct place.</li>
+</ol>
 </article>
           </div>
           
@@ -130,7 +149,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/JelleKUL/KULeuven-Game/blob/main/Documentation~/DocFx/articles/intro.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/JelleKUL/KULeuven-Game/blob/main/Documentation~/DocFx/articles/extending.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MeasureUp: A serious game about Topography | MeasureUp </title>
+    <title>Saving Progress | MeasureUp </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="MeasureUp: A serious game about Topography | MeasureUp ">
+    <meta name="title" content="Saving Progress | MeasureUp ">
     <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -89,14 +89,14 @@
                 <div class="toc" id="toc">
                   
                   <ul class="nav level1">
-                    <li class="active">
-                      <a href="intro.html" title="Getting Started" class="active">Getting Started</a>
+                    <li class="">
+                      <a href="intro.html" title="Getting Started" class="">Getting Started</a>
                     </li>
                     <li class="">
                       <a href="structure.html" title="Game Structure" class="">Game Structure</a>
                     </li>
-                    <li class="">
-                      <a href="database.html" title="Database Structure" class="">Database Structure</a>
+                    <li class="active">
+                      <a href="database.html" title="Database Structure" class="active">Database Structure</a>
                     </li>
                     <li class="">
                       <a href="localisation.html" title="Multi Language" class="">Multi Language</a>
@@ -112,17 +112,44 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="measureup-a-serious-game-about-topography">MeasureUp: A serious game about Topography</h1>
+<h1 id="saving-progress">Saving Progress</h1>
 
-<h2 id="game-structure">Game Structure</h2>
-<p>The Game is structured in Chapters, each chapter covering a specific topic. Those Chapter each contain a number of levels.</p>
-<h2 id="database-structure">Database Structure</h2>
-<p>Progress in the game is stored in a database. Student can log in with their university account using Shibboleth, a central login system. This simplifies the data storage and only requires us to store the id.</p>
-<h2 id="multi-language">Multi Language</h2>
-<p>The Game has full support for multiple languages and can be easily extended to support even more.</p>
-<h2 id="adding-content">Adding Content</h2>
-<p>The Content of the game can be quickly expanded by using the available tools.</p>
-</article>
+<p>The database files can be found at <a href="https://github.com/JelleKUL/KULeuven-Game/tree/main/Server-Side~">/Server-Side~</a>. These files are uploaded to a PHP &amp; Mysql compatible server.</p>
+<h2 id="accounts">accounts</h2>
+<p>Using SimplSamlPHP for the back end: <a href="https://simplesamlphp.org/docs/stable/">SimpleSamlPHP Documentation</a>
+Integrated with KULeuven Identity provider: <a href="https://admin.kuleuven.be/icts/services/aai/documentation/sp/install-simplesamlphp-sp.html">KULeuven integration Documentation</a>.
+The service returns the student ID to linkk the progress to the student.
+All the accounts are stored in a database with the following structure.</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>studentnr</th>
+<th>custominfo</th>
+<th>creationdate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>auto generated identifier</td>
+<td>the unique student number</td>
+<td>all the game related information</td>
+<td>the date when the account was created</td>
+</tr>
+</tbody>
+</table>
+<h2 id="custom-info">custom info</h2>
+<p>the custominfo contains an XML-serialized string which holds all the relevant game info (can be changed in the game).</p>
+<pre><code class="lang-C#">public class AS_CustomInfo
+{
+    public int totalScore = 0; // the total score a player has
+    public List&lt;ChapterInfo&gt; chapters; // a list of all the chapters in the game
+    {
+        public string UID = &quot;&quot;; // a unique UID to identify the chapter in the game
+        public List&lt;int&gt; scores = new List&lt;int&gt;(); // a list of the score of each level. this also tracks if the player has competed the level when the score is higher then zero
+    }
+}
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -130,7 +157,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/JelleKUL/KULeuven-Game/blob/main/Documentation~/DocFx/articles/intro.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/JelleKUL/KULeuven-Game/blob/main/Documentation~/DocFx/articles/database.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

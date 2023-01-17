@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MeasureUp: A serious game about Topography | MeasureUp </title>
+    <title>Game structure | MeasureUp </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="MeasureUp: A serious game about Topography | MeasureUp ">
+    <meta name="title" content="Game structure | MeasureUp ">
     <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -89,11 +89,11 @@
                 <div class="toc" id="toc">
                   
                   <ul class="nav level1">
-                    <li class="active">
-                      <a href="intro.html" title="Getting Started" class="active">Getting Started</a>
-                    </li>
                     <li class="">
-                      <a href="structure.html" title="Game Structure" class="">Game Structure</a>
+                      <a href="intro.html" title="Getting Started" class="">Getting Started</a>
+                    </li>
+                    <li class="active">
+                      <a href="structure.html" title="Game Structure" class="active">Game Structure</a>
                     </li>
                     <li class="">
                       <a href="database.html" title="Database Structure" class="">Database Structure</a>
@@ -112,16 +112,31 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="measureup-a-serious-game-about-topography">MeasureUp: A serious game about Topography</h1>
+<h1 id="game-structure">Game structure</h1>
 
-<h2 id="game-structure">Game Structure</h2>
-<p>The Game is structured in Chapters, each chapter covering a specific topic. Those Chapter each contain a number of levels.</p>
-<h2 id="database-structure">Database Structure</h2>
-<p>Progress in the game is stored in a database. Student can log in with their university account using Shibboleth, a central login system. This simplifies the data storage and only requires us to store the id.</p>
-<h2 id="multi-language">Multi Language</h2>
-<p>The Game has full support for multiple languages and can be easily extended to support even more.</p>
-<h2 id="adding-content">Adding Content</h2>
-<p>The Content of the game can be quickly expanded by using the available tools.</p>
+<p>The most important parts of the game structure is strored in <strong>scriptable objects</strong> in <a href="../master/Assets/Chapters">/Chapters</a>. These scriptable object allow for prersystent data storage without needing scene representation.</p>
+<h2 id="game">Game</h2>
+<p>The game is set up around menu scenes which let the user log in, check leaderboards and play the game.
+The game contains a number of <strong>chapters</strong>. </p>
+<pre><code class="lang-C#">public class ChapterListScriptableObject : ScriptableObject
+{
+    [Scene] public List&lt;string&gt; menuScenes = new List&lt;string&gt;(); // the extra menu scenes
+    [Scene] public string chapterEndScene; // the end scene to show at the end of every chapter
+    public List&lt;ChapterScriptableObject&gt; chapters; // the list of all the chapters
+}
+</code></pre><h2 id="chapter">Chapter</h2>
+<p>Each chapter has a certain <strong>topic</strong> and contains a number of <strong>levels</strong>.</p>
+<pre><code class="lang-C#">public class ChapterScriptableObject : ScriptableObject
+{
+    [ReadOnly] public string UID; // the unique identifier
+    public string chapterName; // the name of the chapter
+    public string chapterExplanation; // the explanation of the chapter
+    public Sprite coverImage; // the cover image of the chapter
+    [Scene] public List &lt;string&gt; levels; // a list of all the levels (as UnityScenes)
+}
+</code></pre><h2 id="level">Level</h2>
+<p>A level is one exercise where the player has to enter a correct answer to unlock the next exercise.
+this is a unique <strong>scene</strong> where all the relevant parameters can be changed to the creators liking.</p>
 </article>
           </div>
           
@@ -130,7 +145,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/JelleKUL/KULeuven-Game/blob/main/Documentation~/DocFx/articles/intro.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/JelleKUL/KULeuven-Game/blob/main/Documentation~/DocFx/articles/structure.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

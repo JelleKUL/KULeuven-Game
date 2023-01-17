@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MeasureUp: A serious game about Topography | MeasureUp </title>
+    <title>Localisation | MeasureUp </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="MeasureUp: A serious game about Topography | MeasureUp ">
+    <meta name="title" content="Localisation | MeasureUp ">
     <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -89,8 +89,8 @@
                 <div class="toc" id="toc">
                   
                   <ul class="nav level1">
-                    <li class="active">
-                      <a href="intro.html" title="Getting Started" class="active">Getting Started</a>
+                    <li class="">
+                      <a href="intro.html" title="Getting Started" class="">Getting Started</a>
                     </li>
                     <li class="">
                       <a href="structure.html" title="Game Structure" class="">Game Structure</a>
@@ -98,8 +98,8 @@
                     <li class="">
                       <a href="database.html" title="Database Structure" class="">Database Structure</a>
                     </li>
-                    <li class="">
-                      <a href="localisation.html" title="Multi Language" class="">Multi Language</a>
+                    <li class="active">
+                      <a href="localisation.html" title="Multi Language" class="active">Multi Language</a>
                     </li>
                     <li class="">
                       <a href="extending.html" title="Adding Content" class="">Adding Content</a>
@@ -112,16 +112,68 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="measureup-a-serious-game-about-topography">MeasureUp: A serious game about Topography</h1>
+<h1 id="localisation">Localisation</h1>
 
-<h2 id="game-structure">Game Structure</h2>
-<p>The Game is structured in Chapters, each chapter covering a specific topic. Those Chapter each contain a number of levels.</p>
-<h2 id="database-structure">Database Structure</h2>
-<p>Progress in the game is stored in a database. Student can log in with their university account using Shibboleth, a central login system. This simplifies the data storage and only requires us to store the id.</p>
-<h2 id="multi-language">Multi Language</h2>
-<p>The Game has full support for multiple languages and can be easily extended to support even more.</p>
-<h2 id="adding-content">Adding Content</h2>
-<p>The Content of the game can be quickly expanded by using the available tools.</p>
+<p>The project is localised and can handle multiple languages.
+every textfield in the game has a <strong>key</strong> as a string, which is connected to a <strong>value</strong> in a CSV.
+Currently the game supports the following languages:</p>
+<ul>
+<li><em>Dutch</em> (NL)</li>
+<li><em>English</em> (EN)</li>
+</ul>
+<p>New Languages can be added in the <a href="../master/Assets/Scripts/Localisation/LocalisationManager.cs">LocalisationManager</a></p>
+<pre><code class="lang-C#">public class LocalisationManager : MonoBehaviour
+{
+    public enum Language { NL, EN } // add new languages here
+    public static Language language = Language.NL;
+
+    private static Dictionary&lt;string, string&gt; localisedNL;
+    private static Dictionary&lt;string, string&gt; localisedEN;
+    //add new languages here
+    ...
+    public static string GetLocalisedValue(string key)
+    {
+        ...
+        switch (language)
+        {
+            case Language.NL:
+                localisedNL.TryGetValue(key, out value);
+                break;
+            case Language.EN:
+                localisedEN.TryGetValue(key, out value);
+                break;
+            // add new languages here
+        }
+        ...
+        return value;
+    }
+    ...
+}
+</code></pre><p>Then add new values to <a href="../master/Assets/Resources/localisation.csv">localisation.csv</a> to add the new language to the game.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>nl</th>
+<th>en</th>
+<th>...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>ID_unique</em></td>
+<td>De waarde in het Nederlands</td>
+<td>The value in English</td>
+<td>...</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
 </article>
           </div>
           
@@ -130,7 +182,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/JelleKUL/KULeuven-Game/blob/main/Documentation~/DocFx/articles/intro.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/JelleKUL/KULeuven-Game/blob/main/Documentation~/DocFx/articles/localisation.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
