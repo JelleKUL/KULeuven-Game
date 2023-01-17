@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>KULeuven-Game | MeasureUp </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="KULeuven-Game | MeasureUp ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc">
+    <meta property="docfx:tocrel" content="toc">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="resources/MeasureUpLogo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+                
+                <ul class="nav level1 navbar-nav">
+                      <li>
+                          <a href="articles/intro.html" title="Information">Information</a>
+                      </li>
+                      <li>
+                          <a href="api/AS.html" title="Scripting API">Scripting API</a>
+                      </li>
+                </ul>    </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="kuleuven-game">KULeuven-Game</h1>
+
+<p>A game made to help the students.<br>The game is made in <strong>Unity 3D v2019.4 LTS</strong>.</p>
+<h2 id="table-of-contents">Table of contents</h2>
+<ul>
+<li><a href="#Project-structure">Project structure</a><ul>
+<li><a href="#Online-account-system">Online account system</a></li>
+<li><a href="#Localisation">Localisation</a></li>
+</ul>
+</li>
+<li><a href="#Game-structure">Game structure</a><ul>
+<li><a href="#Game">Game</a></li>
+<li><a href="#Chapter">Chapter</a></li>
+<li><a href="#Level">Level</a></li>
+</ul>
+</li>
+<li><a href="#Database-Structure">Database Structure</a><ul>
+<li><a href="#accounts">accounts</a></li>
+<li><a href="#custom-info">custom info</a></li>
+</ul>
+</li>
+<li><a href="#How-to-add-content">How to add content</a><ul>
+<li><a href="#Adding-a-new-Level">Adding a new Level</a></li>
+<li><a href="#Adding-a-new-Chapter">Adding a new Chapter</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="project-structure">Project structure</h2>
+<p>The project is structured like a Unity project. All the relevant files are in the <a href="../master/Assets">/assets</a> folder.
+You can clone this repo on your system. Be sure to have <strong>Github LFS</strong> installed to also get all the assets.</p>
+<h3 id="online-account-system">Online account system</h3>
+<p>Progress in the game is stored in a database. Student can log in using Shibboleth, so the authentication goes through KU Leuven and we don&#39;t need to store any passwords.
+Go to <a href="#Database-Structure">Database Structure</a> for more info about the structure of the database.</p>
+<h3 id="localisation">Localisation</h3>
+<p>The project is localised and can handle multiple languages.
+every textfield in the game has a <strong>key</strong> as a string, which is connected to a <strong>value</strong> in a CSV.
+Currently the game supports the following languages:</p>
+<ul>
+<li><em>Dutch</em> (NL)</li>
+<li><em>English</em> (EN)</li>
+</ul>
+<p>New Languages can be added in the <a href="../master/Assets/Scripts/Localisation/LocalisationManager.cs">LocalisationManager</a></p>
+<pre><code class="lang-C#">public class LocalisationManager : MonoBehaviour
+{
+    public enum Language { NL, EN } // add new languages here
+    public static Language language = Language.NL;
+
+    private static Dictionary&lt;string, string&gt; localisedNL;
+    private static Dictionary&lt;string, string&gt; localisedEN;
+    //add new languages here
+    ...
+    public static string GetLocalisedValue(string key)
+    {
+        ...
+        switch (language)
+        {
+            case Language.NL:
+                localisedNL.TryGetValue(key, out value);
+                break;
+            case Language.EN:
+                localisedEN.TryGetValue(key, out value);
+                break;
+            // add new languages here
+        }
+        ...
+        return value;
+    }
+    ...
+}
+</code></pre><p>Then add new values to <a href="../master/Assets/Resources/localisation.csv">localisation.csv</a> to add the new language to the game.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>nl</th>
+<th>en</th>
+<th>...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>ID_unique</em></td>
+<td>De waarde in het Nederlands</td>
+<td>The value in English</td>
+<td>...</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<h2 id="game-structure">Game structure</h2>
+<p>The most important parts of the game structure is strored in <strong>scriptable objects</strong> in <a href="../master/Assets/Chapters">/Chapters</a>. These scriptable object allow for prersystent data storage without needing scene representation.</p>
+<h3 id="game">Game</h3>
+<p>The game is set up around menu scenes which let the user log in, check leaderboards and play the game.
+The game contains a number of <strong>chapters</strong>. </p>
+<pre><code class="lang-C#">public class ChapterListScriptableObject : ScriptableObject
+{
+    [Scene] public List&lt;string&gt; menuScenes = new List&lt;string&gt;(); // the extra menu scenes
+    [Scene] public string chapterEndScene; // the end scene to show at the end of every chapter
+    public List&lt;ChapterScriptableObject&gt; chapters; // the list of all the chapters
+}
+</code></pre><h3 id="chapter">Chapter</h3>
+<p>Each chapter has a certain <strong>topic</strong> and contains a number of <strong>levels</strong>.</p>
+<pre><code class="lang-C#">public class ChapterScriptableObject : ScriptableObject
+{
+    [ReadOnly] public string UID; // the unique identifier
+    public string chapterName; // the name of the chapter
+    public string chapterExplanation; // the explanation of the chapter
+    public Sprite coverImage; // the cover image of the chapter
+    [Scene] public List &lt;string&gt; levels; // a list of all the levels (as UnityScenes)
+}
+</code></pre><h3 id="level">Level</h3>
+<p>A level is one exercise where the player has to enter a correct answer to unlock the next exercise.
+this is a unique <strong>scene</strong> where all the relevant parameters can be changed to the creators liking.</p>
+<h2 id="database-structure">Database Structure</h2>
+<p>The database files can be found at <a href="../master/Assets/Online%20Account%20System/Server-Side%20Scripts">/Server-Side Scripts</a>. these files are uploaded to a PHP &amp; Mysql compatible server.</p>
+<h3 id="accounts">accounts</h3>
+<p>Using SimplSamlPHP for the back end: <a href="https://simplesamlphp.org/docs/stable/">SimpleSamlPHP Documentation</a>
+Integrated with KULeuven Identity provider: <a href="https://admin.kuleuven.be/icts/services/aai/documentation/sp/install-simplesamlphp-sp.html">KULeuven integration Documentation</a>.
+The service returns the student ID to linkk the progress to the student.
+All the accounts are stored in a database with the following structure.</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>studentnr</th>
+<th>custominfo</th>
+<th>creationdate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>auto generated identifier</td>
+<td>the unique student number</td>
+<td>all the game related information</td>
+<td>the date when the account was created</td>
+</tr>
+</tbody>
+</table>
+<h3 id="custom-info">custom info</h3>
+<p>the custominfo contains an XML-serialized string which holds all the relevant game info (can be changed in the game).</p>
+<pre><code class="lang-C#">public class AS_CustomInfo
+{
+    public int totalScore = 0; // the total score a player has
+    public List&lt;ChapterInfo&gt; chapters; // a list of all the chapters in the game
+    {
+        public string UID = &quot;&quot;; // a unique UID to identify the chapter in the game
+        public List&lt;int&gt; scores = new List&lt;int&gt;(); // a list of the score of each level. this also tracks if the player has competed the level when the score is higher then zero
+    }
+}
+</code></pre><h2 id="how-to-add-content">How to add content</h2>
+<p>This game can be easily expanded either with new chapters or new levels.</p>
+<h3 id="adding-a-new-level">Adding a new Level</h3>
+<ol>
+<li>Create a new Scene in <em>/Assets/Scenes/(Chapter)</em>.</li>
+<li>Empty out the scene and add a <code>ScenePrefab</code>from <em>Assets/Prefabs/ScenePrefabs</em> of the desired Chapter. <a href="##Adding-a-new-Chapter">You can also create a new Chapter</a>.</li>
+<li>Navigate to the <code>(Chapter)Manager</code> (eg. <code>WaterPassingManager</code>).</li>
+<li>Create a new <strong>key</strong> and <strong>values</strong> in the <a href="../master/Assets/Resources/localisation.csv">localisation.csv</a> and add them to the <code>(Chapter)Questions</code>. </li>
+<li>You can add values from public variables in the respective <code>(Chapter)Controller</code> to the question title and explanation by inserting <code>{VARIABLE_NAME}</code> or <code>{VARIABLE_NAME[i]}</code> in the localised values. adding a <code>*</code> in between the <code>{}</code> will multiply the value by the <code>worldScale</code> e.g. &quot;Plaats de meetbaken op de <code>{nrOfPoints}</code> meetpunten, met Coördinaten: <code>{meetpunten[0]*}</code>,<code>{meetpunten[1]*}</code>.&quot;</li>
+<li>You can also change the Error Margin &amp; Unit, NrOfTries and Score Increase.</li>
+<li>Choose the AnswerType to fit your excersice.</li>
+<li>Change the parameters in the <code>(Chapter)Controller</code> to fit your excercise.</li>
+<li>Add your <strong>Level</strong> to the relevant <strong>Chapter</strong> and press the <strong>Update Build Settings</strong> button in the <a href="../master/Assets/Chapters">ChapterList</a> to add the scene to the build settings at their correct place.</li>
+</ol>
+<h3 id="adding-a-new-chapter">Adding a new Chapter</h3>
+<ol>
+<li>Create a new <code>ChapterScriptableObject</code> <strong>Chapter</strong> in <em>/Assets/Chapters</em> from the Project <strong>+</strong> dropdown menu under <em>ScriptableObjects/chapter</em>.</li>
+<li>Fill in the relevant information like the title and explanation (the UID is automatically generated)</li>
+<li>Add a cover image in <em>/Assets/Images/Banners</em> and link it to the <strong>Chapter</strong></li>
+<li>Create a new folder in <em>/Assets/Scenes/</em> to house you new levels.</li>
+<li>if your new <strong>Chapter</strong> doesn&#39;t fit the existing controllers do the following extra steps:<ul>
+<li>Create a new <code>(Chapter)Questions</code> script from the <a href="../master/Assets/Scripts/Templates">QuestionTemplate</a></li>
+<li>Create a new <code>(Chapter)Controller</code> script to match the new gameplay (use other controllers as reference)</li>
+</ul>
+</li>
+<li>Create some new <strong>Levels</strong> in the new folder and add them to the list in the <code>ChapterScriptableObject</code>.</li>
+<li>Add your new <strong>Chapter</strong> to the <a href="../master/Assets/Chapters">ChapterList</a> and press the <strong>Update Build Settings</strong> button to add the chapter and scenes to the build settings at their correct place.</li>
+</ol>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/JelleKUL/KULeuven-Game/blob/master/Documentation~/DocFx/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            A serious game from the KU Leuven
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>
