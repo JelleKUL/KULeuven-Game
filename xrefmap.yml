@@ -1708,6 +1708,19 @@ references:
   isSpec: "True"
   fullName: CSVLoader.GetDictionaryValues
   nameWithType: CSVLoader.GetDictionaryValues
+- uid: Global.CSVLoader.GetFullDictionaryValues
+  name: GetFullDictionaryValues()
+  href: api/Global.CSVLoader.html#Global_CSVLoader_GetFullDictionaryValues
+  commentId: M:Global.CSVLoader.GetFullDictionaryValues
+  fullName: CSVLoader.GetFullDictionaryValues()
+  nameWithType: CSVLoader.GetFullDictionaryValues()
+- uid: Global.CSVLoader.GetFullDictionaryValues*
+  name: GetFullDictionaryValues
+  href: api/Global.CSVLoader.html#Global_CSVLoader_GetFullDictionaryValues_
+  commentId: Overload:Global.CSVLoader.GetFullDictionaryValues
+  isSpec: "True"
+  fullName: CSVLoader.GetFullDictionaryValues
+  nameWithType: CSVLoader.GetFullDictionaryValues
 - uid: Global.CSVLoader.LoadCSV
   name: LoadCSV()
   href: api/Global.CSVLoader.html#Global_CSVLoader_LoadCSV
@@ -2346,6 +2359,19 @@ references:
   commentId: F:Global.LocalisationManager.csvLoader
   fullName: LocalisationManager.csvLoader
   nameWithType: LocalisationManager.csvLoader
+- uid: Global.LocalisationManager.GetLanguage
+  name: GetLanguage()
+  href: api/Global.LocalisationManager.html#Global_LocalisationManager_GetLanguage
+  commentId: M:Global.LocalisationManager.GetLanguage
+  fullName: LocalisationManager.GetLanguage()
+  nameWithType: LocalisationManager.GetLanguage()
+- uid: Global.LocalisationManager.GetLanguage*
+  name: GetLanguage
+  href: api/Global.LocalisationManager.html#Global_LocalisationManager_GetLanguage_
+  commentId: Overload:Global.LocalisationManager.GetLanguage
+  isSpec: "True"
+  fullName: LocalisationManager.GetLanguage
+  nameWithType: LocalisationManager.GetLanguage
 - uid: Global.LocalisationManager.GetLocalisedValue(System.String)
   name: GetLocalisedValue(String)
   href: api/Global.LocalisationManager.html#Global_LocalisationManager_GetLocalisedValue_System_String_
@@ -2384,24 +2410,6 @@ references:
   commentId: F:Global.LocalisationManager.language
   fullName: LocalisationManager.language
   nameWithType: LocalisationManager.language
-- uid: Global.LocalisationManager.Language
-  name: LocalisationManager.Language
-  href: api/Global.LocalisationManager.Language.html
-  commentId: T:Global.LocalisationManager.Language
-  fullName: LocalisationManager.Language
-  nameWithType: LocalisationManager.Language
-- uid: Global.LocalisationManager.Language.EN
-  name: EN
-  href: api/Global.LocalisationManager.Language.html#Global_LocalisationManager_Language_EN
-  commentId: F:Global.LocalisationManager.Language.EN
-  fullName: LocalisationManager.Language.EN
-  nameWithType: LocalisationManager.Language.EN
-- uid: Global.LocalisationManager.Language.NL
-  name: NL
-  href: api/Global.LocalisationManager.Language.html#Global_LocalisationManager_Language_NL
-  commentId: F:Global.LocalisationManager.Language.NL
-  fullName: LocalisationManager.Language.NL
-  nameWithType: LocalisationManager.Language.NL
 - uid: Global.LocalisationManager.UpdateDictionaries
   name: UpdateDictionaries()
   href: api/Global.LocalisationManager.html#Global_LocalisationManager_UpdateDictionaries
