@@ -17,7 +17,7 @@ public class LanguageSwitcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (text) text.text = LocalisationManager.language.ToString();
+        if (text) text.text = LocalisationManager.GetLanguage();
     }
 
     // Update is called once per frame

@@ -15,7 +15,6 @@ MonoBehaviour:
   menuScenes:
   - LoginMenu
   - MainMenu
-  - AccountManagementScene
   chapterEndScene: ChapterEndScene
   chapters:
   - {fileID: 11400000, guid: f084b257d3e004a0fae206fdb7e64505, type: 2}

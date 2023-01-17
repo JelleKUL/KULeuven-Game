@@ -1,41 +1,21 @@
 # Localisation
 The project is localised and can handle multiple languages.
 every textfield in the game has a **key** as a string, which is connected to a **value** in a CSV.
+
+## Variable injection
+It is possible to insert variables into the text by using the name of the variable in between `{}`.
+- This works for sing variables like: `float`, `int`, ...
+- This also supports arrays with indexing `variable[i]`
+- Use an `*` after the variable name to scale the variable by the world scale defined by the game manager.
+
+## Supported languages
 Currently the game supports the following languages:
-- *Dutch* (NL)
-- *English* (EN)
+- *Dutch* (nl)
+- *English* (en)
 
-New Languages can be added in the [LocalisationManager](../master/Assets/Scripts/Localisation/LocalisationManager.cs)
-```C#
-public class LocalisationManager : MonoBehaviour
-{
-    public enum Language { NL, EN } // add new languages here
-    public static Language language = Language.NL;
+## Adding a new language
 
-    private static Dictionary<string, string> localisedNL;
-    private static Dictionary<string, string> localisedEN;
-    //add new languages here
-    ...
-    public static string GetLocalisedValue(string key)
-    {
-        ...
-        switch (language)
-        {
-            case Language.NL:
-                localisedNL.TryGetValue(key, out value);
-                break;
-            case Language.EN:
-                localisedEN.TryGetValue(key, out value);
-                break;
-            // add new languages here
-        }
-        ...
-        return value;
-    }
-    ...
-}
-```
-Then add new values to [localisation.csv](../master/Assets/Resources/localisation.csv) to add the new language to the game.
+A new language can be added by inseeting a new column in [localisation.csv](../master/Assets/Resources/localisation.csv). The first value should be the name of the language. like in this example:
 
 key | nl | en | ... 
 --- | --- | --- | --- 

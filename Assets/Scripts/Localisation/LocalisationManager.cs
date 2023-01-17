@@ -1,16 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using UnityEngine;
 
 public class LocalisationManager : MonoBehaviour
 {
-    public enum Language { NL, EN }
 
-    public static Language language = Language.NL;
+    public static int language = 0;
 
-    private static Dictionary<string, string> localisedNL;
-    private static Dictionary<string, string> localisedEN;
+    private static Dictionary<string, string>[] localisedValues;
     public static CSVLoader csvLoader;
 
     public static bool isInit;
@@ -28,15 +27,33 @@ public class LocalisationManager : MonoBehaviour
         isInit = true;
     }
 
-    public static void ChangeLanguage()
+    public static string ChangeLanguage()
     {
-        language = (Language)((int)(language + 1) % System.Enum.GetValues(typeof(Language)).Length);
+        if (!isInit) Init();
+
+        language = (language + 1) % localisedValues.Length;
+        localisedValues[language].TryGetValue("key", out string currentLang);
+        return currentLang;
     }
+
+    public static string GetLanguage()
+    {
+        if (!isInit) Init();
+
+        localisedValues[language].TryGetValue("key", out string currentLang);
+        return currentLang;
+    }
+
 
     public static void UpdateDictionaries()
     {
-        localisedNL = csvLoader.GetDictionaryValues("nl");
-        localisedEN = csvLoader.GetDictionaryValues("en");
+        localisedValues = csvLoader.GetFullDictionaryValues();
+        /*
+        foreach (var val in localisedValues)
+        {
+            val.Select(i => $"{i.Key}: {i.Value}").ToList().ForEach(Debug.Log);
+        }
+        */
     }
 
     /// <summary>
@@ -47,25 +64,13 @@ public class LocalisationManager : MonoBehaviour
     public static string GetLocalisedValue(string key)
     {
         if (!isInit) Init();
-
         if (key == "") return key;
+        localisedValues[language].TryGetValue(key, out string value);
 
-        string value = key;
-
-        switch (language)
-        {
-            case Language.NL:
-                localisedNL.TryGetValue(key, out value);
-                break;
-            case Language.EN:
-                localisedEN.TryGetValue(key, out value);
-                break;
-
-        }
         if (value == null || value == "")
         {
-            value = "NO VAL IN: " + language;
-            Debug.LogWarning("The key: <color=white><i>" + key + "</i></color>, has no corresponding value in " + language + ". Please add a value or dubblecheck the key");
+            value = "NO VAL IN: " + GetLanguage();
+            Debug.LogWarning("The key: <color=white><i>" + key + "</i></color>, has no corresponding value in " + GetLanguage() + ". Please add a value or dubblecheck the key");
         }
         return value;
     }
